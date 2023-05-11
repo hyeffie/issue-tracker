@@ -11,11 +11,7 @@ const FilterBar: React.FC = () => {
         action=""
         className="w-[472px] pl-10 flex justify-start gap-x-3 rounded-r-2xl border border-gray-200 bg-gray-100"
       >
-        <img
-          src="/assets/Search.svg"
-          alt="search"
-          className="w-4 text-gray-400"
-        />
+        <img src="/assets/Search.svg" alt="search" className="w-4" />
         <input
           type="text"
           value="is:issue is:open"
