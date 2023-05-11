@@ -38,12 +38,18 @@
 ### 커밋 템플릿
 
 ```
-type: Subject
+type (#issue-number): Subject
 
 body
+
+// 예시
+// feat #3: 메인 페이지 토글 기능 추가
+// (한 줄 띄기)
+// - 토글 버튼 클릭 시, 팝업창 on/off
 ```
 
 - `feat` : 새로운 기능 추가
+- `design`: css 등 사용자 UI 디자인 변경
 - `fix` : 버그 수정
 - `docs` : 문서 수정
 - `test` : 테스트 코드 추가
