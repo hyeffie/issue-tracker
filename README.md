@@ -13,8 +13,7 @@
 - `main` : 배포 branch
 - `dev` : 개발 branch
   - `fe` : 프론트엔드 branch
-    - `feature1`: 기능1
-    - `feature2` : 기능2
+    - `fe/{issue-no}`
   - `be` : 백엔드 branch
   - `ios` : iOS branch
 
