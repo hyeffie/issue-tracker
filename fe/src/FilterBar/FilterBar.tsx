@@ -19,7 +19,7 @@ const FilterBar: React.FC = () => {
         <input
           type="text"
           value="is:issue is:open"
-          className="w-full bg-gray-100 text-gray-500"
+          className="w-96 bg-gray-100 text-gray-500"
         />
       </form>
     </div>
