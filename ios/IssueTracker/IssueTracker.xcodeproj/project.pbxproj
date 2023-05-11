@@ -15,6 +15,8 @@
 		F4BF7CD82A0C8887001C22F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4BF7CD62A0C8887001C22F0 /* LaunchScreen.storyboard */; };
 		F4BF7CE32A0C89BD001C22F0 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F4BF7CE22A0C89BD001C22F0 /* .swiftlint.yml */; };
 		F4BF7CF32A0D1312001C22F0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF22A0D1312001C22F0 /* Color.swift */; };
+		F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */; };
+		F4BF7CF72A0D231D001C22F0 /* UILabel+font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		F4BF7CD92A0C8887001C22F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4BF7CE22A0C89BD001C22F0 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F4BF7CF22A0D1312001C22F0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypoGraphy.swift; sourceTree = "<group>"; };
+		F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+font.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,8 @@
 				F4BF7CD12A0C8886001C22F0 /* Main.storyboard */,
 				F4BF7CCF2A0C8886001C22F0 /* ViewController.swift */,
 				F4BF7CF22A0D1312001C22F0 /* Color.swift */,
+				F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */,
+				F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */,
 				F4BF7CE42A0C8B89001C22F0 /* Supporting Files */,
 				F4BF7CE52A0C8B9F001C22F0 /* Resource */,
 			);
@@ -185,7 +191,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4BF7CD02A0C8886001C22F0 /* ViewController.swift in Sources */,
+				F4BF7CF72A0D231D001C22F0 /* UILabel+font.swift in Sources */,
 				F4BF7CF32A0D1312001C22F0 /* Color.swift in Sources */,
+				F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */,
 				F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */,
 				F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */,
 			);
