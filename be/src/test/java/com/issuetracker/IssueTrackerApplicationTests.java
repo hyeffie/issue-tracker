@@ -1,10 +1,10 @@
-package com.example.issuetracker;
+package com.issuetracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class IssuetrackerApplicationTests {
+class IssueTrackerApplicationTests {
 
 	@Test
 	void contextLoads() {
