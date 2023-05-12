@@ -2,10 +2,6 @@ import React from 'react';
 
 import Issue from './Issue';
 
-import dropDownArrow from '../../asset/dropDownArrow.svg';
-import openedIssue from '../../asset/openedIssue.svg';
-import closedIssue from '../../asset/closedIssue.svg';
-
 export interface LabelRow {
   id: number;
   title: string;
@@ -48,14 +44,14 @@ const IssueList: React.FC<Props> = ({
             <div className="flex">
               <button className="mr-4">{/* TODO(Lily): add icon */}</button>
               <div className="flex mr-3 text-neutral-strong font-bold">
-                <img src={openedIssue} />
+                <img src="assets/openedIssue.svg" />
                 <span className="ml-1">열린 이슈({countOpenedIssues})</span>
               </div>
             </div>
             <div className="flex">
               <button>{/* TODO(Lily): add icon */}</button>
               <div className="flex text-neutral">
-                <img src={closedIssue} />
+                <img src="assets/closedIssue.svg" />
                 <span className="ml-1">닫힌 이슈({countClosedIssues})</span>
               </div>
             </div>
@@ -63,19 +59,19 @@ const IssueList: React.FC<Props> = ({
           <div className="flex">
             <button className="flex items-center mr-4 text-neutral-week font-bold">
               <span className="mr-1.5">담당자</span>
-              <img src={dropDownArrow} />
+              <img src="assets/dropDownArrow.svg" />
             </button>
             <button className="flex items-center mr-4 text-neutral-week font-bold">
               <span className="mr-1.5">레이블</span>
-              <img src={dropDownArrow} />
+              <img src="assets/dropDownArrow.svg" />
             </button>
             <button className="flex items-center mr-4 text-neutral-week font-bold">
               <span className="mr-1.5">마일스톤</span>
-              <img src={dropDownArrow} />
+              <img src="assets/dropDownArrow.svg" />
             </button>
             <button className="flex items-center text-neutral-week font-bold">
               <span className="mr-1.5">작성자</span>
-              <img src={dropDownArrow} />
+              <img src="assets/dropDownArrow.svg" />
             </button>
           </div>
         </div>

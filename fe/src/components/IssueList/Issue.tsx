@@ -1,18 +1,17 @@
 import React from 'react';
 
 import { LabelRow } from './IssueList';
-
 interface Props {
-  id?: number;
-  title?: string;
-  userName?: string;
-  profileUrl?: string;
-  isOpen?: boolean;
-  createdAt?: string;
-  closedAt?: string;
-  milestoneName?: string;
-  labels?: LabelRow[];
-  onIssueTitleClick?: () => void;
+  id: number;
+  title: string;
+  userName: string;
+  profileUrl: string;
+  isOpen: boolean;
+  createdAt: string;
+  closedAt: string;
+  milestoneName: string;
+  labels: LabelRow[];
+  onIssueTitleClick: () => void;
 }
 
 const Issue: React.FC<Props> = ({
@@ -39,10 +38,10 @@ const Issue: React.FC<Props> = ({
           >
             {title}
           </button>
-          {/* {labels.map(label => (
+          {labels.map(label => (
             // TODO(Lily): add Label component instead of image
             <img key={id} className="mr-1" src={label.title} />
-          ))} */}
+          ))}
         </div>
         <div className="flex">
           <span className="mr-2 text-neutral-week">이슈 번호</span>

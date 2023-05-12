@@ -3,7 +3,6 @@ import React from 'react';
 import Header from './components/Header/Header';
 import FilterBar from './components/FilterBar/FilterBar';
 import NavLinks from './components/NavLinks/NavLinks';
-import Issue from './components/IssueList/Issue';
 
 function App() {
   return (
