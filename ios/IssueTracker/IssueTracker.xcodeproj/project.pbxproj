@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		638659D92A0D30AD006FE4F0 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638659D82A0D30AD006FE4F0 /* IssueCell.xib */; };
-		638659DB2A0D3483006FE4F0 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638659DA2A0D3483006FE4F0 /* IssueCell.swift */; };
+		638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */; };
+		638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */; };
+		F40809712A0DE2040005E0AB /* TabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40809702A0DE2040005E0AB /* TabBarController.storyboard */; };
+		F40809732A0DE2470005E0AB /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40809722A0DE2470005E0AB /* IssueList.storyboard */; };
+		F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40809742A0DE61C0005E0AB /* IssueListViewController.swift */; };
 		F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CCB2A0C8886001C22F0 /* AppDelegate.swift */; };
 		F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CCD2A0C8886001C22F0 /* SceneDelegate.swift */; };
 		F4BF7CD02A0C8886001C22F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CCF2A0C8886001C22F0 /* ViewController.swift */; };
@@ -22,8 +25,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		638659D82A0D30AD006FE4F0 /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
-		638659DA2A0D3483006FE4F0 /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
+		638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueListCollectionViewCell.xib; sourceTree = "<group>"; };
+		638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionViewCell.swift; sourceTree = "<group>"; };
+		F40809702A0DE2040005E0AB /* TabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarController.storyboard; sourceTree = "<group>"; };
+		F40809722A0DE2470005E0AB /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
+		F40809742A0DE61C0005E0AB /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		F4BF7CC82A0C8886001C22F0 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4BF7CCB2A0C8886001C22F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4BF7CCD2A0C8886001C22F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +55,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F48583A82A0E216A00322C9F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F4BF7CF22A0D1312001C22F0 /* Color.swift */,
+				F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		F48583A92A0E21DA00322C9F /* IssueTab */ = {
+			isa = PBXGroup;
+			children = (
+				F40809722A0DE2470005E0AB /* IssueList.storyboard */,
+				F40809742A0DE61C0005E0AB /* IssueListViewController.swift */,
+				638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */,
+				638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */,
+			);
+			path = IssueTab;
+			sourceTree = "<group>";
+		};
+		F48583AA2A0E21E500322C9F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		F4BF7CBF2A0C8886001C22F0 = {
 			isa = PBXGroup;
 			children = (
@@ -72,11 +106,10 @@
 				F4BF7CD62A0C8887001C22F0 /* LaunchScreen.storyboard */,
 				F4BF7CD12A0C8886001C22F0 /* Main.storyboard */,
 				F4BF7CCF2A0C8886001C22F0 /* ViewController.swift */,
-				F4BF7CF22A0D1312001C22F0 /* Color.swift */,
-				F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */,
-				F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */,
-				638659D82A0D30AD006FE4F0 /* IssueCell.xib */,
-				638659DA2A0D3483006FE4F0 /* IssueCell.swift */,
+				F40809702A0DE2040005E0AB /* TabBarController.storyboard */,
+				F48583A92A0E21DA00322C9F /* IssueTab */,
+				F48583A82A0E216A00322C9F /* Common */,
+				F48583AA2A0E21E500322C9F /* Extension */,
 				F4BF7CE42A0C8B89001C22F0 /* Supporting Files */,
 				F4BF7CE52A0C8B9F001C22F0 /* Resource */,
 			);
@@ -160,9 +193,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F40809712A0DE2040005E0AB /* TabBarController.storyboard in Resources */,
 				F4BF7CE32A0C89BD001C22F0 /* .swiftlint.yml in Resources */,
-				638659D92A0D30AD006FE4F0 /* IssueCell.xib in Resources */,
+				638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */,
 				F4BF7CD82A0C8887001C22F0 /* LaunchScreen.storyboard in Resources */,
+				F40809732A0DE2470005E0AB /* IssueList.storyboard in Resources */,
 				F4BF7CD52A0C8887001C22F0 /* Assets.xcassets in Resources */,
 				F4BF7CD32A0C8886001C22F0 /* Main.storyboard in Resources */,
 			);
@@ -187,7 +222,7 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "run /bin/sh";
+			shellPath = /bin/sh;
 			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -201,9 +236,10 @@
 				F4BF7CF72A0D231D001C22F0 /* UILabel+font.swift in Sources */,
 				F4BF7CF32A0D1312001C22F0 /* Color.swift in Sources */,
 				F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */,
+				F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */,
 				F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */,
 				F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */,
-				638659DB2A0D3483006FE4F0 /* IssueCell.swift in Sources */,
+				638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

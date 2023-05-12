@@ -7,19 +7,11 @@
 
 import UIKit
 
-class IssueCell: UICollectionViewCell {
+class IssueListCollectionViewCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var milestoneLabel: UILabel!
     @IBOutlet var labelStackView: UIStackView!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     func configureFont() {
         self.titleLabel.apply(typography: TypoGraphy(weight: .bold,
