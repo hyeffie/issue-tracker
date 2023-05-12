@@ -2,20 +2,17 @@ import React from 'react';
 
 import { LabelRow } from './IssueList';
 
-import openedIssue from '../../asset/openedIssue.svg';
-import milestone from '../../asset/milestone.svg';
-
 interface Props {
-  id: number;
-  title: string;
-  userName: string;
-  profileUrl: string;
-  isOpen: boolean;
-  createdAt: string;
-  closedAt: string;
-  milestoneName: string;
-  labels: LabelRow[];
-  onIssueTitleClick: () => void;
+  id?: number;
+  title?: string;
+  userName?: string;
+  profileUrl?: string;
+  isOpen?: boolean;
+  createdAt?: string;
+  closedAt?: string;
+  milestoneName?: string;
+  labels?: LabelRow[];
+  onIssueTitleClick?: () => void;
 }
 
 const Issue: React.FC<Props> = ({
@@ -35,17 +32,17 @@ const Issue: React.FC<Props> = ({
       <div className="mr-4">{/* TODO(Lily): add check box */}c</div>
       <div>
         <div className="flex mb-1">
-          {isOpen && <img className="mr-1" src={openedIssue} />}
+          {isOpen && <img className="mr-1" src="assets/openedIssue.svg" />}
           <button
             className="mr-1 text-lg text-neutral-strong font-bold"
             onClick={onIssueTitleClick}
           >
             {title}
           </button>
-          {labels.map(label => (
+          {/* {labels.map(label => (
             // TODO(Lily): add Label component instead of image
             <img key={id} className="mr-1" src={label.title} />
-          ))}
+          ))} */}
         </div>
         <div className="flex">
           <span className="mr-2 text-neutral-week">이슈 번호</span>
@@ -55,7 +52,7 @@ const Issue: React.FC<Props> = ({
             작성되었습니다.
           </span>
           <div className="flex">
-            <img className="mr-1" src={milestone} />
+            <img className="mr-1" src="assets/milestone.svg" />
             <span className="text-neutral-week">{milestoneName}</span>
           </div>
         </div>

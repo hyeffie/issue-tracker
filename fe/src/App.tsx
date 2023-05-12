@@ -1,8 +1,9 @@
 import React from 'react';
-import './App.css';
-import Header from './Header/Header';
-import FilterBar from './FilterBar/FilterBar';
-import NavLinks from './NavLinks';
+
+import Header from './components/Header/Header';
+import FilterBar from './components/FilterBar/FilterBar';
+import NavLinks from './components/NavLinks/NavLinks';
+import Issue from './components/IssueList/Issue';
 
 function App() {
   return (
