@@ -75,3 +75,11 @@ export const Primary: Story = {
     countClosedIssues: 20,
   },
 };
+
+export const Secondary: Story = {
+  args: {
+    issues: [],
+    countOpenedIssues: 0,
+    countClosedIssues: 0,
+  },
+};

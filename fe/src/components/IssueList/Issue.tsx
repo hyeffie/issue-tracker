@@ -30,7 +30,7 @@ const Issue: React.FC<Props> = ({
   onIssueTitleClick,
 }) => {
   return (
-    <div className="flex px-8 py-4">
+    <div className="flex px-8 py-4 border-t">
       <div className="mr-4">{/* TODO(Lily): add check box */}c</div>
       <div>
         <div className="flex mb-1">
@@ -52,8 +52,8 @@ const Issue: React.FC<Props> = ({
           ))}
         </div>
         <div className="flex">
-          <span className="mr-2 text-neutral-week">#{id}</span>
-          <span className="mr-2 text-neutral-week">
+          <span className="mr-2 text-neutral-weak">#{id}</span>
+          <span className="mr-2 text-neutral-weak">
             {/* TODO(Lily): 경과 시간 계산은 위에서 하고 계산 된 값을 props로 받아서 처리하기 */}
             {isOpen
               ? `이 이슈가 ${createdAt}분 전, ${userName}님에 의해 작성되었습니다.`
@@ -61,7 +61,7 @@ const Issue: React.FC<Props> = ({
           </span>
           <div className="flex">
             <img className="mr-1" src="assets/milestone.svg" />
-            <span className="text-neutral-week">{milestoneName}</span>
+            <span className="text-neutral-weak">{milestoneName}</span>
           </div>
         </div>
       </div>
