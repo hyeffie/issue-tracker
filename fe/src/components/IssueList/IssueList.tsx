@@ -40,20 +40,16 @@ const IssueList: React.FC<Props> = ({
       <div className="w-160 px-8 py-6 bg-light-mode border-b rounded-t-2xl box-border">
         <div className="flex justify-between">
           <div className="flex ">
-            <div>{/* TODO(Lily): add check box */}c</div>
-            <div className="flex">
-              <button className="mr-4">{/* TODO(Lily): add icon */}</button>
-              <div className="flex mr-3 text-neutral-strong font-bold">
+            <div className="mr-4">{/* TODO(Lily): add check box */}c</div>
+            <div className="flex ">
+              <button className="flex items-center mr-3 text-neutral-strong font-bold">
                 <img src="assets/openedIssue.svg" />
                 <span className="ml-1">열린 이슈({countOpenedIssues})</span>
-              </div>
-            </div>
-            <div className="flex">
-              <button>{/* TODO(Lily): add icon */}</button>
-              <div className="flex text-neutral">
+              </button>
+              <button className="flex items-center text-neutral">
                 <img src="assets/closedIssue.svg" />
                 <span className="ml-1">닫힌 이슈({countClosedIssues})</span>
-              </div>
+              </button>
             </div>
           </div>
           <div className="flex">

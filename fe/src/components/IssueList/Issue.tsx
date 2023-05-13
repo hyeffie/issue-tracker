@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { LabelRow } from './IssueList';
+import Profile from '../../common/Profile';
+
 interface Props {
   id: number;
   title: string;
@@ -40,13 +42,20 @@ const Issue: React.FC<Props> = ({
           </button>
           {labels.map(label => (
             // TODO(Lily): add Label component instead of image
+            // <label
+            //   key={id}
+            //   className='mr-1'
+            //   labelName={label.title}
+            //   backgroundColor={label.backgroundColor}
+            //   fontColor={label.fontColor}
+            // />
             <img key={id} className="mr-1" src={label.title} />
           ))}
         </div>
         <div className="flex">
           <span className="mr-2 text-neutral-week">이슈 번호</span>
           <span className="mr-2 text-neutral-week">
-            {/* TODO(Lily): To replace with a function that calculates the time */}
+            {/* TODO(Lily): 경과 시간 계산은 위에서 하고 계산 된 값을 props로 받아서 처리하기 */}
             이 이슈가 {isOpen ? createdAt : closedAt}분 전, {userName}님에 의해
             작성되었습니다.
           </span>
@@ -57,7 +66,7 @@ const Issue: React.FC<Props> = ({
         </div>
       </div>
       <div className="w-5 h-5 flex grow justify-end self-center">
-        <img src={profileUrl} />
+        <Profile url={profileUrl} />
       </div>
     </div>
   );
