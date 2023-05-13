@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,26 +12,36 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="l9u-TH-xie" customClass="IssueListCollectionViewCell" customModule="IssueTracker" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="606" height="244"/>
+            <rect key="frame" x="0.0" y="0.0" width="655" height="148"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="URj-8g-Jwl">
-                <rect key="frame" x="0.0" y="0.0" width="606" height="244"/>
+                <rect key="frame" x="0.0" y="0.0" width="655" height="148"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="I7B-VG-nnl">
-                        <rect key="frame" x="24" y="16" width="558" height="212"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="I7B-VG-nnl">
+                        <rect key="frame" x="24" y="16.000000000000007" width="615" height="105.66666666666669"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exc-QW-s87">
-                                <rect key="frame" x="0.0" y="0.0" width="558" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="Txz-43-v1B"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5L8-B3-LIn">
+                                <rect key="frame" x="0.0" y="0.0" width="615" height="21.666666666666668"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exc-QW-s87">
+                                        <rect key="frame" x="0.0" y="0.0" width="585" height="21.666666666666668"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="k11-4I-sMu">
+                                        <rect key="frame" x="585" y="2" width="30" height="18"/>
+                                        <color key="tintColor" name="gray700"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="8Oh-zu-rK4"/>
+                                            <constraint firstAttribute="height" constant="30" id="Zs6-su-4d5"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="설명(최대 두 줄까지 보여줄 수 있다)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XvL-EA-VVf">
-                                <rect key="frame" x="0.0" y="68" width="558" height="24"/>
+                                <rect key="frame" x="0.0" y="25.666666666666664" width="615" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="R5G-iA-3zA"/>
                                 </constraints>
@@ -39,7 +50,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[iOS] 이슈 탭" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CR-Vp-wLF">
-                                <rect key="frame" x="0.0" y="128" width="558" height="24"/>
+                                <rect key="frame" x="0.0" y="53.666666666666671" width="615" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Oma-C4-yOf"/>
                                 </constraints>
@@ -48,7 +59,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="dyV-HA-oXT">
-                                <rect key="frame" x="0.0" y="188" width="50" height="24"/>
+                                <rect key="frame" x="0.0" y="81.666666666666671" width="50" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="V1h-sl-TEp"/>
                                 </constraints>
@@ -57,17 +68,17 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="XvL-EA-VVf" secondAttribute="trailing" id="BSu-Gp-AC6"/>
                             <constraint firstItem="XvL-EA-VVf" firstAttribute="leading" secondItem="I7B-VG-nnl" secondAttribute="leading" id="Nmh-LJ-spM"/>
+                            <constraint firstItem="5L8-B3-LIn" firstAttribute="leading" secondItem="I7B-VG-nnl" secondAttribute="leading" id="OZp-uI-YcO"/>
                             <constraint firstAttribute="trailing" secondItem="9CR-Vp-wLF" secondAttribute="trailing" id="dSk-cQ-shf"/>
-                            <constraint firstItem="exc-QW-s87" firstAttribute="leading" secondItem="I7B-VG-nnl" secondAttribute="leading" id="kh9-1b-KhL"/>
-                            <constraint firstAttribute="trailing" secondItem="exc-QW-s87" secondAttribute="trailing" id="rjy-Di-pzf"/>
+                            <constraint firstAttribute="trailing" secondItem="5L8-B3-LIn" secondAttribute="trailing" id="hMc-CJ-W6c"/>
                         </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="I7B-VG-nnl" secondAttribute="bottom" constant="16" id="9Bt-Ry-p5d"/>
-                    <constraint firstItem="I7B-VG-nnl" firstAttribute="top" secondItem="URj-8g-Jwl" secondAttribute="top" constant="16" id="TIz-PY-AkS"/>
-                    <constraint firstAttribute="trailing" secondItem="I7B-VG-nnl" secondAttribute="trailing" constant="24" id="nZH-OI-GQ5"/>
-                    <constraint firstItem="I7B-VG-nnl" firstAttribute="leading" secondItem="URj-8g-Jwl" secondAttribute="leading" constant="24" id="yPS-YW-nZt"/>
+                    <constraint firstItem="I7B-VG-nnl" firstAttribute="top" secondItem="URj-8g-Jwl" secondAttribute="top" constant="16" id="I7g-G5-OZH"/>
+                    <constraint firstAttribute="trailing" secondItem="I7B-VG-nnl" secondAttribute="trailing" constant="16" id="XNa-JK-xw5"/>
+                    <constraint firstAttribute="bottom" secondItem="I7B-VG-nnl" secondAttribute="bottom" constant="25" id="XOq-77-NKw"/>
+                    <constraint firstItem="I7B-VG-nnl" firstAttribute="leading" secondItem="URj-8g-Jwl" secondAttribute="leading" constant="24" id="ac5-HC-Jl4"/>
                 </constraints>
             </collectionViewCellContentView>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -82,6 +93,10 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
+        <namedColor name="gray700">
+            <color red="0.54117647058823526" green="0.54117647058823526" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
