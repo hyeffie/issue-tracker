@@ -41,7 +41,16 @@ extension IssueListViewController: UICollectionViewDataSource {
     guard let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: "IssueListCollectionViewCell",
       for: indexPath) as? IssueListCollectionViewCell else { return UICollectionViewCell() }
-    return cell
+      
+      guard !labelList.isEmpty else {
+          return cell
+      }
+      
+      
+    
+    
+      
+      return cell
   }
 }
 

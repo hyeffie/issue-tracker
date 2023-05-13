@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6343A0662A0F7B65005FFC3E /* IssueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6343A0652A0F7B65005FFC3E /* IssueLabel.swift */; };
 		638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */; };
 		638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */; };
 		F40809712A0DE2040005E0AB /* TabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40809702A0DE2040005E0AB /* TabBarController.storyboard */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6343A0652A0F7B65005FFC3E /* IssueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueLabel.swift; sourceTree = "<group>"; };
 		638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueListCollectionViewCell.xib; sourceTree = "<group>"; };
 		638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F40809702A0DE2040005E0AB /* TabBarController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarController.storyboard; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				F40809742A0DE61C0005E0AB /* IssueListViewController.swift */,
 				638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */,
 				638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */,
+				6343A0652A0F7B65005FFC3E /* IssueLabel.swift */,
 			);
 			path = IssueTab;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				F4BF7CF72A0D231D001C22F0 /* UILabel+font.swift in Sources */,
 				F4BF7CF32A0D1312001C22F0 /* Color.swift in Sources */,
 				F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */,
+				6343A0662A0F7B65005FFC3E /* IssueLabel.swift in Sources */,
 				F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */,
 				F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */,
 				F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */,

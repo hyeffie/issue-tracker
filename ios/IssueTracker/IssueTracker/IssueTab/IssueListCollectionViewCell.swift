@@ -24,4 +24,8 @@ class IssueListCollectionViewCell: UICollectionViewCell {
                                                          size: .medium),
                                   textColor: .gray800)
     }
+    
+    func addTag() {
+        
+    }
 }
