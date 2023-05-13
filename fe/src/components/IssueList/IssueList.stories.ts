@@ -28,7 +28,13 @@ export const Primary: Story = {
           {
             id: 20123,
             title: 'title',
-            backgroundColor: 'red',
+            backgroundColor: 'tomato',
+            fontColor: 'black',
+          },
+          {
+            id: 20123,
+            title: 'document',
+            backgroundColor: 'blue',
             fontColor: 'black',
           },
         ],
@@ -46,7 +52,19 @@ export const Primary: Story = {
         labels: [
           {
             id: 20123,
-            title: 'title',
+            title: 'Jayden',
+            backgroundColor: 'orange',
+            fontColor: 'black',
+          },
+          {
+            id: 20123,
+            title: 'Lily',
+            backgroundColor: 'pink',
+            fontColor: 'black',
+          },
+          {
+            id: 20123,
+            title: 'FE',
             backgroundColor: 'red',
             fontColor: 'black',
           },

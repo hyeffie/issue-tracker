@@ -2,6 +2,7 @@ import React from 'react';
 
 import { LabelRow } from './IssueList';
 import Profile from '../../common/Profile';
+import Label from '../../common/Label';
 
 interface Props {
   id: number;
@@ -13,7 +14,7 @@ interface Props {
   closedAt: string;
   milestoneName: string;
   labels: LabelRow[];
-  onIssueTitleClick: () => void;
+  onIssueTitleClick: (id: number) => void;
 }
 
 const Issue: React.FC<Props> = ({
@@ -34,30 +35,29 @@ const Issue: React.FC<Props> = ({
       <div>
         <div className="flex mb-1">
           {isOpen && <img className="mr-1" src="assets/openedIssue.svg" />}
+          {/* TODO(Lily): 라우터 설치 및 설정 이후에 Link 태그로 바꾸기 */}
           <button
             className="mr-1 text-lg text-neutral-strong font-bold"
-            onClick={onIssueTitleClick}
+            onClick={() => onIssueTitleClick(id)}
           >
             {title}
           </button>
           {labels.map(label => (
-            // TODO(Lily): add Label component instead of image
-            // <label
-            //   key={id}
-            //   className='mr-1'
-            //   labelName={label.title}
-            //   backgroundColor={label.backgroundColor}
-            //   fontColor={label.fontColor}
-            // />
-            <img key={id} className="mr-1" src={label.title} />
+            <Label
+              key={label.id}
+              labelName={label.title}
+              backgroundColor={label.backgroundColor}
+              fontColor={label.fontColor}
+            />
           ))}
         </div>
         <div className="flex">
-          <span className="mr-2 text-neutral-week">이슈 번호</span>
+          <span className="mr-2 text-neutral-week">#{id}</span>
           <span className="mr-2 text-neutral-week">
             {/* TODO(Lily): 경과 시간 계산은 위에서 하고 계산 된 값을 props로 받아서 처리하기 */}
-            이 이슈가 {isOpen ? createdAt : closedAt}분 전, {userName}님에 의해
-            작성되었습니다.
+            {isOpen
+              ? `이 이슈가 ${createdAt}분 전, ${userName}님에 의해 작성되었습니다.`
+              : `이 이슈가 ${closedAt}분 전, ${userName}에 의해 닫혔습니다.`}
           </span>
           <div className="flex">
             <img className="mr-1" src="assets/milestone.svg" />
