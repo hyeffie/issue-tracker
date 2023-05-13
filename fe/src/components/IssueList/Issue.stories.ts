@@ -15,7 +15,8 @@ export const Primary: Story = {
     id: 10,
     title: 'issue title',
     userName: 'lily',
-    profileUrl: 'url',
+    profileUrl:
+      'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
     isOpen: true,
     createdAt: 'time',
     closedAt: 'time',
@@ -30,7 +31,8 @@ export const Secondary: Story = {
     title:
       '글자가 길어지면 어떻게 될까요오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오',
     userName: 'lily',
-    profileUrl: 'url',
+    profileUrl:
+      'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
     isOpen: true,
     createdAt: 'time',
     closedAt: 'time',

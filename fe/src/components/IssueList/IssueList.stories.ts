@@ -19,7 +19,8 @@ export const Primary: Story = {
         title: 'issue title',
         content: 'issue content',
         userName: 'user name',
-        profileUrl: 'image url',
+        profileUrl:
+          'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
         isOpen: true,
         createdAt: 'create date',
         closedAt: 'crate close',
@@ -44,7 +45,8 @@ export const Primary: Story = {
         title: 'issue title',
         content: 'issue content',
         userName: 'user name',
-        profileUrl: 'image url',
+        profileUrl:
+          'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
         isOpen: true,
         createdAt: 'create date',
         closedAt: 'crate close',
