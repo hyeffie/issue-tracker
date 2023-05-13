@@ -3,6 +3,7 @@ import React from 'react';
 interface Props {
   size?: 'large' | 'medium';
 }
+
 const Logo: React.FC<Props> = ({ size = 'medium' }) => {
   return (
     <img
