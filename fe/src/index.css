@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* TODO(Jayden): tailwind base 특정 값만 변경하기(img의 height) */
+/*@layer base {*/
+/*    img {*/
+/*        height: fit-content;*/
+/*    }*/
+/*}*/

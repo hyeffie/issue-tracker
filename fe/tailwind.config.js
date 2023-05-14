@@ -18,11 +18,19 @@ export const theme = {
       blue: '#007AFF',
       navy: '#0025E6',
       red: '#FF3B30',
-
+      // FIXME(Jayden): theme에 작성할 style명 구체화하기
       neutral: '#4E4B66',
       'neutral-weak': '#6E7191',
       'neutral-strong': '#14142B',
       'light-mode': '#F7F7FC',
+    },
+    // NOTE(Jayden): 기본 font-size 설정
+    fontSize: {
+      sm: ['12px', '20px'],
+      md: ['16px', '28px'],
+      lg: ['18px', '32px'],
+      xl: ['24px', '40px'],
+      '2xl': ['32px', '48px'],
     },
   },
   // TODO(Lily): set default attributes (font color)
