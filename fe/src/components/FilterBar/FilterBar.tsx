@@ -2,14 +2,14 @@ import React from 'react';
 
 const FilterBar: React.FC = () => {
   return (
-    <div className="w-auto flex justify-start ">
-      <button className="w-32 h-10 flex justify-center items-center gap-x-3 rounded-l-2xl border border-gray-200 bg-white text-gray-500 font-bold">
+    <div className="flex w-auto justify-start ">
+      <button className="flex h-10 w-32 items-center justify-center gap-x-3 rounded-l-2xl border border-gray-200 bg-white font-bold text-gray-500">
         <span>필터</span>
         <img src="/assets/ChevronDown.svg" alt="chevron-down" />
       </button>
       <form
         action=""
-        className="w-[472px] pl-10 flex justify-start gap-x-3 rounded-r-2xl border border-gray-200 bg-gray-100"
+        className="flex w-[472px] justify-start gap-x-3 rounded-r-2xl border border-gray-200 bg-gray-100 pl-10"
       >
         <img src="/assets/Search.svg" alt="search" className="w-4" />
         <input
