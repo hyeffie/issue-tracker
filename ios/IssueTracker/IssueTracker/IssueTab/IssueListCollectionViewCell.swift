@@ -25,7 +25,7 @@ class IssueListCollectionViewCell: UICollectionViewCell {
                                   textColor: .gray800)
     }
     
-    func addTag() {
-        
+    func addLabel(name: String, color: String) {
+        self.labelStackView.addArrangedSubview(IssueLabel(name: name, color: color))
     }
 }
