@@ -42,4 +42,8 @@ export const theme = {
   //   }),
   // ],
 };
+// NOTE(Jayden): prefix 설정하는 건 어떨지 논의해보기
+// export const prefix = 'it-';
+export const safelist = [{ pattern: /bg-(blue|gray)/ }];
+
 export const plugins = [];

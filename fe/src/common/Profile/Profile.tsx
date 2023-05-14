@@ -12,7 +12,7 @@ const Profile: React.FC<Props> = ({ url, width = 32, height = 32 }) => {
       src={url}
       width={width}
       height={height}
-      className="rounded-full"
+      className="h-fit rounded-full"
       alt="profile"
     />
   );

@@ -7,7 +7,7 @@ interface Props {
 const Logo: React.FC<Props> = ({ size = 'medium' }) => {
   return (
     <img
-      src="/assets/Logo.svg"
+      src="/assets/logo.svg"
       width={size === 'medium' ? 199 : 342}
       height={size === 'medium' ? 40 : 72}
       alt="logo"
