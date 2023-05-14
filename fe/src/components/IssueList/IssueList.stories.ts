@@ -19,7 +19,8 @@ export const Primary: Story = {
         title: 'issue title',
         content: 'issue content',
         userName: 'user name',
-        profileUrl: 'image url',
+        profileUrl:
+          'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
         isOpen: true,
         createdAt: 'create date',
         closedAt: 'crate close',
@@ -28,7 +29,13 @@ export const Primary: Story = {
           {
             id: 20123,
             title: 'title',
-            backgroundColor: 'red',
+            backgroundColor: 'tomato',
+            fontColor: 'black',
+          },
+          {
+            id: 20123,
+            title: 'document',
+            backgroundColor: 'blue',
             fontColor: 'black',
           },
         ],
@@ -38,7 +45,8 @@ export const Primary: Story = {
         title: 'issue title',
         content: 'issue content',
         userName: 'user name',
-        profileUrl: 'image url',
+        profileUrl:
+          'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
         isOpen: true,
         createdAt: 'create date',
         closedAt: 'crate close',
@@ -46,7 +54,19 @@ export const Primary: Story = {
         labels: [
           {
             id: 20123,
-            title: 'title',
+            title: 'Jayden',
+            backgroundColor: 'orange',
+            fontColor: 'black',
+          },
+          {
+            id: 20123,
+            title: 'Lily',
+            backgroundColor: 'pink',
+            fontColor: 'black',
+          },
+          {
+            id: 20123,
+            title: 'FE',
             backgroundColor: 'red',
             fontColor: 'black',
           },
@@ -55,5 +75,13 @@ export const Primary: Story = {
     ],
     countOpenedIssues: 10,
     countClosedIssues: 20,
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    issues: [],
+    countOpenedIssues: 0,
+    countClosedIssues: 0,
   },
 };

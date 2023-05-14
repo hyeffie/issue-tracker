@@ -14,6 +14,7 @@ const FilterBar: React.FC = () => {
         <img src="/assets/Search.svg" alt="search" className="w-4" />
         <input
           type="text"
+          // TODO(Lily): value 값을 현재 선택된 필터 항목을 props로 받아서 처리
           value="is:issue is:open"
           className="w-96 bg-gray-100 text-gray-500"
         />

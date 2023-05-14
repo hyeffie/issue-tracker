@@ -5,7 +5,7 @@ export const theme = {
   extend: {
     colors: {
       neutral: '#4E4B66',
-      'neutral-week': '#6E7191',
+      'neutral-weak': '#6E7191',
       'neutral-strong': '#14142B',
       'light-mode': '#F7F7FC',
     },
