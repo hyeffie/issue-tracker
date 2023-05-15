@@ -1,5 +1,8 @@
 import React from 'react';
 
+import openedIssue from '@assets/openedIssue.svg';
+import closedIssue from '@assets/closedIssue.svg';
+import dropDownArrow from '@assets/dropDownArrow.svg';
 import Issue from './Issue';
 
 export interface LabelRow {
@@ -43,11 +46,11 @@ const IssueList: React.FC<Props> = ({
             <div className="mr-4">{/* TODO(Lily): add check box */}c</div>
             <div className="flex ">
               <button className="mr-3 flex items-center font-bold text-neutral-strong">
-                <img src="assets/openedIssue.svg" />
+                <img src={openedIssue} />
                 <span className="ml-1">열린 이슈({countOpenedIssues})</span>
               </button>
               <button className="flex items-center text-neutral">
-                <img src="assets/closedIssue.svg" />
+                <img src={closedIssue} />
                 <span className="ml-1">닫힌 이슈({countClosedIssues})</span>
               </button>
             </div>
@@ -55,19 +58,19 @@ const IssueList: React.FC<Props> = ({
           <div className="flex">
             <button className="mr-4 flex items-center font-bold text-neutral-weak">
               <span className="mr-1.5">담당자</span>
-              <img src="assets/dropDownArrow.svg" />
+              <img src={dropDownArrow} />
             </button>
             <button className="mr-4 flex items-center font-bold text-neutral-weak">
               <span className="mr-1.5">레이블</span>
-              <img src="assets/dropDownArrow.svg" />
+              <img src={dropDownArrow} />
             </button>
             <button className="mr-4 flex items-center font-bold text-neutral-weak">
               <span className="mr-1.5">마일스톤</span>
-              <img src="assets/dropDownArrow.svg" />
+              <img src={dropDownArrow} />
             </button>
             <button className="flex items-center font-bold text-neutral-weak">
               <span className="mr-1.5">작성자</span>
-              <img src="assets/dropDownArrow.svg" />
+              <img src={dropDownArrow} />
             </button>
           </div>
         </div>

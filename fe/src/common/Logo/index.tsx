@@ -1,15 +1,17 @@
 import React from 'react';
 
+import logo from '../../assets/logo.svg';
+
 interface Props {
-  size?: 'large' | 'medium';
+  size: 'Large' | 'Medium';
 }
 
-const Logo: React.FC<Props> = ({ size = 'medium' }) => {
+const Logo: React.FC<Props> = ({ size = 'Medium' }) => {
   return (
     <img
-      src="/fe/src/assets/logo.svg"
-      width={size === 'medium' ? 199 : 342}
-      height={size === 'medium' ? 40 : 72}
+      src={logo}
+      width={size === 'Medium' ? 199 : 342}
+      height={size === 'Medium' ? 40 : 72}
       alt="logo"
     />
   );
