@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Profile from '../Profile/Profile';
+import Profile from '../Profile';
 
 interface Props {
   title: string;
@@ -19,7 +19,7 @@ const FilterItem: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={`text-neutral flex items-center gap-x-1 ${
+      className={`flex items-center gap-x-1 text-neutral ${
         bold && 'font-bold'
       }`}
     >

@@ -34,26 +34,29 @@ const Issue: React.FC<Props> = ({
       <div className="mr-4">{/* TODO(Lily): add check box */}c</div>
       <div>
         <div className="mb-1 flex">
-          {isOpen ? (
-            <img className="mr-1" src="assets/openedIssue.svg" />
-          ) : (
-            <img className="mr-1" src="assets/closedIssue.svg" />
-          )}
+          <img
+            className="mr-1"
+            src={isOpen ? 'assets/openedIssue.svg' : 'assets/closedIssue.svg'}
+          />
           {/* TODO(Lily): 라우터 설치 및 설정 이후에 Link 태그로 바꾸기 */}
           <button
-            className="mr-1 text-lg font-bold text-neutral-strong"
+            className="mr-1 text-left text-lg font-bold text-neutral-strong"
             onClick={() => onIssueTitleClick(id)}
           >
             {title}
           </button>
-          {labels.map(label => (
-            <Label
-              key={label.id}
-              labelName={label.title}
-              backgroundColor={label.backgroundColor}
-              fontColor={label.fontColor}
-            />
-          ))}
+          {labels.map(label => {
+            const { id, title, backgroundColor, fontColor } = label;
+
+            return (
+              <Label
+                key={id}
+                labelName={title}
+                backgroundColor={backgroundColor}
+                fontColor={fontColor}
+              />
+            );
+          })}
         </div>
         <div className="flex">
           <span className="mr-2 text-neutral-weak">#{id}</span>
@@ -70,7 +73,7 @@ const Issue: React.FC<Props> = ({
         </div>
       </div>
       {/* FIXME(Jayden): Profile 태그의 상위 태그의 높이가 고정 */}
-      <div className="flex h-5 w-5 grow justify-end self-center">
+      <div className="flex h-16 w-16 grow items-center justify-end">
         <Profile url={profileUrl} />
       </div>
     </div>
