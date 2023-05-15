@@ -4,7 +4,7 @@ export const content = ['./src/**/*.{js,jsx,ts,tsx}'];
 export const theme = {
   extend: {
     colors: {
-      // NOTE(Jayden): 기본 컬러 설정
+      // NOTE(Jayden): 기본 color
       'gray-50': '#FEFEFE',
       'gray-100': '#F7F7FC',
       'gray-200': '#EFF0F6',
@@ -18,13 +18,13 @@ export const theme = {
       blue: '#007AFF',
       navy: '#0025E6',
       red: '#FF3B30',
-      // FIXME(Jayden): theme에 작성할 style명 구체화하기
+      // TODO: 아래 컬러들을 위의 테마 컬러로 변경하기
       neutral: '#4E4B66',
       'neutral-weak': '#6E7191',
       'neutral-strong': '#14142B',
       'light-mode': '#F7F7FC',
     },
-    // NOTE(Jayden): 기본 font-size 설정
+    // NOTE(Jayden): 기본 font-size
     fontSize: {
       sm: ['12px', '20px'],
       md: ['16px', '28px'],
@@ -42,4 +42,5 @@ export const theme = {
   //   }),
   // ],
 };
+export const safelist = [{ pattern: /bg-(blue|gray)/ }];
 export const plugins = [];

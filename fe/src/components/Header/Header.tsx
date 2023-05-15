@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Profile from '../../common/Profile';
-import Logo from '../../common/Logo';
+import Logo from '@common/Logo';
+import Profile from '@common/Profile';
 
 interface Props {
   url?: string;
