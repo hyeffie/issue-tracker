@@ -1,11 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* TODO(Jayden): tailwind base 특정 값만 변경하기(img의 height) */
-/* NOTE(Jayden): 원하는 img 태그의 className에만 `h-fit` 적용하여 해결 */
-/*@layer base {*/
-/*    img {*/
-/*        height: fit-content;*/
-/*    }*/
-/*}*/

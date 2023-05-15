@@ -1,8 +1,8 @@
 import React from 'react';
 
+import Profile from '@common/Profile';
+import Label from '@common/Label';
 import { LabelRow } from './IssueList';
-import Profile from '../../common/Profile';
-import Label from '../../common/Label';
 
 interface Props {
   id: number;

@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { ReactComponent as PlusIcon } from '../../assets/plus.svg';
+import { ReactComponent as PlusIcon } from '@assets/plus.svg';
 
 interface Props {
-  isFlexible?: boolean;
-  type?: 'Contained' | 'Outline' | 'Ghost';
-  hasIcon?: boolean;
-  condition?: 'Enabled' | 'Hover' | 'Press' | 'Disabled';
-  size?: 'Large' | 'Medium' | 'Small';
-  color?: 'Blue' | 'grayDark' | 'grayLight';
-  content?: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  isFlexible: boolean;
+  type: 'Contained' | 'Outline' | 'Ghost';
+  hasIcon: boolean;
+  condition: 'Enabled' | 'Hover' | 'Press' | 'Disabled';
+  size: 'Large' | 'Medium' | 'Small';
+  color: 'Blue' | 'grayDark' | 'grayLight';
+  title: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button: React.FC<Props> = ({
@@ -20,8 +20,9 @@ const Button: React.FC<Props> = ({
   condition = 'Enabled',
   size = 'Medium',
   color = 'Blue',
-  content = 'Button',
+  title = 'Button',
   onClick = () => {
+    // TODO: 아래 console.log 추후 지우기
     console.log('clicked!');
   },
 }) => {
@@ -37,7 +38,7 @@ const Button: React.FC<Props> = ({
       onClick={onClick}
     >
       {hasIcon && <PlusIcon stroke={'#ffffff'} />}
-      <span>{content}</span>
+      <span>{title}</span>
     </button>
   );
 };
@@ -50,6 +51,8 @@ function getWidthHeight(size: string) {
       return 'w-60 h-14';
     case 'Small':
       return 'w-[120px] h-10';
+    default:
+      'w-60 h-14';
   }
 }
 
@@ -76,6 +79,8 @@ function getOpacity(condition: string) {
       return 'opacity-[.64]';
     case 'Disabled':
       return 'opacity-[.32]';
+    default:
+      'opacity-100';
   }
 }
 
@@ -90,4 +95,5 @@ function getOpacity(condition: string) {
 //       return 'bg-transparent';
 //   }
 // }
+
 export default Button;
