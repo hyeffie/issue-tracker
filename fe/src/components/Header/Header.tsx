@@ -9,7 +9,7 @@ interface Props {
 
 const Header: React.FC<Props> = ({ url }) => {
   return (
-    <header className="h-24 flex justify-between items-center">
+    <header className="flex h-24 items-center justify-between">
       <Logo />
       <Profile url={url} />
     </header>

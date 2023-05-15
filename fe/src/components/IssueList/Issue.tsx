@@ -30,10 +30,10 @@ const Issue: React.FC<Props> = ({
   onIssueTitleClick,
 }) => {
   return (
-    <div className="flex px-8 py-4 border-t">
+    <div className="flex border-t px-8 py-4">
       <div className="mr-4">{/* TODO(Lily): add check box */}c</div>
       <div>
-        <div className="flex mb-1">
+        <div className="mb-1 flex">
           {isOpen ? (
             <img className="mr-1" src="assets/openedIssue.svg" />
           ) : (
@@ -41,7 +41,7 @@ const Issue: React.FC<Props> = ({
           )}
           {/* TODO(Lily): 라우터 설치 및 설정 이후에 Link 태그로 바꾸기 */}
           <button
-            className="mr-1 text-lg text-neutral-strong font-bold"
+            className="mr-1 text-lg font-bold text-neutral-strong"
             onClick={() => onIssueTitleClick(id)}
           >
             {title}
@@ -69,7 +69,8 @@ const Issue: React.FC<Props> = ({
           </div>
         </div>
       </div>
-      <div className="w-5 h-5 flex grow justify-end self-center">
+      {/* FIXME(Jayden): Profile 태그의 상위 태그의 높이가 고정 */}
+      <div className="flex h-5 w-5 grow justify-end self-center">
         <Profile url={profileUrl} />
       </div>
     </div>

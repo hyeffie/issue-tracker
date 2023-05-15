@@ -36,13 +36,13 @@ const IssueList: React.FC<Props> = ({
   onIssueTitleClick,
 }) => {
   return (
-    <div className="w-160 border box-border rounded-2xl">
-      <div className="w-160 px-8 py-6 bg-light-mode rounded-t-2xl box-border">
+    <div className="w-160 box-border rounded-2xl border">
+      <div className="w-160 box-border rounded-t-2xl bg-light-mode px-8 py-6">
         <div className="flex justify-between">
           <div className="flex ">
             <div className="mr-4">{/* TODO(Lily): add check box */}c</div>
             <div className="flex ">
-              <button className="flex items-center mr-3 text-neutral-strong font-bold">
+              <button className="mr-3 flex items-center font-bold text-neutral-strong">
                 <img src="assets/openedIssue.svg" />
                 <span className="ml-1">열린 이슈({countOpenedIssues})</span>
               </button>
@@ -53,19 +53,19 @@ const IssueList: React.FC<Props> = ({
             </div>
           </div>
           <div className="flex">
-            <button className="flex items-center mr-4 text-neutral-weak font-bold">
+            <button className="mr-4 flex items-center font-bold text-neutral-weak">
               <span className="mr-1.5">담당자</span>
               <img src="assets/dropDownArrow.svg" />
             </button>
-            <button className="flex items-center mr-4 text-neutral-weak font-bold">
+            <button className="mr-4 flex items-center font-bold text-neutral-weak">
               <span className="mr-1.5">레이블</span>
               <img src="assets/dropDownArrow.svg" />
             </button>
-            <button className="flex items-center mr-4 text-neutral-weak font-bold">
+            <button className="mr-4 flex items-center font-bold text-neutral-weak">
               <span className="mr-1.5">마일스톤</span>
               <img src="assets/dropDownArrow.svg" />
             </button>
-            <button className="flex items-center text-neutral-weak font-bold">
+            <button className="flex items-center font-bold text-neutral-weak">
               <span className="mr-1.5">작성자</span>
               <img src="assets/dropDownArrow.svg" />
             </button>
@@ -89,7 +89,7 @@ const IssueList: React.FC<Props> = ({
           />
         ))
       ) : (
-        <div className="my-5 text-neutral-weak text-center">
+        <div className="my-5 text-center text-neutral-weak">
           검색과 일치하는 결과가 없습니다.
         </div>
       )}
