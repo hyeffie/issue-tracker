@@ -1,7 +1,6 @@
 import React from 'react';
-// FIXME(Jayden): public 폴더 내의 svg 파일 import 경로 줄이는 방법 찾기
-// TODO(Jayden): 추후 다른 svg 파일 추가 시, 조건부 렌더링으로 변경 - stroke 색상 변경도 같이!
-import { ReactComponent as PlusIcon } from '../../../public/assets/plus.svg';
+
+import { ReactComponent as PlusIcon } from '../../assets/plus.svg';
 
 interface Props {
   isFlexible?: boolean;
@@ -28,6 +27,7 @@ const Button: React.FC<Props> = ({
 }) => {
   const widthHeight = getWidthHeight(size);
   const bgColor = `bg-${getColor(color)}`;
+  console.log(bgColor);
   const opacity = getOpacity(condition);
   return (
     <button
@@ -59,8 +59,10 @@ function getColor(color: string) {
       return 'blue';
     case 'grayDark':
       return 'gray-900';
-    case 'garyLight':
+    case 'grayLight':
       return 'gray-100';
+    default:
+      'blue';
   }
 }
 
