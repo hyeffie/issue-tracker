@@ -34,8 +34,7 @@ class IssueLabel: UILabel {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        // TODO: - cornerRadius 값 임의 선택
-        layer.cornerRadius = 10
+        layer.cornerRadius = self.frame.size.height / 2
         layer.masksToBounds = true
     }
     
@@ -45,20 +44,19 @@ class IssueLabel: UILabel {
             let startIndex = color.index(color.startIndex, offsetBy: (2*index) + 1)
             let endIndex = color.index(color.startIndex, offsetBy: 2 * (index+1))
             let maxColorValue: CGFloat = 255
-            guard let colorValue = Int32(color[startIndex...endIndex], radix: 16) else {
-                break
+            guard let colorValue = Int(color[startIndex...endIndex], radix: 16) else {
+                rgbList.append(CGFloat(0.5))
+                continue
             }
-            
-            rgbList.append(CGFloat(colorValue) / maxColorValue )
+            rgbList.append(CGFloat(colorValue) / maxColorValue)
         }
         
         return UIColor(red: rgbList[0], green: rgbList[1], blue: rgbList[2], alpha: 1)
     }
     
     func isBright(_ backgroundColor: UIColor?) -> Bool {
-        // TODO: - Optional Binding 예외 처리
         guard let colorValueList = backgroundColor?.cgColor.components else {
-            return false
+            return true
         }
         
         let averageOfColorValues = colorValueList.reduce(0, +) / 3
@@ -66,6 +64,7 @@ class IssueLabel: UILabel {
         guard averageOfColorValues >= standarOfBrightness else {
             return false
         }
+        
         return true
     }
 }
