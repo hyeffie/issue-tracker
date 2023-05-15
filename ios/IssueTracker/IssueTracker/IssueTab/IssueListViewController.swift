@@ -10,7 +10,8 @@ import UIKit
 class IssueListViewController: UIViewController {
   
   @IBOutlet weak var collectionView: UICollectionView!
-  
+    let data = [["description", "#1429D6"], ["Label", "#A36139"], ["wood", "#B4A239"]]
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -34,18 +35,16 @@ extension IssueListViewController: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 100
+    return 3
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: "IssueListCollectionViewCell",
       for: indexPath) as? IssueListCollectionViewCell else { return UICollectionViewCell() }
-      
-      guard !labelList.isEmpty else {
-          return cell
-      }
-      
+      cell.configureFont()
+      let cellData = data[indexPath.row]
+      cell.addLabel(name: cellData[0], color: cellData[1])
       
     
     
