@@ -20,7 +20,7 @@ export interface IssueRow {
   profileUrl: string;
   isOpen: boolean;
   createdAt: string;
-  closedAt: string;
+  closedAt?: string;
   milestoneName: string;
   labels: LabelRow[];
 }

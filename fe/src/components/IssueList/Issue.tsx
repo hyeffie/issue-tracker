@@ -1,11 +1,12 @@
 import React from 'react';
 
-import milestone from '@assets/milestone.svg';
 import Profile from '@common/Profile';
 import Label from '@common/Label';
 import { LabelRow } from './IssueList';
+
 import { ReactComponent as OpenedIssue } from '@assets/openedIssue.svg';
 import { ReactComponent as ClosedIssue } from '@assets/closedIssue.svg';
+import { ReactComponent as Milestone } from '@assets/milestone.svg';
 
 interface Props {
   id: number;
@@ -14,7 +15,7 @@ interface Props {
   profileUrl: string;
   isOpen: boolean;
   createdAt: string;
-  closedAt: string;
+  closedAt?: string;
   milestoneName: string;
   labels: LabelRow[];
   onIssueTitleClick: (id: number) => void;
@@ -34,7 +35,7 @@ const Issue: React.FC<Props> = ({
 }) => {
   return (
     <div className="flex border-t px-8 py-4">
-      <div className="mr-8">
+      <div className="mr-8 mt-2">
         <input
           type="checkbox"
           checked={false}
@@ -58,7 +59,6 @@ const Issue: React.FC<Props> = ({
           <div className="flex">
             {labels.map(label => {
               const { id, title, backgroundColor, fontColor } = label;
-
               return (
                 <Label
                   key={id}
@@ -70,17 +70,18 @@ const Issue: React.FC<Props> = ({
             })}
           </div>
         </div>
+        {/* TODO: issue info 세로 가운데 정렬 */}
         <div className="flex">
-          <span className="mr-2 text-neutral-weak">#{id}</span>
-          <span className="mr-2 text-neutral-weak">
+          <span className="mr-2 text-gray-600">#{id}</span>
+          <span className="mr-2 text-gray-600">
             {/* TODO(Lily): 경과 시간 계산은 위에서 하고 계산 된 값을 props로 받아서 처리하기 */}
             {isOpen
               ? `이 이슈가 ${createdAt}분 전, ${userName}님에 의해 작성되었습니다.`
               : `이 이슈가 ${closedAt}분 전, ${userName}에 의해 닫혔습니다.`}
           </span>
-          <div className="flex">
-            <img className="mr-1" src={milestone} />
-            <span className="text-neutral-weak">{milestoneName}</span>
+          <div className="flex items-center">
+            <Milestone fill="#6E7191" />
+            <span className="ml-2 text-gray-600">{milestoneName}</span>
           </div>
         </div>
       </div>
