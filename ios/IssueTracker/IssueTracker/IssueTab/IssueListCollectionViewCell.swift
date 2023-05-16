@@ -12,6 +12,16 @@ class IssueListCollectionViewCell: UICollectionViewCell {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var milestoneLabel: UILabel!
     @IBOutlet var labelStackView: UIStackView!
+  
+  override func awakeFromNib() {
+      super.awakeFromNib()
+      configureFont()
+    }
+    
+    override func prepareForReuse() {
+      super.prepareForReuse()
+      emptyLabelStack()
+    }
     
     func configureFont() {
         self.titleLabel.apply(typography: TypoGraphy(weight: .bold,
@@ -27,5 +37,20 @@ class IssueListCollectionViewCell: UICollectionViewCell {
     
     func addLabel(name: String, color: String) {
         self.labelStackView.addArrangedSubview(IssueLabel(name: name, color: color))
+    }
+  
+  func configure(issue: IssueListDTO.Issue) {
+      titleLabel.text = issue.title
+      descriptionLabel.text = issue.description
+      milestoneLabel.text = issue.milestone
+      
+      for label in issue.labels {
+        let labelView = IssueLabel(name: label.title, color: label.color)
+        self.labelStackView.addArrangedSubview(labelView)
+      }
+    }
+  
+  func emptyLabelStack() {
+      labelStackView.arrangedSubviews.forEach { view in labelStackView.removeArrangedSubview(view) }
     }
 }

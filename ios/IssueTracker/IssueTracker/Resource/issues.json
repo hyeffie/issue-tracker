@@ -1,0 +1,28 @@
+{
+  "status": 200,
+  "body": [
+    {
+      "title": "iOS 이슈트래커 개발",
+      "description": "2023년 5월 8일 월요일 부터",
+      "milestone": "그룹 프로젝트: 이슈트래커",
+      "labels": [
+        {
+          "title": "documentation",
+          "color": "#538661"
+        }
+      ]
+    },
+    {
+      "title": "UILabel Extension apply 메소드 수정",
+      "description": "line height 지정 함수로 인해 레이블이 2줄 이상\n생기지 않네요",
+      "milestone": "Issue-tracker",
+      "labels": [
+        {
+          "title": "Fix",
+          "color": "#FEFEFE"
+        }
+      ]
+    }
+  ]
+}
+

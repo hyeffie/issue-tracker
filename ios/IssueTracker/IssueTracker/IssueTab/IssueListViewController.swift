@@ -11,6 +11,9 @@ class IssueListViewController: UIViewController {
   
   @IBOutlet weak var collectionView: UICollectionView!
     let data = [["description", "#1429D6"], ["Label", "#A36139"], ["wood", "#B4A239"]]
+  
+  var networkManager: NetworkManager?
+  var objects: [IssueListDTO.Issue] = []
     
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,6 +29,13 @@ class IssueListViewController: UIViewController {
     if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
       flowLayout.estimatedItemSize = .zero
     }
+    
+    let urlSession = MockURLSession(withJson: "issues")
+    networkManager = NetworkManager(session: urlSession)
+    
+    networkManager?.fetchIssueList(completion: { [weak self] dto in
+      self?.objects = dto.body
+    })
   }
 }
 
@@ -35,20 +45,14 @@ extension IssueListViewController: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 3
+    return objects.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: "IssueListCollectionViewCell",
       for: indexPath) as? IssueListCollectionViewCell else { return UICollectionViewCell() }
-      cell.configureFont()
-      let cellData = data[indexPath.row]
-      cell.addLabel(name: cellData[0], color: cellData[1])
-      
-    
-    
-      
+    cell.configure(issue: objects[indexPath.item])
       return cell
   }
 }
