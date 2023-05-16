@@ -8,14 +8,17 @@
 import UIKit
 
 extension UILabel {
-  func apply(
-    typography: TypoGraphy,
-    textColor: Color)
-  {
-    self.font = typography.font
-    self.textColor = textColor.color
-    
-//    self.translatesAutoresizingMaskIntoConstraints = false
-//    self.heightAnchor.constraint(equalToConstant: typography.size.lineHeight).isActive = true
-  }
+   func apply(
+      typography: TypoGraphy,
+      textColor: Color,
+      willApplyHeight: Bool = true)
+   {
+      self.font = typography.font
+      self.textColor = textColor.color
+      
+      if willApplyHeight {
+         self.translatesAutoresizingMaskIntoConstraints = false
+         self.heightAnchor.constraint(equalToConstant: typography.size.lineHeight).isActive = true
+      }
+   }
 }

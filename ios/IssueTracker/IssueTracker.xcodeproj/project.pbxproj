@@ -139,15 +139,13 @@
 		F4BF7CCA2A0C8886001C22F0 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				F48583C22A13802E00322C9F /* Network */,
-				F4BF7CD62A0C8887001C22F0 /* LaunchScreen.storyboard */,
-				F4BF7CD12A0C8886001C22F0 /* Main.storyboard */,
-				F48583AB2A10E1FC00322C9F /* TabBarController.swift */,
-				F48583A92A0E21DA00322C9F /* IssueTab */,
+				F4BF7CE52A0C8B9F001C22F0 /* Resource */,
+				F4BF7CE42A0C8B89001C22F0 /* Supporting Files */,
 				F48583A82A0E216A00322C9F /* Common */,
 				F48583AA2A0E21E500322C9F /* Extension */,
-				F4BF7CE42A0C8B89001C22F0 /* Supporting Files */,
-				F4BF7CE52A0C8B9F001C22F0 /* Resource */,
+				F48583C22A13802E00322C9F /* Network */,
+				F48583AB2A10E1FC00322C9F /* TabBarController.swift */,
+				F48583A92A0E21DA00322C9F /* IssueTab */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -155,6 +153,8 @@
 		F4BF7CE42A0C8B89001C22F0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F4BF7CD62A0C8887001C22F0 /* LaunchScreen.storyboard */,
+				F4BF7CD12A0C8886001C22F0 /* Main.storyboard */,
 				F4BF7CCB2A0C8886001C22F0 /* AppDelegate.swift */,
 				F4BF7CCD2A0C8886001C22F0 /* SceneDelegate.swift */,
 				F4BF7CD92A0C8887001C22F0 /* Info.plist */,
@@ -165,8 +165,8 @@
 		F4BF7CE52A0C8B9F001C22F0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				F48583D02A138DA400322C9F /* issues.json */,
 				F4BF7CD42A0C8887001C22F0 /* Assets.xcassets */,
+				F48583D02A138DA400322C9F /* issues.json */,
 			);
 			path = Resource;
 			sourceTree = "<group>";

@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,33 +21,32 @@
                         <rect key="frame" x="24" y="16" width="615" height="107"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5L8-B3-LIn">
-                                <rect key="frame" x="0.0" y="0.0" width="615" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="615" height="21.666666666666668"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exc-QW-s87">
-                                        <rect key="frame" x="0.0" y="0.0" width="585" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="593.33333333333337" height="21.666666666666668"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="k11-4I-sMu">
-                                        <rect key="frame" x="585" y="2" width="30" height="26.333333333333332"/>
+                                        <rect key="frame" x="593.33333333333326" y="2" width="21.666666666666742" height="18"/>
                                         <color key="tintColor" name="gray700"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="8Oh-zu-rK4"/>
-                                            <constraint firstAttribute="height" constant="30" id="Zs6-su-4d5"/>
+                                            <constraint firstAttribute="width" secondItem="k11-4I-sMu" secondAttribute="height" id="eXm-jn-APk"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="설명(최대 두 줄까지 보여줄 수 있다)" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XvL-EA-VVf">
-                                <rect key="frame" x="0.0" y="36" width="615" height="17"/>
+                                <rect key="frame" x="0.0" y="30.333333333333336" width="615" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <lineBreakStrategy key="lineBreakStrategy" hangulWordPriority="YES"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PXH-uF-cRC">
-                                <rect key="frame" x="0.0" y="59" width="615" height="18"/>
+                                <rect key="frame" x="0.0" y="56.333333333333329" width="615" height="18"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="milestone" translatesAutoresizingMaskIntoConstraints="NO" id="dst-1V-35T">
                                         <rect key="frame" x="0.0" y="0.0" width="17" height="18"/>
@@ -68,14 +66,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uuh-kf-CLw">
                                 <rect key="frame" x="0.0" y="83" width="615" height="24"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dyV-HA-oXT">
-                                        <rect key="frame" x="0.0" y="0.0" width="19" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dyV-HA-oXT">
+                                        <rect key="frame" x="0.0" y="0.0" width="615" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="GeG-PP-kVI"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="dyV-HA-oXT" firstAttribute="top" secondItem="Uuh-kf-CLw" secondAttribute="top" id="REp-FS-OJ8"/>
                                     <constraint firstAttribute="height" constant="24" id="Td4-On-uYN"/>
+                                    <constraint firstItem="dyV-HA-oXT" firstAttribute="leading" secondItem="Uuh-kf-CLw" secondAttribute="leading" id="gGN-Ty-jzK"/>
+                                    <constraint firstAttribute="bottom" secondItem="dyV-HA-oXT" secondAttribute="bottom" id="szN-FZ-x4f"/>
+                                    <constraint firstAttribute="trailing" secondItem="dyV-HA-oXT" secondAttribute="trailing" priority="250" id="xn9-la-G5B"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -88,6 +91,7 @@
                     <constraint firstItem="I7B-VG-nnl" firstAttribute="leading" secondItem="URj-8g-Jwl" secondAttribute="leading" constant="24" id="ac5-HC-Jl4"/>
                 </constraints>
             </collectionViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <size key="customSize" width="606" height="244"/>
             <connections>
                 <outlet property="checkBoxImageView" destination="k11-4I-sMu" id="oKp-AC-9Jh"/>
@@ -105,8 +109,5 @@
         <namedColor name="gray700">
             <color red="0.54117647058823526" green="0.54117647058823526" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

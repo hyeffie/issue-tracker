@@ -8,19 +8,19 @@
 import Foundation
 
 protocol URLSessionDataTaskInterface {
-  func resume()
+   func resume()
 }
 
 extension URLSessionDataTask: URLSessionDataTaskInterface {}
 
 final class MockURLSessionDataTask: URLSessionDataTaskInterface {
-  private let resumeHandler: () -> Void
-  
-  init(resumeHandler: @escaping () -> Void) {
-    self.resumeHandler = resumeHandler
-  }
-  
-  func resume() {
-    resumeHandler()
-  }
+   private let resumeHandler: () -> Void
+   
+   init(resumeHandler: @escaping () -> Void) {
+      self.resumeHandler = resumeHandler
+   }
+   
+   func resume() {
+      resumeHandler()
+   }
 }

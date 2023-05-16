@@ -8,7 +8,7 @@
 import Foundation
 
 enum NetworkError: Error {
-  case noResponse
-  case invalidData
-  case failToParse
+   case noResponse
+   case invalidData
+   case failToParse
 }
