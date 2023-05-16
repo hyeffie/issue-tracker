@@ -14,10 +14,23 @@ import { ReactComponent as Edit } from '@assets/edit.svg';
 import { ReactComponent as Smile } from '@assets/smile.svg';
 import { ReactComponent as Calendar } from '@assets/calendar.svg';
 
+type SVGNames =
+  | 'plus'
+  | 'xsquare'
+  | 'label'
+  | 'milestone'
+  | 'alertcircle'
+  | 'archive'
+  | 'paperclip'
+  | 'trash'
+  | 'edit'
+  | 'smile'
+  | 'calendar'
+  | '';
 interface Props {
   isFlexible?: boolean;
   type?: 'Contained' | 'Outline' | 'Ghost';
-  iconName?: string;
+  iconName?: SVGNames;
   condition?: 'Enabled' | 'Hover' | 'Press' | 'Disabled';
   size?: 'Large' | 'Medium' | 'Small';
   color?: 'Blue' | 'GrayDark' | 'GrayLight';
