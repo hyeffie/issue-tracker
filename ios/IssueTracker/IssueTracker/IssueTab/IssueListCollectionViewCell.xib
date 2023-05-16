@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="655" height="148"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="I7B-VG-nnl">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="I7B-VG-nnl">
                         <rect key="frame" x="24" y="16" width="615" height="107"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5L8-B3-LIn">
@@ -40,34 +41,32 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="설명(최대 두 줄까지 보여줄 수 있다)" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XvL-EA-VVf">
-                                <rect key="frame" x="0.0" y="34" width="615" height="17"/>
+                                <rect key="frame" x="0.0" y="36.333333333333336" width="615" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <lineBreakStrategy key="lineBreakStrategy" hangulWordPriority="YES"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[iOS] 이슈 탭" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CR-Vp-wLF">
-                                <rect key="frame" x="0.0" y="55" width="615" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="Oma-C4-yOf"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="59.666666666666671" width="615" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dyV-HA-oXT">
-                                <rect key="frame" x="0.0" y="83" width="100" height="24"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uuh-kf-CLw">
+                                <rect key="frame" x="0.0" y="83" width="615" height="24"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dyV-HA-oXT">
+                                        <rect key="frame" x="0.0" y="0.0" width="19" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="V1h-sl-TEp"/>
+                                    <constraint firstAttribute="height" constant="24" id="Td4-On-uYN"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                         </subviews>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="XvL-EA-VVf" secondAttribute="trailing" id="BSu-Gp-AC6"/>
-                            <constraint firstItem="XvL-EA-VVf" firstAttribute="leading" secondItem="I7B-VG-nnl" secondAttribute="leading" id="Nmh-LJ-spM"/>
-                            <constraint firstItem="5L8-B3-LIn" firstAttribute="leading" secondItem="I7B-VG-nnl" secondAttribute="leading" id="OZp-uI-YcO"/>
-                            <constraint firstAttribute="trailing" secondItem="9CR-Vp-wLF" secondAttribute="trailing" id="dSk-cQ-shf"/>
-                            <constraint firstAttribute="trailing" secondItem="5L8-B3-LIn" secondAttribute="trailing" id="hMc-CJ-W6c"/>
-                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
@@ -84,7 +83,7 @@
                 <outlet property="milestoneLabel" destination="9CR-Vp-wLF" id="504-S8-Dic"/>
                 <outlet property="titleLabel" destination="exc-QW-s87" id="AyX-53-RFb"/>
             </connections>
-            <point key="canvasLocation" x="575.5725190839695" y="33.098591549295776"/>
+            <point key="canvasLocation" x="574.80916030534354" y="33.098591549295776"/>
         </collectionViewCell>
     </objects>
     <resources>
@@ -92,5 +91,8 @@
         <namedColor name="gray700">
             <color red="0.54117647058823526" green="0.54117647058823526" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

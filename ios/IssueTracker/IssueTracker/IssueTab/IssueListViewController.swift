@@ -52,7 +52,14 @@ extension IssueListViewController: UICollectionViewDataSource {
     guard let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: "IssueListCollectionViewCell",
       for: indexPath) as? IssueListCollectionViewCell else { return UICollectionViewCell() }
-    cell.configure(issue: objects[indexPath.item])
+
+      cell.configureFont()
+      cell.descriptionLabel.text = "오늘 점심 뭐먹지? 오늘 점심 뭐먹지? 오늘 점심 뭐먹지? 오늘 점심 뭐먹지?\n 오늘 점심 뭐먹지? 오늘 점심 뭐먹지? 오늘 점심 뭐먹지?"
+      let cellData = data[indexPath.row]
+      cell.addLabel(name: cellData[0], color: cellData[1])
+      cell.labelStackView.translatesAutoresizingMaskIntoConstraints = false
+      cell.labelStackView.sizeToFit()
+
       return cell
   }
 }
@@ -63,7 +70,8 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
     layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAt indexPath: IndexPath
   ) -> CGSize {
-    return CGSize(width: collectionView.frame.width, height: 150)
+      
+      return CGSize(width: collectionView.frame.width, height: 200)
   }
   
   func collectionView(
@@ -81,4 +89,8 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
   ) -> CGFloat {
     return 0
   }
+
+    
 }
+
+
