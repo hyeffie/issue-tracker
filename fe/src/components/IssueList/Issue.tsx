@@ -34,7 +34,7 @@ const Issue: React.FC<Props> = ({
   onIssueTitleClick,
 }) => {
   return (
-    <div className="flex border-t px-8 py-4">
+    <div className="flex items-center border-t px-8 py-4">
       <div className="mr-4">
         <input
           type="checkbox"

@@ -43,7 +43,7 @@ const IssueList: React.FC<Props> = ({
     <div className="w-160 box-border rounded-2xl border">
       <div className="w-160 box-border rounded-t-2xl bg-light-mode px-8 py-6">
         <div className="flex justify-between">
-          <div className="flex ">
+          <div className="flex items-center">
             <div className="mr-4">
               <input
                 type="checkbox"
