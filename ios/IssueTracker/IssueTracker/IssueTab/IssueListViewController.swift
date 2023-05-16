@@ -11,21 +11,23 @@ class IssueListViewController: UIViewController {
   
   @IBOutlet weak var collectionView: UICollectionView!
     let data = [["description", "#1429D6"], ["Label", "#A36139"], ["wood", "#B4A239"]]
+    let milestoneData = ["1st Week", "2nd Week", "3rd Week"]
+
   
   var networkManager: NetworkManager?
   var objects: [IssueListDTO.Issue] = []
     
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     self.title = "이슈"
-    
+
     collectionView.dataSource = self
     collectionView.delegate = self
-    
+
     let cellNib = UINib(nibName: "IssueListCollectionViewCell", bundle: nil)
     collectionView.register(cellNib, forCellWithReuseIdentifier: "IssueListCollectionViewCell")
-    
+
     if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
       flowLayout.estimatedItemSize = .zero
     }
@@ -43,11 +45,11 @@ extension IssueListViewController: UICollectionViewDataSource {
   func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return objects.count
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: "IssueListCollectionViewCell",
@@ -55,6 +57,9 @@ extension IssueListViewController: UICollectionViewDataSource {
 
       cell.configureFont()
       cell.descriptionLabel.text = "오늘 점심 뭐먹지? 오늘 점심 뭐먹지? 오늘 점심 뭐먹지? 오늘 점심 뭐먹지?\n 오늘 점심 뭐먹지? 오늘 점심 뭐먹지? 오늘 점심 뭐먹지?"
+
+      cell.milestoneLabel.text = milestoneData[indexPath.row]
+
       let cellData = data[indexPath.row]
       cell.addLabel(name: cellData[0], color: cellData[1])
       cell.labelStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +78,7 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
       
       return CGSize(width: collectionView.frame.width, height: 200)
   }
-  
+
   func collectionView(
     _ collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
@@ -81,7 +86,7 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
   ) -> CGFloat {
     return 0
   }
-  
+
   func collectionView(
     _ collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
@@ -89,8 +94,4 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
   ) -> CGFloat {
     return 0
   }
-
-    
 }
-
-

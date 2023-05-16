@@ -32,7 +32,7 @@ class IssueListCollectionViewCell: UICollectionViewCell {
                               textColor: .gray800)
         self.milestoneLabel.apply(typography: TypoGraphy(weight: .regular,
                                                          size: .medium),
-                                  textColor: .gray800)
+                              textColor: .gray800)
     }
     
     func addLabel(name: String, color: String) {
