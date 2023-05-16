@@ -1,7 +1,7 @@
 import React from 'react';
 
-import openedIssue from '@assets/openedIssue.svg';
-import closedIssue from '@assets/closedIssue.svg';
+import openedIssue from '@assets/alertCircle.svg';
+import closedIssue from '@assets/archive.svg';
 import milestone from '@assets/milestone.svg';
 import Profile from '@common/Profile';
 import Label from '@common/Label';

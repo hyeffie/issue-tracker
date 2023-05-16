@@ -1,8 +1,7 @@
 import React from 'react';
 
-import openedIssue from '@assets/openedIssue.svg';
-import closedIssue from '@assets/closedIssue.svg';
-import dropDownArrow from '@assets/dropDownArrow.svg';
+import openedIssue from '@assets/alertCircle.svg';
+import closedIssue from '@assets/archive.svg';
 import Issue from './Issue';
 import Button from '@common/Button';
 
