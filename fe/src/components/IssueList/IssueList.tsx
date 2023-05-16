@@ -4,6 +4,7 @@ import openedIssue from '@assets/openedIssue.svg';
 import closedIssue from '@assets/closedIssue.svg';
 import dropDownArrow from '@assets/dropDownArrow.svg';
 import Issue from './Issue';
+import { log } from '@craco/craco/dist/lib/logger';
 
 export interface LabelRow {
   id: number;
@@ -43,7 +44,13 @@ const IssueList: React.FC<Props> = ({
       <div className="w-160 box-border rounded-t-2xl bg-light-mode px-8 py-6">
         <div className="flex justify-between">
           <div className="flex ">
-            <div className="mr-4">{/* TODO(Lily): add check box */}c</div>
+            <div className="mr-4">
+              <input
+                type="checkbox"
+                checked={false}
+                onChange={() => console.log('check')}
+              />
+            </div>
             <div className="flex ">
               <button className="mr-3 flex items-center font-bold text-neutral-strong">
                 <img src={openedIssue} />
@@ -75,6 +82,7 @@ const IssueList: React.FC<Props> = ({
           </div>
         </div>
       </div>
+      {/* TODO(Lily): 구조분해할당 적용하기 */}
       {issues.length ? (
         issues.map(issue => (
           <Issue

@@ -35,7 +35,13 @@ const Issue: React.FC<Props> = ({
 }) => {
   return (
     <div className="flex border-t px-8 py-4">
-      <div className="mr-4">{/* TODO(Lily): add check box */}c</div>
+      <div className="mr-4">
+        <input
+          type="checkbox"
+          checked={false}
+          onChange={() => console.log('check')}
+        />
+      </div>
       <div>
         <div className="mb-1 flex">
           <img className="mr-1" src={isOpen ? openedIssue : closedIssue} />
@@ -77,7 +83,7 @@ const Issue: React.FC<Props> = ({
       </div>
       {/* FIXME(Jayden): Profile 태그의 상위 태그의 높이가 고정 */}
       <div className="flex h-16 w-16 grow items-center justify-end">
-        <Profile url={profileUrl} />
+        <Profile url={profileUrl} width={20} height={20} />
       </div>
     </div>
   );
