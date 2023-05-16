@@ -9,6 +9,7 @@ import UIKit
 
 class IssueListCollectionViewCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var checkBoxImageView: UIImageView!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var milestoneLabel: UILabel!
     @IBOutlet var labelStackView: UIStackView!
@@ -33,6 +34,15 @@ class IssueListCollectionViewCell: UICollectionViewCell {
         self.milestoneLabel.apply(typography: TypoGraphy(weight: .regular,
                                                          size: .medium),
                               textColor: .gray800)
+    }
+    
+    func configureImage() {
+        guard let chevron = UIImage(systemName: "chevron.right") else {
+            return
+        }
+        
+        let imageInset = UIEdgeInsets(top: -7, left: -7, bottom: -7, right: -7)
+        self.checkBoxImageView.image = chevron.withAlignmentRectInsets(imageInset)
     }
     
     func addLabel(name: String, color: String) {

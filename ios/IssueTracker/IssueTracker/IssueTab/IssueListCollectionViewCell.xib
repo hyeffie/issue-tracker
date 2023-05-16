@@ -90,6 +90,7 @@
             </collectionViewCellContentView>
             <size key="customSize" width="606" height="244"/>
             <connections>
+                <outlet property="checkBoxImageView" destination="k11-4I-sMu" id="oKp-AC-9Jh"/>
                 <outlet property="descriptionLabel" destination="XvL-EA-VVf" id="Ymn-pc-caw"/>
                 <outlet property="labelStackView" destination="dyV-HA-oXT" id="gDG-qO-tJL"/>
                 <outlet property="milestoneLabel" destination="9CR-Vp-wLF" id="NNp-8o-Vfb"/>

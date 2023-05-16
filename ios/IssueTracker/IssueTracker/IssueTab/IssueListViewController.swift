@@ -56,6 +56,8 @@ extension IssueListViewController: UICollectionViewDataSource {
       for: indexPath) as? IssueListCollectionViewCell else { return UICollectionViewCell() }
 
       cell.configureFont()
+      cell.configureImage()
+      
       cell.descriptionLabel.text = "오늘 점심 뭐먹지? 오늘 점심 뭐먹지? 오늘 점심 뭐먹지? 오늘 점심 뭐먹지?\n 오늘 점심 뭐먹지? 오늘 점심 뭐먹지? 오늘 점심 뭐먹지?"
 
       cell.milestoneLabel.text = milestoneData[indexPath.row]
