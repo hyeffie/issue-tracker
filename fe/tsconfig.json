@@ -19,8 +19,9 @@
     "paths": {
       "@common/*": ["src/common/*"],
       "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "craco.config.js"],
+  "extends": "./tsconfig.paths.json"
 }

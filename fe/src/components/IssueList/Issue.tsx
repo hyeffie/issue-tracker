@@ -7,6 +7,7 @@ import Profile from '@common/Profile';
 import Label from '@common/Label';
 import { LabelRow } from './IssueList';
 
+console.log(openedIssue);
 interface Props {
   id: number;
   title: string;
