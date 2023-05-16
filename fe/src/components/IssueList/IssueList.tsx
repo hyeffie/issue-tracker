@@ -4,7 +4,7 @@ import openedIssue from '@assets/openedIssue.svg';
 import closedIssue from '@assets/closedIssue.svg';
 import dropDownArrow from '@assets/dropDownArrow.svg';
 import Issue from './Issue';
-import { log } from '@craco/craco/dist/lib/logger';
+import Button from '@common/Button';
 
 export interface LabelRow {
   id: number;
@@ -63,22 +63,20 @@ const IssueList: React.FC<Props> = ({
             </div>
           </div>
           <div className="flex">
-            <button className="mr-4 flex items-center font-bold text-neutral-weak">
-              <span className="mr-1.5">담당자</span>
-              <img src={dropDownArrow} />
-            </button>
-            <button className="mr-4 flex items-center font-bold text-neutral-weak">
-              <span className="mr-1.5">레이블</span>
-              <img src={dropDownArrow} />
-            </button>
-            <button className="mr-4 flex items-center font-bold text-neutral-weak">
-              <span className="mr-1.5">마일스톤</span>
-              <img src={dropDownArrow} />
-            </button>
-            <button className="flex items-center font-bold text-neutral-weak">
-              <span className="mr-1.5">작성자</span>
-              <img src={dropDownArrow} />
-            </button>
+            {/* FIXME(Jayden): 추후 key값 고려해보기 */}
+            {['담당자', '레이블', '마일스톤', '작성자'].map((title, i) => {
+              return (
+                <Button
+                  key={i}
+                  title={title}
+                  onClick={() => console.log(`${title}!`)}
+                  size="Small"
+                  type="Ghost"
+                  color="GrayLight"
+                  hasDropDown={true}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

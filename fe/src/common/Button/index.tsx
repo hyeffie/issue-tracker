@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ReactComponent as PlusIcon } from '@assets/plus.svg';
-
+import { ReactComponent as CheveronDown } from '@assets/chevronDown.svg';
 interface Props {
   isFlexible?: boolean;
   type?: 'Contained' | 'Outline' | 'Ghost';
@@ -11,6 +11,7 @@ interface Props {
   color?: 'Blue' | 'GrayDark' | 'GrayLight';
   title: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
+  hasDropDown?: boolean;
 }
 
 const Button: React.FC<Props> = ({
@@ -25,6 +26,7 @@ const Button: React.FC<Props> = ({
     // TODO: 아래 console.log 추후 지우기
     console.log('clicked!');
   },
+  hasDropDown = false,
 }) => {
   const widthHeight = getWidthHeight(size);
   const opacity = getOpacity(condition);
@@ -38,6 +40,7 @@ const Button: React.FC<Props> = ({
     >
       {hasIcon && <PlusIcon stroke={getHexByType(color, type)} />}
       <span>{title}</span>
+      {hasDropDown && <CheveronDown stroke={getHexByType(color, type)} />}
     </button>
   );
 };
@@ -62,7 +65,7 @@ function getColor(color: string) {
     case 'GrayDark':
       return 'gray-900';
     case 'GrayLight':
-      return 'gray-100';
+      return 'gray-600';
     default:
       return 'blue';
   }
@@ -83,7 +86,6 @@ function getOpacity(condition: string) {
   }
 }
 
-// TODO(Jayden): 타입 조건과 색상 조건 합쳐서 하나의 함수로 만들기
 function getType(type: string, color: string) {
   switch (type) {
     case 'Contained':
@@ -103,7 +105,7 @@ function getHex(color: string) {
     case 'GrayDark':
       return '#14142B';
     case 'GrayLight':
-      return '#F7F7FC';
+      return '#6E7191';
     default:
       return '#007AFF';
   }
