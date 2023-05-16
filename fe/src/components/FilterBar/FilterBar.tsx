@@ -1,18 +1,18 @@
 import React from 'react';
 
-import chevronDown from '@assets/chevronDown.svg';
 import search from '@assets/search.svg';
+import { ReactComponent as ChevronDown } from '@assets/chevronDown.svg';
 
 const FilterBar: React.FC = () => {
   return (
     <div className="flex w-auto justify-start ">
       <button className="flex h-10 w-32 items-center justify-center gap-x-3 rounded-l-2xl border border-gray-200 bg-white font-bold text-gray-500">
         <span>필터</span>
-        <img src={chevronDown} alt="chevron-down" />
+        <ChevronDown stroke="#6E7191" />
       </button>
       <form
         action=""
-        className="flex w-[472px] justify-start gap-x-3 rounded-r-2xl border border-gray-200 bg-gray-100 pl-10"
+        className="flex w-[472px] justify-start gap-x-3 rounded-r-2xl border border-gray-200 bg-gray-100 pl-6"
       >
         <img src={search} alt="search" className="w-4" />
         <input

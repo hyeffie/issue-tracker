@@ -4,18 +4,28 @@ import Header from '@components/Header/Header';
 import FilterBar from '@components/FilterBar/FilterBar';
 import NavLinks from '@components/NavLinks/NavLinks';
 import IssueList from '@components/IssueList/IssueList';
+import Button from '@common/Button';
 
 const MainPage = () => {
   return (
-    <section>
+    <section className="mx-10">
       <Header
         url={
           'https://images.unsplash.com/photo-1600354587397-681c16c184bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80'
         }
       />
-      <div>
+      <div className="mb-6 flex justify-between">
         <FilterBar />
-        <NavLinks countAllMilestones={12} countAllLabels={123} />
+        <div className="justify- flex gap-x-5">
+          <NavLinks countAllMilestones={12} countAllLabels={123} />
+          <Button
+            title={'이슈 작성'}
+            onClick={() => {
+              console.log('test');
+            }}
+            size={'Small'}
+          />
+        </div>
       </div>
       <IssueList
         issues={[

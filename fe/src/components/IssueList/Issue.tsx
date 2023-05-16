@@ -38,10 +38,7 @@ const Issue: React.FC<Props> = ({
       <div className="mr-4">{/* TODO(Lily): add check box */}c</div>
       <div>
         <div className="mb-1 flex">
-          <img
-            className="mr-1"
-            src={isOpen ? 'assets/openedIssue.svg' : 'assets/closedIssue.svg'}
-          />
+          <img className="mr-1" src={isOpen ? openedIssue : closedIssue} />
           {/* TODO(Lily): 라우터 설치 및 설정 이후에 Link 태그로 바꾸기 */}
           <button
             className="mr-1 text-left text-lg font-bold text-neutral-strong"

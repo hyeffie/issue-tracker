@@ -3,12 +3,12 @@ import React from 'react';
 import { ReactComponent as PlusIcon } from '@assets/plus.svg';
 
 interface Props {
-  isFlexible: boolean;
-  type: 'Contained' | 'Outline' | 'Ghost';
-  hasIcon: boolean;
-  condition: 'Enabled' | 'Hover' | 'Press' | 'Disabled';
-  size: 'Large' | 'Medium' | 'Small';
-  color: 'Blue' | 'GrayDark' | 'GrayLight';
+  isFlexible?: boolean;
+  type?: 'Contained' | 'Outline' | 'Ghost';
+  hasIcon?: boolean;
+  condition?: 'Enabled' | 'Hover' | 'Press' | 'Disabled';
+  size?: 'Large' | 'Medium' | 'Small';
+  color?: 'Blue' | 'GrayDark' | 'GrayLight';
   title: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
