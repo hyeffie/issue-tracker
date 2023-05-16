@@ -22,7 +22,7 @@ const FilterItem: React.FC<FilterItemRaw> = ({
 }) => {
   return (
     <div
-      className={`flex items-center gap-x-1 text-neutral ${
+      className={`flex items-center gap-x-1 text-gray-700 ${
         bold && 'font-bold'
       }`}
     >

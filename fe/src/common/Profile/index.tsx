@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-  url?: string;
+  url: string;
   width?: number;
   height?: number;
 }

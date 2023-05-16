@@ -1,5 +1,8 @@
 import React from 'react';
 
+import openedIssue from '@assets/openedIssue.svg';
+import closedIssue from '@assets/closedIssue.svg';
+import milestone from '@assets/milestone.svg';
 import Profile from '@common/Profile';
 import Label from '@common/Label';
 import { LabelRow } from './IssueList';
@@ -69,7 +72,7 @@ const Issue: React.FC<Props> = ({
               : `이 이슈가 ${closedAt}분 전, ${userName}에 의해 닫혔습니다.`}
           </span>
           <div className="flex">
-            <img className="mr-1" src="assets/milestone.svg" />
+            <img className="mr-1" src={milestone} />
             <span className="text-neutral-weak">{milestoneName}</span>
           </div>
         </div>
