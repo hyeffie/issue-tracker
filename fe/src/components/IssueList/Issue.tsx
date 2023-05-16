@@ -45,18 +45,20 @@ const Issue: React.FC<Props> = ({
           >
             {title}
           </button>
-          {labels.map(label => {
-            const { id, title, backgroundColor, fontColor } = label;
+          <div className="flex">
+            {labels.map(label => {
+              const { id, title, backgroundColor, fontColor } = label;
 
-            return (
-              <Label
-                key={id}
-                labelName={title}
-                backgroundColor={backgroundColor}
-                fontColor={fontColor}
-              />
-            );
-          })}
+              return (
+                <Label
+                  key={id}
+                  labelName={title}
+                  backgroundColor={backgroundColor}
+                  fontColor={fontColor}
+                />
+              );
+            })}
+          </div>
         </div>
         <div className="flex">
           <span className="mr-2 text-neutral-weak">#{id}</span>
