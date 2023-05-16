@@ -25,7 +25,7 @@ class IssueLabel: UILabel {
         self.text = name
         self.font = TypoGraphy(weight: .regular, size: .small).font
         self.backgroundColor = convertToUIColor(color: color)
-        self.textColor = isBright(self.backgroundColor) ? .white : .black
+        self.textColor = isBright(self.backgroundColor) ? .black : .white
     }
     
     override func drawText(in rect: CGRect) {
@@ -39,7 +39,7 @@ class IssueLabel: UILabel {
     }
     
     func convertToUIColor(color: String) -> UIColor {
-        var rgbList: [CGFloat] = []
+        var rgbList = Array(repeating: CGFloat(0), count: 3)
         for index in 0..<3 {
             let startIndex = color.index(color.startIndex, offsetBy: (2*index) + 1)
             let endIndex = color.index(color.startIndex, offsetBy: 2 * (index+1))
@@ -48,23 +48,26 @@ class IssueLabel: UILabel {
                 rgbList.append(CGFloat(0.5))
                 continue
             }
-            rgbList.append(CGFloat(colorValue) / maxColorValue)
+            let floatValue = CGFloat(colorValue) / maxColorValue
+            rgbList[index] = floatValue
         }
-        
         return UIColor(red: rgbList[0], green: rgbList[1], blue: rgbList[2], alpha: 1)
     }
     
     func isBright(_ backgroundColor: UIColor?) -> Bool {
-        guard let colorValueList = backgroundColor?.cgColor.components else {
-            return true
+        guard var colorValueList = backgroundColor?.cgColor.components else {
+            self.layer.borderWidth = 0.5
+            return false
         }
         
+        colorValueList.removeLast()
         let averageOfColorValues = colorValueList.reduce(0, +) / 3
         let standarOfBrightness: CGFloat = 0.5
         guard averageOfColorValues >= standarOfBrightness else {
             return false
         }
         
+        self.layer.borderWidth = 0.5
         return true
     }
 }
