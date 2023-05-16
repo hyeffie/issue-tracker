@@ -81,23 +81,35 @@ const IssueList: React.FC<Props> = ({
           </div>
         </div>
       </div>
-      {/* TODO(Lily): 구조분해할당 적용하기 */}
       {issues.length ? (
-        issues.map(issue => (
-          <Issue
-            key={issue.id}
-            id={issue.id}
-            title={issue.title}
-            userName={issue.userName}
-            profileUrl={issue.profileUrl}
-            isOpen={issue.isOpen}
-            createdAt={issue.createdAt}
-            closedAt={issue.closedAt}
-            milestoneName={issue.milestoneName}
-            labels={issue.labels}
-            onIssueTitleClick={onIssueTitleClick}
-          />
-        ))
+        issues.map(issue => {
+          const {
+            id,
+            title,
+            userName,
+            profileUrl,
+            isOpen,
+            createdAt,
+            closedAt,
+            milestoneName,
+            labels,
+          } = issue;
+          return (
+            <Issue
+              key={id}
+              id={id}
+              title={title}
+              userName={userName}
+              profileUrl={profileUrl}
+              isOpen={isOpen}
+              createdAt={createdAt}
+              closedAt={closedAt}
+              milestoneName={milestoneName}
+              labels={labels}
+              onIssueTitleClick={onIssueTitleClick}
+            />
+          );
+        })
       ) : (
         <div className="my-5 text-center text-neutral-weak">
           검색과 일치하는 결과가 없습니다.
