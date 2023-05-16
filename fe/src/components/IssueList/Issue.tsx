@@ -1,13 +1,12 @@
 import React from 'react';
 
-import openedIssue from '@assets/openedIssue.svg';
-import closedIssue from '@assets/closedIssue.svg';
 import milestone from '@assets/milestone.svg';
 import Profile from '@common/Profile';
 import Label from '@common/Label';
 import { LabelRow } from './IssueList';
+import { ReactComponent as OpenedIssue } from '@assets/openedIssue.svg';
+import { ReactComponent as ClosedIssue } from '@assets/closedIssue.svg';
 
-console.log(openedIssue);
 interface Props {
   id: number;
   title: string;
@@ -35,7 +34,7 @@ const Issue: React.FC<Props> = ({
 }) => {
   return (
     <div className="flex border-t px-8 py-4">
-      <div className="mr-4">
+      <div className="mr-8">
         <input
           type="checkbox"
           checked={false}
@@ -43,11 +42,15 @@ const Issue: React.FC<Props> = ({
         />
       </div>
       <div>
-        <div className="mb-1 flex">
-          <img className="mr-1" src={isOpen ? openedIssue : closedIssue} />
+        <div className="mb-1 flex items-center">
+          {isOpen ? (
+            <OpenedIssue stroke="#007AFF" />
+          ) : (
+            <ClosedIssue stroke="#4E4B66" />
+          )}
           {/* TODO(Lily): 라우터 설치 및 설정 이후에 Link 태그로 바꾸기 */}
           <button
-            className="mr-1 text-left text-lg font-bold text-neutral-strong"
+            className="mx-2 text-left text-lg font-bold text-neutral-strong"
             onClick={() => onIssueTitleClick(id)}
           >
             {title}

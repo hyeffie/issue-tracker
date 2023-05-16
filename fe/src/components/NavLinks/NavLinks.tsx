@@ -1,7 +1,7 @@
 import React from 'react';
 
-import label from '@assets/label.svg';
-import milestone from '@assets/milestone.svg';
+import { ReactComponent as Label } from '@assets/label.svg';
+import { ReactComponent as Milestone } from '@assets/milestone.svg';
 
 interface Props {
   countAllLabels: number;
@@ -12,14 +12,14 @@ const NavLinks: React.FC<Props> = ({ countAllLabels, countAllMilestones }) => {
   return (
     <div className="flex h-10 w-80 items-center justify-around">
       <div className="flex h-full w-40 items-center justify-center gap-1 rounded-l-2xl border border-gray-200">
-        <img className="w-4" src={label} alt="link to label list" />
-        <span className="text-base font-semibold text-gray-600">
+        <Label className="w-4" stroke="#4E4B66" />
+        <span className="text-base font-semibold text-gray-700">
           레이블({countAllLabels})
         </span>
       </div>
       <div className="flex h-full w-40 items-center justify-center gap-1 rounded-r-2xl border border-gray-200">
-        <img className="w-4" src={milestone} alt="link to milestone list" />
-        <span className="font-semibold text-gray-600">
+        <Milestone className="w-4" />
+        <span className="font-semibold text-gray-700">
           마일스톤({countAllMilestones})
         </span>
       </div>
