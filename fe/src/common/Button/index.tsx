@@ -8,7 +8,7 @@ interface Props {
   hasIcon: boolean;
   condition: 'Enabled' | 'Hover' | 'Press' | 'Disabled';
   size: 'Large' | 'Medium' | 'Small';
-  color: 'Blue' | 'grayDark' | 'grayLight';
+  color: 'Blue' | 'GrayDark' | 'GrayLight';
   title: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -27,17 +27,16 @@ const Button: React.FC<Props> = ({
   },
 }) => {
   const widthHeight = getWidthHeight(size);
-  const bgColor = `bg-${getColor(color)}`;
-  console.log(bgColor);
   const opacity = getOpacity(condition);
   return (
     <button
-      className={`${
-        isFlexible && 'w-auto px-6 '
-      } ${widthHeight} ${bgColor} ${opacity} flex items-center justify-center gap-x-2 rounded-2xl font-bold text-white`}
+      className={`${isFlexible && 'w-auto px-6'} ${widthHeight} ${getType(
+        type,
+        getColor(color)
+      )} ${opacity} flex items-center justify-center gap-x-2 rounded-2xl font-bold`}
       onClick={onClick}
     >
-      {hasIcon && <PlusIcon stroke={'#ffffff'} />}
+      {hasIcon && <PlusIcon stroke={getHexByType(color, type)} />}
       <span>{title}</span>
     </button>
   );
@@ -52,7 +51,7 @@ function getWidthHeight(size: string) {
     case 'Small':
       return 'w-[120px] h-10';
     default:
-      'w-60 h-14';
+      return 'w-60 h-14';
   }
 }
 
@@ -60,12 +59,12 @@ function getColor(color: string) {
   switch (color) {
     case 'Blue':
       return 'blue';
-    case 'grayDark':
+    case 'GrayDark':
       return 'gray-900';
-    case 'grayLight':
+    case 'GrayLight':
       return 'gray-100';
     default:
-      'blue';
+      return 'blue';
   }
 }
 
@@ -80,20 +79,45 @@ function getOpacity(condition: string) {
     case 'Disabled':
       return 'opacity-[.32]';
     default:
-      'opacity-100';
+      return 'opacity-100';
   }
 }
 
 // TODO(Jayden): 타입 조건과 색상 조건 합쳐서 하나의 함수로 만들기
-// function getType(type: string) {
-//   switch (type) {
-//     case 'Contained':
-//       return 'bg-blue-500';
-//     case 'Outline':
-//       return 'bg-white border border-blue-500';
-//     case 'Ghost':
-//       return 'bg-transparent';
-//   }
-// }
+function getType(type: string, color: string) {
+  switch (type) {
+    case 'Contained':
+      return `bg-${color} text-white`;
+    case 'Outline':
+      return `bg-white border-2 border-${color} text-${color}`;
+    case 'Ghost':
+      return `bg-transparent text-${color}`;
+    default:
+      return `bg-${color} text-white`;
+  }
+}
+function getHex(color: string) {
+  switch (color) {
+    case 'Blue':
+      return '#007AFF';
+    case 'GrayDark':
+      return '#14142B';
+    case 'GrayLight':
+      return '#F7F7FC';
+    default:
+      return '#007AFF';
+  }
+}
+
+function getHexByType(color: string, type: string) {
+  switch (type) {
+    case 'Contained':
+      return '#FFFFFF';
+    case 'Outline':
+      return getHex(color);
+    case 'Ghost':
+      return getHex(color);
+  }
+}
 
 export default Button;

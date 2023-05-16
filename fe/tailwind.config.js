@@ -45,5 +45,5 @@ export const theme = {
   //   }),
   // ],
 };
-export const safelist = [{ pattern: /(bg|text)-(blue|gray|red|navy)/ }];
+export const safelist = [{ pattern: /(bg|text|border)-(blue|gray|red|navy)/ }];
 export const plugins = [];
