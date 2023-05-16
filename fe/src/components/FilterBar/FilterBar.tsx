@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { ReactComponent as ChevronDown } from '@assets/chevronDown.svg';
 import { ReactComponent as Search } from '@assets/search.svg';
 import Button from '@common/Button';
 
