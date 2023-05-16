@@ -144,7 +144,7 @@ function getType(type: string, color: string) {
     case 'Contained':
       return `bg-${color} text-white`;
     case 'Outline':
-      return `bg-white border-2 border-${color} text-${color}`;
+      return `bg-white border-[1px] border-${color} text-${color}`;
     case 'Ghost':
       return `bg-transparent text-${color}`;
     default:
