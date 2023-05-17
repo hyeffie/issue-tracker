@@ -7,17 +7,158 @@ import IssueList from '@components/IssueList/IssueList';
 import Button from '@common/Button';
 
 const MainPage = () => {
+  const user = {
+    id: 23123,
+    name: 'Lily',
+    profileUrl:
+      'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
+  };
+
+  const fetchData = {
+    issues: [
+      {
+        id: 1,
+        title: 'First Issue',
+        content: 'This is the first issue',
+        userName: 'JohnDoe',
+        profileUrl: 'https://example.com/johndoe',
+        isOpen: true,
+        createdAt: '2023-05-15 10:30:00',
+        closedAt: '',
+        milestoneName: 'Milestone 1',
+        labels: [
+          {
+            id: 1,
+            title: 'Bug',
+            backgroundColor: '#FF0000',
+            fontColor: '#FFFFFF',
+          },
+          {
+            id: 2,
+            title: 'High Priority',
+            backgroundColor: '#FFA500',
+            fontColor: '#000000',
+          },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Second Issue',
+        content: 'This is the second issue',
+        userName: 'JaneSmith',
+        profileUrl: 'https://example.com/janesmith',
+        isOpen: true,
+        createdAt: '2023-05-16 09:15:00',
+        closedAt: '',
+        milestoneName: 'Milestone 2',
+        labels: [
+          {
+            id: 3,
+            title: 'Feature',
+            backgroundColor: '#00FF00',
+            fontColor: '#000000',
+          },
+          {
+            id: 4,
+            title: 'Low Priority',
+            backgroundColor: '#0000FF',
+            fontColor: '#FFFFFF',
+          },
+        ],
+      },
+      {
+        id: 3,
+        title: 'Third Issue',
+        content: 'This is the third issue',
+        userName: 'RobertJohnson',
+        profileUrl: 'https://example.com/robertjohnson',
+        isOpen: false,
+        createdAt: '2023-05-14 14:20:00',
+        closedAt: '2023-05-16 11:45:00',
+        milestoneName: 'Milestone 1',
+        labels: [
+          {
+            id: 5,
+            title: 'Enhancement',
+            backgroundColor: '#FFFF00',
+            fontColor: '#000000',
+          },
+          {
+            id: 6,
+            title: 'Medium Priority',
+            backgroundColor: '#800080',
+            fontColor: '#FFFFFF',
+          },
+        ],
+      },
+    ],
+    userList: [
+      {
+        userId: 1,
+        userName: 'John',
+        profileUrl: 'https://example.com/john',
+      },
+      {
+        userId: 2,
+        userName: 'Emily',
+        profileUrl: 'https://example.com/emily',
+      },
+      {
+        userId: 3,
+        userName: 'Michael',
+        profileUrl: 'https://example.com/michael',
+      },
+    ],
+    labelList: [
+      {
+        id: 1,
+        title: 'Red',
+        backgroundColor: '#FF0000',
+        fontColor: '#FFFFFF',
+      },
+      {
+        id: 2,
+        title: 'Blue',
+        backgroundColor: '#0000FF',
+        fontColor: '#FFFFFF',
+      },
+      {
+        id: 3,
+        title: 'Green',
+        backgroundColor: '#00FF00',
+        fontColor: '#000000',
+      },
+    ],
+    milestone: [
+      {
+        milestoneId: 1,
+        milestoneName: 'Task 1',
+      },
+      {
+        milestoneId: 2,
+        milestoneName: 'Task 2',
+      },
+      {
+        milestoneId: 3,
+        milestoneName: 'Task 3',
+      },
+    ],
+    countAllLabels: 13,
+    countAllMilestones: 11,
+    countOpenedIssues: 23,
+    countClosedIssues: 47,
+  };
+
   return (
     <section className="mx-10 my-[27px]">
-      <Header
-        url={
-          'https://images.unsplash.com/photo-1600354587397-681c16c184bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80'
-        }
-      />
+      <Header url={user.profileUrl} />
       <div className="mb-6 flex justify-between">
         <FilterBar />
         <div className="justify- flex gap-x-5">
-          <NavLinks countAllMilestones={12} countAllLabels={123} />
+          <NavLinks
+            countAllMilestones={fetchData.countAllMilestones}
+            countAllLabels={fetchData.countAllLabels}
+          />
           <Button
             title={'이슈 작성'}
             onClick={() => {
@@ -28,68 +169,9 @@ const MainPage = () => {
         </div>
       </div>
       <IssueList
-        issues={[
-          {
-            id: 10,
-            title: 'issue title',
-            content: 'issue content',
-            userName: 'user name',
-            profileUrl:
-              'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
-            isOpen: true,
-            createdAt: 'create date',
-            closedAt: 'crate close',
-            milestoneName: 'milestone name',
-            labels: [
-              {
-                id: 20123,
-                title: 'title',
-                backgroundColor: 'tomato',
-                fontColor: 'black',
-              },
-              {
-                id: 20123,
-                title: 'document',
-                backgroundColor: 'blue',
-                fontColor: 'black',
-              },
-            ],
-          },
-          {
-            id: 10,
-            title: 'issue title',
-            content: 'issue content',
-            userName: 'user name',
-            profileUrl:
-              'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
-            isOpen: true,
-            createdAt: 'create date',
-            closedAt: 'crate close',
-            milestoneName: 'milestone name',
-            labels: [
-              {
-                id: 20123,
-                title: 'Jayden',
-                backgroundColor: 'orange',
-                fontColor: 'black',
-              },
-              {
-                id: 20123,
-                title: 'Lily',
-                backgroundColor: 'pink',
-                fontColor: 'black',
-              },
-              {
-                id: 20123,
-                title: 'FE',
-                backgroundColor: 'red',
-                fontColor: 'black',
-              },
-            ],
-          },
-        ]}
-        countOpenedIssues={10}
-        countClosedIssues={20}
+        issues={fetchData.issues}
+        countOpenedIssues={fetchData.countOpenedIssues}
+        countClosedIssues={fetchData.countOpenedIssues}
         onIssueTitleClick={() => console.log('onIssueTitleClick')}
       />
     </section>

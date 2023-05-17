@@ -1,11 +1,10 @@
 import React from 'react';
 
-import openedIssue from '@assets/openedIssue.svg';
-import closedIssue from '@assets/closedIssue.svg';
-import dropDownArrow from '@assets/dropDownArrow.svg';
 import Issue from './Issue';
-import { log } from '@craco/craco/dist/lib/logger';
 
+import dropDownArrow from '@assets/dropDownArrow.svg';
+import { ReactComponent as OpenedIssue } from '@assets/openedIssue.svg';
+import { ReactComponent as ClosedIssue } from '@assets/closedIssue.svg';
 export interface LabelRow {
   id: number;
   title: string;
@@ -21,7 +20,7 @@ export interface IssueRow {
   profileUrl: string;
   isOpen: boolean;
   createdAt: string;
-  closedAt: string;
+  closedAt?: string;
   milestoneName: string;
   labels: LabelRow[];
 }
@@ -44,7 +43,7 @@ const IssueList: React.FC<Props> = ({
       <div className="w-160 box-border rounded-t-2xl bg-light-mode px-8 py-6">
         <div className="flex justify-between">
           <div className="flex ">
-            <div className="mr-4">
+            <div className="mr-8">
               <input
                 type="checkbox"
                 checked={false}
@@ -53,52 +52,64 @@ const IssueList: React.FC<Props> = ({
             </div>
             <div className="flex ">
               <button className="mr-3 flex items-center font-bold text-neutral-strong">
-                <img src={openedIssue} />
+                <OpenedIssue stroke="#14142B" />
                 <span className="ml-1">열린 이슈({countOpenedIssues})</span>
               </button>
               <button className="flex items-center text-neutral">
-                <img src={closedIssue} />
+                <ClosedIssue stroke="#4E4B66" />
                 <span className="ml-1">닫힌 이슈({countClosedIssues})</span>
               </button>
             </div>
           </div>
           <div className="flex">
-            <button className="mr-4 flex items-center font-bold text-neutral-weak">
-              <span className="mr-1.5">담당자</span>
+            <button className="mr-8 flex items-center font-bold text-neutral-weak">
+              <span className="mr-2">담당자</span>
               <img src={dropDownArrow} />
             </button>
-            <button className="mr-4 flex items-center font-bold text-neutral-weak">
-              <span className="mr-1.5">레이블</span>
+            <button className="mr-8 flex items-center font-bold text-neutral-weak">
+              <span className="mr-2">레이블</span>
               <img src={dropDownArrow} />
             </button>
-            <button className="mr-4 flex items-center font-bold text-neutral-weak">
-              <span className="mr-1.5">마일스톤</span>
+            <button className="mr-8 flex items-center font-bold text-neutral-weak">
+              <span className="mr-2">마일스톤</span>
               <img src={dropDownArrow} />
             </button>
             <button className="flex items-center font-bold text-neutral-weak">
-              <span className="mr-1.5">작성자</span>
+              <span className="mr-2">작성자</span>
               <img src={dropDownArrow} />
             </button>
           </div>
         </div>
       </div>
-      {/* TODO(Lily): 구조분해할당 적용하기 */}
       {issues.length ? (
-        issues.map(issue => (
-          <Issue
-            key={issue.id}
-            id={issue.id}
-            title={issue.title}
-            userName={issue.userName}
-            profileUrl={issue.profileUrl}
-            isOpen={issue.isOpen}
-            createdAt={issue.createdAt}
-            closedAt={issue.closedAt}
-            milestoneName={issue.milestoneName}
-            labels={issue.labels}
-            onIssueTitleClick={onIssueTitleClick}
-          />
-        ))
+        issues.map(issue => {
+          const {
+            id,
+            title,
+            userName,
+            profileUrl,
+            isOpen,
+            createdAt,
+            closedAt,
+            milestoneName,
+            labels,
+          } = issue;
+          return (
+            <Issue
+              key={id}
+              id={id}
+              title={title}
+              userName={userName}
+              profileUrl={profileUrl}
+              isOpen={isOpen}
+              createdAt={createdAt}
+              closedAt={closedAt}
+              milestoneName={milestoneName}
+              labels={labels}
+              onIssueTitleClick={onIssueTitleClick}
+            />
+          );
+        })
       ) : (
         <div className="my-5 text-center text-neutral-weak">
           검색과 일치하는 결과가 없습니다.
