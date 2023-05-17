@@ -10,9 +10,10 @@ const FilterBar: React.FC = () => {
         title="필터"
         onClick={() => console.log('필터')}
         size="Small"
-        color="GrayLight"
+        color="Gray"
         type="Ghost"
         hasDropDown={true}
+        condition="Press"
       />
       <form
         action=""

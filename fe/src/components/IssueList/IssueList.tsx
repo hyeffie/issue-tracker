@@ -71,8 +71,9 @@ const IssueList: React.FC<Props> = ({
                   onClick={() => console.log(`${title}!`)}
                   size="Small"
                   type="Ghost"
-                  color="GrayLight"
+                  color="Gray"
                   hasDropDown={true}
+                  condition="Press"
                 />
               );
             })}
