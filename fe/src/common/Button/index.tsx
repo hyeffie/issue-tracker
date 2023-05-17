@@ -1,30 +1,54 @@
 import React from 'react';
 
+// NOTE(Jayden): 버튼 앞에 오는 아이콘을 위한 import
 import { ReactComponent as PlusIcon } from '@assets/plus.svg';
+import { ReactComponent as CheveronDown } from '@assets/chevronDown.svg';
+import { ReactComponent as XSquare } from '@assets/xSquare.svg';
+import { ReactComponent as Label } from '@assets/label.svg';
+import { ReactComponent as Milestone } from '@assets/milestone.svg';
+import { ReactComponent as AlertCircle } from '@assets/alertCircle.svg';
+import { ReactComponent as Archive } from '@assets/archive.svg';
+import { ReactComponent as PaperClip } from '@assets/paperclip.svg';
+import { ReactComponent as Trash } from '@assets/trash.svg';
+import { ReactComponent as Edit } from '@assets/edit.svg';
+import { ReactComponent as Smile } from '@assets/smile.svg';
+import { ReactComponent as Calendar } from '@assets/calendar.svg';
 
+type SVGNames =
+  | 'none'
+  | 'plus'
+  | 'xsquare'
+  | 'label'
+  | 'milestone'
+  | 'alertcircle'
+  | 'archive'
+  | 'paperclip'
+  | 'trash'
+  | 'edit'
+  | 'smile'
+  | 'calendar';
 interface Props {
+  title: string;
   isFlexible?: boolean;
   type?: 'Contained' | 'Outline' | 'Ghost';
-  hasIcon?: boolean;
+  iconName?: SVGNames;
   condition?: 'Enabled' | 'Hover' | 'Press' | 'Disabled';
   size?: 'Large' | 'Medium' | 'Small';
   color?: 'Blue' | 'GrayDark' | 'GrayLight';
-  title: string;
+  hasDropDown?: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button: React.FC<Props> = ({
   isFlexible = false,
   type = 'Contained',
-  hasIcon = false,
+  iconName = 'None',
   condition = 'Enabled',
   size = 'Medium',
   color = 'Blue',
-  title = 'Button',
-  onClick = () => {
-    // TODO: 아래 console.log 추후 지우기
-    console.log('clicked!');
-  },
+  title,
+  onClick,
+  hasDropDown = false,
 }) => {
   const widthHeight = getWidthHeight(size);
   const opacity = getOpacity(condition);
@@ -36,12 +60,43 @@ const Button: React.FC<Props> = ({
       )} ${opacity} flex items-center justify-center gap-x-2 rounded-2xl font-bold`}
       onClick={onClick}
     >
-      {hasIcon && <PlusIcon stroke={getHexByType(color, type)} />}
+      {getSvgComponent(iconName, getHexByType(color, type))}
       <span>{title}</span>
+      {hasDropDown && <CheveronDown stroke={getHexByType(color, type)} />}
     </button>
   );
 };
 
+function getSvgComponent(iconName: string, strokeColor: string) {
+  switch (iconName.toLowerCase()) {
+    case 'none':
+      return false;
+    case 'plus':
+      return <PlusIcon stroke={strokeColor} />;
+    case 'xsquare':
+      return <XSquare stroke={strokeColor} />;
+    case 'label':
+      return <Label stroke={strokeColor} />;
+    case 'milestone':
+      return <Milestone stroke={strokeColor} />;
+    case 'alertcircle':
+      return <AlertCircle stroke={strokeColor} />;
+    case 'archive':
+      return <Archive stroke={strokeColor} />;
+    case 'paperclip':
+      return <PaperClip stroke={strokeColor} />;
+    case 'trash':
+      return <Trash stroke={strokeColor} />;
+    case 'edit':
+      return <Edit stroke={strokeColor} />;
+    case 'smile':
+      return <Smile stroke={strokeColor} />;
+    case 'calendar':
+      return <Calendar stroke={strokeColor} />;
+    default:
+      return false;
+  }
+}
 function getWidthHeight(size: string) {
   switch (size) {
     case 'Large':
@@ -62,7 +117,7 @@ function getColor(color: string) {
     case 'GrayDark':
       return 'gray-900';
     case 'GrayLight':
-      return 'gray-100';
+      return 'gray-600';
     default:
       return 'blue';
   }
@@ -83,13 +138,12 @@ function getOpacity(condition: string) {
   }
 }
 
-// TODO(Jayden): 타입 조건과 색상 조건 합쳐서 하나의 함수로 만들기
 function getType(type: string, color: string) {
   switch (type) {
     case 'Contained':
       return `bg-${color} text-white`;
     case 'Outline':
-      return `bg-white border-2 border-${color} text-${color}`;
+      return `bg-white border-[1px] border-${color} text-${color}`;
     case 'Ghost':
       return `bg-transparent text-${color}`;
     default:
@@ -103,7 +157,7 @@ function getHex(color: string) {
     case 'GrayDark':
       return '#14142B';
     case 'GrayLight':
-      return '#F7F7FC';
+      return '#6E7191';
     default:
       return '#007AFF';
   }
@@ -117,6 +171,8 @@ function getHexByType(color: string, type: string) {
       return getHex(color);
     case 'Ghost':
       return getHex(color);
+    default:
+      return '#FFFFFF';
   }
 }
 

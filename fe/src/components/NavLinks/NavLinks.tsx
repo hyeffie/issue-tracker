@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { ReactComponent as Label } from '@assets/label.svg';
-import { ReactComponent as Milestone } from '@assets/milestone.svg';
+import Button from '@common/Button';
 
 interface Props {
   countAllLabels: number;
@@ -10,18 +9,28 @@ interface Props {
 
 const NavLinks: React.FC<Props> = ({ countAllLabels, countAllMilestones }) => {
   return (
-    <div className="flex h-10 w-80 items-center justify-around">
-      <div className="flex h-full w-40 items-center justify-center gap-1 rounded-l-2xl border border-gray-200">
-        <Label stroke="#4E4B66" />
-        <span className="text-base font-semibold text-gray-700">
-          레이블({countAllLabels})
-        </span>
+    <div className="flex h-10 w-80 rounded-2xl border border-gray-200">
+      <div className="flex w-1/2 justify-center  border-r">
+        <Button
+          title={`레이블(${countAllLabels})`}
+          onClick={() => console.log('레이블')}
+          size="Small"
+          color="GrayLight"
+          type="Ghost"
+          iconName="label"
+        />
+        {/* FIXME(Jayden): 버튼 사이 선 추가하는 방법 변경*/}
       </div>
-      <div className="flex h-full w-40 items-center justify-center gap-1 rounded-r-2xl border border-gray-200">
-        <Milestone className="h-4" fill="#4E4B66" />
-        <span className="font-semibold text-gray-700">
-          마일스톤({countAllMilestones})
-        </span>
+      {/* <span className="text-gray-600">|</span>*/}
+      <div className="flex w-1/2 justify-center">
+        <Button
+          title={`마일스톤(${countAllMilestones})`}
+          onClick={() => console.log('마일스톤')}
+          size="Small"
+          color="GrayLight"
+          type="Ghost"
+          iconName="milestone"
+        />
       </div>
     </div>
   );

@@ -14,7 +14,6 @@ export const Primary: Story = {
   args: {
     isFlexible: false,
     type: 'Contained',
-    hasIcon: true,
     condition: 'Enabled',
     size: 'Large',
     color: 'Blue',

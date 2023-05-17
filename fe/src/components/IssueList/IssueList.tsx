@@ -1,10 +1,10 @@
 import React from 'react';
 
 import Issue from './Issue';
+import Button from '@common/Button';
 
-import dropDownArrow from '@assets/dropDownArrow.svg';
-import { ReactComponent as OpenedIssue } from '@assets/openedIssue.svg';
-import { ReactComponent as ClosedIssue } from '@assets/closedIssue.svg';
+import { ReactComponent as AlertCircle } from '@assets/alertCircle.svg';
+import { ReactComponent as Archive } from '@assets/archive.svg';
 export interface LabelRow {
   id: number;
   title: string;
@@ -52,32 +52,30 @@ const IssueList: React.FC<Props> = ({
             </div>
             <div className="flex ">
               <button className="mr-3 flex items-center font-bold text-neutral-strong">
-                <OpenedIssue stroke="#14142B" />
+                <AlertCircle stroke="#14142B" />
                 <span className="ml-1">열린 이슈({countOpenedIssues})</span>
               </button>
               <button className="flex items-center text-neutral">
-                <ClosedIssue stroke="#4E4B66" />
+                <Archive stroke="#4E4B66" />
                 <span className="ml-1">닫힌 이슈({countClosedIssues})</span>
               </button>
             </div>
           </div>
           <div className="flex">
-            <button className="mr-8 flex items-center font-bold text-neutral-weak">
-              <span className="mr-2">담당자</span>
-              <img src={dropDownArrow} />
-            </button>
-            <button className="mr-8 flex items-center font-bold text-neutral-weak">
-              <span className="mr-2">레이블</span>
-              <img src={dropDownArrow} />
-            </button>
-            <button className="mr-8 flex items-center font-bold text-neutral-weak">
-              <span className="mr-2">마일스톤</span>
-              <img src={dropDownArrow} />
-            </button>
-            <button className="flex items-center font-bold text-neutral-weak">
-              <span className="mr-2">작성자</span>
-              <img src={dropDownArrow} />
-            </button>
+            {/* FIXME(Jayden): 추후 key값 고려해보기 */}
+            {['담당자', '레이블', '마일스톤', '작성자'].map((title, i) => {
+              return (
+                <Button
+                  key={i}
+                  title={title}
+                  onClick={() => console.log(`${title}!`)}
+                  size="Small"
+                  type="Ghost"
+                  color="GrayLight"
+                  hasDropDown={true}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

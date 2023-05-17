@@ -4,8 +4,8 @@ import Profile from '@common/Profile';
 import Label from '@common/Label';
 import { LabelRow } from './IssueList';
 
-import { ReactComponent as OpenedIssue } from '@assets/openedIssue.svg';
-import { ReactComponent as ClosedIssue } from '@assets/closedIssue.svg';
+import { ReactComponent as AlertCircle } from '@assets/alertCircle.svg';
+import { ReactComponent as Archive } from '@assets/archive.svg';
 import { ReactComponent as Milestone } from '@assets/milestone.svg';
 
 interface Props {
@@ -45,9 +45,9 @@ const Issue: React.FC<Props> = ({
       <div>
         <div className="mb-1 flex items-center">
           {isOpen ? (
-            <OpenedIssue stroke="#007AFF" />
+            <AlertCircle stroke="#007AFF" />
           ) : (
-            <ClosedIssue stroke="#4E4B66" />
+            <Archive stroke="#4E4B66" />
           )}
           {/* TODO(Lily): 라우터 설치 및 설정 이후에 Link 태그로 바꾸기 */}
           <button
