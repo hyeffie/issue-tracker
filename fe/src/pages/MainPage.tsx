@@ -18,16 +18,18 @@ const MainPage = () => {
     writer: false,
   });
 
-  // const handleClickFilter = (filterTitle: string) => {
-  //   const newIsFilterOpen = { ...isFilterOpen };
-  //   for (const key in newIsFilterOpen) {
-  //     if (key === filterTitle) {
-  //       newIsFilterOpen[key] = !newIsFilterOpen[key];
-  //     } else {
-  //       newIsFilterOpen[key] = false;
-  //     }
-  //   }
-  // };
+  const handleClickFilter = (title: keyof typeof isFilterOpen) => {
+    const newIsFilterOpen = { ...isFilterOpen };
+    for (const key in newIsFilterOpen) {
+      if (key === title) {
+        newIsFilterOpen[key] = !newIsFilterOpen[key];
+      } else {
+        newIsFilterOpen[key as keyof typeof isFilterOpen] = false;
+      }
+    }
+
+    setIsFilterOpen(newIsFilterOpen);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,11 +53,7 @@ const MainPage = () => {
       {/* ref: https://ko.javascript.info/optional-chaining */}
       <Header url={data.user?.profileUrl} />
       <div className="relative mb-6 flex justify-between">
-        <FilterBar
-          onClick={() => {
-            console.log();
-          }}
-        />
+        <FilterBar onClick={() => handleClickFilter('filter')} />
         {isFilterOpen.filter && (
           <div className="absolute top-12">
             <FilterList
