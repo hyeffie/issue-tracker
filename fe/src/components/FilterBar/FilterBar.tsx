@@ -18,7 +18,7 @@ const FilterBar: React.FC = () => {
         action=""
         className="flex w-[472px] items-center justify-start gap-x-3 rounded-r-2xl bg-gray-100 pl-6"
       >
-        <Search stroke="#6E7191" />
+        <Search stroke="#6E7191" className="w-4 self-center" />
         <input
           type="text"
           // TODO(Lily): value 값을 현재 선택된 필터 항목을 props로 받아서 처리

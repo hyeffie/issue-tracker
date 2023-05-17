@@ -1,13 +1,13 @@
 import React from 'react';
 
-import openedIssue from '@assets/alertCircle.svg';
-import closedIssue from '@assets/archive.svg';
-import milestone from '@assets/milestone.svg';
 import Profile from '@common/Profile';
 import Label from '@common/Label';
 import { LabelRow } from './IssueList';
 
-console.log(openedIssue);
+import { ReactComponent as AlertCircle } from '@assets/alertCircle.svg';
+import { ReactComponent as Archive } from '@assets/archive.svg';
+import { ReactComponent as Milestone } from '@assets/milestone.svg';
+
 interface Props {
   id: number;
   title: string;
@@ -15,7 +15,7 @@ interface Props {
   profileUrl: string;
   isOpen: boolean;
   createdAt: string;
-  closedAt: string;
+  closedAt?: string;
   milestoneName: string;
   labels: LabelRow[];
   onIssueTitleClick: (id: number) => void;
@@ -34,8 +34,8 @@ const Issue: React.FC<Props> = ({
   onIssueTitleClick,
 }) => {
   return (
-    <div className="flex items-center border-t px-8 py-4">
-      <div className="mr-4">
+    <div className="flex border-t px-8 py-4">
+      <div className="mr-8 mt-2">
         <input
           type="checkbox"
           checked={false}
@@ -43,11 +43,15 @@ const Issue: React.FC<Props> = ({
         />
       </div>
       <div>
-        <div className="mb-1 flex">
-          <img className="mr-1" src={isOpen ? openedIssue : closedIssue} />
+        <div className="mb-1 flex items-center">
+          {isOpen ? (
+            <AlertCircle stroke="#007AFF" />
+          ) : (
+            <Archive stroke="#4E4B66" />
+          )}
           {/* TODO(Lily): 라우터 설치 및 설정 이후에 Link 태그로 바꾸기 */}
           <button
-            className="mr-1 text-left text-lg font-bold text-neutral-strong"
+            className="mx-2 text-left text-lg font-bold text-neutral-strong"
             onClick={() => onIssueTitleClick(id)}
           >
             {title}
@@ -55,7 +59,6 @@ const Issue: React.FC<Props> = ({
           <div className="flex">
             {labels.map(label => {
               const { id, title, backgroundColor, fontColor } = label;
-
               return (
                 <Label
                   key={id}
@@ -67,17 +70,18 @@ const Issue: React.FC<Props> = ({
             })}
           </div>
         </div>
+        {/* TODO: issue info 세로 가운데 정렬 */}
         <div className="flex">
-          <span className="mr-2 text-neutral-weak">#{id}</span>
-          <span className="mr-2 text-neutral-weak">
+          <span className="mr-2 text-gray-600">#{id}</span>
+          <span className="mr-2 text-gray-600">
             {/* TODO(Lily): 경과 시간 계산은 위에서 하고 계산 된 값을 props로 받아서 처리하기 */}
             {isOpen
               ? `이 이슈가 ${createdAt}분 전, ${userName}님에 의해 작성되었습니다.`
               : `이 이슈가 ${closedAt}분 전, ${userName}에 의해 닫혔습니다.`}
           </span>
-          <div className="flex">
-            <img className="mr-1" src={milestone} />
-            <span className="text-neutral-weak">{milestoneName}</span>
+          <div className="flex items-center">
+            <Milestone fill="#6E7191" />
+            <span className="ml-2 text-gray-600">{milestoneName}</span>
           </div>
         </div>
       </div>

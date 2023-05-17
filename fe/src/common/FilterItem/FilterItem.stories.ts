@@ -25,7 +25,7 @@ export const Secondary: Story = {
     id: 13213,
     title: '열린이슈',
     bold: true,
-    imgUrl: 'assets/openedIssue.svg',
+    imgUrl: '',
     width: 16,
     height: 16,
   },
