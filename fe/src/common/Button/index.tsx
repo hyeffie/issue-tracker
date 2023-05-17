@@ -27,6 +27,7 @@ type SVGNames =
   | 'edit'
   | 'smile'
   | 'calendar';
+
 interface Props {
   title: string;
   isFlexible?: boolean;
@@ -40,18 +41,19 @@ interface Props {
 }
 
 const Button: React.FC<Props> = ({
+  title,
   isFlexible = false,
   type = 'Contained',
   iconName = 'None',
   condition = 'Enabled',
   size = 'Medium',
   color = 'Blue',
-  title,
-  onClick,
   hasDropDown = false,
+  onClick,
 }) => {
   const widthHeight = getWidthHeight(size);
   const opacity = getOpacity(condition);
+
   return (
     <button
       className={`${isFlexible && 'w-auto px-6'} ${widthHeight} ${getType(
@@ -97,6 +99,7 @@ function getSvgComponent(iconName: string, strokeColor: string) {
       return false;
   }
 }
+
 function getWidthHeight(size: string) {
   switch (size) {
     case 'Large':
@@ -150,6 +153,7 @@ function getType(type: string, color: string) {
       return `bg-${color} text-white`;
   }
 }
+
 function getHex(color: string) {
   switch (color) {
     case 'Blue':
