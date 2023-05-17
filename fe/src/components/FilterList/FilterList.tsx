@@ -1,8 +1,8 @@
 import React from 'react';
 
 import FilterItem, { FilterItemRaw } from '@common/FilterItem/FilterItem';
-import checkOffCircle from '../../assets/checkOffCircle.svg';
-import checkOnCircle from '../../assets/checkOnCircle.svg';
+import checkOffCircle from '@assets/checkOffCircle.svg';
+import checkOnCircle from '@assets/checkOnCircle.svg';
 
 interface Props {
   title: string;
@@ -39,6 +39,7 @@ const FilterList: React.FC<Props> = ({
           const { id, title, imgUrl } = item;
           return (
             <button key={id} className={filterItemStyle} onClick={onClick}>
+              {/* TODO(Lily): Item backgroundColor 주기 */}
               <FilterItem
                 id={id}
                 title={title}
