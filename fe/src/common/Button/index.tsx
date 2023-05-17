@@ -15,6 +15,7 @@ import { ReactComponent as Smile } from '@assets/smile.svg';
 import { ReactComponent as Calendar } from '@assets/calendar.svg';
 
 type SVGNames =
+  | 'none'
   | 'plus'
   | 'xsquare'
   | 'label'
@@ -25,32 +26,28 @@ type SVGNames =
   | 'trash'
   | 'edit'
   | 'smile'
-  | 'calendar'
-  | '';
+  | 'calendar';
 interface Props {
+  title: string;
   isFlexible?: boolean;
   type?: 'Contained' | 'Outline' | 'Ghost';
   iconName?: SVGNames;
   condition?: 'Enabled' | 'Hover' | 'Press' | 'Disabled';
   size?: 'Large' | 'Medium' | 'Small';
   color?: 'Blue' | 'GrayDark' | 'GrayLight';
-  title: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
   hasDropDown?: boolean;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button: React.FC<Props> = ({
   isFlexible = false,
   type = 'Contained',
-  iconName = '',
+  iconName = 'None',
   condition = 'Enabled',
   size = 'Medium',
   color = 'Blue',
-  title = 'Button',
-  onClick = () => {
-    // TODO: 아래 console.log 추후 지우기
-    console.log('clicked!');
-  },
+  title,
+  onClick,
   hasDropDown = false,
 }) => {
   const widthHeight = getWidthHeight(size);
@@ -72,6 +69,8 @@ const Button: React.FC<Props> = ({
 
 function getSvgComponent(iconName: string, strokeColor: string) {
   switch (iconName.toLowerCase()) {
+    case 'none':
+      return false;
     case 'plus':
       return <PlusIcon stroke={strokeColor} />;
     case 'xsquare':
