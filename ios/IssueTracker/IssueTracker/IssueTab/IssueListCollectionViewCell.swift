@@ -48,6 +48,7 @@ class IssueListCollectionViewCell: UICollectionViewCell {
    }
    
    func emptyLabelStack() {
-      labelStackView.arrangedSubviews.forEach { view in labelStackView.removeArrangedSubview(view) }
+      labelStackView.arrangedSubviews.forEach { view in view.removeFromSuperview()
+      }
    }
 }

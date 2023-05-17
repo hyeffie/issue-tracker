@@ -24,15 +24,13 @@ class IssueListViewController: UIViewController {
    
    func setCollectionView() {
       collectionView.dataSource = self
+      collectionView.delegate = self
       
       let cellNib = UINib(nibName: cellIdentifier, bundle: nil)
       collectionView.register(cellNib, forCellWithReuseIdentifier: cellIdentifier)
       
       if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-         flowLayout.minimumLineSpacing = 1
-         flowLayout.minimumInteritemSpacing = 0
          flowLayout.estimatedItemSize = .zero
-         flowLayout.itemSize = CGSize(width: collectionView.frame.width, height: 180)
       }
    }
    
@@ -42,6 +40,8 @@ class IssueListViewController: UIViewController {
       
       networkManager?.fetchIssueList(completion: { [weak self] dto in
          self?.objects = dto.body
+         
+         DispatchQueue.main.async { [weak self] in self?.collectionView.reloadData() }
       })
    }
 }
@@ -63,4 +63,30 @@ extension IssueListViewController: UICollectionViewDataSource {
       issue.labels.forEach { label in cell.addLabel(name: label.title, color: label.color) }
       return cell
    }
+}
+
+extension IssueListViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath
+  ) -> CGSize {
+      return CGSize(width: collectionView.frame.width, height: 180)
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumLineSpacingForSectionAt section: Int
+  ) -> CGFloat {
+     return 1.0
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumInteritemSpacingForSectionAt section: Int
+  ) -> CGFloat {
+    return 0
+  }
 }
