@@ -376,3 +376,4 @@ yarn-error.log*
 
 # direnv
 .envrc
+be/src/main/resources/application.properties
