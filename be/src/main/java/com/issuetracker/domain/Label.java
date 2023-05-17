@@ -20,6 +20,6 @@ public class Label {
     @Column("font_color")
     private String fontColor;
     private String description;
-    @MappedCollection(idColumn = "label_id", keyColumn = "issue_id")
+    @MappedCollection(idColumn = "id", keyColumn = "id")
     private Set<Issue> issueList;
 }

@@ -24,10 +24,10 @@ public class Issue {
     private LocalDateTime createdAt;
     private LocalDateTime closedAt;
     private LocalDateTime deletedAt;
-    @MappedCollection(idColumn = "issue_id", keyColumn = "label_id")
+    @MappedCollection(idColumn = "id", keyColumn = "id")
     private Set<Label> labelList;
 
-    @MappedCollection(idColumn = "issue_id",keyColumn = "user_id")
+    @MappedCollection(idColumn = "id",keyColumn = "id")
     private Set<User> userList;
 }
 
