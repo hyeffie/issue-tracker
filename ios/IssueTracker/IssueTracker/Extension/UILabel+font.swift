@@ -15,10 +15,5 @@ extension UILabel {
    {
       self.font = typography.font
       self.textColor = textColor.color
-      
-      if willApplyHeight {
-         self.translatesAutoresizingMaskIntoConstraints = false
-         self.heightAnchor.constraint(equalToConstant: typography.size.lineHeight).isActive = true
-      }
    }
 }

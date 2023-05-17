@@ -30,7 +30,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="k11-4I-sMu">
-                                        <rect key="frame" x="593.33333333333326" y="2" width="21.666666666666742" height="18"/>
+                                        <rect key="frame" x="593.33333333333337" y="2" width="21.666666666666629" height="18"/>
                                         <color key="tintColor" name="gray700"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="k11-4I-sMu" secondAttribute="height" id="eXm-jn-APk"/>
