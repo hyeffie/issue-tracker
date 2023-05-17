@@ -5,10 +5,29 @@ import FilterBar from '@components/FilterBar/FilterBar';
 import NavLinks from '@components/NavLinks/NavLinks';
 import Button from '@common/Button';
 import IssueList from '@components/IssueList/IssueList';
+import FilterList from '@components/FilterList/FilterList';
 
 const MainPage = () => {
   // TODO: 올바른 타입 명시
   const [data, setData] = useState({} as any);
+  const [isFilterOpen, setIsFilterOpen] = useState({
+    filter: false,
+    assignee: false,
+    label: false,
+    milestone: false,
+    writer: false,
+  });
+
+  // const handleClickFilter = (filterTitle: string) => {
+  //   const newIsFilterOpen = { ...isFilterOpen };
+  //   for (const key in newIsFilterOpen) {
+  //     if (key === filterTitle) {
+  //       newIsFilterOpen[key] = !newIsFilterOpen[key];
+  //     } else {
+  //       newIsFilterOpen[key] = false;
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +35,6 @@ const MainPage = () => {
         const res = await fetch('/issues');
         const data = await res.json();
 
-        console.log(data.user);
         if (res.status === 200) {
           setData(data);
         }
@@ -32,8 +50,45 @@ const MainPage = () => {
     <section className="mx-10 my-[27px]">
       {/* ref: https://ko.javascript.info/optional-chaining */}
       <Header url={data.user?.profileUrl} />
-      <div className="mb-6 flex justify-between">
-        <FilterBar />
+      <div className="relative mb-6 flex justify-between">
+        <FilterBar
+          onClick={() => {
+            console.log();
+          }}
+        />
+        {isFilterOpen.filter && (
+          <div className="absolute top-12">
+            <FilterList
+              title="이슈"
+              items={[
+                {
+                  id: 231,
+                  title: '열린 이슈',
+                },
+                {
+                  id: 131232,
+                  title: '내가 작성한 이슈',
+                },
+                {
+                  id: 1223,
+                  title: '나에게 할당된 이슈',
+                },
+                {
+                  id: 1223,
+                  title: '내가 댓글을 남긴 이슈',
+                },
+                {
+                  id: 1223,
+                  title: '닫힌 이슈',
+                },
+              ]}
+              isNullAvailability={false}
+              onClick={() => {
+                console.log('test');
+              }}
+            />
+          </div>
+        )}
         {/* FIXME: justify style check */}
         <div className="justify- flex gap-x-5">
           <NavLinks

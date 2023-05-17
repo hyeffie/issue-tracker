@@ -40,7 +40,7 @@ const IssueList: React.FC<Props> = ({
 }) => {
   return (
     <div className="w-160 box-border rounded-2xl border">
-      <div className="w-160 box-border rounded-t-2xl bg-light-mode px-8 py-6">
+      <div className="w-160 box-border rounded-t-2xl bg-light-mode px-6 py-4">
         <div className="flex justify-between">
           <div className="flex ">
             <div className="mr-8">

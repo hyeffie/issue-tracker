@@ -3,12 +3,16 @@ import React from 'react';
 import { ReactComponent as Search } from '@assets/search.svg';
 import Button from '@common/Button';
 
-const FilterBar: React.FC = () => {
+interface Props {
+  onClick: () => void;
+}
+
+const FilterBar: React.FC<Props> = ({ onClick }) => {
   return (
     <div className="flex w-auto justify-start rounded-2xl border border-gray-200">
       <Button
         title="필터"
-        onClick={() => console.log('필터')}
+        onClick={onClick}
         size="Small"
         color="GrayLight"
         type="Ghost"
