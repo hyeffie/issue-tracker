@@ -1,4 +1,4 @@
-package com.issuetracker.domain;
+package com.issuetracker.dto;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -8,26 +8,35 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
+import com.issuetracker.domain.Label;
+import com.issuetracker.domain.Milestone;
+import com.issuetracker.domain.User;
+
 import lombok.Data;
 
 @Data
 @Table("issue")
-public class Issue {
-    @Id
+public class IssueTestDto {
+    @Column("issueId")
     private Long id;
-    @Column("user_id")
+    @Column("userName")
     private String userId;
-    private Milestone milestone;
+    @Column("title")
     private String title;
+    @Column("content")
     private String content;
+    @Column("isOpen")
     private Boolean opened;
+    @Column("createdAt")
     private LocalDateTime createdAt;
+    @Column("closedAt")
     private LocalDateTime closedAt;
-    private LocalDateTime deletedAt;
-    @MappedCollection(idColumn = "id", keyColumn = "id")
-    private Set<Label> labelList;
 
-    @MappedCollection(idColumn = "id", keyColumn = "id")
-    private Set<User> userList;
+
+    // @MappedCollection(idColumn = "issueId", keyColumn = "labelId")
+    // private Set<LabelTestDto> labelList;
+
+    // @MappedCollection(idColumn = "id", keyColumn = "id")
+    // private Set<User> userList;
 }
 

@@ -14,14 +14,13 @@ public class LabelService {
     private final LabelRepository labelRepository;
 
     public List<IssueLabelDto> getIssueLabels() {
-        List<IssueLabelDto> tests = labelRepository.getLabels();;
 
-        for (IssueLabelDto test : tests) {
 
-            System.out.println("test = " + test.getLabelId());
-        }
 
-        return tests;
+
+        System.out.println(labelRepository.getAllIssuesAndMilestone());
+
+        return null;
     }
 
 
