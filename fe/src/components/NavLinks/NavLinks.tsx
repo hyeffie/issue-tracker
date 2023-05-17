@@ -19,9 +19,7 @@ const NavLinks: React.FC<Props> = ({ countAllLabels, countAllMilestones }) => {
           type="Ghost"
           iconName="label"
         />
-        {/* FIXME(Jayden): 버튼 사이 선 추가하는 방법 변경*/}
       </div>
-      {/* <span className="text-gray-600">|</span>*/}
       <div className="flex w-1/2 justify-center">
         <Button
           title={`마일스톤(${countAllMilestones})`}

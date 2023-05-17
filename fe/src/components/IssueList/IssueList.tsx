@@ -2,9 +2,9 @@ import React from 'react';
 
 import Issue from './Issue';
 import Button from '@common/Button';
-
 import { ReactComponent as AlertCircle } from '@assets/alertCircle.svg';
 import { ReactComponent as Archive } from '@assets/archive.svg';
+
 export interface LabelRow {
   id: number;
   title: string;
@@ -79,7 +79,8 @@ const IssueList: React.FC<Props> = ({
           </div>
         </div>
       </div>
-      {issues.length ? (
+      {/* TODO: 이슈의 존재 유무에 따른 분기 처리 */}
+      {issues ? (
         issues.map(issue => {
           const {
             id,
