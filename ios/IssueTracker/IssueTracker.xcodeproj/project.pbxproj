@@ -38,7 +38,7 @@
 		638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueListCollectionViewCell.xib; sourceTree = "<group>"; };
 		638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionViewCell.swift; sourceTree = "<group>"; };
 		63D6CFCE2A15B7F6000876D5 /* FilterElementListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterElementListViewController.swift; sourceTree = "<group>"; };
-		63D6CFD12A15F099000876D5 /* FilterElementList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = FilterElementList.storyboard; path = IssueTracker/FilterTab/FilterElementList.storyboard; sourceTree = SOURCE_ROOT; };
+		63D6CFD12A15F099000876D5 /* FilterElementList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = FilterElementList.storyboard; path = IssueTracker/IssueTab/IssueListFilter/FilterElementList.storyboard; sourceTree = SOURCE_ROOT; };
 		F40809722A0DE2470005E0AB /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
 		F40809742A0DE61C0005E0AB /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		F48583AB2A10E1FC00322C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -73,13 +73,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		63D6CFD02A15B80D000876D5 /* FilterTab */ = {
+		63D6CFD02A15B80D000876D5 /* IssueListFilter */ = {
 			isa = PBXGroup;
 			children = (
 				63D6CFD12A15F099000876D5 /* FilterElementList.storyboard */,
 				63D6CFCE2A15B7F6000876D5 /* FilterElementListViewController.swift */,
 			);
-			path = FilterTab;
+			path = IssueListFilter;
 			sourceTree = "<group>";
 		};
 		F48583A82A0E216A00322C9F /* Common */ = {
@@ -99,6 +99,7 @@
 				638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */,
 				638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */,
 				6343A0652A0F7B65005FFC3E /* IssueLabel.swift */,
+				63D6CFD02A15B80D000876D5 /* IssueListFilter */,
 			);
 			path = IssueTab;
 			sourceTree = "<group>";
@@ -159,7 +160,6 @@
 				F48583C22A13802E00322C9F /* Network */,
 				F48583AB2A10E1FC00322C9F /* TabBarController.swift */,
 				F48583A92A0E21DA00322C9F /* IssueTab */,
-				63D6CFD02A15B80D000876D5 /* FilterTab */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
