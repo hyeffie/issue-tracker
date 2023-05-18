@@ -9,17 +9,45 @@ import Foundation
 
 struct IssueListDTO: Codable {
    struct Issue: Codable {
-      struct Label: Codable {
-         let title: String
-         let color: String
-      }
-      
-      let title: String
-      let description: String
-      let milestone: String
-      let labels: [Label]
+      let issueId: Int
+      var title: String
+      let content: String
+      let userName: String
+      let profileUrl: String?
+      let isOpen: Bool
+      let createdAt: String
+      let closedAt: String?
+      let milestoneName: String?
+      let labelList: [Label]
    }
    
-   let status: Int
-   let body: [Issue]
+   struct User: Codable {
+      let userId: Int
+      let userName: String
+      let profileUrl: String?
+   }
+   
+   struct Label: Codable {
+      let labelId: Int
+      let labelName: String
+      let backgroundColor: String
+      let fontColor: String
+      let description: String?
+   }
+   
+   struct Milestone: Codable {
+      let milestoneId: Int
+      let milestoneName: String
+      let description: String?
+   }
+   
+   let issues: [Issue]
+   let userList: [User]
+   let labelList: [Label]
+   let milestoneList: [Milestone]
+   
+   let countAllLabels: Int
+   let countAllMilestones: Int
+   let countOpenedIssues: Int
+   let countClosedIssues: Int
 }

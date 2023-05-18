@@ -21,6 +21,6 @@ final class MockURLSessionDataTask: URLSessionDataTaskInterface {
    }
    
    func resume() {
-      resumeHandler()
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { self.resumeHandler() })
    }
 }
