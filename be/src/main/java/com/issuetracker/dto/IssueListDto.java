@@ -16,8 +16,8 @@ public class IssueListDto {
     private List<FilterUserDto> userList;
     private List<FilterLabelDto> labelList;
     private List<FilterMilestoneDto> milestoneList;
-    private int countAllLabels;
-    private int countAllMilestones;
-    private int countOpenedIssues;
-    private int countClosedIssues;
+    private Integer countAllLabels;
+    private Integer countAllMilestones;
+    private Long countOpenedIssues;
+    private Long countClosedIssues;
 }

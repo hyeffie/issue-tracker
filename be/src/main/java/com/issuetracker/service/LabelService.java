@@ -1,5 +1,8 @@
 package com.issuetracker.service;
 
+import com.issuetracker.dto.FilterLabelDto;
+import com.issuetracker.dto.FilterMilestoneDto;
+import com.issuetracker.dto.FilterUserDto;
 import com.issuetracker.dto.IssueDto;
 import com.issuetracker.dto.IssueLabelDto;
 import com.issuetracker.dto.IssueListDto;
@@ -20,30 +23,59 @@ public class LabelService {
 
     public IssueListDto fetchMain() {
         IssueListDto issueListDto = new IssueListDto();
-        List<IssueDao> issueMainPageDtoList = labelRepository.getIssues();
-        //IssueDao -> IssueDto로 변환
+        List<IssueDao> issueMainPageDtoList = labelRepository.getIssues(true);
+
         List<IssueDto> issueDtoList = new ArrayList<>();
         for (int i = 0; i < issueMainPageDtoList.size(); i++) {
             IssueDao issueDao = issueMainPageDtoList.get(i);
             long id = issueDao.getId();
             List<IssueLabelDto> issueLabelDtoList = new ArrayList<>();
+            IssueDto issueDto = new IssueDto(id, issueDao.getTitle(), issueDao.getContent(), issueDao.getUserName(),
+                    issueDao.getProfileUrl(), issueDao.getOpened(), issueDao.getCreatedAt(), issueDao.getClosedAt(),
+                    issueDao.getMilestoneName(), issueLabelDtoList);
+            Boolean flag = false;
             while (i < issueMainPageDtoList.size() && id == issueDao.getId()) {
-                issueLabelDtoList.add(
-                        new IssueLabelDto(issueDao.getLabelId(), issueDao.getLabelName(), issueDao.getBackgroundColor(),
-                                issueDao.getFontColor()));
+                flag = true;
+                if (issueDao.getLabelId() != null) {
+                    issueLabelDtoList.add(
+                            new IssueLabelDto(issueDao.getLabelId(), issueDao.getLabelName(),
+                                    issueDao.getBackgroundColor(),
+                                    issueDao.getFontColor()));
+                }
                 i++;
                 if (i < issueMainPageDtoList.size()) {
                     issueDao = issueMainPageDtoList.get(i);
                 }
             }
-
-            issueDtoList.add(new IssueDto(id, issueDao.getTitle(), issueDao.getContent(), issueDao.getUserName(),
-                    issueDao.getProfileUrl(), issueDao.getOpened(), issueDao.getCreatedAt(), issueDao.getClosedAt(),
-                    issueDao.getMilestoneName(), issueLabelDtoList));
-
+            issueDtoList.add(issueDto);
+            if (flag) {
+                i--;
+            }
         }
         issueListDto.setIssues(issueDtoList);
+        issueListDto.setUserList(fetchFilterUsers());
+        List<FilterLabelDto> filterLabelDtoList = fetchFilterLabels();
+        issueListDto.setLabelList(filterLabelDtoList);
+        List<FilterMilestoneDto> filterMilestoneDtoList = fetchFilterMilestones();
+        issueListDto.setMilestoneList(filterMilestoneDtoList);
+
+        issueListDto.setCountAllLabels(filterLabelDtoList.size());
+        issueListDto.setCountAllMilestones(filterMilestoneDtoList.size());
+        issueListDto.setCountOpenedIssues(issueDtoList.stream().filter(issueDto -> issueDto.getIsOpen()).count());
+        issueListDto.setCountClosedIssues(labelRepository.getTotalClosedIssueCount());
         return issueListDto;
+    }
+
+    public List<FilterUserDto> fetchFilterUsers() {
+        return labelRepository.getFilterUserList();
+    }
+
+    public List<FilterLabelDto> fetchFilterLabels() {
+        return labelRepository.getFilterLabelList();
+    }
+
+    public List<FilterMilestoneDto> fetchFilterMilestones() {
+        return labelRepository.getFilterMilestoneList();
     }
 
 }
