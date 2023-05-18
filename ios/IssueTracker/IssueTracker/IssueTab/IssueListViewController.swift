@@ -44,16 +44,12 @@ class IssueListViewController: UIViewController {
    func fetchIssues(cellCompletion: (() -> Void)? = nil) {
       guard hasNextPage else { return }
       isPaging = true
-      networkManager?.fetchIssueList(pageNumber: currentPageNumber) { [weak self] dto in
+      networkManager?.fetchIssueList() { [weak self] dto in
          cellCompletion?()
          self?.isPaging = false
-         self?.hasNextPage = dto.body.count < NetworkManager.defaultPagingOffSet ? false : true
-         if dto.body.count > 0 {
-            let mockBody = dto.body.map { IssueListDTO.Issue(title: "\(self?.currentPageNumber ?? 0)",
-                                                             description: $0.description,
-                                                             milestone: $0.milestone,
-                                                             labels: $0.labels) }
-            self?.objects.append(contentsOf: mockBody)
+         self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
+         if dto.issues.count > 0 {
+            self?.objects.append(contentsOf: dto.issues)
             DispatchQueue.main.async { [weak self] in self?.collectionView.reloadData() }
             self?.currentPageNumber += 1
          }
@@ -61,8 +57,7 @@ class IssueListViewController: UIViewController {
    }
    
    func setNetworkManagerAndData() {
-      let urlSession = MockURLSession(withJson: "issues")
-      networkManager = NetworkManager(session: urlSession)
+      networkManager = NetworkManager(session: URLSession.shared)
       fetchIssues()
    }
 }
@@ -89,9 +84,9 @@ extension IssueListViewController: UICollectionViewDataSource {
          
          let issue = objects[indexPath.item]
          cell.titleLabel.text = issue.title
-         cell.descriptionLabel.text = issue.description
-         cell.milestoneLabel.text = issue.milestone
-         issue.labels.forEach { label in cell.addLabel(name: label.title, color: label.color) }
+         cell.descriptionLabel.text = issue.content
+         cell.milestoneLabel.text = issue.milestoneName
+         issue.labelList.forEach { label in cell.addLabel(name: label.labelName, color: label.backgroundColor) }
          return cell
          
       case 1:

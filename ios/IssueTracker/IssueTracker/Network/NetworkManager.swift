@@ -74,7 +74,9 @@ final class NetworkManager {
          query.updateValue("\(pageNumber)", forKey: "pageNum")
       }
       
-      fetchData(for: Self.dummyURLString,
+      let issueListURL = "http://43.200.199.205:8080/api/"
+      
+      fetchData(for: issueListURL,
                 with: query,
                 dataType: IssueListDTO.self) { result in
          switch result {
