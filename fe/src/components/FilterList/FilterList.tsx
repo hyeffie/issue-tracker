@@ -7,7 +7,7 @@ import checkOnCircle from '@assets/checkOnCircle.svg';
 interface Props {
   title: string;
   items: FilterItemRaw[];
-  isNullAvailability: boolean;
+  isNullAvailability?: boolean;
   canSelectMultipleItems?: boolean;
   onClick: () => void;
 }
@@ -15,19 +15,23 @@ interface Props {
 const FilterList: React.FC<Props> = ({
   title,
   items,
-  isNullAvailability,
-  canSelectMultipleItems = true,
+  isNullAvailability = true,
+  canSelectMultipleItems = false,
   onClick,
 }) => {
   const filterItemStyle =
     'flex w-full justify-between items-center border-t px-4 py-2 text-gray-700';
 
   return (
-    <div className="flex w-60 flex-col items-center rounded-lg border">
-      <div className="w-full bg-gray-100 py-2 pl-4 text-left text-sm">
+    <div
+      className={`absolute top-12 z-10 flex w-60 flex-col items-center rounded-lg border ${
+        title !== '이슈' && 'right-0'
+      }`}
+    >
+      <div className="w-full rounded-t-lg bg-gray-100 py-2 pl-4 text-left text-sm">
         {title} 필터
       </div>
-      <div className="w-full">
+      <div className="w-full rounded-b-lg bg-white">
         {isNullAvailability && (
           <button className={filterItemStyle} onClick={onClick}>
             <span>{title} 없는 이슈</span>
@@ -35,7 +39,7 @@ const FilterList: React.FC<Props> = ({
             {canSelectMultipleItems && <img src={checkOffCircle} />}
           </button>
         )}
-        {items.map(item => {
+        {items.map((item, i, arr) => {
           const { id, title, imgUrl } = item;
           return (
             <button key={id} className={filterItemStyle} onClick={onClick}>

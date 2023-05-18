@@ -37,7 +37,8 @@ interface Props {
   size?: 'Large' | 'Medium' | 'Small';
   color?: 'Blue' | 'Gray';
   hasDropDown?: boolean;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  // onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick: () => void;
 }
 
 const Button: React.FC<Props> = ({
@@ -131,7 +132,7 @@ function getOpacity(condition: string) {
     case 'Hover':
       return 'opacity-80';
     case 'Press':
-      return 'opacity-[.64]';
+      return 'opacity-[0.64]';
     case 'Disabled':
       return 'opacity-[.32]';
     default:

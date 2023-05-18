@@ -6,11 +6,17 @@ import NavLinks from '@components/NavLinks/NavLinks';
 import Button from '@common/Button';
 import IssueList from '@components/IssueList/IssueList';
 import FilterList from '@components/FilterList/FilterList';
-
+export type DropdownItems = {
+  filter: boolean;
+  assignee: boolean;
+  label: boolean;
+  milestone: boolean;
+  writer: boolean;
+};
 const MainPage = () => {
   // TODO: 올바른 타입 명시
   const [data, setData] = useState({} as any);
-  const [isFilterOpen, setIsFilterOpen] = useState({
+  const [isDropdownOpen, setIsDropdownOpen] = useState({
     filter: false,
     assignee: false,
     label: false,
@@ -18,17 +24,17 @@ const MainPage = () => {
     writer: false,
   });
 
-  const handleClickFilter = (title: keyof typeof isFilterOpen) => {
-    const newIsFilterOpen = { ...isFilterOpen };
-    for (const key in newIsFilterOpen) {
+  const handleClickDropdown = (title: keyof typeof isDropdownOpen) => {
+    const newIsDropdownOpen = { ...isDropdownOpen };
+    for (const key in newIsDropdownOpen) {
       if (key === title) {
-        newIsFilterOpen[key] = !newIsFilterOpen[key];
+        newIsDropdownOpen[key] = !newIsDropdownOpen[key];
       } else {
-        newIsFilterOpen[key as keyof typeof isFilterOpen] = false;
+        newIsDropdownOpen[key as keyof typeof isDropdownOpen] = false;
       }
     }
 
-    setIsFilterOpen(newIsFilterOpen);
+    setIsDropdownOpen(newIsDropdownOpen);
   };
 
   useEffect(() => {
@@ -53,39 +59,37 @@ const MainPage = () => {
       {/* ref: https://ko.javascript.info/optional-chaining */}
       <Header url={data.user?.profileUrl} />
       <div className="relative mb-6 flex justify-between">
-        <FilterBar onClick={() => handleClickFilter('filter')} />
-        {isFilterOpen.filter && (
-          <div className="absolute top-12">
-            <FilterList
-              title="이슈"
-              items={[
-                {
-                  id: 231,
-                  title: '열린 이슈',
-                },
-                {
-                  id: 131232,
-                  title: '내가 작성한 이슈',
-                },
-                {
-                  id: 1223,
-                  title: '나에게 할당된 이슈',
-                },
-                {
-                  id: 1223,
-                  title: '내가 댓글을 남긴 이슈',
-                },
-                {
-                  id: 1223,
-                  title: '닫힌 이슈',
-                },
-              ]}
-              isNullAvailability={false}
-              onClick={() => {
-                console.log('test');
-              }}
-            />
-          </div>
+        <FilterBar onClick={() => handleClickDropdown('filter')} />
+        {isDropdownOpen.filter && (
+          <FilterList
+            title="이슈"
+            items={[
+              {
+                id: 231,
+                title: '열린 이슈',
+              },
+              {
+                id: 131232,
+                title: '내가 작성한 이슈',
+              },
+              {
+                id: 1223,
+                title: '나에게 할당된 이슈',
+              },
+              {
+                id: 1223,
+                title: '내가 댓글을 남긴 이슈',
+              },
+              {
+                id: 1223,
+                title: '닫힌 이슈',
+              },
+            ]}
+            isNullAvailability={false}
+            onClick={() => {
+              console.log('test');
+            }}
+          />
         )}
         {/* FIXME: justify style check */}
         <div className="justify- flex gap-x-5">
@@ -107,6 +111,8 @@ const MainPage = () => {
         countOpenedIssues={data.countOpenedIssues}
         countClosedIssues={data.countOpenedIssues}
         onIssueTitleClick={() => console.log('onIssueTitleClick')}
+        isDropdownOpen={isDropdownOpen}
+        onDropdownTitleClick={handleClickDropdown}
       />
     </section>
   );
