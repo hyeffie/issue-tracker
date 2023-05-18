@@ -7,11 +7,14 @@
 
 import UIKit
 
-class IssueListViewController: UIViewController {
+class IssueListViewController: UIViewController, DataSenderDelegate {
+   
    let cellIdentifier = "IssueListCollectionViewCell"
    
    var networkManager: NetworkManager?
    var objects: [IssueListDTO.Issue] = []
+   
+   let useCase = IssueListUseCase(issues: Issue, users: <#T##<<error type>>#>, labels: <#T##<<error type>>#>, milestones: <#T##<<error type>>#>)
    
    @IBOutlet weak var collectionView: UICollectionView!
    
@@ -43,6 +46,20 @@ class IssueListViewController: UIViewController {
       networkManager?.fetchIssueList(completion: { [weak self] dto in
          self?.objects = dto.body
       })
+   }
+   
+   func receive() -> [Any] {
+      return [useCase.users, useCase.labels, useCase.milestones]
+   }
+   
+   @IBAction func filter(_ sender: Any) {
+      guard let filterListViewController = self.storyboard?.instantiateViewController(withIdentifier: "FilterElementList") as? FilterElementListViewController else {
+         return
+      }
+      
+      filterListViewController.delegate = self
+      self.navigationController?.pushViewController(filterListViewController, animated: true)
+      
    }
 }
 

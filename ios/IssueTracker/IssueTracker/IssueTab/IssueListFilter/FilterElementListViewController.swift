@@ -10,9 +10,16 @@ import UIKit
 class FilterElementListViewController: UIViewController {
    @IBOutlet weak var collectionView: UICollectionView!
    
+   var filterElement = FilterElementUseCase(users: <#[User]#>,
+                                            labels: <#[Label]#>,
+                                            milestones: <#[Milestone]#>)
+   var delegate: DataSenderDelegate?
+   
    override func viewDidLoad() {
       super.viewDidLoad()
-      
+      delegate?.receive().forEach {
+         
+      }
    }
    
    @IBAction func cancel(_ sender: Any) {
