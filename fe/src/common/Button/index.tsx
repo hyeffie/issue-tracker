@@ -57,7 +57,7 @@ const Button: React.FC<Props> = ({
 
   return (
     <button
-      className={`${isFlexible && 'w-auto px-6'} ${widthHeight} ${getType(
+      className={`${isFlexible && 'w-auto'} ${widthHeight} ${getType(
         type,
         getColor(color)
       )} ${opacity} flex items-center justify-center gap-x-2 rounded-2xl font-bold`}

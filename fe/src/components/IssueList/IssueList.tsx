@@ -76,17 +76,17 @@ const IssueList: React.FC<Props> = ({
               />
             </div>
           </div>
-          <div className="flex">
+          <div className="flex justify-end gap-6">
             {/* FIXME(Jayden): 추후 key값 고려해보기 */}
             <div className="relative">
               <Button
                 title="담당자"
                 onClick={() => onDropdownTitleClick!('assignee')}
-                size="Small"
                 type="Ghost"
                 color="Gray"
                 hasDropDown={true}
                 condition="Press"
+                isFlexible={true}
               />
               {isDropdownOpen!.assignee && (
                 <FilterList
@@ -124,11 +124,11 @@ const IssueList: React.FC<Props> = ({
               <Button
                 title="레이블"
                 onClick={() => onDropdownTitleClick!('label')}
-                size="Small"
                 type="Ghost"
                 color="Gray"
                 hasDropDown={true}
                 condition="Press"
+                isFlexible={true}
               />
               {isDropdownOpen!.label && (
                 <FilterList
@@ -153,11 +153,11 @@ const IssueList: React.FC<Props> = ({
               <Button
                 title="마일스톤"
                 onClick={() => onDropdownTitleClick!('milestone')}
-                size="Small"
                 type="Ghost"
                 color="Gray"
                 hasDropDown={true}
                 condition="Press"
+                isFlexible={true}
               />
               {isDropdownOpen!.milestone && (
                 <FilterList
@@ -186,11 +186,11 @@ const IssueList: React.FC<Props> = ({
               <Button
                 title="작성자"
                 onClick={() => onDropdownTitleClick!('writer')}
-                size="Small"
                 type="Ghost"
                 color="Gray"
                 hasDropDown={true}
                 condition="Press"
+                isFlexible={true}
               />
               {isDropdownOpen!.writer && (
                 <FilterList
