@@ -113,6 +113,9 @@ const MainPage = () => {
       </div>
       <IssueList
         issues={data.issues}
+        users={data.userList}
+        labels={data.labelList}
+        milestones={data.milestoneList}
         countOpenedIssues={data.countOpenedIssues}
         countClosedIssues={data.countClosedIssues}
         onIssueTitleClick={() => console.log('onIssueTitleClick')}

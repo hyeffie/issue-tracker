@@ -73,6 +73,30 @@ export const Primary: Story = {
         ],
       },
     ],
+    users: [
+      {
+        userId: 1,
+        userName: 'user name',
+        profileUrl: '',
+      },
+    ],
+    labels: [
+      {
+        labelId: 0,
+        labelName: '',
+        backgroundColor: '',
+        fontColor: '',
+      },
+    ],
+    milestones: [
+      {
+        milestoneId: 0,
+        milestoneName: '',
+        description: '',
+        dueDate: '',
+        isOpen: true,
+      },
+    ],
     countOpenedIssues: 10,
     countClosedIssues: 20,
   },
@@ -81,6 +105,30 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     issues: [],
+    users: [
+      {
+        userId: 0,
+        userName: '',
+        profileUrl: '',
+      },
+    ],
+    labels: [
+      {
+        labelId: 0,
+        labelName: '',
+        backgroundColor: '',
+        fontColor: '',
+      },
+    ],
+    milestones: [
+      {
+        milestoneId: 0,
+        milestoneName: '',
+        description: '',
+        dueDate: '',
+        isOpen: true,
+      },
+    ],
     countOpenedIssues: 0,
     countClosedIssues: 0,
   },

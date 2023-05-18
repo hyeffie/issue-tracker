@@ -41,16 +41,16 @@ const FilterList: React.FC<Props> = ({
           </button>
         )}
         {items.map(item => {
-          const { id, title, imgUrl } = item;
+          const { id, title, imgUrl, backgroundColor } = item;
           return (
             <button key={id} className={filterItemStyle} onClick={onClick}>
-              {/* TODO(Lily): Item backgroundColor 주기 */}
               <FilterItem
                 id={id}
                 title={title}
                 imgUrl={imgUrl}
                 width={20}
                 height={20}
+                backgroundColor={backgroundColor}
               />
               {/* TODO(Lily): item이 선택되면 checkOnCircle로 바꾸기 */}
               {canSelectMultipleItems && <CheckOffCircle />}
