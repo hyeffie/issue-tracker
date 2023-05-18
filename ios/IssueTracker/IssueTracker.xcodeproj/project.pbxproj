@@ -29,6 +29,8 @@
 		F4BF7CF32A0D1312001C22F0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF22A0D1312001C22F0 /* Color.swift */; };
 		F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */; };
 		F4BF7CF72A0D231D001C22F0 /* UILabel+font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */; };
+		F4E13F862A15988500892FFD /* LoadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E13F852A15988500892FFD /* LoadCollectionViewCell.swift */; };
+		F4E13F882A15F6EC00892FFD /* LoadCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4E13F872A15F6EC00892FFD /* LoadCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		F4BF7CF22A0D1312001C22F0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypoGraphy.swift; sourceTree = "<group>"; };
 		F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+font.swift"; sourceTree = "<group>"; };
+		F4E13F852A15988500892FFD /* LoadCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCollectionViewCell.swift; sourceTree = "<group>"; };
+		F4E13F872A15F6EC00892FFD /* LoadCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,8 @@
 				F40809742A0DE61C0005E0AB /* IssueListViewController.swift */,
 				638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */,
 				638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */,
+				F4E13F872A15F6EC00892FFD /* LoadCollectionViewCell.xib */,
+				F4E13F852A15988500892FFD /* LoadCollectionViewCell.swift */,
 				6343A0652A0F7B65005FFC3E /* IssueLabel.swift */,
 			);
 			path = IssueTab;
@@ -232,6 +238,7 @@
 			files = (
 				F4BF7CE32A0C89BD001C22F0 /* .swiftlint.yml in Resources */,
 				638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */,
+				F4E13F882A15F6EC00892FFD /* LoadCollectionViewCell.xib in Resources */,
 				F4BF7CD82A0C8887001C22F0 /* LaunchScreen.storyboard in Resources */,
 				F40809732A0DE2470005E0AB /* IssueList.storyboard in Resources */,
 				F4BF7CD52A0C8887001C22F0 /* Assets.xcassets in Resources */,
@@ -283,6 +290,7 @@
 				F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */,
 				F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */,
 				F48583CB2A13802E00322C9F /* MockResponse.swift in Sources */,
+				F4E13F862A15988500892FFD /* LoadCollectionViewCell.swift in Sources */,
 				638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

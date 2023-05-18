@@ -8,7 +8,8 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-   let cellIdentifier = "IssueListCollectionViewCell"
+   let issueCellID = "IssueListCollectionViewCell"
+   let loadCellID = "LoadCollectionViewCell"
    
    var networkManager: NetworkManager?
    var objects: [IssueListDTO.Issue] = []
@@ -30,18 +31,21 @@ class IssueListViewController: UIViewController {
       collectionView.dataSource = self
       collectionView.delegate = self
       
-      let cellNib = UINib(nibName: cellIdentifier, bundle: nil)
-      collectionView.register(cellNib, forCellWithReuseIdentifier: cellIdentifier)
+      let issueCell = UINib(nibName: issueCellID, bundle: nil)
+      collectionView.register(issueCell, forCellWithReuseIdentifier: issueCellID)
+      let loadCell = UINib(nibName: loadCellID, bundle: nil)
+      collectionView.register(loadCell, forCellWithReuseIdentifier: loadCellID)
       
       if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
          flowLayout.estimatedItemSize = .zero
       }
    }
    
-   func fetchIssues() {
+   func fetchIssues(cellCompletion: (() -> Void)? = nil) {
       guard hasNextPage else { return }
       isPaging = true
       networkManager?.fetchIssueList(pageNumber: currentPageNumber) { [weak self] dto in
+         cellCompletion?()
          self?.isPaging = false
          self?.hasNextPage = dto.body.count < NetworkManager.defaultPagingOffSet ? false : true
          if dto.body.count > 0 {
@@ -64,31 +68,63 @@ class IssueListViewController: UIViewController {
 }
 
 extension IssueListViewController: UICollectionViewDataSource {
+   func numberOfSections(in collectionView: UICollectionView) -> Int {
+      return 2
+   }
+   
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return objects.count
+      switch section {
+      case 0: return objects.count
+      case 1: return 1
+      default: return 0
+      }
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-      guard let cell = collectionView.dequeueReusableCell(
-         withReuseIdentifier: cellIdentifier,
-         for: indexPath) as? IssueListCollectionViewCell else { return UICollectionViewCell() }
-      
-      let issue = objects[indexPath.item]
-      cell.titleLabel.text = issue.title
-      cell.descriptionLabel.text = issue.description
-      cell.milestoneLabel.text = issue.milestone
-      issue.labels.forEach { label in cell.addLabel(name: label.title, color: label.color) }
-      return cell
+      switch indexPath.section {
+      case 0:
+         guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: issueCellID,
+            for: indexPath) as? IssueListCollectionViewCell else { return UICollectionViewCell() }
+         
+         let issue = objects[indexPath.item]
+         cell.titleLabel.text = issue.title
+         cell.descriptionLabel.text = issue.description
+         cell.milestoneLabel.text = issue.milestone
+         issue.labels.forEach { label in cell.addLabel(name: label.title, color: label.color) }
+         return cell
+         
+      case 1:
+         guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: loadCellID,
+            for: indexPath) as? LoadCollectionViewCell else { return LoadCollectionViewCell() }
+         return cell
+         
+      default:
+         return UICollectionViewCell()
+      }
    }
 }
 
 extension IssueListViewController: UICollectionViewDelegateFlowLayout {
+   
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+      return UIEdgeInsets(top: 0.5, left: 0, bottom: 0.5, right: 0)
+   }
+   
    func collectionView(
       _ collectionView: UICollectionView,
       layout collectionViewLayout: UICollectionViewLayout,
       sizeForItemAt indexPath: IndexPath
    ) -> CGSize {
-      return CGSize(width: collectionView.frame.width, height: 180)
+      switch indexPath.section {
+      case 0:
+         return CGSize(width: collectionView.frame.width, height: 180)
+      case 1:
+         return CGSize(width: collectionView.frame.width, height: 80)
+      default:
+         return .zero
+      }
    }
    
    func collectionView(
@@ -112,8 +148,11 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
       willDisplay cell: UICollectionViewCell,
       forItemAt indexPath: IndexPath)
    {
-      if indexPath.item == collectionView.numberOfItems(inSection: 0) - 1 {
-         fetchIssues()
+      if indexPath.section == 1 && indexPath.item == 0 {
+         guard let loadCell = cell as? LoadCollectionViewCell else { return }
+         loadCell.start()
+         let completion: () -> Void = { loadCell.stop() }
+         fetchIssues(cellCompletion: completion)
       }
    }
 }
