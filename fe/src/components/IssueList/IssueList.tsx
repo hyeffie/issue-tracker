@@ -2,8 +2,6 @@ import React from 'react';
 
 import Issue from './Issue';
 import Button from '@common/Button';
-import { ReactComponent as AlertCircle } from '@assets/alertCircle.svg';
-import { ReactComponent as Archive } from '@assets/archive.svg';
 
 export interface LabelRow {
   id: number;
