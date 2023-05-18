@@ -38,14 +38,29 @@
                             <constraint firstItem="GJq-qp-MAu" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="yx9-Xk-6pU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="iGz-kO-LIf"/>
+                    <navigationItem key="navigationItem" id="iGz-kO-LIf">
+                        <barButtonItem key="leftBarButtonItem" title="필터" id="RBQ-Ru-vSp">
+                            <connections>
+                                <segue destination="gbJ-dY-BTf" kind="presentation" id="1B6-Ci-bio"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="선택" id="qvx-5B-bxI"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="GJq-qp-MAu" id="Veh-ub-Hjq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054.1984732824426" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="1052.6717557251909" y="-27.464788732394368"/>
+        </scene>
+        <!--FilterElementList-->
+        <scene sceneID="OKs-2Y-9h8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FilterElementList" id="gbJ-dY-BTf" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lu8-um-Qf4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2010" y="-42"/>
         </scene>
         <!--이슈-->
         <scene sceneID="XAi-I1-CGq">

@@ -10,6 +10,8 @@
 		6343A0662A0F7B65005FFC3E /* IssueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6343A0652A0F7B65005FFC3E /* IssueLabel.swift */; };
 		638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */; };
 		638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */; };
+		63D6CFCF2A15B7F6000876D5 /* FilterElementListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6CFCE2A15B7F6000876D5 /* FilterElementListViewController.swift */; };
+		63D6CFD22A15F099000876D5 /* FilterElementList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63D6CFD12A15F099000876D5 /* FilterElementList.storyboard */; };
 		F40809732A0DE2470005E0AB /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40809722A0DE2470005E0AB /* IssueList.storyboard */; };
 		F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40809742A0DE61C0005E0AB /* IssueListViewController.swift */; };
 		F48583AC2A10E1FC00322C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48583AB2A10E1FC00322C9F /* TabBarController.swift */; };
@@ -35,6 +37,8 @@
 		6343A0652A0F7B65005FFC3E /* IssueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueLabel.swift; sourceTree = "<group>"; };
 		638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueListCollectionViewCell.xib; sourceTree = "<group>"; };
 		638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionViewCell.swift; sourceTree = "<group>"; };
+		63D6CFCE2A15B7F6000876D5 /* FilterElementListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterElementListViewController.swift; sourceTree = "<group>"; };
+		63D6CFD12A15F099000876D5 /* FilterElementList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = FilterElementList.storyboard; path = IssueTracker/FilterTab/FilterElementList.storyboard; sourceTree = SOURCE_ROOT; };
 		F40809722A0DE2470005E0AB /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
 		F40809742A0DE61C0005E0AB /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		F48583AB2A10E1FC00322C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -69,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63D6CFD02A15B80D000876D5 /* FilterTab */ = {
+			isa = PBXGroup;
+			children = (
+				63D6CFD12A15F099000876D5 /* FilterElementList.storyboard */,
+				63D6CFCE2A15B7F6000876D5 /* FilterElementListViewController.swift */,
+			);
+			path = FilterTab;
+			sourceTree = "<group>";
+		};
 		F48583A82A0E216A00322C9F /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +159,7 @@
 				F48583C22A13802E00322C9F /* Network */,
 				F48583AB2A10E1FC00322C9F /* TabBarController.swift */,
 				F48583A92A0E21DA00322C9F /* IssueTab */,
+				63D6CFD02A15B80D000876D5 /* FilterTab */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -237,6 +251,7 @@
 				F4BF7CD52A0C8887001C22F0 /* Assets.xcassets in Resources */,
 				F4BF7CD32A0C8886001C22F0 /* Main.storyboard in Resources */,
 				F48583D12A138DA400322C9F /* issues.json in Resources */,
+				63D6CFD22A15F099000876D5 /* FilterElementList.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +294,7 @@
 				F48583CF2A1380D100322C9F /* IssueListDTO.swift in Sources */,
 				F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */,
 				6343A0662A0F7B65005FFC3E /* IssueLabel.swift in Sources */,
+				63D6CFCF2A15B7F6000876D5 /* FilterElementListViewController.swift in Sources */,
 				F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */,
 				F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */,
 				F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */,
