@@ -27,7 +27,7 @@ public class Issue {
     @MappedCollection(idColumn = "id", keyColumn = "id")
     private Set<Label> labelList;
 
-    @MappedCollection(idColumn = "id",keyColumn = "id")
+    @MappedCollection(idColumn = "id", keyColumn = "id")
     private Set<User> userList;
 }
 
