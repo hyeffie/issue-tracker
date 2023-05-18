@@ -11,5 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LabelListDto {
     private List<LabelDto> labelList;
-    private int countAllLabels;
+    private Integer countAllLabels;
 }

@@ -10,7 +10,7 @@ import org.springframework.data.relational.core.mapping.Column;
 @AllArgsConstructor
 public class LabelDto {
     @Column("id")
-    private int labelId;
+    private Integer labelId;
     @Column("name")
     private String labelName;
     @Column("background_color")
