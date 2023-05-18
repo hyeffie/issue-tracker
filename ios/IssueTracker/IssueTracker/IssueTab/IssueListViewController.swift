@@ -45,9 +45,13 @@ class IssueListViewController: UIViewController {
          self?.isPaging = false
          self?.hasNextPage = dto.body.count < NetworkManager.defaultPagingOffSet ? false : true
          if dto.body.count > 0 {
-            self?.currentPageNumber += 1
-            self?.objects.append(contentsOf: dto.body)
+            let mockBody = dto.body.map { IssueListDTO.Issue(title: "\(self?.currentPageNumber ?? 0)",
+                                                             description: $0.description,
+                                                             milestone: $0.milestone,
+                                                             labels: $0.labels) }
+            self?.objects.append(contentsOf: mockBody)
             DispatchQueue.main.async { [weak self] in self?.collectionView.reloadData() }
+            self?.currentPageNumber += 1
          }
       }
    }
@@ -101,5 +105,15 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
       minimumInteritemSpacingForSectionAt section: Int
    ) -> CGFloat {
       return 0
+   }
+   
+   func collectionView(
+      _ collectionView: UICollectionView,
+      willDisplay cell: UICollectionViewCell,
+      forItemAt indexPath: IndexPath)
+   {
+      if indexPath.item == collectionView.numberOfItems(inSection: 0) - 1 {
+         fetchIssues()
+      }
    }
 }
