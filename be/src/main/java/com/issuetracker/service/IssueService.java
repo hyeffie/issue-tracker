@@ -1,9 +1,6 @@
 package com.issuetracker.service;
 
-import com.issuetracker.dto.issue.AssigneeDto;
-import com.issuetracker.dto.issue.IssueCommentDto;
-import com.issuetracker.dto.issue.IssueDetailDto;
-import com.issuetracker.dto.issue.IssueLabelDto;
+import com.issuetracker.dto.issue.*;
 import com.issuetracker.repository.IssueRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +17,8 @@ public class IssueService {
         List<AssigneeDto> assigneeList = getAssgineesByIssueId(issueId);
         List<IssueLabelDto> labelList = getLabelListByIssueId(issueId);
         List<IssueCommentDto> commentList = getCommentListByIssueId(issueId);
-        return new IssueDetailDto(assigneeList, labelList, commentList);
+        IssueMilestoneDto milestone = getMilestoneByIssueId(issueId);
+        return new IssueDetailDto(assigneeList, labelList, commentList, milestone);
     }
 
     private List<AssigneeDto> getAssgineesByIssueId(Long issueId) {
@@ -60,5 +58,9 @@ public class IssueService {
         }
 
         return commentList;
+    }
+
+    private IssueMilestoneDto getMilestoneByIssueId(Long issueId) {
+        return issueRepository.findMilestoneByIssueId();
     }
 }

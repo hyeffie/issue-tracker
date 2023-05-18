@@ -3,6 +3,7 @@ package com.issuetracker.repository;
 import com.issuetracker.dto.issue.IssueCommentDto;
 import com.issuetracker.dto.issue.IssueLabelDto;
 import com.issuetracker.dto.issue.AssigneeDto;
+import com.issuetracker.dto.issue.IssueMilestoneDto;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -28,4 +29,11 @@ public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
             "JOIN user u ON c.user_id = u.id\n" +
             "WHERE c.issue_id = :issueId AND c.deleted_at IS NULL;")
     List<IssueCommentDto> findCommentListByIssueId(Long issueId);
+
+    @Query(value = "SELECT m.id, m.name, COUNT(i.id) AS countAllIssues, SUM(i.opened IS FALSE) AS countAllClosedIssues\n" +
+            "FROM milestone m\n" +
+            "LEFT JOIN issue i ON m.id = i.milestone_id\n" +
+            "WHERE m.id IN (SELECT DISTINCT milestone_id FROM issue WHERE id = 1)\n" +
+            "GROUP BY m.id;")
+    IssueMilestoneDto findMilestoneByIssueId();
 }
