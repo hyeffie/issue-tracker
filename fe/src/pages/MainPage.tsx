@@ -6,11 +6,17 @@ import NavLinks from '@components/NavLinks/NavLinks';
 import Button from '@common/Button';
 import IssueList from '@components/IssueList/IssueList';
 import FilterList from '@components/FilterList/FilterList';
-
+export type DropdownItems = {
+  filter: boolean;
+  assignee: boolean;
+  label: boolean;
+  milestone: boolean;
+  writer: boolean;
+};
 const MainPage = () => {
   // TODO: 올바른 타입 명시
   const [data, setData] = useState({} as any);
-  const [isFilterOpen, setIsFilterOpen] = useState({
+  const [isDropdownOpen, setIsDropdownOpen] = useState({
     filter: false,
     assignee: false,
     label: false,
@@ -18,17 +24,17 @@ const MainPage = () => {
     writer: false,
   });
 
-  const handleClickFilter = (title: keyof typeof isFilterOpen) => {
-    const newIsFilterOpen = { ...isFilterOpen };
-    for (const key in newIsFilterOpen) {
+  const handleClickDropdown = (title: keyof typeof isDropdownOpen) => {
+    const newIsDropdownOpen = { ...isDropdownOpen };
+    for (const key in newIsDropdownOpen) {
       if (key === title) {
-        newIsFilterOpen[key] = !newIsFilterOpen[key];
+        newIsDropdownOpen[key] = !newIsDropdownOpen[key];
       } else {
-        newIsFilterOpen[key as keyof typeof isFilterOpen] = false;
+        newIsDropdownOpen[key as keyof typeof isDropdownOpen] = false;
       }
     }
 
-    setIsFilterOpen(newIsFilterOpen);
+    setIsDropdownOpen(newIsDropdownOpen);
   };
 
   useEffect(() => {
@@ -53,8 +59,8 @@ const MainPage = () => {
       {/* ref: https://ko.javascript.info/optional-chaining */}
       <Header url={data.user?.profileUrl} />
       <div className="relative mb-6 flex justify-between">
-        <FilterBar onClick={() => handleClickFilter('filter')} />
-        {isFilterOpen.filter && (
+        <FilterBar onClick={() => handleClickDropdown('filter')} />
+        {isDropdownOpen.filter && (
           <FilterList
             title="이슈"
             items={[
@@ -105,6 +111,8 @@ const MainPage = () => {
         countOpenedIssues={data.countOpenedIssues}
         countClosedIssues={data.countOpenedIssues}
         onIssueTitleClick={() => console.log('onIssueTitleClick')}
+        isDropdownOpen={isDropdownOpen}
+        onDropdownTitleClick={handleClickDropdown}
       />
     </section>
   );

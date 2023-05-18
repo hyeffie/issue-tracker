@@ -3,6 +3,9 @@ import React from 'react';
 import Issue from './Issue';
 import Button from '@common/Button';
 
+import { DropdownItems } from '../../pages/MainPage';
+import FilterList from '@components/FilterList/FilterList';
+
 export interface LabelRow {
   id: number;
   title: string;
@@ -28,6 +31,8 @@ interface Props {
   countOpenedIssues: number;
   countClosedIssues: number;
   onIssueTitleClick: () => void;
+  isDropdownOpen?: DropdownItems;
+  onDropdownTitleClick?: (title: keyof DropdownItems) => void;
 }
 
 const IssueList: React.FC<Props> = ({
@@ -35,6 +40,8 @@ const IssueList: React.FC<Props> = ({
   countOpenedIssues,
   countClosedIssues,
   onIssueTitleClick,
+  isDropdownOpen,
+  onDropdownTitleClick,
 }) => {
   return (
     <div className="w-160 box-border rounded-2xl border">
@@ -71,20 +78,140 @@ const IssueList: React.FC<Props> = ({
           </div>
           <div className="flex">
             {/* FIXME(Jayden): 추후 key값 고려해보기 */}
-            {['담당자', '레이블', '마일스톤', '작성자'].map((title, i) => {
-              return (
-                <Button
-                  key={i}
-                  title={title}
-                  onClick={() => console.log(`${title}!`)}
-                  size="Small"
-                  type="Ghost"
-                  color="Gray"
-                  hasDropDown={true}
-                  condition="Press"
+            <div className="relative">
+              <Button
+                title="담당자"
+                onClick={() => onDropdownTitleClick!('assignee')}
+                size="Small"
+                type="Ghost"
+                color="Gray"
+                hasDropDown={true}
+                condition="Press"
+              />
+              {isDropdownOpen!.assignee && (
+                <FilterList
+                  title="담당자"
+                  items={[
+                    {
+                      id: 0,
+                      title: 'chloe',
+                    },
+                    {
+                      id: 1,
+                      title: 'lily',
+                    },
+                    {
+                      id: 2,
+                      title: 'jayden',
+                    },
+                    {
+                      id: 3,
+                      title: 'wood',
+                    },
+                    {
+                      id: 4,
+                      title: 'poro',
+                    },
+                  ]}
+                  isNullAvailability={true}
+                  onClick={() => {
+                    console.log('test');
+                  }}
                 />
-              );
-            })}
+              )}
+            </div>
+            <div className="relative">
+              <Button
+                title="레이블"
+                onClick={() => onDropdownTitleClick!('label')}
+                size="Small"
+                type="Ghost"
+                color="Gray"
+                hasDropDown={true}
+                condition="Press"
+              />
+              {isDropdownOpen!.label && (
+                <FilterList
+                  title="레이블"
+                  items={[
+                    {
+                      id: 0,
+                      title: 'documentation',
+                    },
+                    {
+                      id: 1,
+                      title: 'bug',
+                    },
+                  ]}
+                  onClick={() => {
+                    console.log('test');
+                  }}
+                />
+              )}
+            </div>
+            <div className="relative">
+              <Button
+                title="마일스톤"
+                onClick={() => onDropdownTitleClick!('milestone')}
+                size="Small"
+                type="Ghost"
+                color="Gray"
+                hasDropDown={true}
+                condition="Press"
+              />
+              {isDropdownOpen!.milestone && (
+                <FilterList
+                  title="마일스톤"
+                  items={[
+                    {
+                      id: 0,
+                      title: '[FE]w01',
+                    },
+                    {
+                      id: 1,
+                      title: '[BE]w01',
+                    },
+                    {
+                      id: 2,
+                      title: '[iOS]w01',
+                    },
+                  ]}
+                  onClick={() => {
+                    console.log('test');
+                  }}
+                />
+              )}
+            </div>
+            <div className="relative">
+              <Button
+                title="작성자"
+                onClick={() => onDropdownTitleClick!('writer')}
+                size="Small"
+                type="Ghost"
+                color="Gray"
+                hasDropDown={true}
+                condition="Press"
+              />
+              {isDropdownOpen!.writer && (
+                <FilterList
+                  title="작성자"
+                  items={[
+                    {
+                      id: 0,
+                      title: 'luke',
+                    },
+                    {
+                      id: 1,
+                      title: 'effie',
+                    },
+                  ]}
+                  isNullAvailability={false}
+                  onClick={() => {
+                    console.log('test');
+                  }}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

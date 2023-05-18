@@ -37,7 +37,8 @@ interface Props {
   size?: 'Large' | 'Medium' | 'Small';
   color?: 'Blue' | 'Gray';
   hasDropDown?: boolean;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  // onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick: () => void;
 }
 
 const Button: React.FC<Props> = ({
