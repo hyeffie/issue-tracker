@@ -11,4 +11,5 @@ public class IssueDetailDto {
 
     private List<AssigneeDto> assigneeList;
     private List<IssueLabelDto> labelList;
+    private List<IssueCommentDto> commentList;
 }

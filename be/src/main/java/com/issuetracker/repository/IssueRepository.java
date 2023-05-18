@@ -1,5 +1,6 @@
 package com.issuetracker.repository;
 
+import com.issuetracker.dto.issue.IssueCommentDto;
 import com.issuetracker.dto.issue.IssueLabelDto;
 import com.issuetracker.dto.issue.AssigneeDto;
 import org.springframework.data.jdbc.repository.query.Query;
@@ -20,5 +21,11 @@ public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
             "FROM assignee a\n" +
             "JOIN user u ON u.id = a.user_id\n" +
             "WHERE a.issue_id = :issueId;")
-    List<AssigneeDto> findAssigneesByIssueId(Long issueId);
+    List<AssigneeDto> findAssigneeListByIssueId(Long issueId);
+
+    @Query("SELECT c.id AS commentId, u.id AS userId, u.login_id, u.profile_url, c.content, c.created_at, c.updated_at\n" +
+            "FROM comment c\n" +
+            "JOIN user u ON c.user_id = u.id\n" +
+            "WHERE c.issue_id = :issueId AND c.deleted_at IS NULL;")
+    List<IssueCommentDto> findCommentListByIssueId(Long issueId);
 }

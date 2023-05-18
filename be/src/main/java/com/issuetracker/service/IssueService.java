@@ -1,6 +1,7 @@
 package com.issuetracker.service;
 
 import com.issuetracker.dto.issue.AssigneeDto;
+import com.issuetracker.dto.issue.IssueCommentDto;
 import com.issuetracker.dto.issue.IssueDetailDto;
 import com.issuetracker.dto.issue.IssueLabelDto;
 import com.issuetracker.repository.IssueRepository;
@@ -18,11 +19,12 @@ public class IssueService {
     public IssueDetailDto getIssueDetail(Long issueId) {
         List<AssigneeDto> assigneeList = getAssgineesByIssueId(issueId);
         List<IssueLabelDto> labelList = getLabelListByIssueId(issueId);
-        return new IssueDetailDto(assigneeList, labelList);
+        List<IssueCommentDto> commentList = getCommentListByIssueId(issueId);
+        return new IssueDetailDto(assigneeList, labelList, commentList);
     }
 
     private List<AssigneeDto> getAssgineesByIssueId(Long issueId) {
-        List<AssigneeDto> assigneeDtoList = issueRepository.findAssigneesByIssueId(issueId);
+        List<AssigneeDto> assigneeDtoList = issueRepository.findAssigneeListByIssueId(issueId);
 
         for (AssigneeDto assigneeDto : assigneeDtoList) {
             System.out.println(assigneeDto.getId());
@@ -42,5 +44,21 @@ public class IssueService {
             System.out.println(issueLabelDto.getFontColor());
         }
         return labelList;
+    }
+
+    private List<IssueCommentDto> getCommentListByIssueId(Long issueId) {
+        List<IssueCommentDto> commentList = issueRepository.findCommentListByIssueId(issueId);
+
+        for (IssueCommentDto issueCommentDto : commentList) {
+            System.out.println(issueCommentDto.getCommentId());
+            System.out.println(issueCommentDto.getUserId());
+            System.out.println(issueCommentDto.getUserName());
+            System.out.println(issueCommentDto.getProfileUrl());
+            System.out.println(issueCommentDto.getContent());
+            System.out.println(issueCommentDto.getCreatedAt());
+            System.out.println(issueCommentDto.getUpdatedAt());
+        }
+
+        return commentList;
     }
 }
