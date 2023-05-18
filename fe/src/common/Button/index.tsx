@@ -35,7 +35,7 @@ interface Props {
   iconName?: SVGNames;
   condition?: 'Enabled' | 'Hover' | 'Press' | 'Disabled';
   size?: 'Large' | 'Medium' | 'Small';
-  color?: 'Blue' | 'GrayDark' | 'GrayLight';
+  color?: 'Blue' | 'Gray';
   hasDropDown?: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -117,10 +117,8 @@ function getColor(color: string) {
   switch (color) {
     case 'Blue':
       return 'blue';
-    case 'GrayDark':
+    case 'Gray':
       return 'gray-900';
-    case 'GrayLight':
-      return 'gray-600';
     default:
       return 'blue';
   }
@@ -158,10 +156,8 @@ function getHex(color: string) {
   switch (color) {
     case 'Blue':
       return '#007AFF';
-    case 'GrayDark':
+    case 'Gray':
       return '#14142B';
-    case 'GrayLight':
-      return '#6E7191';
     default:
       return '#007AFF';
   }
