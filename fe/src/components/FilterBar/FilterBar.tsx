@@ -14,9 +14,10 @@ const FilterBar: React.FC<Props> = ({ onClick }) => {
         title="필터"
         onClick={onClick}
         size="Small"
-        color="GrayLight"
+        color="Gray"
         type="Ghost"
         hasDropDown={true}
+        condition="Press"
       />
       <form
         action=""

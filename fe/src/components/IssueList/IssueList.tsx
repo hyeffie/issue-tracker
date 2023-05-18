@@ -2,8 +2,6 @@ import React from 'react';
 
 import Issue from './Issue';
 import Button from '@common/Button';
-import { ReactComponent as AlertCircle } from '@assets/alertCircle.svg';
-import { ReactComponent as Archive } from '@assets/archive.svg';
 
 export interface LabelRow {
   id: number;
@@ -40,9 +38,9 @@ const IssueList: React.FC<Props> = ({
 }) => {
   return (
     <div className="w-160 box-border rounded-2xl border">
-      <div className="w-160 box-border rounded-t-2xl bg-light-mode px-6 py-4">
+      <div className="box-border rounded-t-2xl bg-gray-100 px-6 py-4">
         <div className="flex justify-between">
-          <div className="flex ">
+          <div className="flex items-center">
             <div className="mr-8">
               <input
                 type="checkbox"
@@ -50,15 +48,25 @@ const IssueList: React.FC<Props> = ({
                 onChange={() => console.log('check')}
               />
             </div>
-            <div className="flex ">
-              <button className="mr-3 flex items-center font-bold text-neutral-strong">
-                <AlertCircle stroke="#14142B" />
-                <span className="ml-1">열린 이슈({countOpenedIssues})</span>
-              </button>
-              <button className="flex items-center text-neutral">
-                <Archive stroke="#4E4B66" />
-                <span className="ml-1">닫힌 이슈({countClosedIssues})</span>
-              </button>
+            <div className="flex">
+              <Button
+                title={`열린 이슈(${countOpenedIssues})`}
+                onClick={() => console.log('열린 이슈')}
+                type="Ghost"
+                color="Gray"
+                size="Small"
+                iconName="alertcircle"
+                condition="Enabled"
+              />
+              <Button
+                title={`닫힌 이슈(${countClosedIssues})`}
+                onClick={() => console.log('닫힌 이슈')}
+                type="Ghost"
+                color="Gray"
+                size="Small"
+                iconName="archive"
+                condition="Press"
+              />
             </div>
           </div>
           <div className="flex">
@@ -71,8 +79,9 @@ const IssueList: React.FC<Props> = ({
                   onClick={() => console.log(`${title}!`)}
                   size="Small"
                   type="Ghost"
-                  color="GrayLight"
+                  color="Gray"
                   hasDropDown={true}
+                  condition="Press"
                 />
               );
             })}
