@@ -16,9 +16,9 @@ public class IssueListController {
 
     @GetMapping("/api/")
     public IssueListDto home() {
-        labelService.getIssueLabels();
+        IssueListDto issueListDto = labelService.fetchMain();
 
-        return null;
+        return issueListDto;
     }
 
 

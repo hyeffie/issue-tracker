@@ -1,7 +1,6 @@
 package com.issuetracker.dto;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.data.relational.core.mapping.Column;
@@ -27,5 +26,5 @@ public class MilestoneTestDto {
     private Boolean deleted;
 
     @MappedCollection(idColumn = "issueId", keyColumn = "milestoneId")
-    private Set<IssueTestDto> issueTestDtos;
+    private Set<IssueDao> issueTestDtos;
 }

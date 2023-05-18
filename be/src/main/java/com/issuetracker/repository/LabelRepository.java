@@ -1,32 +1,32 @@
 package com.issuetracker.repository;
 
-import com.issuetracker.domain.Issue;
-import com.issuetracker.domain.Label;
-import com.issuetracker.dto.IssueLabelDto;
-import com.issuetracker.dto.IssueTestDto;
-import com.issuetracker.dto.MilestoneTestDto;
+import java.util.List;
 
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
+import com.issuetracker.dto.FilterLabelDto;
+import com.issuetracker.dto.FilterMilestoneDto;
+import com.issuetracker.dto.FilterUserDto;
+import com.issuetracker.dto.IssueDao;
 
-public interface LabelRepository extends CrudRepository<MilestoneTestDto, Integer> {
-
-    @Query("SELECT l.id AS labelId, l.name AS labelName, l.background_color AS backgroundColor, l.font_color AS fontColor\n" +
-            "FROM issue i\n" +
-            "JOIN issue_label il ON i.id = il.issue_id\n" +
-            "JOIN label l ON l.id = il.label_id;")
-    List<IssueLabelDto> getLabels();
-
-    @Query("SELECT i.id AS issueId, i.title AS title, i.content AS content, i.opened AS isOpen, i.created_at AS createdAt, i.closed_at AS closedAt, l.id AS labelId, l.name AS labelName, l.background_color AS backgroundColor, l.font_color AS fontColor, l.description AS description\n"
+public interface LabelRepository extends CrudRepository<IssueDao, Long> {
+    @Query("SELECT i.id AS issueId, i.title AS title, i.content AS content, u.login_id AS userName,\n"
+            + "u.profile_url AS profileUrl, i.opened AS opened, i.created_at AS createdAt, i.closed_at AS closedAt\n"
+            + ", m.name AS milestoneName, l.id AS labelId, l.name AS labelName, l.background_color AS backgroundColor, l.font_color AS fontColor\n"
             + "FROM issue i\n"
-            + "LEFT OUTER JOIN issue_label il ON i.id = il.issue_id LEFT JOIN label l ON il.label_id = l.id;")
-    List<IssueTestDto> getAllIssues();
+            + "JOIN issue_label il ON i.id = il.issue_id\n"
+            + "JOIN label l ON l.id = il.label_id\n"
+            + "JOIN user u ON u.id =  i.user_id\n"
+            + "JOIN milestone m ON m.id = i.milestone_id\n"
+            + "WHERE i.deleted_at IS NULL;")
+    List<IssueDao> getIssues();
 
-    @Query("SELECT i.id AS issueId, i.title AS title, i.content AS content, i.opened AS isOpen, i.created_at AS createdAt, i.closed_at AS closedAt, m.id AS milestoneId, m.name AS milestoneName, m.description AS mDescription, m.completed_at AS completedAt, m.opened AS mIsOpened, m.deleted AS mDeleted\n"
-            + "FROM issue i\n"
-            + "LEFT OUTER JOIN milestone m ON i.milestone_id = m.id;")
-    List<MilestoneTestDto> getAllIssuesAndMilestone();
+    @Query("SELECT id, name, background_color, font_color, description FROM label;")
+    List<FilterLabelDto> getFilterLabelList();
+    @Query("SELECT id, login_id, profile_url FROM user")
+    List<FilterUserDto> getFilterUserList();
+    @Query("SELECT id, name, description FROM milestone")
+    List<FilterMilestoneDto> getFilterMilestoneList();
 
 }

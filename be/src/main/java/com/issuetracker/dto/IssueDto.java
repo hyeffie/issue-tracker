@@ -1,6 +1,9 @@
 package com.issuetracker.dto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,14 +13,28 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class IssueDto {
-    private int issueId;
+    private Long issueId;
     private String title;
     private String content;
     private String userName;
     private String profileUrl;
-    private boolean isOpen;
-    private String createdAt;
-    private String closedAt;
+    private Boolean isOpen;
+    private LocalDateTime createdAt;
+    private LocalDateTime closedAt;
     private String milestoneName;
     private List<IssueLabelDto> labelList;
+
+    public String getCreatedAt() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return Optional.ofNullable(createdAt)
+                .map(formatter::format)
+                .orElse(null);
+    }
+
+    public String getClosedAt() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return Optional.ofNullable(closedAt)
+                .map(formatter::format)
+                .orElse(null);
+    }
 }
