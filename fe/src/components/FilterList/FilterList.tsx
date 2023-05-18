@@ -38,7 +38,11 @@ const FilterList: React.FC<Props> = ({
         {items.map(item => {
           const { id, title, imgUrl } = item;
           return (
-            <button key={id} className={filterItemStyle} onClick={onClick}>
+            <button
+              key={id}
+              className={`${filterItemStyle} bg-white`}
+              onClick={onClick}
+            >
               {/* TODO(Lily): Item backgroundColor 주기 */}
               <FilterItem
                 id={id}
