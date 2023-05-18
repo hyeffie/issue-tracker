@@ -2,7 +2,7 @@ import React from 'react';
 
 import Profile from '@common/Profile';
 import Label from '@common/Label';
-import { LabelRow } from './IssueList';
+import { LabelRow, elapseTime } from './IssueList';
 import { ReactComponent as AlertCircle } from '@assets/alertCircle.svg';
 import { ReactComponent as Archive } from '@assets/archive.svg';
 import { ReactComponent as Milestone } from '@assets/milestone.svg';
@@ -13,8 +13,7 @@ interface Props {
   userName: string;
   profileUrl: string;
   isOpen: boolean;
-  createdAt: string;
-  closedAt?: string;
+  elapseTime: elapseTime;
   milestoneName?: string;
   labels: LabelRow[];
   onIssueTitleClick: (id: number) => void;
@@ -26,12 +25,20 @@ const Issue: React.FC<Props> = ({
   userName,
   profileUrl,
   isOpen,
-  createdAt,
-  closedAt,
+  elapseTime,
   milestoneName,
   labels,
   onIssueTitleClick,
 }) => {
+  const { days, hours, minutes } = elapseTime;
+  const elapsedMessage = isOpen
+    ? `${days !== 0 ? `${days}일 ` : ''}${hours !== 0 ? `${hours}시간 ` : ''}${
+        minutes !== 0 ? `${minutes}분 ` : ''
+      }전, ${userName}님에 의해 작성되었습니다.`
+    : `${days !== 0 ? `${days}일 ` : ''}${hours !== 0 ? `${hours}시간 ` : ''}${
+        minutes !== 0 ? `${minutes}분 ` : ''
+      }전, ${userName}님에 의해 닫혔습니다.`;
+
   return (
     <div className="flex border-t px-8 py-4">
       <div className="mr-8 mt-2">
@@ -57,11 +64,11 @@ const Issue: React.FC<Props> = ({
           </button>
           <div className="flex">
             {labels.map(label => {
-              const { id, title, backgroundColor, fontColor } = label;
+              const { labelId, labelName, backgroundColor, fontColor } = label;
               return (
                 <Label
-                  key={id}
-                  labelName={title}
+                  key={labelId}
+                  labelName={labelName}
                   backgroundColor={backgroundColor}
                   fontColor={fontColor}
                 />
@@ -72,20 +79,17 @@ const Issue: React.FC<Props> = ({
         {/* TODO: issue info 세로 가운데 정렬 */}
         <div className="flex">
           <span className="mr-2 text-gray-600">#{id}</span>
-          <span className="mr-2 text-gray-600">
-            {/* TODO(Lily): 경과 시간 계산은 위에서 하고 계산 된 값을 props로 받아서 처리하기 */}
-            {isOpen
-              ? `이 이슈가 ${createdAt}분 전, ${userName}님에 의해 작성되었습니다.`
-              : `이 이슈가 ${closedAt}분 전, ${userName}에 의해 닫혔습니다.`}
-          </span>
-          <div className="flex items-center">
-            <Milestone fill="#6E7191" />
-            <span className="ml-2 text-gray-600">{milestoneName}</span>
-          </div>
+          <span className="mr-2 text-gray-600">{elapsedMessage}</span>
+          {milestoneName && (
+            <div className="flex items-center">
+              <Milestone fill="#6E7191" />
+              <span className="ml-2 text-gray-600">{milestoneName}</span>
+            </div>
+          )}
         </div>
       </div>
       {/* FIXME(Jayden): Profile 태그의 상위 태그의 높이가 고정 */}
-      <div className="flex h-16 w-16 grow items-center justify-end">
+      <div className="flex grow items-center justify-end">
         <Profile url={profileUrl} width={20} height={20} />
       </div>
     </div>

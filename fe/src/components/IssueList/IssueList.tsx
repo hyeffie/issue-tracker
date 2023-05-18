@@ -7,10 +7,17 @@ import { DropdownItems } from '../../pages/MainPage';
 import FilterList from '@components/FilterList/FilterList';
 
 export interface LabelRow {
-  id: number;
-  title: string;
+  labelId: number;
+  labelName: string;
   backgroundColor: string;
   fontColor: string;
+}
+
+export interface elapseTime {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
 }
 
 export interface IssueRow {
@@ -20,8 +27,9 @@ export interface IssueRow {
   userName: string;
   profileUrl: string;
   isOpen: boolean;
-  createdAt: string;
-  closedAt?: string;
+  elapseTime: elapseTime;
+  // createdAt: string;
+  // closedAt?: string;
   milestoneName?: string;
   labels: LabelRow[];
 }
@@ -31,6 +39,7 @@ interface Props {
   countOpenedIssues: number;
   countClosedIssues: number;
   isDropdownOpen: DropdownItems;
+  status: boolean;
   onIssueTitleClick: () => void;
   onDropdownTitleClick: (title: keyof DropdownItems) => void;
   onStatusTabClick: (status: boolean) => void;
@@ -41,6 +50,7 @@ const IssueList: React.FC<Props> = ({
   countOpenedIssues,
   countClosedIssues,
   isDropdownOpen,
+  status,
   onIssueTitleClick,
   onDropdownTitleClick,
   onStatusTabClick,
@@ -64,7 +74,7 @@ const IssueList: React.FC<Props> = ({
                 color="Gray"
                 size="Small"
                 iconName="alertcircle"
-                condition="Enabled"
+                condition={status ? 'Enabled' : 'Press'}
                 onClick={() => onStatusTabClick(true)}
               />
               <Button
@@ -73,7 +83,7 @@ const IssueList: React.FC<Props> = ({
                 color="Gray"
                 size="Small"
                 iconName="archive"
-                condition="Press"
+                condition={!status ? 'Enabled' : 'Press'}
                 onClick={() => onStatusTabClick(false)}
               />
             </div>
@@ -224,8 +234,7 @@ const IssueList: React.FC<Props> = ({
             userName,
             profileUrl,
             isOpen,
-            createdAt,
-            closedAt,
+            elapseTime,
             milestoneName,
             labels,
           } = issue;
@@ -237,8 +246,7 @@ const IssueList: React.FC<Props> = ({
               userName={userName}
               profileUrl={profileUrl}
               isOpen={isOpen}
-              createdAt={createdAt}
-              closedAt={closedAt}
+              elapseTime={elapseTime}
               milestoneName={milestoneName}
               labels={labels}
               onIssueTitleClick={onIssueTitleClick}

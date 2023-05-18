@@ -51,14 +51,66 @@ const MainPage = () => {
     [issueItems]
   );
 
+  const getTimeElapsed = (
+    startTime: string
+  ): {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  } => {
+    const start = new Date(startTime);
+    const now = new Date();
+
+    const elapsedTime = now.getTime() - start.getTime();
+    const elapsedSeconds = Math.floor(elapsedTime / 1000);
+    const days = Math.floor(elapsedSeconds / 86400);
+    const hours = Math.floor((elapsedSeconds % 86400) / 3600);
+    const minutes = Math.floor(((elapsedSeconds % 86400) % 3600) / 60);
+    const seconds = elapsedSeconds % 60;
+
+    return {
+      days,
+      hours,
+      minutes,
+      seconds,
+    };
+  };
+
+  const mapIssues = (data: any) => {
+    const issueItem: IssueRow[] = data.issues
+      .filter((issue: any) => issue.isOpen === isOpenIssues)
+      .map((issue: any) => {
+        const elapseTime = issue.isOpen
+          ? getTimeElapsed(issue.createdAt)
+          : getTimeElapsed(issue.closedAt);
+        console.log(elapseTime);
+        return {
+          id: issue.issueId,
+          title: issue.title,
+          content: issue.content,
+          userName: issue.userName,
+          profileUrl: issue.profileUrl,
+          isOpen: issue.isOpen,
+          elapseTime,
+          milestoneName: issue.milestoneName,
+          labels: issue.labelList,
+        };
+      });
+
+    setIssueItems(issueItem);
+  };
+
   const fetchData = async () => {
     try {
+      // const res = await fetch('http://43.200.199.205:8080/api/');
       const res = await fetch('/issues');
       const data = await res.json();
 
+      console.log(data);
       if (res.status === 200) {
         setData(data);
-        setIssueItems(data.issues);
+        mapIssues(data);
       }
     } catch (error) {
       console.log(error);
@@ -126,6 +178,7 @@ const MainPage = () => {
         countClosedIssues={data.countOpenedIssues}
         onIssueTitleClick={() => console.log('onIssueTitleClick')}
         isDropdownOpen={isDropdownOpen}
+        status={isOpenIssues}
         onDropdownTitleClick={handleClickDropdown}
         onStatusTabClick={handleClickStatusTab}
       />
