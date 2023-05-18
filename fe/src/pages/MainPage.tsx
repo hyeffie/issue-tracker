@@ -6,6 +6,7 @@ import NavLinks from '@components/NavLinks/NavLinks';
 import Button from '@common/Button';
 import IssueList from '@components/IssueList/IssueList';
 import FilterList from '@components/FilterList/FilterList';
+
 export type DropdownItems = {
   filter: boolean;
   assignee: boolean;
@@ -13,6 +14,7 @@ export type DropdownItems = {
   milestone: boolean;
   writer: boolean;
 };
+
 const MainPage = () => {
   // TODO: 올바른 타입 명시
   const [data, setData] = useState({} as any);
