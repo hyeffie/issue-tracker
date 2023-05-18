@@ -15,7 +15,7 @@ export const Primary: Story = {
   args: {
     issues: [
       {
-        id: 10,
+        issueId: 10,
         title: 'issue title',
         content: 'issue content',
         userName: 'user name',
@@ -25,23 +25,23 @@ export const Primary: Story = {
         createdAt: 'create date',
         closedAt: 'crate close',
         milestoneName: 'milestone name',
-        labels: [
+        labelList: [
           {
-            id: 20123,
-            title: 'title',
+            labelId: 20123,
+            labelName: 'title',
             backgroundColor: 'tomato',
             fontColor: 'black',
           },
           {
-            id: 20123,
-            title: 'document',
+            labelId: 20123,
+            labelName: 'document',
             backgroundColor: 'blue',
             fontColor: 'black',
           },
         ],
       },
       {
-        id: 10,
+        issueId: 10,
         title: 'issue title',
         content: 'issue content',
         userName: 'user name',
@@ -51,22 +51,22 @@ export const Primary: Story = {
         createdAt: 'create date',
         closedAt: 'crate close',
         milestoneName: 'milestone name',
-        labels: [
+        labelList: [
           {
-            id: 20123,
-            title: 'Jayden',
+            labelId: 20123,
+            labelName: 'Jayden',
             backgroundColor: 'orange',
             fontColor: 'black',
           },
           {
-            id: 20123,
-            title: 'Lily',
+            labelId: 20123,
+            labelName: 'Lily',
             backgroundColor: 'pink',
             fontColor: 'black',
           },
           {
-            id: 20123,
-            title: 'FE',
+            labelId: 20123,
+            labelName: 'FE',
             backgroundColor: 'red',
             fontColor: 'black',
           },

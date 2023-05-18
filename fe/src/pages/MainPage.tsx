@@ -15,6 +15,29 @@ export type DropdownItems = {
   writer: boolean;
 };
 
+const issueDropdownList = [
+  {
+    id: 0,
+    title: '열린 이슈',
+  },
+  {
+    id: 1,
+    title: '내가 작성한 이슈',
+  },
+  {
+    id: 2,
+    title: '나에게 할당된 이슈',
+  },
+  {
+    id: 3,
+    title: '내가 댓글을 남긴 이슈',
+  },
+  {
+    id: 4,
+    title: '닫힌 이슈',
+  },
+];
+
 const MainPage = () => {
   // TODO: 올바른 타입 명시
   const [data, setData] = useState({} as any);
@@ -35,16 +58,16 @@ const MainPage = () => {
         newIsDropdownOpen[key as keyof typeof isDropdownOpen] = false;
       }
     }
-
     setIsDropdownOpen(newIsDropdownOpen);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('/issues');
-        const data = await res.json();
+        const res = await fetch('http://43.200.199.205:8080/api/');
 
+        const data = await res.json();
+        console.log(data);
         if (res.status === 200) {
           setData(data);
         }
@@ -65,28 +88,7 @@ const MainPage = () => {
         {isDropdownOpen.filter && (
           <FilterList
             title="이슈"
-            items={[
-              {
-                id: 231,
-                title: '열린 이슈',
-              },
-              {
-                id: 131232,
-                title: '내가 작성한 이슈',
-              },
-              {
-                id: 1223,
-                title: '나에게 할당된 이슈',
-              },
-              {
-                id: 1223,
-                title: '내가 댓글을 남긴 이슈',
-              },
-              {
-                id: 1223,
-                title: '닫힌 이슈',
-              },
-            ]}
+            items={issueDropdownList}
             isNullAvailability={false}
             onClick={() => {
               console.log('test');
@@ -94,7 +96,7 @@ const MainPage = () => {
           />
         )}
         {/* FIXME: justify style check */}
-        <div className="justify- flex gap-x-5">
+        <div className="flex gap-x-5">
           <NavLinks
             countAllMilestones={data.countAllMilestones}
             countAllLabels={data.countAllLabels}
@@ -105,13 +107,14 @@ const MainPage = () => {
               console.log('test');
             }}
             size={'Small'}
+            iconName="plus"
           />
         </div>
       </div>
       <IssueList
         issues={data.issues}
         countOpenedIssues={data.countOpenedIssues}
-        countClosedIssues={data.countOpenedIssues}
+        countClosedIssues={data.countClosedIssues}
         onIssueTitleClick={() => console.log('onIssueTitleClick')}
         isDropdownOpen={isDropdownOpen}
         onDropdownTitleClick={handleClickDropdown}

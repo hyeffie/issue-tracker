@@ -7,14 +7,14 @@ import { DropdownItems } from '../../pages/MainPage';
 import FilterList from '@components/FilterList/FilterList';
 
 export interface LabelRow {
-  id: number;
-  title: string;
+  labelId: number;
+  labelName: string;
   backgroundColor: string;
   fontColor: string;
 }
 
 export interface IssueRow {
-  id: number;
+  issueId: number;
   title: string;
   content: string;
   userName: string;
@@ -22,8 +22,8 @@ export interface IssueRow {
   isOpen: boolean;
   createdAt: string;
   closedAt?: string;
-  milestoneName: string;
-  labels: LabelRow[];
+  milestoneName?: string;
+  labelList: LabelRow[];
 }
 
 interface Props {
@@ -219,7 +219,7 @@ const IssueList: React.FC<Props> = ({
       {issues ? (
         issues.map(issue => {
           const {
-            id,
+            issueId,
             title,
             userName,
             profileUrl,
@@ -227,12 +227,12 @@ const IssueList: React.FC<Props> = ({
             createdAt,
             closedAt,
             milestoneName,
-            labels,
+            labelList,
           } = issue;
           return (
             <Issue
-              key={id}
-              id={id}
+              key={issueId}
+              issueId={issueId}
               title={title}
               userName={userName}
               profileUrl={profileUrl}
@@ -240,7 +240,7 @@ const IssueList: React.FC<Props> = ({
               createdAt={createdAt}
               closedAt={closedAt}
               milestoneName={milestoneName}
-              labels={labels}
+              labelList={labelList}
               onIssueTitleClick={onIssueTitleClick}
             />
           );

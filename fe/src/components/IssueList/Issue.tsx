@@ -8,20 +8,20 @@ import { ReactComponent as Archive } from '@assets/archive.svg';
 import { ReactComponent as Milestone } from '@assets/milestone.svg';
 
 interface Props {
-  id: number;
+  issueId: number;
   title: string;
   userName: string;
   profileUrl: string;
   isOpen: boolean;
   createdAt: string;
   closedAt?: string;
-  milestoneName: string;
-  labels: LabelRow[];
+  milestoneName?: string;
+  labelList: LabelRow[];
   onIssueTitleClick: (id: number) => void;
 }
 
 const Issue: React.FC<Props> = ({
-  id,
+  issueId,
   title,
   userName,
   profileUrl,
@@ -29,7 +29,7 @@ const Issue: React.FC<Props> = ({
   createdAt,
   closedAt,
   milestoneName,
-  labels,
+  labelList,
   onIssueTitleClick,
 }) => {
   return (
@@ -51,17 +51,17 @@ const Issue: React.FC<Props> = ({
           {/* TODO(Lily): 라우터 설치 및 설정 이후에 Link 태그로 바꾸기 */}
           <button
             className="mx-2 text-left text-lg font-bold text-neutral-strong"
-            onClick={() => onIssueTitleClick(id)}
+            onClick={() => onIssueTitleClick(issueId)}
           >
             {title}
           </button>
           <div className="flex">
-            {labels.map(label => {
-              const { id, title, backgroundColor, fontColor } = label;
+            {labelList.map(label => {
+              const { labelId, labelName, backgroundColor, fontColor } = label;
               return (
                 <Label
-                  key={id}
-                  labelName={title}
+                  key={labelId}
+                  labelName={labelName}
                   backgroundColor={backgroundColor}
                   fontColor={fontColor}
                 />
@@ -71,7 +71,7 @@ const Issue: React.FC<Props> = ({
         </div>
         {/* TODO: issue info 세로 가운데 정렬 */}
         <div className="flex">
-          <span className="mr-2 text-gray-600">#{id}</span>
+          <span className="mr-2 text-gray-600">#{issueId}</span>
           <span className="mr-2 text-gray-600">
             {/* TODO(Lily): 경과 시간 계산은 위에서 하고 계산 된 값을 props로 받아서 처리하기 */}
             {isOpen

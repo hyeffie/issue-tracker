@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    id: 10,
+    issueId: 10,
     title: 'issue title',
     userName: 'lily',
     profileUrl:
@@ -21,13 +21,13 @@ export const Primary: Story = {
     createdAt: 'time',
     closedAt: 'time',
     milestoneName: 'milestone',
-    labels: [],
+    labelList: [],
   },
 };
 
 export const Secondary: Story = {
   args: {
-    id: 10,
+    issueId: 10,
     title:
       '글자가 길어지면 어떻게 될까요오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오오',
     userName: 'lily',
@@ -37,16 +37,16 @@ export const Secondary: Story = {
     createdAt: 'time',
     closedAt: 'time',
     milestoneName: 'milestone',
-    labels: [
+    labelList: [
       {
-        id: 20123,
-        title: 'Jayden',
+        labelId: 20123,
+        labelName: 'Jayden',
         backgroundColor: 'orange',
         fontColor: 'black',
       },
       {
-        id: 20123,
-        title: 'Lily',
+        labelId: 20123,
+        labelName: 'Lily',
         backgroundColor: 'pink',
         fontColor: 'black',
       },
