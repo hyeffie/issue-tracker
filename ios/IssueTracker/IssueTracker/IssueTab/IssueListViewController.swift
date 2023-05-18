@@ -146,7 +146,8 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
       if indexPath.section == 1 && indexPath.item == 0 {
          guard let loadCell = cell as? LoadCollectionViewCell else { return }
          loadCell.start()
-         let completion: () -> Void = { loadCell.stop() }
+         let completion: () -> Void = {
+            DispatchQueue.main.async { [weak loadCell] in loadCell?.stop() } }
          fetchIssues(cellCompletion: completion)
       }
    }
