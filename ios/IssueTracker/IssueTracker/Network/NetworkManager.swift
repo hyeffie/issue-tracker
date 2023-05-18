@@ -8,7 +8,8 @@
 import Foundation
 
 final class NetworkManager {
-   static let dummyURLString = "https://api.codesquad.kr/onban/main"
+   static let dummyURLString = "https://example.com"
+   static let defaultPagingOffSet = 10
    
    let session: URLSessionInterface
    
@@ -67,10 +68,9 @@ final class NetworkManager {
    // MARK: - Util
    
    func fetchIssueList(pageNumber: Int? = nil, completion: @escaping (IssueListDTO) -> Void) {
-      let defaultOffSet = 10
       var query: [String: String] = [:]
       if let pageNumber {
-         query.updateValue("\(defaultOffSet)", forKey: "offset")
+         query.updateValue("\(Self.defaultPagingOffSet)", forKey: "offset")
          query.updateValue("\(pageNumber)", forKey: "pageNum")
       }
       

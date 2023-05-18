@@ -13,6 +13,10 @@ class IssueListViewController: UIViewController {
    var networkManager: NetworkManager?
    var objects: [IssueListDTO.Issue] = []
    
+   var currentPageNumber: Int = 0
+   var isPaging = false
+   var hasNextPage = true
+   
    @IBOutlet weak var collectionView: UICollectionView!
    
    override func viewDidLoad() {
@@ -34,15 +38,24 @@ class IssueListViewController: UIViewController {
       }
    }
    
+   func fetchIssues() {
+      guard hasNextPage else { return }
+      isPaging = true
+      networkManager?.fetchIssueList(pageNumber: currentPageNumber) { [weak self] dto in
+         self?.isPaging = false
+         self?.hasNextPage = dto.body.count < NetworkManager.defaultPagingOffSet ? false : true
+         if dto.body.count > 0 {
+            self?.currentPageNumber += 1
+            self?.objects.append(contentsOf: dto.body)
+            DispatchQueue.main.async { [weak self] in self?.collectionView.reloadData() }
+         }
+      }
+   }
+   
    func setNetworkManagerAndData() {
       let urlSession = MockURLSession(withJson: "issues")
       networkManager = NetworkManager(session: urlSession)
-      
-      networkManager?.fetchIssueList(completion: { [weak self] dto in
-         self?.objects = dto.body
-         
-         DispatchQueue.main.async { [weak self] in self?.collectionView.reloadData() }
-      })
+      fetchIssues()
    }
 }
 
@@ -66,27 +79,27 @@ extension IssueListViewController: UICollectionViewDataSource {
 }
 
 extension IssueListViewController: UICollectionViewDelegateFlowLayout {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath
-  ) -> CGSize {
+   func collectionView(
+      _ collectionView: UICollectionView,
+      layout collectionViewLayout: UICollectionViewLayout,
+      sizeForItemAt indexPath: IndexPath
+   ) -> CGSize {
       return CGSize(width: collectionView.frame.width, height: 180)
-  }
-
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumLineSpacingForSectionAt section: Int
-  ) -> CGFloat {
-     return 1.0
-  }
-
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    minimumInteritemSpacingForSectionAt section: Int
-  ) -> CGFloat {
-    return 0
-  }
+   }
+   
+   func collectionView(
+      _ collectionView: UICollectionView,
+      layout collectionViewLayout: UICollectionViewLayout,
+      minimumLineSpacingForSectionAt section: Int
+   ) -> CGFloat {
+      return 1.0
+   }
+   
+   func collectionView(
+      _ collectionView: UICollectionView,
+      layout collectionViewLayout: UICollectionViewLayout,
+      minimumInteritemSpacingForSectionAt section: Int
+   ) -> CGFloat {
+      return 0
+   }
 }
