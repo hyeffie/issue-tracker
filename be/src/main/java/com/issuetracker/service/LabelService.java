@@ -1,6 +1,6 @@
 package com.issuetracker.service;
 
-import com.issuetracker.dto.IssueLabelDto;
+import com.issuetracker.dto.issue.IssueLabelDto;
 import com.issuetracker.repository.LabelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
