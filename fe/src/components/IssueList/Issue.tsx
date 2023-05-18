@@ -15,7 +15,7 @@ interface Props {
   isOpen: boolean;
   createdAt: string;
   closedAt?: string;
-  milestoneName: string;
+  milestoneName?: string;
   labels: LabelRow[];
   onIssueTitleClick: (id: number) => void;
 }

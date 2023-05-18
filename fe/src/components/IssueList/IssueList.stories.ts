@@ -75,6 +75,13 @@ export const Primary: Story = {
     ],
     countOpenedIssues: 10,
     countClosedIssues: 20,
+    isDropdownOpen: {
+      filter: false,
+      assignee: false,
+      label: false,
+      milestone: false,
+      writer: false,
+    },
   },
 };
 
@@ -83,5 +90,12 @@ export const Secondary: Story = {
     issues: [],
     countOpenedIssues: 0,
     countClosedIssues: 0,
+    isDropdownOpen: {
+      filter: false,
+      assignee: false,
+      label: false,
+      milestone: false,
+      writer: false,
+    },
   },
 };

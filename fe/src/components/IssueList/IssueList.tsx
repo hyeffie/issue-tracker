@@ -16,13 +16,13 @@ export interface LabelRow {
 export interface IssueRow {
   id: number;
   title: string;
-  content: string;
+  content?: string;
   userName: string;
   profileUrl: string;
   isOpen: boolean;
   createdAt: string;
   closedAt?: string;
-  milestoneName: string;
+  milestoneName?: string;
   labels: LabelRow[];
 }
 
@@ -30,18 +30,20 @@ interface Props {
   issues: IssueRow[];
   countOpenedIssues: number;
   countClosedIssues: number;
+  isDropdownOpen: DropdownItems;
   onIssueTitleClick: () => void;
-  isDropdownOpen?: DropdownItems;
-  onDropdownTitleClick?: (title: keyof DropdownItems) => void;
+  onDropdownTitleClick: (title: keyof DropdownItems) => void;
+  onStatusTabClick: (status: boolean) => void;
 }
 
 const IssueList: React.FC<Props> = ({
   issues,
   countOpenedIssues,
   countClosedIssues,
-  onIssueTitleClick,
   isDropdownOpen,
+  onIssueTitleClick,
   onDropdownTitleClick,
+  onStatusTabClick,
 }) => {
   return (
     <div className="w-160 box-border rounded-2xl border">
@@ -58,37 +60,36 @@ const IssueList: React.FC<Props> = ({
             <div className="flex gap-x-3">
               <Button
                 title={`열린 이슈(${countOpenedIssues})`}
-                onClick={() => console.log('열린 이슈')}
                 type="Ghost"
                 color="Gray"
                 size="Small"
                 iconName="alertcircle"
                 condition="Enabled"
+                onClick={() => onStatusTabClick(true)}
               />
               <Button
                 title={`닫힌 이슈(${countClosedIssues})`}
-                onClick={() => console.log('닫힌 이슈')}
                 type="Ghost"
                 color="Gray"
                 size="Small"
                 iconName="archive"
                 condition="Press"
+                onClick={() => onStatusTabClick(false)}
               />
             </div>
           </div>
           <div className="flex justify-end gap-6">
-            {/* FIXME(Jayden): 추후 key값 고려해보기 */}
             <div className="relative">
               <Button
                 title="담당자"
-                onClick={() => onDropdownTitleClick!('assignee')}
+                onClick={() => onDropdownTitleClick('assignee')}
                 type="Ghost"
                 color="Gray"
                 hasDropDown={true}
                 condition="Press"
                 isFlexible={true}
               />
-              {isDropdownOpen!.assignee && (
+              {isDropdownOpen.assignee && (
                 <FilterList
                   title="담당자"
                   items={[
@@ -123,14 +124,14 @@ const IssueList: React.FC<Props> = ({
             <div className="relative">
               <Button
                 title="레이블"
-                onClick={() => onDropdownTitleClick!('label')}
+                onClick={() => onDropdownTitleClick('label')}
                 type="Ghost"
                 color="Gray"
                 hasDropDown={true}
                 condition="Press"
                 isFlexible={true}
               />
-              {isDropdownOpen!.label && (
+              {isDropdownOpen.label && (
                 <FilterList
                   title="레이블"
                   items={[
@@ -152,14 +153,14 @@ const IssueList: React.FC<Props> = ({
             <div className="relative">
               <Button
                 title="마일스톤"
-                onClick={() => onDropdownTitleClick!('milestone')}
+                onClick={() => onDropdownTitleClick('milestone')}
                 type="Ghost"
                 color="Gray"
                 hasDropDown={true}
                 condition="Press"
                 isFlexible={true}
               />
-              {isDropdownOpen!.milestone && (
+              {isDropdownOpen.milestone && (
                 <FilterList
                   title="마일스톤"
                   items={[
@@ -185,14 +186,14 @@ const IssueList: React.FC<Props> = ({
             <div className="relative">
               <Button
                 title="작성자"
-                onClick={() => onDropdownTitleClick!('writer')}
+                onClick={() => onDropdownTitleClick('writer')}
                 type="Ghost"
                 color="Gray"
                 hasDropDown={true}
                 condition="Press"
                 isFlexible={true}
               />
-              {isDropdownOpen!.writer && (
+              {isDropdownOpen.writer && (
                 <FilterList
                   title="작성자"
                   items={[
@@ -215,8 +216,7 @@ const IssueList: React.FC<Props> = ({
           </div>
         </div>
       </div>
-      {/* TODO: 이슈의 존재 유무에 따른 분기 처리 */}
-      {issues ? (
+      {issues.length ? (
         issues.map(issue => {
           const {
             id,

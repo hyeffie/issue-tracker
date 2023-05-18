@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import Header from '@components/Header/Header';
 import FilterBar from '@components/FilterBar/FilterBar';
 import NavLinks from '@components/NavLinks/NavLinks';
 import Button from '@common/Button';
-import IssueList from '@components/IssueList/IssueList';
+import IssueList, { IssueRow } from '@components/IssueList/IssueList';
 import FilterList from '@components/FilterList/FilterList';
 
 export type DropdownItems = {
@@ -18,7 +18,9 @@ export type DropdownItems = {
 const MainPage = () => {
   // TODO: 올바른 타입 명시
   const [data, setData] = useState({} as any);
-  const [isDropdownOpen, setIsDropdownOpen] = useState({
+  const [issueItems, setIssueItems] = useState<IssueRow[]>([]);
+  const [isOpenIssues, setIsOpenIssues] = useState(true);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<DropdownItems>({
     filter: false,
     assignee: false,
     label: false,
@@ -26,8 +28,13 @@ const MainPage = () => {
     writer: false,
   });
 
+  const handleClickStatusTab = (status: boolean) => {
+    setIsOpenIssues(status);
+  };
+
   const handleClickDropdown = (title: keyof typeof isDropdownOpen) => {
     const newIsDropdownOpen = { ...isDropdownOpen };
+
     for (const key in newIsDropdownOpen) {
       if (key === title) {
         newIsDropdownOpen[key] = !newIsDropdownOpen[key];
@@ -39,22 +46,28 @@ const MainPage = () => {
     setIsDropdownOpen(newIsDropdownOpen);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('/issues');
-        const data = await res.json();
+  const shownIssues: IssueRow[] = useMemo(
+    () => issueItems.filter((item: IssueRow) => item.isOpen === isOpenIssues),
+    [issueItems]
+  );
 
-        if (res.status === 200) {
-          setData(data);
-        }
-      } catch (error) {
-        console.log(error);
+  const fetchData = async () => {
+    try {
+      const res = await fetch('/issues');
+      const data = await res.json();
+
+      if (res.status === 200) {
+        setData(data);
+        setIssueItems(data.issues);
       }
-    };
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
-  }, []);
+  }, [isOpenIssues]);
 
   return (
     <section className="mx-10 my-[27px]">
@@ -93,8 +106,7 @@ const MainPage = () => {
             }}
           />
         )}
-        {/* FIXME: justify style check */}
-        <div className="justify- flex gap-x-5">
+        <div className="flex gap-x-5">
           <NavLinks
             countAllMilestones={data.countAllMilestones}
             countAllLabels={data.countAllLabels}
@@ -109,12 +121,13 @@ const MainPage = () => {
         </div>
       </div>
       <IssueList
-        issues={data.issues}
+        issues={shownIssues}
         countOpenedIssues={data.countOpenedIssues}
         countClosedIssues={data.countOpenedIssues}
         onIssueTitleClick={() => console.log('onIssueTitleClick')}
         isDropdownOpen={isDropdownOpen}
         onDropdownTitleClick={handleClickDropdown}
+        onStatusTabClick={handleClickStatusTab}
       />
     </section>
   );
