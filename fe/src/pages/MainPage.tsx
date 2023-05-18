@@ -55,37 +55,35 @@ const MainPage = () => {
       <div className="relative mb-6 flex justify-between">
         <FilterBar onClick={() => handleClickFilter('filter')} />
         {isFilterOpen.filter && (
-          <div className="absolute top-12">
-            <FilterList
-              title="이슈"
-              items={[
-                {
-                  id: 231,
-                  title: '열린 이슈',
-                },
-                {
-                  id: 131232,
-                  title: '내가 작성한 이슈',
-                },
-                {
-                  id: 1223,
-                  title: '나에게 할당된 이슈',
-                },
-                {
-                  id: 1223,
-                  title: '내가 댓글을 남긴 이슈',
-                },
-                {
-                  id: 1223,
-                  title: '닫힌 이슈',
-                },
-              ]}
-              isNullAvailability={false}
-              onClick={() => {
-                console.log('test');
-              }}
-            />
-          </div>
+          <FilterList
+            title="이슈"
+            items={[
+              {
+                id: 231,
+                title: '열린 이슈',
+              },
+              {
+                id: 131232,
+                title: '내가 작성한 이슈',
+              },
+              {
+                id: 1223,
+                title: '나에게 할당된 이슈',
+              },
+              {
+                id: 1223,
+                title: '내가 댓글을 남긴 이슈',
+              },
+              {
+                id: 1223,
+                title: '닫힌 이슈',
+              },
+            ]}
+            isNullAvailability={false}
+            onClick={() => {
+              console.log('test');
+            }}
+          />
         )}
         {/* FIXME: justify style check */}
         <div className="justify- flex gap-x-5">

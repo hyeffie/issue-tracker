@@ -23,7 +23,7 @@ const FilterList: React.FC<Props> = ({
     'flex w-full justify-between items-center border-t px-4 py-2 text-gray-700';
 
   return (
-    <div className="flex w-60 flex-col items-center rounded-lg border">
+    <div className="absolute top-12 z-10 flex w-60 flex-col items-center rounded-lg border">
       <div className="w-full bg-gray-100 py-2 pl-4 text-left text-sm">
         {title} 필터
       </div>
