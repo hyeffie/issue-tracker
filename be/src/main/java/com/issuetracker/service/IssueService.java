@@ -27,42 +27,15 @@ public class IssueService {
     }
 
     private List<AssigneeDto> getAssgineesByIssueId(Long issueId) {
-        List<AssigneeDto> assigneeDtoList = issueRepository.findAssigneeListByIssueId(issueId);
-
-        for (AssigneeDto assigneeDto : assigneeDtoList) {
-            System.out.println(assigneeDto.getId());
-            System.out.println(assigneeDto.getUserName());
-            System.out.println(assigneeDto.getProfileUrl());
-        }
-        return assigneeDtoList;
+        return issueRepository.findAssigneeListByIssueId(issueId);
     }
 
     private List<IssueLabelDto> getLabelListByIssueId(Long issueId) {
-        List<IssueLabelDto> labelList = issueRepository.findLabelListByIssueId(issueId);
-
-        for (IssueLabelDto issueLabelDto : labelList) {
-            System.out.println(issueLabelDto.getLabelId());
-            System.out.println(issueLabelDto.getLabelName());
-            System.out.println(issueLabelDto.getBackgroundColor());
-            System.out.println(issueLabelDto.getFontColor());
-        }
-        return labelList;
+        return issueRepository.findLabelListByIssueId(issueId);
     }
 
     private List<IssueCommentDto> getCommentListByIssueId(Long issueId) {
-        List<IssueCommentDto> commentList = issueRepository.findCommentListByIssueId(issueId);
-
-        for (IssueCommentDto issueCommentDto : commentList) {
-            System.out.println(issueCommentDto.getCommentId());
-            System.out.println(issueCommentDto.getUserId());
-            System.out.println(issueCommentDto.getUserName());
-            System.out.println(issueCommentDto.getProfileUrl());
-            System.out.println(issueCommentDto.getContent());
-            System.out.println(issueCommentDto.getCreatedAt());
-            System.out.println(issueCommentDto.getUpdatedAt());
-        }
-
-        return commentList;
+        return issueRepository.findCommentListByIssueId(issueId);
     }
 
     private IssueMilestoneDto getMilestoneByIssueId(Long issueId) {
