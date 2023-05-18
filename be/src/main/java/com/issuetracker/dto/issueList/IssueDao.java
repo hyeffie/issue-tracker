@@ -1,4 +1,4 @@
-package com.issuetracker.dto;
+package com.issuetracker.dto.issueList;
 
 import java.time.LocalDateTime;
 

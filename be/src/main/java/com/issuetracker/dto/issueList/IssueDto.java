@@ -1,9 +1,11 @@
-package com.issuetracker.dto;
+package com.issuetracker.dto.issueList;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+
+import com.issuetracker.dto.issue.IssueLabelDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

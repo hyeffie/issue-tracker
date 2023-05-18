@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.issuetracker.dto.FilterLabelDto;
-import com.issuetracker.dto.FilterMilestoneDto;
-import com.issuetracker.dto.FilterUserDto;
-import com.issuetracker.dto.IssueDao;
+import com.issuetracker.dto.issueList.FilterLabelDto;
+import com.issuetracker.dto.issueList.FilterMilestoneDto;
+import com.issuetracker.dto.issueList.FilterUserDto;
+import com.issuetracker.dto.issueList.IssueDao;
 
-public interface LabelRepository extends CrudRepository<IssueDao, Long> {
+public interface IssueListRepository extends CrudRepository<IssueDao, Long> {
     @Query("SELECT i.id AS issueId, i.title AS title, i.content AS content, u.login_id AS userName,\n"
             + "u.profile_url AS profileUrl, i.opened AS opened, i.created_at AS createdAt, i.closed_at AS closedAt\n"
             + ", m.name AS milestoneName, l.id AS labelId, l.name AS labelName, l.background_color AS backgroundColor, l.font_color AS fontColor\n"

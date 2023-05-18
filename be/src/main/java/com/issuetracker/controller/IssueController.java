@@ -1,6 +1,6 @@
 package com.issuetracker.controller;
 
-import com.issuetracker.dto.issue.IssueDetailDto;
+import com.issuetracker.dto.issue.IssueDetailPageDto;
 import com.issuetracker.service.IssueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ public class IssueController {
     private final IssueService issueService;
 
     @GetMapping("/api/issues/{issueId}")
-    public IssueDetailDto getIssueDetail(@PathVariable Long issueId) {
+    public IssueDetailPageDto getIssueDetail(@PathVariable Long issueId) {
         return issueService.getIssueDetail(issueId);
     }
 }

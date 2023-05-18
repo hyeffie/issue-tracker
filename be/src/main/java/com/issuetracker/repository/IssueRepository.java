@@ -12,7 +12,7 @@ public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
             "FROM issue i\n" +
             "JOIN user u ON u.id = i.user_id\n" +
             "WHERE i.id = :issueId AND i.deleted_at IS NULL;")
-    IssueDto findIssueByIssueId(Long issueId);
+    IssueDetailDto findIssueByIssueId(Long issueId);
 
     @Query("SELECT l.id, l.name, l.background_color, l.font_color\n" +
             "FROM issue i\n" +

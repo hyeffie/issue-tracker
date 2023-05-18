@@ -3,8 +3,8 @@ package com.issuetracker.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.issuetracker.dto.IssueListDto;
-import com.issuetracker.service.LabelService;
+import com.issuetracker.dto.issueList.IssueListDto;
+import com.issuetracker.service.IssueListService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class IssueListController {
 
-    private final LabelService labelService;
+    private final IssueListService labelService;
 
     @GetMapping("/api/")
     public IssueListDto home() {

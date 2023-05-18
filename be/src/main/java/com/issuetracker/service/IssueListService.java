@@ -1,25 +1,26 @@
 package com.issuetracker.service;
 
-import com.issuetracker.dto.FilterLabelDto;
-import com.issuetracker.dto.FilterMilestoneDto;
-import com.issuetracker.dto.FilterUserDto;
-import com.issuetracker.dto.IssueDto;
-import com.issuetracker.dto.IssueLabelDto;
-import com.issuetracker.dto.IssueListDto;
-import com.issuetracker.dto.IssueDao;
-import com.issuetracker.repository.LabelRepository;
-
-import lombok.RequiredArgsConstructor;
-
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.issuetracker.dto.issueList.FilterLabelDto;
+import com.issuetracker.dto.issueList.FilterMilestoneDto;
+import com.issuetracker.dto.issueList.FilterUserDto;
+import com.issuetracker.dto.issueList.IssueDao;
+import com.issuetracker.dto.issueList.IssueDto;
+
+import com.issuetracker.dto.issueList.IssueListDto;
+import com.issuetracker.dto.issue.IssueLabelDto;
+import com.issuetracker.repository.IssueListRepository;
+
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
-public class LabelService {
-    private final LabelRepository labelRepository;
+public class IssueListService {
+    private final IssueListRepository labelRepository;
 
     public IssueListDto fetchMain() {
         IssueListDto issueListDto = new IssueListDto();

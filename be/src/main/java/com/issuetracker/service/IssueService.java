@@ -13,16 +13,16 @@ public class IssueService {
 
     private final IssueRepository issueRepository;
 
-    public IssueDetailDto getIssueDetail(Long issueId) {
-        IssueDto issue = getIssueByIssueId(issueId);
+    public IssueDetailPageDto getIssueDetail(Long issueId) {
+        IssueDetailDto issue = getIssueByIssueId(issueId);
         List<AssigneeDto> assigneeList = getAssgineesByIssueId(issueId);
         List<IssueLabelDto> labelList = getLabelListByIssueId(issueId);
         List<IssueCommentDto> commentList = getCommentListByIssueId(issueId);
         IssueMilestoneDto milestone = getMilestoneByIssueId(issueId);
-        return new IssueDetailDto(issue, milestone, labelList, assigneeList, commentList);
+        return new IssueDetailPageDto(issue, milestone, labelList, assigneeList, commentList);
     }
 
-    private IssueDto getIssueByIssueId(Long issueId) {
+    private IssueDetailDto getIssueByIssueId(Long issueId) {
         return issueRepository.findIssueByIssueId(issueId);
     }
 
