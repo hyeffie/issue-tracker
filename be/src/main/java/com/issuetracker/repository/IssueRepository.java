@@ -11,7 +11,7 @@ public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
     @Query("SELECT i.id, title, content, u.login_id, u.profile_url, i.opened, i.created_at, i.closed_at\n" +
             "FROM issue i\n" +
             "JOIN user u ON u.id = i.user_id\n" +
-            "WHERE i.id = 1;")
+            "WHERE i.id = :issueId AND i.deleted_at IS NULL;")
     IssueDto findIssueByIssueId(Long issueId);
 
     @Query("SELECT l.id, l.name, l.background_color, l.font_color\n" +
@@ -36,7 +36,7 @@ public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
     @Query(value = "SELECT m.id, m.name, COUNT(i.id) AS countAllIssues, SUM(i.opened IS FALSE) AS countAllClosedIssues\n" +
             "FROM milestone m\n" +
             "LEFT JOIN issue i ON m.id = i.milestone_id\n" +
-            "WHERE m.id IN (SELECT DISTINCT milestone_id FROM issue WHERE id = 1)\n" +
+            "WHERE m.id IN (SELECT DISTINCT milestone_id FROM issue WHERE id = :issueId AND i.deleted_at IS NULL)\n" +
             "GROUP BY m.id;")
-    IssueMilestoneDto findMilestoneByIssueId();
+    IssueMilestoneDto findMilestoneByIssueId(Long issueId);
 }

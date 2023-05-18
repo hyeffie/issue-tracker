@@ -66,6 +66,6 @@ public class IssueService {
     }
 
     private IssueMilestoneDto getMilestoneByIssueId(Long issueId) {
-        return issueRepository.findMilestoneByIssueId();
+        return issueRepository.findMilestoneByIssueId(issueId);
     }
 }
