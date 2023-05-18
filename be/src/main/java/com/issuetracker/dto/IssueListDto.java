@@ -2,6 +2,7 @@ package com.issuetracker.dto;
 
 import java.util.List;
 
+import com.issuetracker.dto.issue.IssueDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,15 +1,18 @@
 package com.issuetracker.repository;
 
-import com.issuetracker.dto.issue.IssueCommentDto;
-import com.issuetracker.dto.issue.IssueLabelDto;
-import com.issuetracker.dto.issue.AssigneeDto;
-import com.issuetracker.dto.issue.IssueMilestoneDto;
+import com.issuetracker.dto.issue.*;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
 public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
+
+    @Query("SELECT i.id, title, content, u.login_id, u.profile_url, i.opened, i.created_at, i.closed_at\n" +
+            "FROM issue i\n" +
+            "JOIN user u ON u.id = i.user_id\n" +
+            "WHERE i.id = 1;")
+    IssueDto findIssueByIssueId(Long issueId);
 
     @Query("SELECT l.id, l.name, l.background_color, l.font_color\n" +
             "FROM issue i\n" +
