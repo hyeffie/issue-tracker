@@ -2,8 +2,7 @@ export const mainData = {
   user: {
     id: 23123,
     name: 'Lily',
-    profileUrl:
-      'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
+    profileUrl: 'https://unsplash.com/ko/%EC%82%AC%EC%A7%84/b5LTjyJM9Yw',
   },
   issues: [
     {
@@ -11,21 +10,22 @@ export const mainData = {
       title: 'First Issue',
       content: 'This is the first issue',
       userName: 'JohnDoe',
-      profileUrl: 'https://example.com/johndoe',
+      profileUrl:
+        'https://images.unsplash.com/photo-1684397377783-9924e83271b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=800&q=60',
       isOpen: true,
       createdAt: '2023-05-15 10:30:00',
       closedAt: '',
       milestoneName: 'Milestone 1',
-      labels: [
+      labelList: [
         {
-          id: 1,
-          title: 'Bug',
+          labelId: 1,
+          labelName: 'Bug',
           backgroundColor: '#FF0000',
           fontColor: '#FFFFFF',
         },
         {
-          id: 2,
-          title: 'High Priority',
+          labelId: 2,
+          labelName: 'High Priority',
           backgroundColor: '#FFA500',
           fontColor: '#000000',
         },
@@ -41,16 +41,16 @@ export const mainData = {
       createdAt: '2023-05-16 09:15:00',
       closedAt: '',
       milestoneName: 'Milestone 2',
-      labels: [
+      labelList: [
         {
-          id: 3,
-          title: 'Feature',
+          labelId: 3,
+          labelName: 'Feature',
           backgroundColor: '#00FF00',
           fontColor: '#000000',
         },
         {
-          id: 4,
-          title: 'Low Priority',
+          labelId: 4,
+          labelName: 'Low Priority',
           backgroundColor: '#0000FF',
           fontColor: '#FFFFFF',
         },
@@ -66,16 +66,16 @@ export const mainData = {
       createdAt: '2023-05-14 14:20:00',
       closedAt: '2023-05-16 11:45:00',
       milestoneName: 'Milestone 1',
-      labels: [
+      labelList: [
         {
-          id: 5,
-          title: 'Enhancement',
+          labelId: 5,
+          labelName: 'Enhancement',
           backgroundColor: '#FFFF00',
           fontColor: '#000000',
         },
         {
-          id: 6,
-          title: 'Medium Priority',
+          labelId: 6,
+          labelName: 'Medium Priority',
           backgroundColor: '#800080',
           fontColor: '#FFFFFF',
         },
@@ -101,20 +101,20 @@ export const mainData = {
   ],
   labelList: [
     {
-      id: 1,
-      title: 'Red',
+      labelId: 1,
+      labelName: 'Red',
       backgroundColor: '#FF0000',
       fontColor: '#FFFFFF',
     },
     {
-      id: 2,
-      title: 'Blue',
+      labelId: 2,
+      labelName: 'Blue',
       backgroundColor: '#0000FF',
       fontColor: '#FFFFFF',
     },
     {
-      id: 3,
-      title: 'Green',
+      labelId: 3,
+      labelName: 'Green',
       backgroundColor: '#00FF00',
       fontColor: '#000000',
     },
