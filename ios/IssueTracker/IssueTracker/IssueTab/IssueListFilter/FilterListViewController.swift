@@ -54,3 +54,56 @@ class FilterListViewController: UIViewController {
       self.dismiss(animated: true)
    }
 }
+
+extension FilterListViewController: UICollectionViewDataSource {
+   func numberOfSections(in collectionView: UICollectionView) -> Int {
+      return sectionCount
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+      guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                         withReuseIdentifier: filterHeaderID,
+                                                                         for: indexPath) as? FilterListCollectionViewHeader else {
+         return UICollectionReusableView()
+      }
+      
+      header.sectionName.text = filterHeaderNames[indexPath.section]
+      header.configureFont()
+      return header
+   }
+
+   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+      switch section {
+         case 0:
+            return filterStatusList.count
+         case 1:
+            return useCase.userList.count
+         case 2:
+            return useCase.countAllLabels
+         default:
+            return useCase.countAllMilestones
+      }
+   }
+
+   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: filterCellID, for: indexPath) as? FilterListCollectionViewCell else {
+         return UICollectionViewCell() }
+      
+      let filterElement: String
+      switch indexPath.section {
+         case 0:
+            filterElement = filterStatusList[indexPath.row]
+         case 1:
+            filterElement = useCase.userList[indexPath.row].userName
+         case 2:
+            filterElement = useCase.labelList[indexPath.row].labelName
+         default:
+            filterElement = useCase.milestoneList[indexPath.row].milestoneName
+      }
+      
+      cell.filterName.text = filterElement
+      cell.configureFont()
+      cell.configureImage()
+      return cell
+   }
+}
