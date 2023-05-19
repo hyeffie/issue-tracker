@@ -50,4 +50,15 @@ struct IssueListDTO: Codable {
    let countAllMilestones: Int
    let countOpenedIssues: Int
    let countClosedIssues: Int
+   
+   init() {
+      self.issues = []
+      self.userList = []
+      self.labelList = []
+      self.milestoneList = []
+      self.countAllLabels = 0
+      self.countAllMilestones = 0
+      self.countOpenedIssues = 0
+      self.countClosedIssues = 0
+   }
 }

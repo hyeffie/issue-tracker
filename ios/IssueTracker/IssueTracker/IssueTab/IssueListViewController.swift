@@ -10,9 +10,11 @@ import UIKit
 class IssueListViewController: UIViewController {
    let issueCellID = "IssueListCollectionViewCell"
    let loadCellID = "LoadCollectionViewCell"
+   let filterListID = "FilterList"
    
    var networkManager: NetworkManager?
    var objects: [IssueListDTO.Issue] = []
+   var fetchedAllData = IssueListDTO()
    
    var currentPageNumber: Int = 0
    var isPaging = false
@@ -50,6 +52,7 @@ class IssueListViewController: UIViewController {
          self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
          if dto.issues.count > 0 {
             self?.objects.append(contentsOf: dto.issues)
+            self?.fetchedAllData = dto
             DispatchQueue.main.async { [weak self] in self?.collectionView.reloadData() }
             self?.currentPageNumber += 1
          }
@@ -59,6 +62,13 @@ class IssueListViewController: UIViewController {
    func setNetworkManagerAndData() {
       networkManager = NetworkManager(session: URLSession.shared)
       fetchIssues()
+   }
+   
+   @IBAction func filter(_ sender: Any) {
+      let storyboard = UIStoryboard(name: filterListID, bundle: nil)
+      guard let filterListViewController = storyboard.instantiateInitialViewController() as? FilterListViewController else { return }
+      filterListViewController.delegate = self
+      self.present(filterListViewController, animated: true)
    }
 }
 
@@ -150,5 +160,11 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
             DispatchQueue.main.async { [weak loadCell] in loadCell?.stop() } }
          fetchIssues(cellCompletion: completion)
       }
+   }
+}
+   
+extension IssueListViewController: DataSenderDelegate {
+   func receive() -> IssueListDTO {
+      fetchedAllData
    }
 }

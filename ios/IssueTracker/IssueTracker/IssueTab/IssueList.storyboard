@@ -38,14 +38,21 @@
                             <constraint firstItem="GJq-qp-MAu" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="yx9-Xk-6pU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="iGz-kO-LIf"/>
+                    <navigationItem key="navigationItem" id="iGz-kO-LIf">
+                        <barButtonItem key="leftBarButtonItem" title="필터" id="RBQ-Ru-vSp">
+                            <connections>
+                                <action selector="filter:" destination="Y6W-OH-hqX" id="6Yr-Ga-mck"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="선택" id="qvx-5B-bxI"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="GJq-qp-MAu" id="Veh-ub-Hjq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054.1984732824426" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="1052.6717557251909" y="-27.464788732394368"/>
         </scene>
         <!--이슈-->
         <scene sceneID="XAi-I1-CGq">
