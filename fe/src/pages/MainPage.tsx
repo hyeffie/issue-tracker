@@ -103,8 +103,8 @@ const MainPage = () => {
 
   const fetchData = async () => {
     try {
-      // const res = await fetch('http://43.200.199.205:8080/api/');
-      const res = await fetch('/issues');
+      const res = await fetch('http://43.200.199.205:8080/api/');
+      // const res = await fetch('/issues');
       const data = await res.json();
 
       console.log(data);
@@ -175,7 +175,7 @@ const MainPage = () => {
       <IssueList
         issues={shownIssues}
         countOpenedIssues={data.countOpenedIssues}
-        countClosedIssues={data.countOpenedIssues}
+        countClosedIssues={data.countClosedIssues}
         onIssueTitleClick={() => console.log('onIssueTitleClick')}
         isDropdownOpen={isDropdownOpen}
         status={isOpenIssues}
