@@ -2,7 +2,8 @@ package com.issuetracker.controller;
 
 import java.sql.SQLException;
 
-import org.springframework.data.relational.core.sql.In;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +19,15 @@ import com.issuetracker.dto.label.LabelVo;
 import com.issuetracker.service.LabelService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class LabelController {
 
     private final LabelService labelService;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/api/labels")
     public LabelListDto getLabels() {
@@ -54,14 +58,14 @@ public class LabelController {
                 new Label(labelId, labelVo.getLabelName(), labelVo.getBackgroundColor(), labelVo.getFontColor(),
                         labelVo.getDescription(), false));
     }
-}
-    // @ExceptionHandler(SQLException.class)
-    // public void sqlException() {
-    //     System.out.println("SQL 예외 발생(예외처리 수정 예정)");
-    // }
-    //
-    // @ExceptionHandler(IllegalArgumentException.class)
-    // public void labelException() {
-    //     System.out.println("존재하지 않는 Issue입니다.");
-    //}
 
+    @ExceptionHandler(SQLException.class)
+    public void sqlException() {
+        logger.debug("SQL 예외 발생");
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public void labelException() {
+        logger.debug("존재하지 않는 Issue입니다.");
+    }
+}
