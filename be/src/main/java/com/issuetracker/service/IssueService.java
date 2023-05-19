@@ -13,6 +13,11 @@ public class IssueService {
 
     private final IssueRepository issueRepository;
 
+    /**
+     * 데이터베이스에서 가져온 데이터들로 이슈 상세 조회 시 필요한 데이터들을 조립
+     * @param issueId
+     * @return
+     */
     public IssueDetailPageDto getIssueDetail(Long issueId) {
         IssueDetailDto issue = getIssueByIssueId(issueId);
         List<AssigneeDto> assigneeList = getAssgineesByIssueId(issueId);
