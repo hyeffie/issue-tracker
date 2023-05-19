@@ -15,6 +15,29 @@ export type DropdownItems = {
   writer: boolean;
 };
 
+const issueDropdownList = [
+  {
+    id: 0,
+    title: '열린 이슈',
+  },
+  {
+    id: 1,
+    title: '내가 작성한 이슈',
+  },
+  {
+    id: 2,
+    title: '나에게 할당된 이슈',
+  },
+  {
+    id: 3,
+    title: '내가 댓글을 남긴 이슈',
+  },
+  {
+    id: 4,
+    title: '닫힌 이슈',
+  },
+];
+
 const MainPage = () => {
   // TODO: 올바른 타입 명시
   const [data, setData] = useState({} as any);
@@ -42,7 +65,6 @@ const MainPage = () => {
         newIsDropdownOpen[key as keyof typeof isDropdownOpen] = false;
       }
     }
-
     setIsDropdownOpen(newIsDropdownOpen);
   };
 
@@ -86,15 +108,8 @@ const MainPage = () => {
           : getTimeElapsed(issue.closedAt);
         console.log(elapseTime);
         return {
-          id: issue.issueId,
-          title: issue.title,
-          content: issue.content,
-          userName: issue.userName,
-          profileUrl: issue.profileUrl,
-          isOpen: issue.isOpen,
+          ...issue,
           elapseTime,
-          milestoneName: issue.milestoneName,
-          labels: issue.labelList,
         };
       });
 
@@ -130,28 +145,7 @@ const MainPage = () => {
         {isDropdownOpen.filter && (
           <FilterList
             title="이슈"
-            items={[
-              {
-                id: 231,
-                title: '열린 이슈',
-              },
-              {
-                id: 131232,
-                title: '내가 작성한 이슈',
-              },
-              {
-                id: 1223,
-                title: '나에게 할당된 이슈',
-              },
-              {
-                id: 1223,
-                title: '내가 댓글을 남긴 이슈',
-              },
-              {
-                id: 1223,
-                title: '닫힌 이슈',
-              },
-            ]}
+            items={issueDropdownList}
             isNullAvailability={false}
             onClick={() => {
               console.log('test');
@@ -169,10 +163,14 @@ const MainPage = () => {
               console.log('test');
             }}
             size={'Small'}
+            iconName="plus"
           />
         </div>
       </div>
       <IssueList
+        users={data.userList}
+        labels={data.labelList}
+        milestones={data.milestoneList}
         issues={shownIssues}
         countOpenedIssues={data.countOpenedIssues}
         countClosedIssues={data.countClosedIssues}
@@ -185,5 +183,4 @@ const MainPage = () => {
     </section>
   );
 };
-
 export default MainPage;

@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { worker } from './mocks/browser';
 
+// NOTE(Jayden): MSW mock api 주석 처리
 // if (process.env.NODE_ENV === 'development') {
 //   worker.start();
 // }
