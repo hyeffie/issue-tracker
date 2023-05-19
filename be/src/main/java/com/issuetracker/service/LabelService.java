@@ -23,6 +23,18 @@ public class LabelService {
     }
 
     public Label createLabel(LabelVo labelVo) {
-        return labelRepository.save(new Label(labelVo.getLabelName(), labelVo.getBackgroundColor(), labelVo.getFontColor(), labelVo.getDescription()));
+        System.out.println(labelVo);
+        return labelRepository.save(new Label(labelVo.getLabelName(), labelVo.getBackgroundColor(), labelVo.getFontColor(), labelVo.getDescription(), false));
+    }
+
+    public Label updateLabel(Label label) {
+        return labelRepository.save(label);
+    }
+
+    public Label deleteLabelById(int labelId) {
+        Label label = labelRepository.findById((long)labelId).orElseThrow(() -> new IllegalArgumentException("없는 라벨입니다."));
+        label.setDeleted(true);
+
+        return labelRepository.save(label);
     }
 }

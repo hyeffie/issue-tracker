@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface LabelRepository extends CrudRepository<Label, Long> {
 
-    @Query("SELECT id, name, background_color, font_color, description\n" +
+    @Query("SELECT id, name, background_color, font_color, description, deleted\n" +
             "FROM label\n" +
             "WHERE deleted IS FALSE;")
     List<Label> findAllLabels();
