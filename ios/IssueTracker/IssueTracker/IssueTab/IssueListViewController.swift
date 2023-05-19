@@ -10,11 +10,11 @@ import UIKit
 class IssueListViewController: UIViewController {
    let issueCellID = "IssueListCollectionViewCell"
    let loadCellID = "LoadCollectionViewCell"
+   let filterListID = "FilterList"
    
    var networkManager: NetworkManager?
    var objects: [IssueListDTO.Issue] = []
-   
-   let useCase = IssueListUseCase(issues: Issue, users: <#T##<<error type>>#>, labels: <#T##<<error type>>#>, milestones: <#T##<<error type>>#>)
+   var fetchedAllData = IssueListDTO()
    
    var currentPageNumber: Int = 0
    var isPaging = false
@@ -52,6 +52,7 @@ class IssueListViewController: UIViewController {
          self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
          if dto.issues.count > 0 {
             self?.objects.append(contentsOf: dto.issues)
+            self?.fetchedAllData = dto
             DispatchQueue.main.async { [weak self] in self?.collectionView.reloadData() }
             self?.currentPageNumber += 1
          }
@@ -63,18 +64,11 @@ class IssueListViewController: UIViewController {
       fetchIssues()
    }
    
-   func receive() -> [Any] {
-      return [useCase.users, useCase.labels, useCase.milestones]
-   }
-   
    @IBAction func filter(_ sender: Any) {
-      guard let filterListViewController = self.storyboard?.instantiateViewController(withIdentifier: "FilterElementList") as? FilterElementListViewController else {
-         return
-      }
-      
+      let storyboard = UIStoryboard(name: filterListID, bundle: nil)
+      guard let filterListViewController = storyboard.instantiateInitialViewController() as? FilterListViewController else { return }
       filterListViewController.delegate = self
-      self.navigationController?.pushViewController(filterListViewController, animated: true)
-      
+      self.present(filterListViewController, animated: true)
    }
 }
 
@@ -169,3 +163,8 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
    }
 }
    
+extension IssueListViewController: DataSenderDelegate {
+   func receive() -> IssueListDTO {
+      fetchedAllData
+   }
+}
