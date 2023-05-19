@@ -6,6 +6,32 @@
 | :-----------------------------------------------------------: | :------------------------------------------------------------: | :----------------------------------------------------------------: | :-----------------------------------------------------------: | :-----------------------------------------------------------: | :-----------------------------------------------------------: |
 |        [**제이든(FE)**](https://github.com/JaydenLee1116)         |           [**릴리(FE)**](https://github.com/ahnlook)           |         [**루크(BE)**](https://github.com/acceptor-gyu)         |        [**포로(BE)**](https://github.com/Gwonwoo-Nam)         |        [**우드(iOS)**](https://github.com/dpfdlalfm)         |        [**에피(iOS)**](https://github.com/hyeffie)         |
 
+## 기술 스택
+
+### 공통
+
+![Git](https://img.shields.io/badge/-Git-F05032?style=flat&logo=Git&logoColor=white)
+![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=GitHub&logoColor=white)
+
+### Back-End
+
+<img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=SpringBoot&logoColor=white"/> <img src="https://img.shields.io/badge/AWS-232F3E?style=flat&logo=AmazonAWS&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/>
+
+### Front-End
+
+<!-- 테일윈드, 타입스크립트 -->
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat&logo=TypeScript&logoColor=white"/>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
+<img src="https://img.shields.io/badge/-Tailwind-38B2AC?style=flat&logo=Tailwind%20CSS&logoColor=white"/>
+<img src="https://img.shields.io/badge/-Storybook-FF4785?style=flat&logo=Storybook&logoColor=white"/>
+
+### iOS
+
+![Xcode](https://img.shields.io/badge/-Xcode-1575F9?style=flat&logo=Xcode&logoColor=white)
+![Swift](https://img.shields.io/badge/-Swift-FA7343?style=flat&logo=Swift&logoColor=white)
+![UIKit](https://img.shields.io/badge/-UIKit-00599C?style=flat&logo=UIKit&logoColor=white)
+![Combine](https://img.shields.io/badge/-Combine-FF7B17?style=flat&logo=Swift&logoColor=white)
+
 ## 협업 전략
 
 ### 브랜치 구조
