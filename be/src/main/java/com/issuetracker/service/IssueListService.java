@@ -22,6 +22,11 @@ import lombok.RequiredArgsConstructor;
 public class IssueListService {
     private final IssueListRepository labelRepository;
 
+    /**
+     * 이슈 목록을 가져온 후 API의 형식에 맞춰서 mapping한 후, filter 목록 데이터 DTO와 함께 조립합니다.
+     * 이슈를 가져올 때 여러 테이블을 Join하여 가져오므로 DB의 중복 데이터가 많습니다.(n:m, 1:n 관계 - 예를 들면 issue : label을 가져오는 경우)
+     * 동일 이슈에 대해서 여러 개의 라벨을 Issue 객체에 list 타입으로 넣어주기 위해서 다소 지저분한 mapping 로직으로 구현했습니다.
+     */
     public IssueListDto fetchMain() {
         IssueListDto issueListDto = new IssueListDto();
         List<IssueDao> issueMainPageDtoList = labelRepository.getIssues(true);
