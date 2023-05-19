@@ -18,8 +18,12 @@ export const Primary: Story = {
     profileUrl:
       'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
     isOpen: true,
-    createdAt: 'time',
-    closedAt: 'time',
+    elapseTime: {
+      days: 12,
+      hours: 2,
+      minutes: 49,
+      seconds: 22,
+    },
     milestoneName: 'milestone',
     labelList: [],
   },
@@ -34,8 +38,12 @@ export const Secondary: Story = {
     profileUrl:
       'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
     isOpen: true,
-    createdAt: 'time',
-    closedAt: 'time',
+    elapseTime: {
+      days: 12,
+      hours: 2,
+      minutes: 49,
+      seconds: 22,
+    },
     milestoneName: 'milestone',
     labelList: [
       {

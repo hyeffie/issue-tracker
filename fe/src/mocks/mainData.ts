@@ -2,8 +2,7 @@ export const mainData = {
   user: {
     id: 23123,
     name: 'Lily',
-    profileUrl:
-      'https://lh3.googleusercontent.com/ogw/AOLn63F6B2eAe4HzDtvFPJU2zTjgdOtSHvHt-FnbIYcYgqU=s64-c-mo',
+    profileUrl: 'https://unsplash.com/ko/%EC%82%AC%EC%A7%84/b5LTjyJM9Yw',
   },
   issues: [
     {
@@ -11,7 +10,8 @@ export const mainData = {
       title: 'First Issue',
       content: 'This is the first issue',
       userName: 'JohnDoe',
-      profileUrl: 'https://example.com/johndoe',
+      profileUrl:
+        'https://images.unsplash.com/photo-1684397377783-9924e83271b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=800&q=60',
       isOpen: true,
       createdAt: '2023-05-15 10:30:00',
       closedAt: '',
