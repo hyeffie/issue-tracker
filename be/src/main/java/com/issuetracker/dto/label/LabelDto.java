@@ -9,6 +9,14 @@ import org.springframework.data.relational.core.mapping.Column;
 @Setter
 @AllArgsConstructor
 public class LabelDto {
+
+    public LabelDto(String labelName, String backgroundColor, String fontColor, String description) {
+        this.labelName = labelName;
+        this.backgroundColor = backgroundColor;
+        this.fontColor = fontColor;
+        this.description = description;
+    }
+
     @Column("id")
     private Integer labelId;
     @Column("name")

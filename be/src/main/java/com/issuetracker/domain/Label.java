@@ -12,6 +12,14 @@ import lombok.Data;
 @Data
 @Table("label")
 public class Label {
+
+    public Label(String name, String backgroundColor, String fontColor, String description) {
+        this.name = name;
+        this.backgroundColor = backgroundColor;
+        this.fontColor = fontColor;
+        this.description = description;
+    }
+
     @Id
     private Long id;
     private String name;
@@ -20,6 +28,4 @@ public class Label {
     @Column("font_color")
     private String fontColor;
     private String description;
-    @MappedCollection(idColumn = "id", keyColumn = "id")
-    private Set<Issue> issueList;
 }
