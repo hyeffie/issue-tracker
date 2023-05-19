@@ -5,9 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { worker } from './mocks/browser';
 
-if (process.env.NODE_ENV === 'development') {
-  worker.start();
-}
+// NOTE(Jayden): MSW mock api 주석 처리
+// if (process.env.NODE_ENV === 'development') {
+//   worker.start();
+// }
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

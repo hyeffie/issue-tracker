@@ -1,8 +1,9 @@
 import React from 'react';
 
 import FilterItem, { FilterItemRaw } from '@common/FilterItem/FilterItem';
-import checkOffCircle from '@assets/checkOffCircle.svg';
-import checkOnCircle from '@assets/checkOnCircle.svg';
+// import checkOffCircle from '@assets/checkOffCircle.svg';
+import { ReactComponent as CheckOffCircle } from '@assets/checkOffCircle.svg';
+import { ReactComponent as CheckOnCircle } from '@assets/checkOnCircle.svg';
 
 interface Props {
   title: string;
@@ -16,7 +17,7 @@ const FilterList: React.FC<Props> = ({
   title,
   items,
   isNullAvailability = true,
-  canSelectMultipleItems = false,
+  canSelectMultipleItems = true,
   onClick,
 }) => {
   const filterItemStyle =
@@ -36,11 +37,11 @@ const FilterList: React.FC<Props> = ({
           <button className={filterItemStyle} onClick={onClick}>
             <span>{title} 없는 이슈</span>
             {/* TODO(Lily): item이 선택되면 checkOnCircle로 바꾸기 */}
-            {canSelectMultipleItems && <img src={checkOffCircle} />}
+            {canSelectMultipleItems && <CheckOffCircle />}
           </button>
         )}
-        {items.map((item, i, arr) => {
-          const { id, title, imgUrl } = item;
+        {items.map(item => {
+          const { id, title, imgUrl, backgroundColor } = item;
           return (
             <button key={id} className={filterItemStyle} onClick={onClick}>
               <FilterItem
@@ -49,9 +50,10 @@ const FilterList: React.FC<Props> = ({
                 imgUrl={imgUrl}
                 width={20}
                 height={20}
+                backgroundColor={backgroundColor}
               />
               {/* TODO(Lily): item이 선택되면 checkOnCircle로 바꾸기 */}
-              {canSelectMultipleItems && <img src={checkOffCircle} />}
+              {canSelectMultipleItems && <CheckOffCircle />}
             </button>
           );
         })}

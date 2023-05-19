@@ -15,7 +15,7 @@ export const Primary: Story = {
   args: {
     issues: [
       {
-        id: 10,
+        issueId: 10,
         title: 'issue title',
         content: 'issue content',
         userName: 'user name',
@@ -29,7 +29,7 @@ export const Primary: Story = {
           seconds: 22,
         },
         milestoneName: 'milestone name',
-        labels: [
+        labelList: [
           {
             labelId: 20123,
             labelName: 'title',
@@ -45,7 +45,7 @@ export const Primary: Story = {
         ],
       },
       {
-        id: 10,
+        issueId: 10,
         title: 'issue title',
         content: 'issue content',
         userName: 'user name',
@@ -59,7 +59,7 @@ export const Primary: Story = {
           seconds: 22,
         },
         milestoneName: 'milestone name',
-        labels: [
+        labelList: [
           {
             labelId: 20123,
             labelName: 'Jayden',
@@ -81,6 +81,29 @@ export const Primary: Story = {
         ],
       },
     ],
+    users: [
+      {
+        userId: 1,
+        userName: 'user name',
+        profileUrl: '',
+      },
+    ],
+    labels: [
+      {
+        labelId: 0,
+        labelName: '',
+        backgroundColor: '',
+        fontColor: '',
+      },
+    ],
+    milestones: [
+      {
+        milestoneId: 0,
+        milestoneName: '',
+        description: '',
+        isOpen: true,
+      },
+    ],
     countOpenedIssues: 10,
     countClosedIssues: 20,
     isDropdownOpen: {
@@ -97,6 +120,27 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     issues: [],
+    users: [
+      {
+        userId: 0,
+        userName: '',
+        profileUrl: '',
+      },
+    ],
+    labels: [
+      {
+        labelId: 0,
+        labelName: '',
+        backgroundColor: '',
+        fontColor: '',
+      },
+    ],
+    milestones: [
+      {
+        milestoneId: 0,
+        milestoneName: '',
+      },
+    ],
     countOpenedIssues: 0,
     countClosedIssues: 0,
     isDropdownOpen: {

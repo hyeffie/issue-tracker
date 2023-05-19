@@ -6,7 +6,7 @@ export const mainData = {
   },
   issues: [
     {
-      id: 1,
+      issueId: 1,
       title: 'First Issue',
       content: 'This is the first issue',
       userName: 'JohnDoe',
@@ -32,7 +32,7 @@ export const mainData = {
       ],
     },
     {
-      id: 2,
+      issueId: 2,
       title: 'Second Issue',
       content: 'This is the second issue',
       userName: 'JaneSmith',
@@ -57,7 +57,7 @@ export const mainData = {
       ],
     },
     {
-      id: 3,
+      issueId: 3,
       title: 'Third Issue',
       content: 'This is the third issue',
       userName: 'RobertJohnson',
@@ -105,18 +105,21 @@ export const mainData = {
       labelName: 'Red',
       backgroundColor: '#FF0000',
       fontColor: '#FFFFFF',
+      dscription: 'This is a red label',
     },
     {
       labelId: 2,
       labelName: 'Blue',
       backgroundColor: '#0000FF',
       fontColor: '#FFFFFF',
+      dscription: 'This is a red label',
     },
     {
       labelId: 3,
       labelName: 'Green',
       backgroundColor: '#00FF00',
       fontColor: '#000000',
+      dscription: 'This is a red label',
     },
   ],
   milestone: [

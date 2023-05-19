@@ -21,21 +21,35 @@ export interface elapseTime {
 }
 
 export interface IssueRow {
-  id: number;
+  issueId: number;
   title: string;
   content?: string;
   userName: string;
   profileUrl: string;
   isOpen: boolean;
   elapseTime: elapseTime;
+  milestoneName?: string;
+  labelList: LabelRow[];
+}
+
+export interface UserRow {
+  userId: number;
+  userName: string;
+  profileUrl: string;
+}
+export interface MilestoneRow {
+  milestoneId: number;
+  description?: string;
   // createdAt: string;
   // closedAt?: string;
-  milestoneName?: string;
-  labels: LabelRow[];
+  milestoneName: string;
 }
 
 interface Props {
   issues: IssueRow[];
+  users: UserRow[];
+  labels: LabelRow[];
+  milestones: MilestoneRow[];
   countOpenedIssues: number;
   countClosedIssues: number;
   isDropdownOpen: DropdownItems;
@@ -47,6 +61,9 @@ interface Props {
 
 const IssueList: React.FC<Props> = ({
   issues,
+  users,
+  labels,
+  milestones,
   countOpenedIssues,
   countClosedIssues,
   isDropdownOpen,
@@ -102,28 +119,13 @@ const IssueList: React.FC<Props> = ({
               {isDropdownOpen.assignee && (
                 <FilterList
                   title="담당자"
-                  items={[
-                    {
-                      id: 0,
-                      title: 'chloe',
-                    },
-                    {
-                      id: 1,
-                      title: 'lily',
-                    },
-                    {
-                      id: 2,
-                      title: 'jayden',
-                    },
-                    {
-                      id: 3,
-                      title: 'wood',
-                    },
-                    {
-                      id: 4,
-                      title: 'poro',
-                    },
-                  ]}
+                  items={users.map(user => {
+                    return {
+                      id: user.userId,
+                      title: user.userName,
+                      imgUrl: user.profileUrl,
+                    };
+                  })}
                   isNullAvailability={true}
                   onClick={() => {
                     console.log('test');
@@ -144,16 +146,15 @@ const IssueList: React.FC<Props> = ({
               {isDropdownOpen.label && (
                 <FilterList
                   title="레이블"
-                  items={[
-                    {
-                      id: 0,
-                      title: 'documentation',
-                    },
-                    {
-                      id: 1,
-                      title: 'bug',
-                    },
-                  ]}
+                  items={labels.map(label => {
+                    return {
+                      id: label.labelId,
+                      title: label.labelName,
+                      backgroundColor: label.backgroundColor,
+                      fontColor: label.fontColor,
+                    };
+                  })}
+                  isNullAvailability={true}
                   onClick={() => {
                     console.log('test');
                   }}
@@ -173,20 +174,12 @@ const IssueList: React.FC<Props> = ({
               {isDropdownOpen.milestone && (
                 <FilterList
                   title="마일스톤"
-                  items={[
-                    {
-                      id: 0,
-                      title: '[FE]w01',
-                    },
-                    {
-                      id: 1,
-                      title: '[BE]w01',
-                    },
-                    {
-                      id: 2,
-                      title: '[iOS]w01',
-                    },
-                  ]}
+                  items={milestones.map(milestone => {
+                    return {
+                      id: milestone.milestoneId,
+                      title: milestone.milestoneName,
+                    };
+                  })}
                   onClick={() => {
                     console.log('test');
                   }}
@@ -206,16 +199,13 @@ const IssueList: React.FC<Props> = ({
               {isDropdownOpen.writer && (
                 <FilterList
                   title="작성자"
-                  items={[
-                    {
-                      id: 0,
-                      title: 'luke',
-                    },
-                    {
-                      id: 1,
-                      title: 'effie',
-                    },
-                  ]}
+                  items={users.map(user => {
+                    return {
+                      id: user.userId,
+                      title: user.userName,
+                      imgUrl: user.profileUrl,
+                    };
+                  })}
                   isNullAvailability={false}
                   onClick={() => {
                     console.log('test');
@@ -229,26 +219,26 @@ const IssueList: React.FC<Props> = ({
       {issues.length ? (
         issues.map(issue => {
           const {
-            id,
+            issueId,
             title,
             userName,
             profileUrl,
             isOpen,
             elapseTime,
             milestoneName,
-            labels,
+            labelList,
           } = issue;
           return (
             <Issue
-              key={id}
-              id={id}
+              key={issueId}
+              issueId={issueId}
               title={title}
               userName={userName}
               profileUrl={profileUrl}
               isOpen={isOpen}
               elapseTime={elapseTime}
               milestoneName={milestoneName}
-              labels={labels}
+              labelList={labelList}
               onIssueTitleClick={onIssueTitleClick}
             />
           );

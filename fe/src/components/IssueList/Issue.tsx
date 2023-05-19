@@ -8,26 +8,26 @@ import { ReactComponent as Archive } from '@assets/archive.svg';
 import { ReactComponent as Milestone } from '@assets/milestone.svg';
 
 interface Props {
-  id: number;
+  issueId: number;
   title: string;
   userName: string;
   profileUrl: string;
   isOpen: boolean;
+  labelList: LabelRow[];
   elapseTime: elapseTime;
   milestoneName?: string;
-  labels: LabelRow[];
   onIssueTitleClick: (id: number) => void;
 }
 
 const Issue: React.FC<Props> = ({
-  id,
+  issueId,
   title,
   userName,
   profileUrl,
   isOpen,
   elapseTime,
   milestoneName,
-  labels,
+  labelList,
   onIssueTitleClick,
 }) => {
   const { days, hours, minutes } = elapseTime;
@@ -58,12 +58,12 @@ const Issue: React.FC<Props> = ({
           {/* TODO(Lily): 라우터 설치 및 설정 이후에 Link 태그로 바꾸기 */}
           <button
             className="mx-2 text-left text-lg font-bold text-neutral-strong"
-            onClick={() => onIssueTitleClick(id)}
+            onClick={() => onIssueTitleClick(issueId)}
           >
             {title}
           </button>
           <div className="flex">
-            {labels.map(label => {
+            {labelList.map(label => {
               const { labelId, labelName, backgroundColor, fontColor } = label;
               return (
                 <Label
@@ -78,7 +78,7 @@ const Issue: React.FC<Props> = ({
         </div>
         {/* TODO: issue info 세로 가운데 정렬 */}
         <div className="flex">
-          <span className="mr-2 text-gray-600">#{id}</span>
+          <span className="mr-2 text-gray-600">#{issueId}</span>
           <span className="mr-2 text-gray-600">{elapsedMessage}</span>
           {milestoneName && (
             <div className="flex items-center">
