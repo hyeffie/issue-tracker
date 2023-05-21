@@ -4,7 +4,10 @@ import Header from '@components/Header/Header';
 import FilterBar from '@components/FilterBar/FilterBar';
 import NavLinks from '@components/NavLinks/NavLinks';
 import Button from '@common/Button';
-import IssueList, { IssueRow } from '@components/IssueList/IssueList';
+import IssueList, {
+  IssueRow,
+  elapseTime,
+} from '@components/IssueList/IssueList';
 import FilterList from '@components/FilterList/FilterList';
 
 export type DropdownItems = {
@@ -73,14 +76,7 @@ const MainPage = () => {
     [issueItems]
   );
 
-  const getTimeElapsed = (
-    startTime: string
-  ): {
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  } => {
+  const getTimeElapsed = (startTime: string): elapseTime => {
     const start = new Date(startTime);
     const now = new Date();
 
@@ -106,7 +102,7 @@ const MainPage = () => {
         const elapseTime = issue.isOpen
           ? getTimeElapsed(issue.createdAt)
           : getTimeElapsed(issue.closedAt);
-        console.log(elapseTime);
+
         return {
           ...issue,
           elapseTime,
@@ -122,7 +118,6 @@ const MainPage = () => {
       // const res = await fetch('/issues');
       const data = await res.json();
 
-      console.log(data);
       if (res.status === 200) {
         setData(data);
         mapIssues(data);
@@ -152,7 +147,7 @@ const MainPage = () => {
             }}
           />
         )}
-        <div className="flex gap-x-5">
+        <div className="flex gap-x-4">
           <NavLinks
             countAllMilestones={data.countAllMilestones}
             countAllLabels={data.countAllLabels}
@@ -164,6 +159,7 @@ const MainPage = () => {
             }}
             size={'Small'}
             iconName="plus"
+            fontSize="text-xs"
           />
         </div>
       </div>

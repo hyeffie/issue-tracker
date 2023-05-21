@@ -35,9 +35,9 @@ const Issue: React.FC<Props> = ({
     ? `${days !== 0 ? `${days}일 ` : ''}${hours !== 0 ? `${hours}시간 ` : ''}${
         minutes !== 0 ? `${minutes}분 ` : ''
       }전, ${userName}님에 의해 작성되었습니다.`
-    : `${days !== 0 ? `${days}일 ` : ''}${hours !== 0 ? `${hours}시간 ` : ''}${
-        minutes !== 0 ? `${minutes}분 ` : ''
-      }전, ${userName}님에 의해 닫혔습니다.`;
+    : `${days !== 0 ? `${days}일 ` : ''}${
+        hours !== 0 ? `${hours}시간 ` : ''
+      } ${minutes}분 전, ${userName}님에 의해 닫혔습니다.`;
 
   return (
     <div className="flex border-t px-8 py-4">
@@ -78,8 +78,8 @@ const Issue: React.FC<Props> = ({
         </div>
         {/* TODO: issue info 세로 가운데 정렬 */}
         <div className="flex">
-          <span className="mr-2 text-gray-600">#{issueId}</span>
-          <span className="mr-2 text-gray-600">{elapsedMessage}</span>
+          <span className="mr-4 text-gray-600">#{issueId}</span>
+          <span className="mr-4 text-gray-600">{elapsedMessage}</span>
           {milestoneName && (
             <div className="flex items-center">
               <Milestone fill="#6E7191" />

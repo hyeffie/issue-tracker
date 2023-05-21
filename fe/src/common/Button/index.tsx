@@ -36,8 +36,8 @@ interface Props {
   condition?: 'Enabled' | 'Hover' | 'Press' | 'Disabled';
   size?: 'Large' | 'Medium' | 'Small';
   color?: 'Blue' | 'Gray';
+  fontSize?: string;
   hasDropDown?: boolean;
-  // onClick: React.MouseEventHandler<HTMLButtonElement>;
   onClick: () => void;
 }
 
@@ -49,6 +49,7 @@ const Button: React.FC<Props> = ({
   condition = 'Enabled',
   size = 'Medium',
   color = 'Blue',
+  fontSize = 'text-base',
   hasDropDown = false,
   onClick,
 }) => {
@@ -64,7 +65,7 @@ const Button: React.FC<Props> = ({
       onClick={onClick}
     >
       {getSvgComponent(iconName, getHexByType(color, type))}
-      <span>{title}</span>
+      <span className={`${fontSize}`}>{title}</span>
       {hasDropDown && <CheveronDown stroke={getHexByType(color, type)} />}
     </button>
   );
