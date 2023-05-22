@@ -22,4 +22,14 @@ public interface MilestoneRepository extends CrudRepository<Milestone, Long> {
             "FROM issue\n" +
             "WHERE milestone_id = :milestoneId AND opened IS FALSE AND deleted_at IS NULL;")
     long countClosedIssuesByMilestoneId(int milestoneId);
+
+    @Query("SELECT count(id) AS count\n" +
+            "FROM milestone\n" +
+            "WHERE opened IS TRUE AND deleted IS FALSE;")
+    int countOpenedMilestones();
+
+    @Query("SELECT count(id) AS count\n" +
+            "FROM milestone\n" +
+            "WHERE opened IS FALSE AND deleted IS FALSE;")
+    int countClosedMilestones();
 }

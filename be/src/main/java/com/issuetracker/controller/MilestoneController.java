@@ -1,6 +1,7 @@
 package com.issuetracker.controller;
 
 import com.issuetracker.dto.milestone.MilestoneDto;
+import com.issuetracker.dto.milestone.MilestonePageDto;
 import com.issuetracker.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public class MilestoneController {
     private final MilestoneService milestoneService;
 
     @GetMapping("/api/milestones")
-    public List<MilestoneDto> getMilestones() {
+    public MilestonePageDto getMilestones() {
         return milestoneService.findAllMilestones();
     }
 }

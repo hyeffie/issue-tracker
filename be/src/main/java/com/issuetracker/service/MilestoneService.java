@@ -2,6 +2,7 @@ package com.issuetracker.service;
 
 import com.issuetracker.domain.Milestone;
 import com.issuetracker.dto.milestone.MilestoneDto;
+import com.issuetracker.dto.milestone.MilestonePageDto;
 import com.issuetracker.repository.MilestoneRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class MilestoneService {
 
     private final MilestoneRepository milestoneRepository;
 
-    public List<MilestoneDto> findAllMilestones() {
+    public MilestonePageDto findAllMilestones() {
 
         List<Milestone> milestoneList = milestoneRepository.findAllMilestones();
         List<MilestoneDto> milestoneDtoList = new ArrayList<>();
@@ -36,6 +37,9 @@ public class MilestoneService {
                     countOpenedIssues, countClosedIssues, progress));
         }
 
-        return milestoneDtoList;
+        int countOpenedMilestones = milestoneRepository.countOpenedMilestones();
+        int countClosedMilestones = milestoneRepository.countClosedMilestones();
+
+        return new MilestonePageDto(milestoneDtoList, countOpenedMilestones, countClosedMilestones);
     }
 }
