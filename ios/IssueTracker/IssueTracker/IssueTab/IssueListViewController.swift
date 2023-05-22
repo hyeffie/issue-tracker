@@ -30,6 +30,8 @@ class IssueListViewController: UIViewController {
    }
    
    func setCollectionView() {
+      collectionView.collectionViewLayout = createLayout()
+      
       collectionView.dataSource = self
       collectionView.delegate = self
       
@@ -37,10 +39,15 @@ class IssueListViewController: UIViewController {
       collectionView.register(issueCell, forCellWithReuseIdentifier: issueCellID)
       let loadCell = UINib(nibName: loadCellID, bundle: nil)
       collectionView.register(loadCell, forCellWithReuseIdentifier: loadCellID)
-      
-      if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-         flowLayout.estimatedItemSize = .zero
+   }
+   
+   func createLayout() -> UICollectionViewLayout {
+      let sectionProvider: UICollectionViewCompositionalLayoutSectionProvider = { _, layoutEnvironment in
+         var config = UICollectionLayoutListConfiguration(appearance: .plain)
+         config.showsSeparators = true
+         return NSCollectionLayoutSection.list(using: config, layoutEnvironment: layoutEnvironment)
       }
+      return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
    }
    
    func fetchIssues(cellCompletion: (() -> Void)? = nil) {
@@ -107,43 +114,7 @@ extension IssueListViewController: UICollectionViewDataSource {
    }
 }
 
-extension IssueListViewController: UICollectionViewDelegateFlowLayout {
-   
-   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-      return UIEdgeInsets(top: 0.5, left: 0, bottom: 0.5, right: 0)
-   }
-   
-   func collectionView(
-      _ collectionView: UICollectionView,
-      layout collectionViewLayout: UICollectionViewLayout,
-      sizeForItemAt indexPath: IndexPath
-   ) -> CGSize {
-      switch indexPath.section {
-      case 0:
-         return CGSize(width: collectionView.frame.width, height: 180)
-      case 1:
-         return CGSize(width: collectionView.frame.width, height: 80)
-      default:
-         return .zero
-      }
-   }
-   
-   func collectionView(
-      _ collectionView: UICollectionView,
-      layout collectionViewLayout: UICollectionViewLayout,
-      minimumLineSpacingForSectionAt section: Int
-   ) -> CGFloat {
-      return 1.0
-   }
-   
-   func collectionView(
-      _ collectionView: UICollectionView,
-      layout collectionViewLayout: UICollectionViewLayout,
-      minimumInteritemSpacingForSectionAt section: Int
-   ) -> CGFloat {
-      return 0
-   }
-   
+extension IssueListViewController: UICollectionViewDelegate {
    func collectionView(
       _ collectionView: UICollectionView,
       willDisplay cell: UICollectionViewCell,
