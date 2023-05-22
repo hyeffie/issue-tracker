@@ -1,0 +1,8 @@
+disabled_rules:
+  - force_cast
+  - trailing_whitespace
+  - trailing_comma
+  - opening_brace
+opt_in_rules:
+  -
+line_length: 120
