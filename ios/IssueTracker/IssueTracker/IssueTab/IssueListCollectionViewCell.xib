@@ -75,7 +75,6 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="dyV-HA-oXT" firstAttribute="top" secondItem="Uuh-kf-CLw" secondAttribute="top" id="REp-FS-OJ8"/>
-                                    <constraint firstAttribute="height" constant="24" id="Td4-On-uYN"/>
                                     <constraint firstItem="dyV-HA-oXT" firstAttribute="leading" secondItem="Uuh-kf-CLw" secondAttribute="leading" id="gGN-Ty-jzK"/>
                                     <constraint firstAttribute="bottom" secondItem="dyV-HA-oXT" secondAttribute="bottom" id="szN-FZ-x4f"/>
                                     <constraint firstAttribute="trailing" secondItem="dyV-HA-oXT" secondAttribute="trailing" priority="250" id="xn9-la-G5B"/>
@@ -96,6 +95,7 @@
             <connections>
                 <outlet property="checkBoxImageView" destination="k11-4I-sMu" id="oKp-AC-9Jh"/>
                 <outlet property="descriptionLabel" destination="XvL-EA-VVf" id="Ymn-pc-caw"/>
+                <outlet property="labelStackContainer" destination="Uuh-kf-CLw" id="rEu-5P-fWP"/>
                 <outlet property="labelStackView" destination="dyV-HA-oXT" id="gDG-qO-tJL"/>
                 <outlet property="milestoneLabel" destination="9CR-Vp-wLF" id="NNp-8o-Vfb"/>
                 <outlet property="titleLabel" destination="exc-QW-s87" id="AyX-53-RFb"/>
