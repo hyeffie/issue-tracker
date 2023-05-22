@@ -17,7 +17,7 @@ public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
             "FROM issue i\n" +
             "JOIN user u ON u.id = i.user_id\n" +
             "WHERE i.id = :issueId AND i.deleted_at IS NULL;")
-    IssueDetailDto findIssueByIssueId(Long issueId);
+    IssueDetailDto findIssueByIssueId(long issueId);
 
     /**
      * issueId를 받아서 해당 issue에 달려있는 label에 대한 데이터를 가져오는 쿼리
@@ -29,7 +29,7 @@ public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
             "JOIN issue_label il ON i.id = il.issue_id\n" +
             "JOIN label l ON il.label_id = l.id\n" +
             "WHERE i.id = :issueId AND l.deleted IS FALSE AND i.deleted_at IS NULL;")
-    List<IssueLabelDto> findLabelListByIssueId(Long issueId);
+    List<IssueLabelDto> findLabelListByIssueId(long issueId);
 
     /**
      * issueId를 받아서 해당 이슈에 할당된 담당자의 데이터를 가져오는 쿼리
@@ -40,7 +40,7 @@ public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
             "FROM assignee a\n" +
             "JOIN user u ON u.id = a.user_id\n" +
             "WHERE a.issue_id = :issueId;")
-    List<AssigneeDto> findAssigneeListByIssueId(Long issueId);
+    List<AssigneeDto> findAssigneeListByIssueId(long issueId);
 
     /**
      * issueId를 받아서 해당 이슈에 달려있는 댓글 목록의 데이터를 가져오는 쿼리
@@ -51,7 +51,7 @@ public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
             "FROM comment c\n" +
             "JOIN user u ON c.user_id = u.id\n" +
             "WHERE c.issue_id = :issueId AND c.deleted_at IS NULL;")
-    List<IssueCommentDto> findCommentListByIssueId(Long issueId);
+    List<IssueCommentDto> findCommentListByIssueId(long issueId);
 
     /**
      * issueId를 받아서 해당 이슈가 할당받은 milestone 데이터와 그 milestone의 진행 정도를 표현하기 위한 데이터를 가져오는 쿼리
@@ -63,5 +63,5 @@ public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
             "LEFT JOIN issue i ON m.id = i.milestone_id\n" +
             "WHERE m.id IN (SELECT DISTINCT milestone_id FROM issue WHERE id = :issueId AND i.deleted_at IS NULL)\n" +
             "GROUP BY m.id;")
-    IssueMilestoneDto findMilestoneByIssueId(Long issueId);
+    IssueMilestoneDto findMilestoneByIssueId(long issueId);
 }

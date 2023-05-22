@@ -1,20 +1,17 @@
 package com.issuetracker.dto.issue;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.relational.core.mapping.Column;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class IssueLabelDto {
-    @Column("id")
-    private Integer labelId;
-    @Column("name")
+    private int labelId;
     private String labelName;
-    @Column("background_color")
     private String backgroundColor;
-    @Column("font_color")
     private String fontColor;
 }

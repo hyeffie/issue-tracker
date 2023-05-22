@@ -18,10 +18,9 @@ public class Label {
     @Id
     private Integer id;
     private String name;
-    // TODO : Column 빼도 동작하는지 확인
-    @Column("background_color")
+    @Column("backgroundColor")
     private String backgroundColor;
-    @Column("font_color")
+    @Column("fontColor")
     private String fontColor;
     private String description;
     private boolean deleted;

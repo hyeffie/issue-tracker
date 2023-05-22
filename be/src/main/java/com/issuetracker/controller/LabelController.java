@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.issuetracker.dto.label.LabelDto;
 import com.issuetracker.dto.label.LabelListDto;
 import com.issuetracker.service.LabelService;
@@ -37,12 +38,12 @@ public class LabelController {
     }
 
     @DeleteMapping("/api/labels/{labelId}")
-    public void delete(@PathVariable Integer labelId) {
+    public void delete(@PathVariable int labelId) {
         labelService.deleteLabelById(labelId);
     }
 
     @PatchMapping("/api/labels/{labelId}")
-    public void update(@PathVariable Integer labelId, @RequestBody LabelDto labelDto) {
+    public void update(@PathVariable int labelId, @RequestBody LabelDto labelDto) {
         labelService.updateLabel(labelId, labelDto);
     }
 

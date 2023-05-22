@@ -1,11 +1,15 @@
 package com.issuetracker.dto.issue;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.util.List;
 
-@Data
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class IssueDetailPageDto {
     private IssueDetailDto issue;

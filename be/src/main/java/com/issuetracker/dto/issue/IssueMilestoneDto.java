@@ -1,23 +1,17 @@
 package com.issuetracker.dto.issue;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import org.springframework.data.relational.core.mapping.Column;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 public class IssueMilestoneDto {
-    @Column("id")
-    private Integer milestoneId;
-    @Column("name")
+    private int milestoneId;
     private String milestoneName;
-    @Column("countAllIssues")
-    private Integer countAllIssues;
-    @Column("countAllClosedIssues")
-    private Integer countAllClosedIssues;
-    private Integer progress;
-
-    public Integer getProgress() {
-        return 100 * countAllClosedIssues / countAllIssues;
-    }
+    private int countAllIssues;
+    private int countAllClosedIssues;
+    private int progress;
+    // public int getProgress() {
+    //     return 100 * countAllClosedIssues / countAllIssues;
+    // }
 }

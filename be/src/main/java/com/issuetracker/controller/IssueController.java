@@ -14,7 +14,7 @@ public class IssueController {
     private final IssueService issueService;
 
     @GetMapping("/api/issues/{issueId}")
-    public IssueDetailPageDto getIssueDetail(@PathVariable Long issueId) {
+    public IssueDetailPageDto getIssueDetail(@PathVariable long issueId) {
         return issueService.getIssueDetail(issueId);
     }
 }

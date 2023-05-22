@@ -5,14 +5,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.issuetracker.domain.Issue;
+import com.issuetracker.domain.Label;
+import com.issuetracker.domain.Milestone;
+import com.issuetracker.domain.User;
+import com.issuetracker.dto.issue.IssueLabelDto;
 import com.issuetracker.dto.issueList.FilterLabelDto;
 import com.issuetracker.dto.issueList.FilterMilestoneDto;
 import com.issuetracker.dto.issueList.FilterUserDto;
-import com.issuetracker.dto.issueList.IssueDao;
 import com.issuetracker.dto.issueList.IssueDto;
-
 import com.issuetracker.dto.issueList.IssueListDto;
-import com.issuetracker.dto.issue.IssueLabelDto;
 import com.issuetracker.repository.IssueListRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -29,11 +31,11 @@ public class IssueListService {
      */
     public IssueListDto fetchMain() {
         IssueListDto issueListDto = new IssueListDto();
-        List<IssueDao> issueMainPageDtoList = issueListRepository.getIssues(true);
+        List<Issue> issueMainPageDtoList = issueListRepository.getIssues(true);
 
         List<IssueDto> issueDtoList = new ArrayList<>();
         for (int i = 0; i < issueMainPageDtoList.size(); i++) {
-            IssueDao issueDao = issueMainPageDtoList.get(i);
+            Issue issueDao = issueMainPageDtoList.get(i);
             long id = issueDao.getId();
             List<IssueLabelDto> issueLabelDtoList = new ArrayList<>();
             IssueDto issueDto = new IssueDto(id, issueDao.getTitle(), issueDao.getContent(), issueDao.getUserName(),
@@ -59,29 +61,37 @@ public class IssueListService {
             }
         }
         issueListDto.setIssues(issueDtoList);
-        issueListDto.setUserList(fetchFilterUsers());
-        List<FilterLabelDto> filterLabelDtoList = fetchFilterLabels();
+
+        List<Label> filterLabelList = issueListRepository.getFilterLabelList();
+        //mapping
+        List<FilterLabelDto> filterLabelDtoList = new ArrayList<>();
+        for (Label label : filterLabelList) {
+            filterLabelDtoList.add(
+                    new FilterLabelDto(label.getId(), label.getName(), label.getBackgroundColor(), label.getFontColor(),
+                            label.getDescription()));
+        }
+
+        List<Milestone> filterMilestoneList = issueListRepository.getFilterMilestoneList();
+        List<FilterMilestoneDto> filterMilestoneDtoList = new ArrayList<>();
+        for (Milestone milestone : filterMilestoneList) {
+            filterMilestoneDtoList.add(
+                    new FilterMilestoneDto(milestone.getId(), milestone.getName(), milestone.getDescription()));
+        }
+
+        List<User> filterUserList = issueListRepository.getFilterUserList();
+        List<FilterUserDto> filterUserDtoList = new ArrayList<>();
+
+        for (User user : filterUserList) {
+            filterUserDtoList.add(new FilterUserDto(user.getId(), user.getLoginId(), user.getProfileUrl()));
+        }
+        issueListDto.setUserList(filterUserDtoList);
         issueListDto.setLabelList(filterLabelDtoList);
-        List<FilterMilestoneDto> filterMilestoneDtoList = fetchFilterMilestones();
         issueListDto.setMilestoneList(filterMilestoneDtoList);
 
         issueListDto.setCountAllLabels(filterLabelDtoList.size());
         issueListDto.setCountAllMilestones(filterMilestoneDtoList.size());
-        issueListDto.setCountOpenedIssues(issueDtoList.stream().filter(issueDto -> issueDto.getIsOpen()).count());
+        issueListDto.setCountOpenedIssues(issueDtoList.stream().filter(issueDto -> issueDto.isOpen()).count());
         issueListDto.setCountClosedIssues(issueListRepository.getTotalClosedIssueCount());
         return issueListDto;
     }
-
-    public List<FilterUserDto> fetchFilterUsers() {
-        return issueListRepository.getFilterUserList();
-    }
-
-    public List<FilterLabelDto> fetchFilterLabels() {
-        return issueListRepository.getFilterLabelList();
-    }
-
-    public List<FilterMilestoneDto> fetchFilterMilestones() {
-        return issueListRepository.getFilterMilestoneList();
-    }
-
 }

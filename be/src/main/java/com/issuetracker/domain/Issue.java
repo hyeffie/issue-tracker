@@ -1,15 +1,19 @@
-package com.issuetracker.dto.issueList;
+package com.issuetracker.domain;
 
 import java.time.LocalDateTime;
 
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table("issue")
-public class IssueDao {
+public class Issue {
     @Column("issueId")
     private Long id;
     private String title;
