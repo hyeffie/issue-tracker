@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 public class IssueCommentDto {
     private long commentId;
     private long userId;

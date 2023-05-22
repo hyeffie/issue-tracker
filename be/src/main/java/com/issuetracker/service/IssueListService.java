@@ -30,7 +30,6 @@ public class IssueListService {
      * 동일 이슈에 대해서 여러 개의 라벨을 Issue 객체에 list 타입으로 넣어주기 위해서 다소 지저분한 mapping 로직으로 구현했습니다.
      */
     public IssueListDto fetchMain() {
-        IssueListDto issueListDto = new IssueListDto();
         List<Issue> issueMainPageDtoList = issueListRepository.getIssues(true);
 
         List<IssueDto> issueDtoList = new ArrayList<>();
@@ -60,7 +59,6 @@ public class IssueListService {
                 i--;
             }
         }
-        issueListDto.setIssues(issueDtoList);
 
         List<Label> filterLabelList = issueListRepository.getFilterLabelList();
         //mapping
@@ -80,18 +78,13 @@ public class IssueListService {
 
         List<User> filterUserList = issueListRepository.getFilterUserList();
         List<FilterUserDto> filterUserDtoList = new ArrayList<>();
-
         for (User user : filterUserList) {
             filterUserDtoList.add(new FilterUserDto(user.getId(), user.getLoginId(), user.getProfileUrl()));
         }
-        issueListDto.setUserList(filterUserDtoList);
-        issueListDto.setLabelList(filterLabelDtoList);
-        issueListDto.setMilestoneList(filterMilestoneDtoList);
 
-        issueListDto.setCountAllLabels(filterLabelDtoList.size());
-        issueListDto.setCountAllMilestones(filterMilestoneDtoList.size());
-        issueListDto.setCountOpenedIssues(issueDtoList.stream().filter(issueDto -> issueDto.isOpen()).count());
-        issueListDto.setCountClosedIssues(issueListRepository.getTotalClosedIssueCount());
-        return issueListDto;
+        int openedIssues = (int)issueDtoList.stream().filter(issueDto -> issueDto.isOpen()).count();
+        int closedIssues = (int)issueListRepository.getTotalClosedIssueCount();
+        return new IssueListDto(issueDtoList, filterUserDtoList, filterLabelDtoList, filterMilestoneDtoList,
+                filterLabelDtoList.size(), filterMilestoneDtoList.size(), openedIssues, closedIssues);
     }
 }

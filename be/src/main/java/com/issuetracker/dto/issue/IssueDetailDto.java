@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 public class IssueDetailDto {
     private int issueId;
     private String title;
