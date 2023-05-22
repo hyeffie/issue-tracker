@@ -1,7 +1,6 @@
 package com.issuetracker.repository;
 
 import com.issuetracker.domain.Label;
-import com.issuetracker.dto.label.LabelDto;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
