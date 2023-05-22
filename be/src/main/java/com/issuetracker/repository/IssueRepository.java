@@ -1,12 +1,13 @@
 package com.issuetracker.repository;
 
+import com.issuetracker.domain.Issue;
 import com.issuetracker.dto.issue.*;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
+public interface IssueRepository extends CrudRepository<Issue, Long> {
 
     /**
      * issueId를 받아서 해당 이슈와 작성자의 정보를 가져오는 쿼리
@@ -63,5 +64,5 @@ public interface IssueRepository extends CrudRepository<AssigneeDto, Long> {
             "LEFT JOIN issue i ON m.id = i.milestone_id\n" +
             "WHERE m.id IN (SELECT DISTINCT milestone_id FROM issue WHERE id = :issueId AND i.deleted_at IS NULL)\n" +
             "GROUP BY m.id;")
-    IssueMilestoneDto findMilestoneByIssueId(long issueId);
+    IssueMilestone findMilestoneByIssueId(long issueId);
 }

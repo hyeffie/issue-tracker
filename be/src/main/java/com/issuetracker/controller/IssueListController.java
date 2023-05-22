@@ -14,7 +14,7 @@ public class IssueListController {
 
     private final IssueListService labelService;
 
-    @GetMapping("/api/")
+    @GetMapping("/api")
     public IssueListDto home() {
         IssueListDto issueListDto = labelService.fetchMain();
 

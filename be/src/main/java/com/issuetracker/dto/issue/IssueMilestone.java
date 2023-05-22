@@ -1,10 +1,9 @@
 package com.issuetracker.dto.issue;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-public class IssueMilestoneDto {
+public class IssueMilestone {
     private int milestoneId;
     private String milestoneName;
     private int countAllIssues;

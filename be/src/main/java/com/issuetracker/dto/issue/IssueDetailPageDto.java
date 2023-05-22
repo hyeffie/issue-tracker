@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class IssueDetailPageDto {
     private IssueDetailDto issue;
-    private IssueMilestoneDto milestone;
+    private IssueMilestone milestone;
     private List<IssueLabelDto> labelList;
     private List<AssigneeDto> assigneeList;
     private List<IssueCommentDto> commentList;

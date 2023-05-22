@@ -9,7 +9,7 @@ import com.issuetracker.dto.issue.IssueCommentDto;
 import com.issuetracker.dto.issue.IssueDetailDto;
 import com.issuetracker.dto.issue.IssueDetailPageDto;
 import com.issuetracker.dto.issue.IssueLabelDto;
-import com.issuetracker.dto.issue.IssueMilestoneDto;
+import com.issuetracker.dto.issue.IssueMilestone;
 import com.issuetracker.repository.IssueRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class IssueService {
         List<AssigneeDto> assigneeList = issueRepository.findAssigneeListByIssueId(issueId);
         List<IssueLabelDto> labelList = issueRepository.findLabelListByIssueId(issueId);
         List<IssueCommentDto> commentList = issueRepository.findCommentListByIssueId(issueId);
-        IssueMilestoneDto milestone = issueRepository.findMilestoneByIssueId(issueId);
+        IssueMilestone milestone = issueRepository.findMilestoneByIssueId(issueId);
         return new IssueDetailPageDto(issue, milestone, labelList, assigneeList, commentList);
     }
 }
