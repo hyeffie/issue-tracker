@@ -91,12 +91,8 @@ extension IssueListViewController: UICollectionViewDataSource {
          guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: issueCellID,
             for: indexPath) as? IssueListCollectionViewCell else { return UICollectionViewCell() }
-         
          let issue = objects[indexPath.item]
-         cell.titleLabel.text = issue.title
-         cell.descriptionLabel.text = issue.content
-         cell.milestoneLabel.text = issue.milestoneName
-         issue.labelList.forEach { label in cell.addLabel(name: label.labelName, color: label.backgroundColor) }
+         cell.configure(issue: issue)
          return cell
          
       case 1:

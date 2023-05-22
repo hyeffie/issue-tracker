@@ -51,4 +51,14 @@ class IssueListCollectionViewCell: UICollectionViewCell {
       labelStackView.arrangedSubviews.forEach { view in view.removeFromSuperview()
       }
    }
+   
+   func configure(issue: IssueListDTO.Issue) {
+      titleLabel.text = issue.title
+      descriptionLabel.text = issue.content
+      milestoneLabel.text = issue.milestoneName
+      
+      for label in issue.labelList {
+         addLabel(name: label.labelName, color: label.backgroundColor)
+      }
+   }
 }
