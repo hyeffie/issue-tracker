@@ -3,9 +3,10 @@ package com.issuetracker.service;
 import com.issuetracker.domain.Label;
 import com.issuetracker.dto.label.LabelDto;
 import com.issuetracker.dto.label.LabelListDto;
-import com.issuetracker.dto.label.LabelVo;
 import com.issuetracker.repository.LabelRepository;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,19 +23,22 @@ public class LabelService {
         return new LabelListDto(labelList, labelList.size());
     }
 
-    public Label createLabel(LabelVo labelVo) {
-        System.out.println(labelVo);
-        return labelRepository.save(new Label(labelVo.getLabelName(), labelVo.getBackgroundColor(), labelVo.getFontColor(), labelVo.getDescription(), false));
+    public void createLabel(LabelDto labelDto) {
+        labelRepository.save(
+                Label.createAutoIncrementedLabel(labelDto.getLabelName(), labelDto.getBackgroundColor(),
+                        labelDto.getFontColor(), labelDto.getDescription()));
     }
 
-    public Label updateLabel(Label label) {
-        return labelRepository.save(label);
+    public void updateLabel(int labelId, LabelDto labelDto) {
+        labelRepository.save(Label.createUpdateLabel(labelId, labelDto.getLabelName(), labelDto.getBackgroundColor(),
+                labelDto.getFontColor(), labelDto.getDescription()));
     }
 
-    public Label deleteLabelById(int labelId) {
-        Label label = labelRepository.findById((long)labelId).orElseThrow(() -> new IllegalArgumentException("없는 라벨입니다."));
-        label.setDeleted(true);
+    public void deleteLabelById(int labelId) {
+        Label label = labelRepository.findById((long)labelId)
+                .orElseThrow(() -> new IllegalArgumentException("없는 라벨입니다."));
 
-        return labelRepository.save(label);
+        labelRepository.save(Label.ofDeleted(labelId, label.getName(), label.getBackgroundColor(),
+                label.getFontColor(), label.getDescription()));
     }
 }

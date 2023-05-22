@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class IssueListService {
-    private final IssueListRepository labelRepository;
+    private final IssueListRepository issueListRepository;
 
     /**
      * 이슈 목록을 가져온 후 API의 형식에 맞춰서 mapping한 후, filter 목록 데이터 DTO와 함께 조립합니다.
@@ -29,7 +29,7 @@ public class IssueListService {
      */
     public IssueListDto fetchMain() {
         IssueListDto issueListDto = new IssueListDto();
-        List<IssueDao> issueMainPageDtoList = labelRepository.getIssues(true);
+        List<IssueDao> issueMainPageDtoList = issueListRepository.getIssues(true);
 
         List<IssueDto> issueDtoList = new ArrayList<>();
         for (int i = 0; i < issueMainPageDtoList.size(); i++) {
@@ -68,20 +68,20 @@ public class IssueListService {
         issueListDto.setCountAllLabels(filterLabelDtoList.size());
         issueListDto.setCountAllMilestones(filterMilestoneDtoList.size());
         issueListDto.setCountOpenedIssues(issueDtoList.stream().filter(issueDto -> issueDto.getIsOpen()).count());
-        issueListDto.setCountClosedIssues(labelRepository.getTotalClosedIssueCount());
+        issueListDto.setCountClosedIssues(issueListRepository.getTotalClosedIssueCount());
         return issueListDto;
     }
 
     public List<FilterUserDto> fetchFilterUsers() {
-        return labelRepository.getFilterUserList();
+        return issueListRepository.getFilterUserList();
     }
 
     public List<FilterLabelDto> fetchFilterLabels() {
-        return labelRepository.getFilterLabelList();
+        return issueListRepository.getFilterLabelList();
     }
 
     public List<FilterMilestoneDto> fetchFilterMilestones() {
-        return labelRepository.getFilterMilestoneList();
+        return issueListRepository.getFilterMilestoneList();
     }
 
 }

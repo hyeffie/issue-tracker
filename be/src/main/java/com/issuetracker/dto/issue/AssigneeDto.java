@@ -8,8 +8,6 @@ import org.springframework.data.relational.core.mapping.Column;
 @AllArgsConstructor
 public class AssigneeDto {
     private Long id;
-    @Column("login_id")
     private String userName;
-    @Column("profile_url")
     private String profileUrl;
 }

@@ -13,17 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.issuetracker.domain.Label;
+import com.issuetracker.dto.label.LabelDto;
 import com.issuetracker.dto.label.LabelListDto;
-import com.issuetracker.dto.label.LabelVo;
 import com.issuetracker.service.LabelService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequiredArgsConstructor
-@Slf4j
 public class LabelController {
 
     private final LabelService labelService;
@@ -35,28 +32,18 @@ public class LabelController {
     }
 
     @PostMapping("/api/labels")
-    public Label createLabel(@RequestBody LabelVo labelVo) {
-        return labelService.createLabel(labelVo);
+    public void create(@RequestBody LabelDto labelDto) {
+        labelService.createLabel(labelDto);
     }
 
-    /**
-     * 라벨을 ID로 삭제합니다.
-     */
     @DeleteMapping("/api/labels/{labelId}")
-    public void delete(@PathVariable int labelId) {
+    public void delete(@PathVariable Integer labelId) {
         labelService.deleteLabelById(labelId);
     }
 
-    /**
-     * 라벨 ID에 해당하는 정보를 업데이트합니다.
-     * @param labelId
-     * @param labelVo
-     */
     @PatchMapping("/api/labels/{labelId}")
-    public void update(@PathVariable Integer labelId, @RequestBody LabelVo labelVo) {
-        labelService.updateLabel(
-                new Label(labelId, labelVo.getLabelName(), labelVo.getBackgroundColor(), labelVo.getFontColor(),
-                        labelVo.getDescription(), false));
+    public void update(@PathVariable Integer labelId, @RequestBody LabelDto labelDto) {
+        labelService.updateLabel(labelId, labelDto);
     }
 
     @ExceptionHandler(SQLException.class)
