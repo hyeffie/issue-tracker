@@ -8,7 +8,7 @@
 import Foundation
 
 struct IssueListDTO: Codable {
-   struct Issue: Codable {
+   struct Issue: Codable, Hashable {
       let issueId: Int
       var title: String
       let content: String
@@ -19,6 +19,14 @@ struct IssueListDTO: Codable {
       let closedAt: String?
       let milestoneName: String?
       let labelList: [Label]
+      
+      static func == (lhs: IssueListDTO.Issue, rhs: IssueListDTO.Issue) -> Bool {
+         return lhs.issueId == rhs.issueId
+      }
+      
+      func hash(into hasher: inout Hasher) {
+         hasher.combine(issueId)
+      }
    }
    
    struct User: Codable {
