@@ -66,7 +66,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uuh-kf-CLw">
                                 <rect key="frame" x="0.0" y="83" width="615" height="24"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dyV-HA-oXT">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dyV-HA-oXT">
                                         <rect key="frame" x="0.0" y="0.0" width="615" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="GeG-PP-kVI"/>

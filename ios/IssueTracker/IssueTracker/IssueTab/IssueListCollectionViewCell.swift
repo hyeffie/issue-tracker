@@ -19,7 +19,6 @@ class IssueListCollectionViewCell: UICollectionViewCell {
       super.awakeFromNib()
       configureFont()
       configureImage()
-      labelStackView.sizeToFit()
    }
    
    override func prepareForReuse() {
@@ -66,5 +65,6 @@ class IssueListCollectionViewCell: UICollectionViewCell {
       for label in issue.labelList {
          addLabel(name: label.labelName, color: label.backgroundColor)
       }
+      labelStackView.sizeToFit()
    }
 }
