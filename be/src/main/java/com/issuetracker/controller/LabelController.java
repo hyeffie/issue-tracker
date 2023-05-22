@@ -2,8 +2,7 @@ package com.issuetracker.controller;
 
 import java.sql.SQLException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,19 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.issuetracker.dto.label.LabelDto;
 import com.issuetracker.dto.label.LabelListDto;
 import com.issuetracker.service.LabelService;
 
 import lombok.RequiredArgsConstructor;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class LabelController {
 
     private final LabelService labelService;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/api/labels")
     public LabelListDto getLabels() {
@@ -49,11 +47,11 @@ public class LabelController {
 
     @ExceptionHandler(SQLException.class)
     public void sqlException() {
-        logger.debug("SQL 예외 발생");
+        log.debug("SQL 예외 발생");
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public void labelException() {
-        logger.debug("존재하지 않는 Issue입니다.");
+        log.debug("존재하지 않는 Issue입니다.");
     }
 }
