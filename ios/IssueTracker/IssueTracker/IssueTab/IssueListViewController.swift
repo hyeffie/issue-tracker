@@ -40,7 +40,19 @@ class IssueListViewController: UIViewController {
       let sectionProvider: UICollectionViewCompositionalLayoutSectionProvider = { _, layoutEnvironment in
          var config = UICollectionLayoutListConfiguration(appearance: .plain)
          config.showsSeparators = true
-
+         config.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
+            let closeAction = UIContextualAction(style: .normal, title: "닫기") { action, view, handler in
+            }
+            closeAction.image = UIImage(systemName: "archivebox.fill")
+            closeAction.backgroundColor = Color.purple.color
+            
+            let deleteAction = UIContextualAction(style: .normal, title: "삭제") { action, view, handler in
+            }
+            deleteAction.image = UIImage(systemName: "trash.fill")
+            deleteAction.backgroundColor = Color.red.color
+            
+            return UISwipeActionsConfiguration(actions: [deleteAction, closeAction])
+         }
          return NSCollectionLayoutSection.list(using: config, layoutEnvironment: layoutEnvironment)
       }
       return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
