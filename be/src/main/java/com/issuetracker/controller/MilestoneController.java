@@ -26,4 +26,9 @@ public class MilestoneController {
     public void update(@PathVariable int milestoneId, @RequestBody MilestoneDto milestoneDto) {
         milestoneService.updateMilestone(milestoneId, milestoneDto);
     }
+
+    @DeleteMapping("/api/milestones/{milestoneId}")
+    public void delete(@PathVariable int milestoneId) {
+        milestoneService.deleteMilestone(milestoneId);
+    }
 }

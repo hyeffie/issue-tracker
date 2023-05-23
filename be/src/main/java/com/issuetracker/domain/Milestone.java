@@ -31,5 +31,9 @@ public class Milestone {
     public static Milestone createUpdateMilestone(Integer id, String name, String description, LocalDateTime completedAt) {
         return new Milestone(id, name, description, completedAt, true, false);
     }
+
+    public static Milestone ofDeleted(Integer id, String name, String description, LocalDateTime completedAt, boolean opened) {
+        return new Milestone(id, name, description, completedAt, opened, true);
+    }
 }
 

@@ -50,4 +50,12 @@ public class MilestoneService {
     public void updateMilestone(int milestoneId, MilestoneDto milestoneDto) {
         milestoneRepository.save(Milestone.createUpdateMilestone(milestoneId, milestoneDto.getName(), milestoneDto.getDescription(), milestoneDto.getCompletedAt()));
     }
+
+    public void deleteMilestone(int milestoneId) {
+        Milestone milestone = milestoneRepository.findById((long) milestoneId)
+                        .orElseThrow(() -> new IllegalArgumentException("없는 마일스톤입니다."));
+
+        milestoneRepository.save(Milestone.ofDeleted(milestoneId, milestone.getName(), milestone.getDescription(),
+                milestone.getCompletedAt(), milestone.isOpened()));
+    }
 }
