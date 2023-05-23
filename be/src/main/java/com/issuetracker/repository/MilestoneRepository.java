@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MilestoneRepository extends CrudRepository<Milestone, Long> {
 
-    @Query("SELECT id, name, description, completed_at AS completedAt, opened, deleted\n" +
+    @Query("SELECT id, name, description, completed_at, opened, deleted\n" +
             "FROM milestone\n" +
             "WHERE opened IS TRUE AND deleted IS FALSE")
     List<Milestone> findAllMilestones();

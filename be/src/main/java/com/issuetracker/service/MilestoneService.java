@@ -42,4 +42,8 @@ public class MilestoneService {
 
         return new MilestonePageDto(milestoneDtoList, countOpenedMilestones, countClosedMilestones);
     }
+
+    public void createMilesonte(MilestoneDto milestoneDto) {
+        milestoneRepository.save(Milestone.createAutoIncrementedMilestone(milestoneDto.getName(), milestoneDto.getDescription(), milestoneDto.getCompletedAt()));
+    }
 }
