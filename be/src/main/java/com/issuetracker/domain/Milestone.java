@@ -27,5 +27,9 @@ public class Milestone {
     public static Milestone createAutoIncrementedMilestone(String name, String description, LocalDateTime completedAt) {
         return new Milestone(null, name, description, completedAt, true, false);
     }
+
+    public static Milestone createUpdateMilestone(Integer id, String name, String description, LocalDateTime completedAt) {
+        return new Milestone(id, name, description, completedAt, true, false);
+    }
 }
 

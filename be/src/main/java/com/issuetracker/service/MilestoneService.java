@@ -46,4 +46,8 @@ public class MilestoneService {
     public void createMilesonte(MilestoneDto milestoneDto) {
         milestoneRepository.save(Milestone.createAutoIncrementedMilestone(milestoneDto.getName(), milestoneDto.getDescription(), milestoneDto.getCompletedAt()));
     }
+
+    public void updateMilestone(int milestoneId, MilestoneDto milestoneDto) {
+        milestoneRepository.save(Milestone.createUpdateMilestone(milestoneId, milestoneDto.getName(), milestoneDto.getDescription(), milestoneDto.getCompletedAt()));
+    }
 }

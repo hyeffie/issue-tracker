@@ -4,10 +4,7 @@ import com.issuetracker.dto.milestone.MilestoneDto;
 import com.issuetracker.dto.milestone.MilestonePageDto;
 import com.issuetracker.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +20,10 @@ public class MilestoneController {
     @PostMapping("/api/milestones")
     public void create(@RequestBody MilestoneDto milestoneDto) {
         milestoneService.createMilesonte(milestoneDto);
+    }
 
+    @PatchMapping("/api/milestones/{milestoneId}")
+    public void update(@PathVariable int milestoneId, @RequestBody MilestoneDto milestoneDto) {
+        milestoneService.updateMilestone(milestoneId, milestoneDto);
     }
 }
