@@ -19,7 +19,7 @@ public class MilestoneController {
 
     @PostMapping("/api/milestones")
     public void create(@RequestBody MilestoneDto milestoneDto) {
-        milestoneService.createMilesonte(milestoneDto);
+        milestoneService.createMilestone(milestoneDto);
     }
 
     @PatchMapping("/api/milestones/{milestoneId}")

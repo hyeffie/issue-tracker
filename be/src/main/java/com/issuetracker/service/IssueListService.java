@@ -19,6 +19,7 @@ public class IssueListService {
     private final IssueListRepository issueListRepository;
     private final IssueListMapper issueListMapper;
 
+<<<<<<< HEAD
     /**
      * 이슈 목록을 가져온 후 API의 형식에 맞춰서 mapping한 후, filter 목록 데이터 DTO와 함께 조립합니다.
      * 이슈를 가져올 때 여러 테이블을 Join하여 가져오므로 DB의 중복 데이터가 많습니다.(n:m, 1:n 관계 - 예를 들면 issue : label을 가져오는 경우)
@@ -33,6 +34,10 @@ public class IssueListService {
         for (IssueListPage issueListPage : filteredIssueList) {
             issueListRepository.getIssues(issueListPage.getId()).forEach(e -> issueMainPageDtoList.add(e));
         }
+=======
+    public IssueListDto fetchMain() {
+        List<IssueListPage> issueMainPageDtoList = issueListRepository.getIssues(true);
+>>>>>>> c73973a8edc17c21689508c015f40cc11577b581
 
         Map<Long, IssueDto> issueDtoMap = new LinkedHashMap<>();
         for (IssueListPage issueListPage : issueMainPageDtoList) {
@@ -59,8 +64,8 @@ public class IssueListService {
                 .map(user -> new FilterUserDto(user.getId(), user.getLoginId(), user.getProfileUrl()))
                 .collect(Collectors.toUnmodifiableList());
 
-        int openedIssues = (int)issueDtoList.stream().filter(issueDto -> issueDto.isOpen()).count();
-        int closedIssues = (int)issueListRepository.getTotalClosedIssueCount();
+        long openedIssues = issueDtoList.stream().filter(issueDto -> issueDto.isOpen()).count();
+        long closedIssues = issueListRepository.getTotalClosedIssueCount();
         return new IssueListDto(issueDtoList, filterUserList, filterLabelDtoList, filterMilestoneList,
                 filterLabelDtoList.size(), filterMilestoneList.size(), openedIssues, closedIssues);
     }

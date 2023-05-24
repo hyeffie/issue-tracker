@@ -1,4 +1,4 @@
-package com.issuetracker;
+package com.issuetracker.mapper;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 @Configuration
-public class JacksonConfig {
+public class JacksonLocalDateTimeConfig {
     @Bean
     public SimpleModule jsonMapperJava8DateTimeModule() {
         SimpleModule module = new SimpleModule();
