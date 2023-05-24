@@ -16,16 +16,17 @@ public interface IssueListRepository extends CrudRepository<IssueListPage, Long>
      * @param isOpen
      * @return
      */
-    @Query("SELECT i.id AS issueId, i.title AS title, i.content AS content, u.login_id AS userName,\n"
-            + "u.profile_url AS profileUrl, i.opened AS opened, i.created_at AS createdAt, i.closed_at AS closedAt\n"
-            + ", m.name AS milestoneName, l.id AS labelId, l.name AS labelName, l.background_color AS backgroundColor, l.font_color AS fontColor\n"
-            + "FROM issue i\n"
-            + "LEFT OUTER JOIN issue_label il ON i.id = il.issue_id\n"
-            + "LEFT OUTER JOIN (SELECT * from label WHERE deleted IS FALSE) l ON l.id = il.label_id\n"
-            + "LEFT OUTER JOIN user u ON u.id =  i.user_id\n"
-            + "LEFT OUTER JOIN (SELECT * from milestone WHERE deleted IS FALSE) m ON m.id = i.milestone_id\n"
-            + "WHERE i.deleted_at IS NULL AND i.opened= :isOpen;")
-    List<IssueListPage> getIssues(boolean isOpen);
+    @Query("SELECT i.id AS issueId, i.title AS title, i.content AS content, u.login_id AS userName,\n" +
+            "u.profile_url AS profileUrl, i.opened AS opened, i.created_at AS createdAt, i.closed_at AS closedAt\n" +
+            ", m.name AS milestoneName, l.id AS labelId, l.name AS labelName, l.background_color AS backgroundColor, l.font_color AS fontColor\n" +
+            "FROM issue i\n" +
+            "LEFT OUTER JOIN issue_label il ON i.id = il.issue_id\n" +
+            "LEFT OUTER JOIN (SELECT * from label WHERE deleted IS FALSE) l ON l.id = il.label_id\n" +
+            "JOIN assignee a ON a.issue_id = i.id\n" +
+            "JOIN user u ON u.id =  i.user_id\n" +
+            "LEFT OUTER JOIN (SELECT * from milestone WHERE deleted IS FALSE) m ON m.id = i.milestone_id\n" +
+            "WHERE i.id = :id")
+    List<IssueListPage> getIssues(long id);
 
     /**
      * 라벨 필터에 사용할 전체 라벨의 목록을 조회합니다.
