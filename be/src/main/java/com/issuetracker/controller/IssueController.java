@@ -1,5 +1,7 @@
 package com.issuetracker.controller;
 
+import com.issuetracker.dto.issueList.IssueDto;
+import com.issuetracker.dto.issueList.IssueStatusListDto;
 import org.springframework.web.bind.annotation.*;
 
 import com.issuetracker.dto.issue.IssueDetailPageDto;
@@ -32,5 +34,10 @@ public class IssueController {
     @DeleteMapping("/api/issues/{issueId}")
     public void delete(@PathVariable long issueId) {
         issueService.deleteIssue(issueId);
+    }
+
+    @PatchMapping("/api/issues")
+    public void changeIssueStatus(@RequestBody IssueStatusListDto issueStatusListDto) {
+        issueService.changeIssueStatus(issueStatusListDto);
     }
 }
