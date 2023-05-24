@@ -1,14 +1,13 @@
 package com.issuetracker.dto.issueList;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 import com.issuetracker.dto.issue.IssueLabelDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
@@ -23,5 +22,5 @@ public class IssueDto {
     private LocalDateTime createdAt;
     private LocalDateTime closedAt;
     private String milestoneName;
-    private List<IssueLabelDto> labelList;
+    private Set<IssueLabelDto> labelList;
 }
