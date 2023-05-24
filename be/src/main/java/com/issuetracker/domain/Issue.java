@@ -38,4 +38,14 @@ public class Issue {
         return new Issue(null, issuePostDto.getUserId(), issuePostDto.getMilestoneId(), issuePostDto.getTitle(),
                 issuePostDto.getContent(), true, LocalDateTime.now(), null, null);
     }
+
+    public static Issue updateIssue(IssuePostDto issuePostDto, Issue issueUnmodified, long id) {
+        return new Issue(id, issuePostDto.getUserId(), issuePostDto.getMilestoneId(), issuePostDto.getTitle(),
+                issuePostDto.getContent(), issueUnmodified.getOpened(), LocalDateTime.now(), issueUnmodified.getClosedAt(), issueUnmodified.getDeletedAt());
+    }
+
+    public static Issue deleteIssue(Issue issue) {
+        return new Issue(issue.getId(), issue.getUserId(), issue.getMilestoneId(), issue.getTitle(),
+                issue.getContent(), issue.getOpened(), issue.getCreatedAt(), issue.getClosedAt(), LocalDateTime.now());
+    }
 }
