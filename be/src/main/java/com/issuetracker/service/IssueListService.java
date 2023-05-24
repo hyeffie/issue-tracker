@@ -1,14 +1,15 @@
 package com.issuetracker.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.issuetracker.domain.Issue;
-import com.issuetracker.domain.Label;
-import com.issuetracker.domain.Milestone;
-import com.issuetracker.domain.User;
+import com.issuetracker.domain.IssueListPage;
 import com.issuetracker.dto.issue.IssueLabelDto;
 import com.issuetracker.dto.issueList.FilterLabelDto;
 import com.issuetracker.dto.issueList.FilterMilestoneDto;
@@ -30,61 +31,57 @@ public class IssueListService {
      * 동일 이슈에 대해서 여러 개의 라벨을 Issue 객체에 list 타입으로 넣어주기 위해서 다소 지저분한 mapping 로직으로 구현했습니다.
      */
     public IssueListDto fetchMain() {
-        List<Issue> issueMainPageDtoList = issueListRepository.getIssues(true);
+        List<IssueListPage> issueMainPageDtoList = issueListRepository.getIssues(true);
 
-        List<IssueDto> issueDtoList = new ArrayList<>();
-        for (int i = 0; i < issueMainPageDtoList.size(); i++) {
-            Issue issueDao = issueMainPageDtoList.get(i);
-            long id = issueDao.getId();
-            List<IssueLabelDto> issueLabelDtoList = new ArrayList<>();
-            IssueDto issueDto = new IssueDto(id, issueDao.getTitle(), issueDao.getContent(), issueDao.getUserName(),
-                    issueDao.getProfileUrl(), issueDao.getOpened(), issueDao.getCreatedAt(), issueDao.getClosedAt(),
-                    issueDao.getMilestoneName(), issueLabelDtoList);
-            Boolean flag = false;
-            while (i < issueMainPageDtoList.size() && id == issueDao.getId()) {
-                flag = true;
-                if (issueDao.getLabelId() != null) {
-                    issueLabelDtoList.add(
-                            new IssueLabelDto(issueDao.getLabelId(), issueDao.getLabelName(),
-                                    issueDao.getBackgroundColor(),
-                                    issueDao.getFontColor()));
-                }
-                i++;
-                if (i < issueMainPageDtoList.size()) {
-                    issueDao = issueMainPageDtoList.get(i);
-                }
-            }
-            issueDtoList.add(issueDto);
-            if (flag) {
-                i--;
+        Map<Long, IssueDto> issueDtoMap = new LinkedHashMap<>();
+        for (IssueListPage issueListPage : issueMainPageDtoList) {
+            if (issueDtoMap.containsKey(issueListPage.getId())) {
+                addIssueLabelDto(issueDtoMap, issueListPage);
+            } else {
+                addIssueDto(issueDtoMap, issueListPage);
+                addIssueLabelDto(issueDtoMap, issueListPage);
             }
         }
+        List<IssueDto> issueDtoList = issueDtoMap.values().stream().collect(Collectors.toList());
 
-        List<Label> filterLabelList = issueListRepository.getFilterLabelList();
-        //mapping
-        List<FilterLabelDto> filterLabelDtoList = new ArrayList<>();
-        for (Label label : filterLabelList) {
-            filterLabelDtoList.add(
-                    new FilterLabelDto(label.getId(), label.getName(), label.getBackgroundColor(), label.getFontColor(),
-                            label.getDescription()));
-        }
+        List<FilterLabelDto> filterLabelDtoList = issueListRepository.getFilterLabelList().stream()
+                .map(label -> new FilterLabelDto(label.getId(), label.getName(), label.getBackgroundColor(),
+                        label.getFontColor(), label.getDescription()))
+                .collect(Collectors.toUnmodifiableList());
 
-        List<Milestone> filterMilestoneList = issueListRepository.getFilterMilestoneList();
-        List<FilterMilestoneDto> filterMilestoneDtoList = new ArrayList<>();
-        for (Milestone milestone : filterMilestoneList) {
-            filterMilestoneDtoList.add(
-                    new FilterMilestoneDto(milestone.getId(), milestone.getName(), milestone.getDescription()));
-        }
+        List<FilterMilestoneDto> filterMilestoneList = issueListRepository.getFilterMilestoneList().stream()
+                .map(milestone -> new FilterMilestoneDto(milestone.getId(), milestone.getName(),
+                        milestone.getDescription()))
+                .collect(Collectors.toUnmodifiableList());
 
-        List<User> filterUserList = issueListRepository.getFilterUserList();
-        List<FilterUserDto> filterUserDtoList = new ArrayList<>();
-        for (User user : filterUserList) {
-            filterUserDtoList.add(new FilterUserDto(user.getId(), user.getLoginId(), user.getProfileUrl()));
-        }
+        List<FilterUserDto> filterUserList = issueListRepository.getFilterUserList().stream()
+                .map(user -> new FilterUserDto(user.getId(), user.getLoginId(), user.getProfileUrl()))
+                .collect(Collectors.toUnmodifiableList());
 
         int openedIssues = (int)issueDtoList.stream().filter(issueDto -> issueDto.isOpen()).count();
         int closedIssues = (int)issueListRepository.getTotalClosedIssueCount();
-        return new IssueListDto(issueDtoList, filterUserDtoList, filterLabelDtoList, filterMilestoneDtoList,
-                filterLabelDtoList.size(), filterMilestoneDtoList.size(), openedIssues, closedIssues);
+        return new IssueListDto(issueDtoList, filterUserList, filterLabelDtoList, filterMilestoneList,
+                filterLabelDtoList.size(), filterMilestoneList.size(), openedIssues, closedIssues);
+    }
+
+    private static void addIssueDto(Map<Long, IssueDto> issueDtoMap, IssueListPage issueListPage) {
+        List<IssueLabelDto> issueLabelDtoList = new ArrayList<>();
+        IssueDto issueDto = new IssueDto(issueListPage.getId(), issueListPage.getTitle(), issueListPage.getContent(),
+                issueListPage.getUserName(),
+                issueListPage.getProfileUrl(), issueListPage.getOpened(), issueListPage.getCreatedAt(),
+                issueListPage.getClosedAt(),
+                issueListPage.getMilestoneName(), issueLabelDtoList);
+
+        issueDtoMap.put(issueListPage.getId(), issueDto);
+    }
+
+    private static void addIssueLabelDto(Map<Long, IssueDto> issueDtoMap, IssueListPage issueListPage) {
+        if (issueListPage.getLabelId() != null) {
+            issueDtoMap.get(issueListPage.getId())
+                    .getLabelList()
+                    .add(new IssueLabelDto(issueListPage.getLabelId(), issueListPage.getLabelName(),
+                            issueListPage.getBackgroundColor(),
+                            issueListPage.getFontColor()));
+        }
     }
 }

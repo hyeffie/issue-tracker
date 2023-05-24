@@ -5,13 +5,12 @@ import java.util.List;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.issuetracker.domain.Issue;
+import com.issuetracker.domain.IssueListPage;
 import com.issuetracker.domain.Label;
 import com.issuetracker.domain.Milestone;
 import com.issuetracker.domain.User;
-import com.issuetracker.dto.issueList.FilterUserDto;
 
-public interface IssueListRepository extends CrudRepository<Issue, Long> {
+public interface IssueListRepository extends CrudRepository<IssueListPage, Long> {
     /**
      * issue 각각에 달린 마일스톤, 라벨 목록, 유저 이름을 함께 조회해야하므로 Join하여 가져옵니다. 이 때, 열린 이슈만 조회하는데 현재는 열린 이슈만 조회되도록 작성되어있습니다.
      * @param isOpen
@@ -26,7 +25,7 @@ public interface IssueListRepository extends CrudRepository<Issue, Long> {
             + "LEFT OUTER JOIN user u ON u.id =  i.user_id\n"
             + "LEFT OUTER JOIN (SELECT * from milestone WHERE deleted IS FALSE) m ON m.id = i.milestone_id\n"
             + "WHERE i.deleted_at IS NULL AND i.opened= :isOpen;")
-    List<Issue> getIssues(boolean isOpen);
+    List<IssueListPage> getIssues(boolean isOpen);
 
     /**
      * 라벨 필터에 사용할 전체 라벨의 목록을 조회합니다.
