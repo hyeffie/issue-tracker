@@ -8,9 +8,6 @@ import com.issuetracker.mapper.IssueListMapper;
 import org.springframework.stereotype.Service;
 
 import com.issuetracker.domain.IssueListPage;
-import com.issuetracker.domain.Label;
-import com.issuetracker.domain.Milestone;
-import com.issuetracker.domain.User;
 import com.issuetracker.dto.issue.IssueLabelDto;
 import com.issuetracker.repository.IssueListRepository;
 

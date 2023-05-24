@@ -3,7 +3,6 @@ package com.issuetracker.dto.issue;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class IssueCommentDto {

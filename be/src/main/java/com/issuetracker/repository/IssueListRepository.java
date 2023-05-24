@@ -11,11 +11,7 @@ import com.issuetracker.domain.Milestone;
 import com.issuetracker.domain.User;
 
 public interface IssueListRepository extends CrudRepository<IssueListPage, Long> {
-    /**
-     * issue 각각에 달린 마일스톤, 라벨 목록, 유저 이름을 함께 조회해야하므로 Join하여 가져옵니다. 이 때, 열린 이슈만 조회하는데 현재는 열린 이슈만 조회되도록 작성되어있습니다.
-     * @param isOpen
-     * @return
-     */
+
     @Query("SELECT i.id AS issueId, i.title AS title, i.content AS content, u.login_id AS userName,\n" +
             "u.profile_url AS profileUrl, i.opened AS opened, i.created_at AS createdAt, i.closed_at AS closedAt\n" +
             ", m.name AS milestoneName, l.id AS labelId, l.name AS labelName, l.background_color AS backgroundColor, l.font_color AS fontColor\n" +

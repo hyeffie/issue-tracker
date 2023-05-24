@@ -1,7 +1,6 @@
 package com.issuetracker.dto.issue;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class AssigneeDto {
