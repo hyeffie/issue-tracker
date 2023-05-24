@@ -32,4 +32,8 @@ public class Comment {
     public static Comment createComment(CommentPostDto commentPostDto, long issueId) {
         return new Comment(null, commentPostDto.getUserId(), issueId, commentPostDto.getContent(), LocalDateTime.now(), null, null);
     }
+
+    public static Comment updateComment(CommentPostDto commentPostDto, Comment unmodifiedComment, long id, long issueId) {
+        return new Comment(id, unmodifiedComment.getUserId(), issueId, commentPostDto.getContent(), unmodifiedComment.getCreatedAt(), LocalDateTime.now(), null);
+    }
 }

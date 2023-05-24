@@ -21,4 +21,12 @@ public class CommentController {
         // TODO: 예외처리 (없거나 삭제된 issue라면 400 또는 404 에러)
         commentService.createComment(commentPostDto, issueId);
     }
+
+    @PatchMapping("/api/issues/{issueId}/comments/{commentId}")
+    public void update(@RequestBody CommentPostDto commentPostDto,
+                       @PathVariable long issueId,
+                       @PathVariable long commentId) {
+        commentService.modifyComment(commentPostDto, issueId, commentId);
+    }
+
 }
