@@ -1,13 +1,19 @@
 package com.issuetracker.repository;
 
-import com.issuetracker.domain.IssueListPage;
-import com.issuetracker.dto.issue.*;
-import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.repository.CrudRepository;
-
 import java.util.List;
 
-public interface IssueRepository extends CrudRepository<IssueListPage, Long> {
+import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.repository.CrudRepository;
+
+import com.issuetracker.domain.Issue;
+import com.issuetracker.dto.issue.AssigneeDto;
+import com.issuetracker.dto.issue.IssueCommentDto;
+import com.issuetracker.dto.issue.IssueDetailDto;
+import com.issuetracker.dto.issue.IssueLabelDto;
+import com.issuetracker.dto.issue.IssueMilestone;
+
+public interface IssueRepository extends CrudRepository<Issue, Long> {
 
     /**
      * issueId를 받아서 해당 이슈와 작성자의 정보를 가져오는 쿼리

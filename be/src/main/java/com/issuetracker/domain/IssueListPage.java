@@ -37,6 +37,5 @@ public class IssueListPage {
     private String backgroundColor;
     @Column("fontColor")
     private String fontColor;
-
 }
 
