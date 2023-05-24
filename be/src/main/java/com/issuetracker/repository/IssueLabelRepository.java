@@ -12,5 +12,6 @@ import com.issuetracker.domain.Milestone;
 import com.issuetracker.domain.User;
 
 public interface IssueLabelRepository extends CrudRepository<IssueLabel, Long> {
-
+    @Query("SELECT id FROM issue_label WHERE issue_id = :issueId")
+    public List<Long> findByIssueId(long issueId);
 }

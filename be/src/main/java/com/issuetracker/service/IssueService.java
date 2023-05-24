@@ -1,25 +1,16 @@
 package com.issuetracker.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.issuetracker.domain.Assignee;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.domain.IssueLabel;
-import com.issuetracker.dto.issue.AssigneeDto;
-import com.issuetracker.dto.issue.IssueCommentDto;
-import com.issuetracker.dto.issue.IssueDetailDto;
-import com.issuetracker.dto.issue.IssueDetailPageDto;
-import com.issuetracker.dto.issue.IssueLabelDto;
-import com.issuetracker.dto.issue.IssueMilestone;
-import com.issuetracker.dto.issue.IssuePostDto;
-import com.issuetracker.dto.issue.UserDto;
+import com.issuetracker.dto.issue.*;
 import com.issuetracker.repository.AssigneeRepository;
 import com.issuetracker.repository.IssueLabelRepository;
 import com.issuetracker.repository.IssueRepository;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +22,7 @@ public class IssueService {
 
     /**
      * 데이터베이스에서 가져온 데이터들로 이슈 상세 조회 시 필요한 데이터들을 조립
+     *
      * @param issueId
      * @return
      */
@@ -51,5 +43,23 @@ public class IssueService {
                 .forEach(userDto -> assigneeRepository.save(Assignee.assign(issue.getId(), userDto.getUserId())));
         issuePostDto.getLabelList().stream().forEach(labelDto -> issueLabelRepository.save(IssueLabel.attach(
                 issue.getId(), labelDto.getLabelId())));
+    }
+
+    public void modifyIssue(IssuePostDto issuePostDto, long id) {
+        Issue issueUnmodified = issueRepository.findById(id).get();
+        Issue issue = issueRepository.save(Issue.updateIssue(issuePostDto, issueUnmodified, id));
+        //Label, Assignee 삭제 후 다시 추가
+        assigneeRepository.findByIssueId(id).forEach(assigneeId -> assigneeRepository.deleteById((assigneeId)));
+        issueLabelRepository.findByIssueId(id).forEach(issueLabelId -> issueLabelRepository.deleteById(issueLabelId));
+        issuePostDto.getUserList().stream()
+                .forEach(userDto -> assigneeRepository.save(Assignee.assign(issue.getId(), userDto.getUserId())));
+        issuePostDto.getLabelList().stream()
+                .forEach(labelDto -> issueLabelRepository.save(IssueLabel.attach(issue.getId(), labelDto.getLabelId())));
+    }
+
+    public void deleteIssue(long id) {
+        Issue issue = issueRepository.findById(id).get();
+        //soft-delete
+        issueRepository.save(Issue.deleteIssue(issue));
     }
 }

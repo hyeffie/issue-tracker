@@ -1,10 +1,6 @@
 package com.issuetracker.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.issuetracker.dto.issue.IssueDetailPageDto;
 import com.issuetracker.dto.issue.IssuePostDto;
@@ -26,5 +22,15 @@ public class IssueController {
     @PostMapping("/api/issues")
     public void post(@RequestBody IssuePostDto labelPostDto) {
         issueService.createIssue(labelPostDto);
+    }
+
+    @PatchMapping("/api/issues/{issueId}")
+    public void update(@RequestBody IssuePostDto labelPostDto, @PathVariable long issueId) {
+        issueService.modifyIssue(labelPostDto, issueId);
+    }
+
+    @DeleteMapping("/api/issues/{issueId}")
+    public void delete(@PathVariable long issueId) {
+        issueService.deleteIssue(issueId);
     }
 }
