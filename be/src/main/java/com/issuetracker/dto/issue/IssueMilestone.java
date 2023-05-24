@@ -12,6 +12,10 @@ public class IssueMilestone {
 
     public int getProgress() {
         //마일스톤 진행률을 반환합니다.
+        if (countAllIssues == 0) {
+            return 0;
+        }
+
         return 100 * countAllClosedIssues / countAllIssues;
     }
 }
