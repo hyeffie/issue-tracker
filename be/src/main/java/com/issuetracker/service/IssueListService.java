@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.issuetracker.domain.Issue;
+import com.issuetracker.domain.IssueListPage;
 import com.issuetracker.domain.Label;
 import com.issuetracker.domain.Milestone;
 import com.issuetracker.domain.User;
@@ -30,11 +30,11 @@ public class IssueListService {
      * 동일 이슈에 대해서 여러 개의 라벨을 Issue 객체에 list 타입으로 넣어주기 위해서 다소 지저분한 mapping 로직으로 구현했습니다.
      */
     public IssueListDto fetchMain() {
-        List<Issue> issueMainPageDtoList = issueListRepository.getIssues(true);
+        List<IssueListPage> issueMainPageDtoList = issueListRepository.getIssues(true);
 
         List<IssueDto> issueDtoList = new ArrayList<>();
         for (int i = 0; i < issueMainPageDtoList.size(); i++) {
-            Issue issueDao = issueMainPageDtoList.get(i);
+            IssueListPage issueDao = issueMainPageDtoList.get(i);
             long id = issueDao.getId();
             List<IssueLabelDto> issueLabelDtoList = new ArrayList<>();
             IssueDto issueDto = new IssueDto(id, issueDao.getTitle(), issueDao.getContent(), issueDao.getUserName(),

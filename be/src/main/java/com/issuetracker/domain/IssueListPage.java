@@ -3,7 +3,6 @@ package com.issuetracker.domain;
 import java.time.LocalDateTime;
 
 import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,8 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("issue")
-public class Issue {
+public class IssueListPage {
     @Column("issueId")
     private Long id;
     private String title;
