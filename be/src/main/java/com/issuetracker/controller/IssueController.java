@@ -1,6 +1,5 @@
 package com.issuetracker.controller;
 
-import com.issuetracker.dto.issueList.IssueDto;
 import com.issuetracker.dto.issueList.IssueStatusListDto;
 import org.springframework.web.bind.annotation.*;
 
