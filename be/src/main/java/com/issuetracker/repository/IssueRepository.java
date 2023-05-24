@@ -1,7 +1,9 @@
 package com.issuetracker.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.repository.CrudRepository;
@@ -71,4 +73,21 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
             "WHERE m.id IN (SELECT DISTINCT milestone_id FROM issue WHERE id = :issueId AND i.deleted_at IS NULL)\n" +
             "GROUP BY m.id;")
     IssueMilestone findMilestoneByIssueId(long issueId);
+
+    /**
+     * 열려있는 특정 이슈를 닫고 시간을 업데이트합니다.
+     * @param issueId
+     * @param now
+     */
+    @Modifying
+    @Query(value = "UPDATE issue SET opened=0, closed_at=:now WHERE id=:issueId AND opened=1")
+    void closeIssueById(long issueId, LocalDateTime now);
+
+    /**
+     * 닫혀있는 특정 이슈를 엽니다.
+     * @param issueId
+     */
+    @Modifying
+    @Query(value = "UPDATE issue SET opened=1 WHERE id=:issueId AND opened=0")
+    void openIssueById(long issueId);
 }
