@@ -3,7 +3,7 @@ package com.issuetracker.dto.issue;
 import lombok.*;
 
 @Getter
-@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

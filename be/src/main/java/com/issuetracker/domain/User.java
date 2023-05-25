@@ -13,9 +13,9 @@ import lombok.Setter;
 public class User {
     @Id
     private int id;
-    @Column("loginId")
+    @Column("login_id")
     private String loginId;
-    @Column("profileUrl")
+    @Column("profile_url")
     private String profileUrl;
 }
 

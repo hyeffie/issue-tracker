@@ -40,7 +40,7 @@ public class Issue {
     }
 
     public static Issue updateIssue(IssuePostDto issuePostDto, Issue issueUnmodified, long id) {
-        return new Issue(id, issuePostDto.getUserId(), issuePostDto.getMilestoneId(), issuePostDto.getTitle(),
+        return new Issue(id, issueUnmodified.getUserId(), issuePostDto.getMilestoneId(), issuePostDto.getTitle(),
                 issuePostDto.getContent(), issueUnmodified.getOpened(), LocalDateTime.now(), issueUnmodified.getClosedAt(), issueUnmodified.getDeletedAt());
     }
 
