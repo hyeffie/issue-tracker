@@ -39,11 +39,19 @@ class LabelListCell: UICollectionViewCell, CellIdentifiable {
    override func prepareForReuse() {
       super.prepareForReuse()
       descriptionLabel.isHidden = false
+      emptyLabelStack()
    }
    
    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
       let atts = super.preferredLayoutAttributesFitting(layoutAttributes)
       atts.size = .init(width: atts.size.width, height: 84)
       return atts
+   }
+   
+   func emptyLabelStack() {
+      container.arrangedSubviews.forEach { view in
+         guard let label = view as? IssueLabel else { return }
+         label.removeFromSuperview()
+      }
    }
 }
