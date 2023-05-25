@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class LoadCollectionViewCell: UICollectionViewCell {
+final class LoadCollectionViewCell: UICollectionViewCell, CellIdentifiable {
+   static var cellId: String = "LoadCollectionViewCell"
+   
    @IBOutlet weak var indicator: UIActivityIndicatorView!
    
    func start() {

@@ -39,6 +39,7 @@
 		F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */; };
 		F4BF7CF72A0D231D001C22F0 /* UILabel+font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */; };
 		F4D5E3D42A1C50AF00722AD1 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5E3D32A1C50AF00722AD1 /* IssueList.swift */; };
+		F4D5E3D72A1DE5CF00722AD1 /* CellIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5E3D62A1DE5CF00722AD1 /* CellIdentifiable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypoGraphy.swift; sourceTree = "<group>"; };
 		F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+font.swift"; sourceTree = "<group>"; };
 		F4D5E3D32A1C50AF00722AD1 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
+		F4D5E3D62A1DE5CF00722AD1 /* CellIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				F4BF7CF22A0D1312001C22F0 /* Color.swift */,
 				F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */,
+				F4D5E3D62A1DE5CF00722AD1 /* CellIdentifiable.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				F48583C82A13802E00322C9F /* URLSessionDataTaskInterface.swift in Sources */,
 				F48583CA2A13802E00322C9F /* URLSessionInterface.swift in Sources */,
 				F48583C92A13802E00322C9F /* NetworkManager.swift in Sources */,
+				F4D5E3D72A1DE5CF00722AD1 /* CellIdentifiable.swift in Sources */,
 				F48583CF2A1380D100322C9F /* IssueListDTO.swift in Sources */,
 				F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */,
 				F4D5E3D42A1C50AF00722AD1 /* IssueList.swift in Sources */,

@@ -8,6 +8,9 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
+   typealias IssueCell = IssueListCollectionViewCell
+   typealias LoadCell = LoadCollectionViewCell
+   
    let filterListID = "FilterList"
    
    var networkManager: NetworkManager?
@@ -77,16 +80,21 @@ class IssueListViewController: UIViewController {
    }
    
    private func createIssueCellRegisteration() -> UICollectionView.CellRegistration<IssueListCollectionViewCell, ItemType> {
-      let issueCellNib = UINib(nibName: Section.issue.cellIdentifier, bundle: nil)
+      let issueCellNib = UINib(nibName: IssueCell.cellId, bundle: nil)
       return .init(cellNib: issueCellNib) { cell, indexPath, itemIdentifier in
-         guard indexPath.section == 0, case Item.issue(let issue) = itemIdentifier else { return }
+         guard case Item.issue(let issue) = itemIdentifier else { return }
          cell.configure(issue: issue)
       }
    }
    
    private func createLoadCellRegisteration() -> UICollectionView.CellRegistration<LoadCollectionViewCell, ItemType> {
-      let loadCellNib = UINib(nibName: Section.loadIndicator.cellIdentifier, bundle: nil)
+      let loadCellNib = UINib(nibName: LoadCell.cellId, bundle: nil)
       return .init(cellNib: loadCellNib, handler: { _, _, _ in })
+   }
+   
+   private func createCellRegisteration<Cell: CellIdentifiable, Item>(cellCompletion: @escaping UICollectionView.CellRegistration<Cell, Item>.Handler) -> UICollectionView.CellRegistration<Cell, Item>  {
+      let cellNib = UINib(nibName: Cell.cellId, bundle: nil)
+      return .init(cellNib: cellNib, handler: cellCompletion)
    }
    
    private func configureDataSource() {
@@ -96,9 +104,15 @@ class IssueListViewController: UIViewController {
       dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
          switch item {
          case .issue(let issue):
-            return collectionView.dequeueConfiguredReusableCell(using: issueCellRegistration, for: indexPath, item: item)
+            return collectionView.dequeueConfiguredReusableCell(
+               using: issueCellRegistration,
+               for: indexPath,
+               item: item)
          case .load:
-            return collectionView.dequeueConfiguredReusableCell(using: loadCellRegistration, for: indexPath, item: item)
+            return collectionView.dequeueConfiguredReusableCell(
+               using: loadCellRegistration,
+               for: indexPath,
+               item: item)
          default:
             return nil
          }
@@ -155,15 +169,8 @@ extension IssueListViewController {
       
       var cellClass: UICollectionViewCell.Type {
          switch self {
-         case .issue: return IssueListCollectionViewCell.self
-         case .loadIndicator: return LoadCollectionViewCell.self
-         }
-      }
-      
-      var cellIdentifier: String {
-         switch self {
-         case .issue: return "IssueListCollectionViewCell"
-         case .loadIndicator: return "LoadCollectionViewCell"
+         case .issue: return IssueCell.self
+         case .loadIndicator: return LoadCell.self
          }
       }
    }

@@ -7,7 +7,9 @@
 
 import UIKit
 
-class IssueListCollectionViewCell: UICollectionViewCell {
+class IssueListCollectionViewCell: UICollectionViewCell, CellIdentifiable {
+   static var cellId: String = "IssueListCollectionViewCell"
+   
    @IBOutlet var titleLabel: UILabel!
    @IBOutlet var checkBoxImageView: UIImageView!
    @IBOutlet var descriptionLabel: UILabel!
