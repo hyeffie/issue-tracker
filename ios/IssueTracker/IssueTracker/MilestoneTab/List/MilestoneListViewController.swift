@@ -11,23 +11,24 @@ class MilestoneListViewController: UIViewController {
    private var collectionView: UICollectionView!
    private var dataSource: DataSource!
    
+   var observers: [NSObjectProtocol] = []
+   
    private var networkManager: NetworkManager?
-   private var list: MilestoneList = MilestoneList(milestones: [
-      .init(milestoneId: 0, name: "[BE] 이슈 관리 기능", description: "평냉엔 소주", completedAt: "2023-01-01", countAllOpenedIssues: 20, countAllClosedIssues: 2, progress: Double(2 / 22)),
-      .init(milestoneId: 1, name: "[iOS] 이슈 관리 기능", description: "평냉엔 소주? 이게 맞아?", completedAt: "2023-06-30", countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: Double(2 / 2)),
-      .init(milestoneId: 2, name: "[iOS] 이슈 관리 기능", description: nil, completedAt: "2023-06-30", countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: Double(2 / 2)),
-      .init(milestoneId: 3, name: "[iOS] 이슈 관리 기능", description: "사랑해요", completedAt: nil, countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: Double(2 / 2)),
-      .init(milestoneId: 4, name: "[iOS] 이슈 관리 기능", description: nil, completedAt: nil, countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: Double(2 / 2)),
-      .init(milestoneId: 5, name: "[iOS] 힘들어요", description: nil, completedAt: nil, countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: 100),
-   ])
+   private var list: MilestoneList = MilestoneList()
    
    override func viewDidLoad() {
       super.viewDidLoad()
       self.view.backgroundColor = .systemBackground
       self.title = "마일스톤"
+      addObservers()
       setCollectionView()
       configureDataSource()
-      applyUpdatedSnapshot()
+      setNetworkManager()
+      fetchMilestones()
+   }
+   
+   func setNetworkManager() {
+      networkManager = NetworkManager(session: URLSession.shared)
    }
 }
 
@@ -115,5 +116,31 @@ extension MilestoneListViewController {
       snapshot.appendSections([.milestone])
       snapshot.appendItems(list.milestones.map { milestone in Item.milestone(milestone: milestone) }, toSection: .milestone)
       dataSource.apply(snapshot, animatingDifferences: animated)
+   }
+}
+
+extension MilestoneListViewController {
+   private func addObservers() {
+      var noti = NotificationCenter.default.addObserver(
+         forName: MilestoneList.Notifications.didAddMilestones,
+         object: list,
+         queue: .main,
+         using: { [weak self] _ in
+            self?.applyUpdatedSnapshot()
+         })
+      self.observers.append(noti)
+   }
+}
+
+extension MilestoneListViewController {
+   func fetchMilestones(cellCompletion: (() -> Void)? = nil) {
+      networkManager?.requestMilestoneList() { [weak self] dto in
+         cellCompletion?()
+         if dto.milestoneList.count > 0 {
+            let milestones = ListingItemFactory.MilestoneTab.makeMilestoneList(with: dto)
+            self?.list.emptyList()
+            self?.list.add(milestones: milestones)
+         }
+      }
    }
 }

@@ -14,12 +14,7 @@ class LabelListViewController: UIViewController {
    var observers: [NSObjectProtocol] = []
    
    private var networkManager: NetworkManager?
-   private var list: LabelList = LabelList(labels: [
-      LabelList.Label(labelId: 0, labelName: "BE", backgroundColor: "#b6f482", description: "데이터베이스 수정"),
-      LabelList.Label(labelId: 1, labelName: "new jeans", backgroundColor: "#10f4FF", description: "코카콜라 맛있다"),
-      LabelList.Label(labelId: 2, labelName: "le serrafim", backgroundColor: "#b6f482", description: "fearless ha"),
-      LabelList.Label(labelId: 3, labelName: "aespa", backgroundColor: "#FFFFFF", description: "넥레 딱대"),
-   ])
+   private var list: LabelList = LabelList()
    
    override func viewDidLoad() {
       super.viewDidLoad()

@@ -47,4 +47,21 @@ struct ListingItemFactory {
          return labels
       }
    }
+   
+   struct MilestoneTab {
+      private static func makeMilestone(with milestone: MilestoneDTO.Milestone) -> MilestoneList.Milestone {
+         return .init(milestoneId: milestone.milestoneId,
+                      name: milestone.name,
+                      description: milestone.description,
+                      completedAt: milestone.completedAt,
+                      countAllOpenedIssues: milestone.countAllOpenedIssues,
+                      countAllClosedIssues: milestone.countAllClosedIssues,
+                      progress: milestone.progress)
+      }
+      
+      static func makeMilestoneList(with dto: MilestoneDTO) -> [MilestoneList.Milestone] {
+         let milestones = dto.milestoneList.map { milestone in makeMilestone(with: milestone) }
+         return milestones
+      }
+   }
 }

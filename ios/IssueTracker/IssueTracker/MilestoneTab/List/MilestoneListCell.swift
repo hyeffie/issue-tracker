@@ -46,7 +46,7 @@ class MilestoneListCell: UICollectionViewCell, CellIdentifiable {
    
    func configure(with milestone: MilestoneList.Milestone) {
       nameLabel.text = milestone.name
-      progressLabel.text = "\(Int(milestone.progress.rounded(.down)))%"
+      progressLabel.text = "\(milestone.progress)%"
       
       if let desc = milestone.description, desc.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false {
          descriptionLabel.text = milestone.description
