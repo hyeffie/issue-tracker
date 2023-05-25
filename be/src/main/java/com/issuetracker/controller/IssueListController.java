@@ -18,15 +18,9 @@ public class IssueListController {
 
     private final IssueListService labelService;
 
-    @GetMapping("/api/issues")
+    @GetMapping(value = {"/api/issues", "/api"})
     public IssueListDto listIssues(@ModelAttribute FilterDto filterDto) {
-        IssueListDto issueListDto = labelService.fetchMain(filterDto);
 
-        return issueListDto;
-    }
-
-    @GetMapping("/api")
-    public IssueListDto home(@ModelAttribute FilterDto filterDto) {
-        return listIssues(filterDto);
+        return labelService.fetchMain(filterDto);
     }
 }
