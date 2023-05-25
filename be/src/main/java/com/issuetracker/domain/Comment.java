@@ -36,4 +36,8 @@ public class Comment {
     public static Comment updateComment(CommentPostDto commentPostDto, Comment unmodifiedComment, long id, long issueId) {
         return new Comment(id, unmodifiedComment.getUserId(), issueId, commentPostDto.getContent(), unmodifiedComment.getCreatedAt(), LocalDateTime.now(), null);
     }
+
+    public static Comment deleteComment(Comment comment) {
+        return new Comment(comment.getId(), comment.getUserId(), comment.getIssueId(), comment.getContent(), comment.getCreatedAt(), comment.getUpdatedAt(), LocalDateTime.now());
+    }
 }
