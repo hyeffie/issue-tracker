@@ -25,6 +25,13 @@ public class CommentService {
          * - 400 또는 404 리턴
          */
         Comment unmodifiedComment = commentRepository.findById(commentId).get();
-        Comment comment = commentRepository.save(Comment.updateComment(commentPostDto, unmodifiedComment, commentId, issueId));
+        commentRepository.save(Comment.updateComment(commentPostDto, unmodifiedComment, commentId, issueId));
+    }
+
+    public void deleteComment(long id) {
+        Comment comment = commentRepository.findById(id).get();
+
+        // TODO 예외 처리: 작성자와 삭제를 요청한 사람이 같으면 삭제 아니면 에러 리턴
+        commentRepository.save(Comment.deleteComment(comment));
     }
 }

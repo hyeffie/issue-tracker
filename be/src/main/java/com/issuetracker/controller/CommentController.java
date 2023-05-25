@@ -29,4 +29,9 @@ public class CommentController {
         commentService.modifyComment(commentPostDto, issueId, commentId);
     }
 
+    @DeleteMapping("/api/issues/{issueId}/comments/{commentId}")
+    public void delete(@PathVariable long issueId, @PathVariable long commentId) {
+        commentService.deleteComment(commentId);
+    }
+
 }
