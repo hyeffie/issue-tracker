@@ -17,7 +17,10 @@ class TabBarController: UITabBarController {
       let issueListStoryBoard = UIStoryboard(name: "IssueList", bundle: nil)
       guard let issueListController = issueListStoryBoard.instantiateInitialViewController() as? UINavigationController else { return }
       
-      let controllers = [issueListController]
+      let labelListStoryBoard = UIStoryboard(name: "LabelList", bundle: nil)
+      guard let labelListController = labelListStoryBoard.instantiateInitialViewController() as? UINavigationController else { return }
+      
+      let controllers = [issueListController, labelListController]
       setViewControllers(controllers, animated: false)
    }
 }
