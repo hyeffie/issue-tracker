@@ -24,7 +24,7 @@ class LabelListCell: UICollectionViewCell, CellIdentifiable {
    }
    
    func configure(with label: LabelList.Label) {
-      nameLabel = IssueLabel(name: label.labelName, color: label.backgroundColor)
+      nameLabel = IssueLabel(name: label.labelName, color: label.backgroundColor ?? "#FFFFFF")
       container.insertArrangedSubview(nameLabel, at: 0)
       if let description = label.description,
          description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false {

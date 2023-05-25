@@ -72,7 +72,7 @@ class IssueListViewController: UIViewController {
          self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
          if dto.issues.count > 0 {
             self?.list.emptyList()
-            let newIssues = ListingItemFactory.LabelList.makeIssues(with: dto.issues)
+            let newIssues = ListingItemFactory.IssueTab.makeIssues(with: dto.issues)
             self?.list.add(issues: newIssues) // -> POST NOTIFICATION
             self?.fetchedAllData = dto
             self?.currentPageNumber += 1
@@ -186,7 +186,7 @@ extension IssueListViewController {
 }
 
 extension IssueListViewController {
-   func addObservers() {
+   private func addObservers() {
       var noti = NotificationCenter.default.addObserver(
          forName: IssueList.Notifications.didAddIssues,
          object: list, queue: .main,

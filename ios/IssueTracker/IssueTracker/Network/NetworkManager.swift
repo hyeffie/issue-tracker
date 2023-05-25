@@ -11,6 +11,8 @@ final class NetworkManager {
    static let dummyURLString = "https://example.com"
    static let defaultPagingOffSet = 10
    
+   let baseURL = "http://43.200.199.205:8080/api"
+   
    let session: URLSessionInterface
    
    init(session: URLSessionInterface = URLSession.shared) {
@@ -74,7 +76,7 @@ final class NetworkManager {
          query.updateValue("\(pageNumber)", forKey: "pageNum")
       }
       
-      let issueListURL = "http://43.200.199.205:8080/api/"
+      let issueListURL = baseURL + "/issues"
       
       fetchData(for: issueListURL,
                 with: query,
@@ -82,6 +84,20 @@ final class NetworkManager {
          switch result {
          case .success(let issueList):
             completion(issueList)
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+   
+   func requestLabelList(completion: @escaping (LabelListDTO) -> Void) {
+      let labelListURL = baseURL + "/labels"
+      
+      fetchData(for: labelListURL,
+                dataType: LabelListDTO.self) { result in
+         switch result {
+         case .success(let dto):
+            completion(dto)
          case .failure(let error):
             print(error)
          }

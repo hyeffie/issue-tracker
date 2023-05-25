@@ -39,6 +39,7 @@
 		F4A28CEA2A1F3C6E0091A940 /* MilestoneList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A28CE92A1F3C6D0091A940 /* MilestoneList.swift */; };
 		F4A28CED2A1F40B70091A940 /* MilestoneListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A28CEB2A1F40B70091A940 /* MilestoneListCell.swift */; };
 		F4A28CEE2A1F40B70091A940 /* MilestoneListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A28CEC2A1F40B70091A940 /* MilestoneListCell.xib */; };
+		F4A28CF22A1F56FB0091A940 /* LabelListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A28CF12A1F56FB0091A940 /* LabelListDTO.swift */; };
 		F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CCB2A0C8886001C22F0 /* AppDelegate.swift */; };
 		F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CCD2A0C8886001C22F0 /* SceneDelegate.swift */; };
 		F4BF7CD32A0C8886001C22F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4BF7CD12A0C8886001C22F0 /* Main.storyboard */; };
@@ -85,6 +86,7 @@
 		F4A28CE92A1F3C6D0091A940 /* MilestoneList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneList.swift; sourceTree = "<group>"; };
 		F4A28CEB2A1F40B70091A940 /* MilestoneListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneListCell.swift; sourceTree = "<group>"; };
 		F4A28CEC2A1F40B70091A940 /* MilestoneListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MilestoneListCell.xib; sourceTree = "<group>"; };
+		F4A28CF12A1F56FB0091A940 /* LabelListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListDTO.swift; sourceTree = "<group>"; };
 		F4BF7CC82A0C8886001C22F0 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4BF7CCB2A0C8886001C22F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4BF7CCD2A0C8886001C22F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				F48583CE2A1380D100322C9F /* IssueListDTO.swift */,
+				F4A28CF12A1F56FB0091A940 /* LabelListDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -209,12 +212,28 @@
 		F4A28CE82A1F32F50091A940 /* MilestoneTab */ = {
 			isa = PBXGroup;
 			children = (
+				F4A28CF32A1F5AAF0091A940 /* List */,
+				F4A28CF42A1F5AB80091A940 /* Model */,
+			);
+			path = MilestoneTab;
+			sourceTree = "<group>";
+		};
+		F4A28CF32A1F5AAF0091A940 /* List */ = {
+			isa = PBXGroup;
+			children = (
 				F4A28CE62A1F32B90091A940 /* MilestoneListViewController.swift */,
-				F4A28CE92A1F3C6D0091A940 /* MilestoneList.swift */,
 				F4A28CEB2A1F40B70091A940 /* MilestoneListCell.swift */,
 				F4A28CEC2A1F40B70091A940 /* MilestoneListCell.xib */,
 			);
-			path = MilestoneTab;
+			path = List;
+			sourceTree = "<group>";
+		};
+		F4A28CF42A1F5AB80091A940 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F4A28CE92A1F3C6D0091A940 /* MilestoneList.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F4BF7CBF2A0C8886001C22F0 = {
@@ -398,6 +417,7 @@
 				F48583CA2A13802E00322C9F /* URLSessionInterface.swift in Sources */,
 				F48583C92A13802E00322C9F /* NetworkManager.swift in Sources */,
 				F4D5E3D72A1DE5CF00722AD1 /* CellIdentifiable.swift in Sources */,
+				F4A28CF22A1F56FB0091A940 /* LabelListDTO.swift in Sources */,
 				F48583CF2A1380D100322C9F /* IssueListDTO.swift in Sources */,
 				F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */,
 				F4A28CED2A1F40B70091A940 /* MilestoneListCell.swift in Sources */,

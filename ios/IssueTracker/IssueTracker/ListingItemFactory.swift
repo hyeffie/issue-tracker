@@ -8,7 +8,7 @@
 import Foundation
 
 struct ListingItemFactory {
-   struct LabelList {
+   struct IssueTab {
       private static func makeLabel(with lable: IssueListDTO.Label) -> IssueList.Issue.Label {
          return .init(labelName: lable.labelName,
                       backgroundColor: lable.backgroundColor)
@@ -31,6 +31,20 @@ struct ListingItemFactory {
       static func makeIssueList(with issueList: IssueListDTO) -> IssueList {
          let issues = makeIssues(with: issueList.issues)
          return IssueList(issues: issues)
+      }
+   }
+   
+   struct LabelTab {
+      private static func makeLabel(with label: LabelListDTO.Label) -> LabelList.Label {
+         return .init(labelId: label.id,
+                      labelName: label.name,
+                      backgroundColor: label.backgroundColor,
+                      description: label.description)
+      }
+      
+      static func makeLabelList(with labelList: LabelListDTO) -> [LabelList.Label] {
+         let labels = labelList.labelList.map { label in makeLabel(with: label) }
+         return labels
       }
    }
 }

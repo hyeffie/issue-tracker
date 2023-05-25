@@ -11,6 +11,8 @@ class LabelListViewController: UIViewController {
    private var collectionView: UICollectionView!
    private var dataSource: DataSource!
    
+   var observers: [NSObjectProtocol] = []
+   
    private var networkManager: NetworkManager?
    private var list: LabelList = LabelList(labels: [
       LabelList.Label(labelId: 0, labelName: "BE", backgroundColor: "#b6f482", description: "데이터베이스 수정"),
@@ -23,9 +25,15 @@ class LabelListViewController: UIViewController {
       super.viewDidLoad()
       self.view.backgroundColor = .systemBackground
       self.title = "레이블"
+      addObservers()
       setCollectionView()
       configureDataSource()
-      applyUpdatedSnapshot()
+      setNetworkManager()
+      fetchLabels()
+   }
+   
+   func setNetworkManager() {
+      networkManager = NetworkManager(session: URLSession.shared)
    }
 }
 
@@ -68,6 +76,7 @@ extension LabelListViewController {
 
 extension LabelListViewController {
    typealias LabelCell = LabelListCell
+   
    private enum Section {
       case label
       
@@ -113,5 +122,32 @@ extension LabelListViewController {
       snapshot.appendSections([.label])
       snapshot.appendItems(list.labels.map { label in Item.label(label: label) }, toSection: .label)
       dataSource.apply(snapshot, animatingDifferences: animated)
+   }
+}
+
+extension LabelListViewController {
+   private func addObservers() {
+      var noti = NotificationCenter.default.addObserver(
+         forName: LabelList.Notifications.didAddLabels,
+         object: list,
+         queue: .main,
+         using: { [weak self] _ in
+            self?.applyUpdatedSnapshot()
+            
+         })
+      self.observers.append(noti)
+   }
+}
+
+extension LabelListViewController {
+   func fetchLabels(cellCompletion: (() -> Void)? = nil) {
+      networkManager?.requestLabelList() { [weak self] dto in
+         cellCompletion?()
+         if dto.labelList.count > 0 {
+            let labels = ListingItemFactory.LabelTab.makeLabelList(with: dto)
+            self?.list.emptyList()
+            self?.list.add(labels: labels)
+         }
+      }
    }
 }
