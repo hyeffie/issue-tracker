@@ -41,7 +41,7 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
      * @param issueId
      * @return
      */
-    @Query("SELECT u.id, u.login_id AS user_id, u.profile_url\n" +
+    @Query("SELECT u.id, u.login_id, u.profile_url\n" +
             "FROM assignee a\n" +
             "JOIN user u ON u.id = a.user_id\n" +
             "WHERE a.issue_id = :issueId;")
@@ -52,7 +52,7 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
      * @param issueId
      * @return
      */
-    @Query("SELECT c.id AS commentId, u.id AS userId, u.login_id AS user_id, u.profile_url, c.content, c.created_at, c.updated_at\n"
+    @Query("SELECT c.id AS commentId, u.id AS userId, u.login_id AS userName, u.profile_url, c.content, c.created_at, c.updated_at\n"
             +
             "FROM comment c\n" +
             "JOIN user u ON c.user_id = u.id\n" +
