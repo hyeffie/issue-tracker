@@ -46,17 +46,17 @@ class IssueListViewController: UIViewController {
          var config = UICollectionLayoutListConfiguration(appearance: .plain)
          config.showsSeparators = true
          config.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
-            let closeAction = UIContextualAction(style: .normal, title: "닫기") { action, view, handler in
-            }
-            closeAction.image = UIImage(systemName: "archivebox.fill")
-            closeAction.backgroundColor = Color.purple.color
+            let closeAction = SwiptAction.close.makeAction(withHandler: { action, view, handler in
+               
+            })
             
-            let deleteAction = UIContextualAction(style: .normal, title: "삭제") { action, view, handler in
-            }
-            deleteAction.image = UIImage(systemName: "trash.fill")
-            deleteAction.backgroundColor = Color.red.color
+            let deleteAction = SwiptAction.delete.makeAction(withHandler: { action, view, handler in
+               
+            })
             
-            return UISwipeActionsConfiguration(actions: [deleteAction, closeAction])
+            let config = UISwipeActionsConfiguration(actions: [deleteAction, closeAction])
+            config.performsFirstActionWithFullSwipe = false
+            return config
          }
          return NSCollectionLayoutSection.list(using: config, layoutEnvironment: layoutEnvironment)
       }
