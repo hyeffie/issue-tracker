@@ -19,7 +19,7 @@ struct ListingItemFactory {
          return .init(issueId: issue.issueId,
                       title: issue.title,
                       content: issue.content,
-                      isOpen: issue.isOpen,
+                      isOpen: issue.open,
                       milestoneName: issue.milestoneName,
                       labelList: labelList)
       }
@@ -34,4 +34,3 @@ struct ListingItemFactory {
       }
    }
 }
-

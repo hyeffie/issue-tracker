@@ -17,10 +17,14 @@ class TabBarController: UITabBarController {
       let issueListStoryBoard = UIStoryboard(name: "IssueList", bundle: nil)
       guard let issueListController = issueListStoryBoard.instantiateInitialViewController() as? UINavigationController else { return }
       
-      let labelListStoryBoard = UIStoryboard(name: "LabelList", bundle: nil)
-      guard let labelListController = labelListStoryBoard.instantiateInitialViewController() as? UINavigationController else { return }
+      let labelListVC = LabelListViewController()
+      labelListVC.view.backgroundColor = .systemBackground
+      let labelNavigationController = UINavigationController(rootViewController: labelListVC)
+      labelNavigationController.navigationBar.prefersLargeTitles = true
+      labelNavigationController.tabBarItem.title = "레이블"
+      labelNavigationController.tabBarItem.image = UIImage(named: "tag")
       
-      let controllers = [issueListController, labelListController]
+      let controllers = [issueListController, labelNavigationController]
       setViewControllers(controllers, animated: false)
    }
 }

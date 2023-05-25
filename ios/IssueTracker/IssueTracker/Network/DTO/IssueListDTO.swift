@@ -14,7 +14,7 @@ struct IssueListDTO: Codable {
       let content: String
       let userName: String
       let profileUrl: String?
-      var isOpen: Bool
+      var open: Bool
       let createdAt: String
       let closedAt: String?
       let milestoneName: String?
