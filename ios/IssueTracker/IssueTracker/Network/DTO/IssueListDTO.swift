@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct IssueListDTO: Codable {
-   struct Issue: Codable, Hashable {
+class IssueListDTO: Codable {
+   class Issue: Codable, Hashable {
       let issueId: Int
       var title: String
       let content: String
       let userName: String
       let profileUrl: String?
-      let isOpen: Bool
+      var isOpen: Bool
       let createdAt: String
       let closedAt: String?
       let milestoneName: String?
@@ -27,15 +27,23 @@ struct IssueListDTO: Codable {
       func hash(into hasher: inout Hasher) {
          hasher.combine(issueId)
       }
+      
+      func open() {
+         self.isOpen = true
+      }
+      
+      func close() {
+         self.isOpen = false
+      }
    }
    
-   struct User: Codable {
+   class User: Codable {
       let userId: Int
       let userName: String
       let profileUrl: String?
    }
    
-   struct Label: Codable {
+   class Label: Codable {
       let labelId: Int
       let labelName: String
       let backgroundColor: String
@@ -43,7 +51,7 @@ struct IssueListDTO: Codable {
       let description: String?
    }
    
-   struct Milestone: Codable {
+   class Milestone: Codable {
       let milestoneId: Int
       let milestoneName: String
       let description: String?

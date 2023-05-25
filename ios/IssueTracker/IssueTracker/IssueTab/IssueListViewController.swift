@@ -61,7 +61,7 @@ class IssueListViewController: UIViewController {
    func fetchIssues(cellCompletion: (() -> Void)? = nil) {
       guard hasNextPage else { return }
       isPaging = true
-      networkManager?.fetchIssueList() { [weak self] dto in
+      networkManager?.fetchIssueList { [weak self] dto in
          cellCompletion?()
          self?.isPaging = false
          self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
