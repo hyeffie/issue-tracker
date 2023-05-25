@@ -1,35 +1,33 @@
 //
-//  LabelListViewController.swift
+//  MilestoneListViewController.swift
 //  IssueTracker
 //
-//  Created by Effie on 2023/05/24.
+//  Created by Effie on 2023/05/25.
 //
 
 import UIKit
 
-class LabelListViewController: UIViewController {
+class MilestoneListViewController: UIViewController {
    private var collectionView: UICollectionView!
    private var dataSource: DataSource!
    
    private var networkManager: NetworkManager?
-   private var list: LabelList = LabelList(labels: [
-      LabelList.Label(labelId: 0, labelName: "BE", backgroundColor: "#b6f482", description: "데이터베이스 수정"),
-      LabelList.Label(labelId: 1, labelName: "new jeans", backgroundColor: "#10f4FF", description: "코카콜라 맛있다"),
-      LabelList.Label(labelId: 2, labelName: "le serrafim", backgroundColor: "#b6f482", description: "fearless ha"),
-      LabelList.Label(labelId: 3, labelName: "aespa", backgroundColor: "#FFFFFF", description: "넥레 딱대"),
+   private var list: MilestoneList = MilestoneList(milestones: [
+      .init(milestoneId: 0, name: "[BE] 이슈 관리 기능", description: "평냉엔 소주", completedAt: Date(), countAllOpenedIssues: 20, countAllClosedIssues: 2, progress: Double(2 / 22)),
+      .init(milestoneId: 1, name: "[iOS] 이슈 관리 기능", description: "평냉엔 소주? 이게 맞아?", completedAt: Date(), countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: Double(2 / 2)),
    ])
    
    override func viewDidLoad() {
       super.viewDidLoad()
       self.view.backgroundColor = .systemBackground
-      self.title = "레이블"
+      self.title = "마일스톤"
       setCollectionView()
       configureDataSource()
       applyUpdatedSnapshot()
    }
 }
 
-extension LabelListViewController {
+extension MilestoneListViewController {
    private func setCollectionView() {
       collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
       collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +52,7 @@ extension LabelListViewController {
    }
 }
 
-extension LabelListViewController {
+extension MilestoneListViewController {
    func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
       return { _ in
          var actions: [UIContextualAction]
@@ -65,42 +63,42 @@ extension LabelListViewController {
    }
 }
 
-extension LabelListViewController {
-   typealias LabelCell = LabelListCell
+extension MilestoneListViewController {
+   typealias MilestoneCell = LabelListCell
    private enum Section {
-      case label
+      case milestone
       
       var cellClass: UICollectionViewCell.Type {
          switch self {
-         case .label: return LabelCell.self
+         case .milestone: return MilestoneCell.self
          }
       }
    }
    
    private enum Item: Hashable {
-      case label(label: LabelList.Label)
+      case milestone(milestone: MilestoneList.Milestone)
    }
    
    private class DataSource: UICollectionViewDiffableDataSource<Section, Item> { }
    
-   private func createLabelCellRegisteration() -> UICollectionView.CellRegistration<LabelCell, Item> {
-      let cellNib = UINib(nibName: LabelCell.cellId, bundle: nil)
+   private func createMilestoneCellRegisteration() -> UICollectionView.CellRegistration<MilestoneCell, Item> {
+      let cellNib = UINib(nibName: MilestoneCell.cellId, bundle: nil)
       return .init(cellNib: cellNib) { cell, indexPath, itemIdentifier in
-         guard case Item.label(let label) = itemIdentifier else { return }
-         cell.configure(with: label)
+         guard case Item.milestone(let milestone) = itemIdentifier else { return }
+//         cell.configure(with: milestone)
       }
    }
    
    private func configureDataSource() {
-      let labelCellRegistration = createLabelCellRegisteration()
+      let milestoneCellRegistration = createMilestoneCellRegisteration()
       
       dataSource = DataSource(
          collectionView: collectionView,
          cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
          switch item {
-         case .label:
+         case .milestone:
             return collectionView.dequeueConfiguredReusableCell(
-               using: labelCellRegistration,
+               using: milestoneCellRegistration,
                for: indexPath,
                item: item)
          }
@@ -109,8 +107,8 @@ extension LabelListViewController {
    
    private func applyUpdatedSnapshot(animated: Bool = true) {
       var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-      snapshot.appendSections([.label])
-      snapshot.appendItems(list.labels.map { label in Item.label(label: label) }, toSection: .label)
+      snapshot.appendSections([.milestone])
+      snapshot.appendItems(list.milestones.map { milestone in Item.milestone(milestone: milestone) }, toSection: .milestone)
       dataSource.apply(snapshot, animatingDifferences: animated)
    }
 }

@@ -14,17 +14,25 @@ class TabBarController: UITabBarController {
    }
    
    func setViewControllers() {
+      // issue
       let issueListStoryBoard = UIStoryboard(name: "IssueList", bundle: nil)
       guard let issueListController = issueListStoryBoard.instantiateInitialViewController() as? UINavigationController else { return }
       
+      // label
       let labelListVC = LabelListViewController()
-      labelListVC.view.backgroundColor = .systemBackground
       let labelNavigationController = UINavigationController(rootViewController: labelListVC)
       labelNavigationController.navigationBar.prefersLargeTitles = true
       labelNavigationController.tabBarItem.title = "레이블"
       labelNavigationController.tabBarItem.image = UIImage(named: "tag")
       
-      let controllers = [issueListController, labelNavigationController]
+      // milestone
+      let milestoneListVC = MilestoneListViewController()
+      let milestoneNavigationController = UINavigationController(rootViewController: milestoneListVC)
+      milestoneNavigationController.navigationBar.prefersLargeTitles = true
+      milestoneNavigationController.tabBarItem.title = "마일스톤"
+      milestoneNavigationController.tabBarItem.image = UIImage(named: "milestone")
+      
+      let controllers = [issueListController, labelNavigationController, milestoneNavigationController]
       setViewControllers(controllers, animated: false)
    }
 }
