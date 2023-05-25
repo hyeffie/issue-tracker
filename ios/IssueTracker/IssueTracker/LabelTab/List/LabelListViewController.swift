@@ -43,12 +43,24 @@ extension LabelListViewController {
    }
    
    private func setCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-      let sectionProvider: UICollectionViewCompositionalLayoutSectionProvider = { _, layoutEnvironment in
+      let sectionProvider: UICollectionViewCompositionalLayoutSectionProvider = { [weak self] _, layoutEnvironment in
          var config = UICollectionLayoutListConfiguration(appearance: .plain)
          config.showsSeparators = true
+         config.trailingSwipeActionsConfigurationProvider = self?.createSwipeActionProvider()
          return NSCollectionLayoutSection.list(using: config, layoutEnvironment: layoutEnvironment)
       }
       return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
+   }
+}
+
+extension LabelListViewController {
+   func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
+      return { _ in
+         var actions: [UIContextualAction]
+         let delete = SwiptAction.delete.makeAction(hasImage: false, withHandler: { _, _, _ in })
+         let edit = SwiptAction.edit.makeAction(hasImage: false, withHandler: { _, _, _ in })
+         return UISwipeActionsConfiguration(actions: [delete, edit])
+      }
    }
 }
 
