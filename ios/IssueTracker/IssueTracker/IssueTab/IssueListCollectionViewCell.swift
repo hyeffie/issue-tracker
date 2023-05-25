@@ -54,7 +54,7 @@ class IssueListCollectionViewCell: UICollectionViewCell, CellIdentifiable {
       labelStackView.arrangedSubviews.forEach { view in view.removeFromSuperview() }
    }
    
-   func configure(issue: IssueListDTO.Issue) {
+   func configure(issue: IssueList.Issue) {
       titleLabel.text = issue.title
       descriptionLabel.text = issue.content
       milestoneLabel.text = issue.milestoneName

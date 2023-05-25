@@ -7,8 +7,8 @@
 
 import Foundation
 
-class IssueListDTO: Codable {
-   class Issue: Codable, Hashable {
+struct IssueListDTO: Codable {
+   struct Issue: Codable, Hashable {
       let issueId: Int
       var title: String
       let content: String
@@ -27,23 +27,15 @@ class IssueListDTO: Codable {
       func hash(into hasher: inout Hasher) {
          hasher.combine(issueId)
       }
-      
-      func open() {
-         self.isOpen = true
-      }
-      
-      func close() {
-         self.isOpen = false
-      }
    }
    
-   class User: Codable {
+   struct User: Codable {
       let userId: Int
       let userName: String
       let profileUrl: String?
    }
    
-   class Label: Codable {
+   struct Label: Codable {
       let labelId: Int
       let labelName: String
       let backgroundColor: String
@@ -51,7 +43,7 @@ class IssueListDTO: Codable {
       let description: String?
    }
    
-   class Milestone: Codable {
+   struct Milestone: Codable {
       let milestoneId: Int
       let milestoneName: String?
       let description: String?

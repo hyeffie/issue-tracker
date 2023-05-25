@@ -72,7 +72,8 @@ class IssueListViewController: UIViewController {
          self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
          if dto.issues.count > 0 {
             self?.list.emptyList()
-            self?.list.add(issues: dto.issues) // -> POST NOTIFICATION
+            let newIssues = ListingItemFactory.LabelList.makeIssues(with: dto.issues)
+            self?.list.add(issues: newIssues) // -> POST NOTIFICATION
             self?.fetchedAllData = dto
             self?.currentPageNumber += 1
          }
@@ -122,6 +123,7 @@ class IssueListViewController: UIViewController {
    private func applyUpdatedSnapshot(animated: Bool = true) {
       var snapshot = NSDiffableDataSourceSnapshot<SectionType, ItemType>()
       snapshot.appendSections([.issue, .loadIndicator])
+//      let issues =
       snapshot.appendItems(list.issues.map { issue in Item.issue(issue: issue) }, toSection: .issue)
       snapshot.appendItems([.load], toSection: .loadIndicator)
       dataSource.apply(snapshot, animatingDifferences: animated)
@@ -176,7 +178,7 @@ extension IssueListViewController {
    }
    
    enum Item: Hashable {
-      case issue(issue: IssueListDTO.Issue)
+      case issue(issue: IssueList.Issue)
       case load
    }
    
