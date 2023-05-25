@@ -32,7 +32,13 @@ class TabBarController: UITabBarController {
       milestoneNavigationController.tabBarItem.title = "마일스톤"
       milestoneNavigationController.tabBarItem.image = UIImage(named: "milestone")
       
-      let controllers = [issueListController, labelNavigationController, milestoneNavigationController]
+      // 내 계정
+      let profileVC = UIViewController()
+      profileVC.view.backgroundColor = .systemBackground
+      profileVC.tabBarItem.title = "내 계정"
+      profileVC.tabBarItem.image = UIImage(named: "profileS")
+      
+      let controllers = [issueListController, labelNavigationController, milestoneNavigationController, profileVC]
       setViewControllers(controllers, animated: false)
    }
 }
