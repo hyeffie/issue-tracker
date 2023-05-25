@@ -53,7 +53,7 @@ class IssueListDTO: Codable {
    
    class Milestone: Codable {
       let milestoneId: Int
-      let milestoneName: String
+      let milestoneName: String?
       let description: String?
    }
    

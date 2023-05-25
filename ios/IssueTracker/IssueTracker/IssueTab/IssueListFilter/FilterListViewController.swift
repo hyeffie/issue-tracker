@@ -98,7 +98,7 @@ extension FilterListViewController: UICollectionViewDataSource {
          case 2:
             filterElement = useCase.labelList[indexPath.row].labelName
          default:
-            filterElement = useCase.milestoneList[indexPath.row].milestoneName
+            filterElement = useCase.milestoneList[indexPath.row].milestoneName!
       }
       
       cell.filterName.text = filterElement
