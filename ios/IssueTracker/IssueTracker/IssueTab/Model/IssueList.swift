@@ -24,10 +24,23 @@ class IssueList {
    
    private func append(_ newIssues: [Issue]) {
       self.issues.append(contentsOf: newIssues)
+      
+      NotificationCenter.default.post(
+         name: Notifications.didAddIssues,
+         object: self,
+         userInfo: [Keys.Issues: self.issues])
    }
    
    func add(issues: [Issue]) {
       self.append(issues)
+   }
+   
+   private func append(_ issue: Issue) {
+      self.issues.append(issue)
+   }
+   
+   func add(issue: Issue) {
+      self.append(issue)
    }
    
    private func empty() {
@@ -100,5 +113,18 @@ class IssueList {
    
    func deleteIssue(at index: Int) {
       self.delete(at: index)
+   }
+}
+
+extension IssueList {
+   enum Notifications {
+      static let didAddIssues = Notification.Name(rawValue: "didAddIssues")
+      static let didOpenIssue = Notification.Name("didOpenIssue")
+      static let didCloseIssue = Notification.Name("didCloseIssue")
+   }
+   
+   enum Keys {
+      static let Issues = "Issues"
+      static let Issue = "Issue"
    }
 }

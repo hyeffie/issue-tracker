@@ -8,17 +8,17 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-   let issueCellID = "IssueListCollectionViewCell"
-   let loadCellID = "LoadCollectionViewCell"
    let filterListID = "FilterList"
    
    var networkManager: NetworkManager?
-   var objects: [IssueListDTO.Issue] = []
+   private var list: IssueList = IssueList()
    var fetchedAllData = IssueListDTO()
    
    var currentPageNumber: Int = 0
    var isPaging = false
    var hasNextPage = true
+   
+   var observers: [NSObjectProtocol] = []
    
    @IBOutlet weak var collectionView: UICollectionView!
    private var dataSource: DataSource!
@@ -26,14 +26,16 @@ class IssueListViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       self.title = "이슈"
+      addObservers()
       setCollectionView()
-      configureDataSource()
-      setNetworkManagerAndData()
+      setNetworkManager()
+      fetchIssues()
    }
    
    func setCollectionView() {
       collectionView.collectionViewLayout = createLayout()
       collectionView.delegate = self
+      configureDataSource()
    }
    
    func createLayout() -> UICollectionViewLayout {
@@ -61,24 +63,21 @@ class IssueListViewController: UIViewController {
    func fetchIssues(cellCompletion: (() -> Void)? = nil) {
       guard hasNextPage else { return }
       isPaging = true
-      networkManager?.fetchIssueList { [weak self] dto in
+      networkManager?.fetchIssueList() { [weak self] dto in
          cellCompletion?()
          self?.isPaging = false
          self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
          if dto.issues.count > 0 {
-            self?.objects = []
-            self?.objects.append(contentsOf: dto.issues)
+            self?.list.emptyList()
+            self?.list.add(issues: dto.issues) // -> POST NOTIFICATION
             self?.fetchedAllData = dto
-            DispatchQueue.main.async { [weak self] in
-               self?.applyUpdatedSnapshot()
-            }
             self?.currentPageNumber += 1
          }
       }
    }
    
    private func createIssueCellRegisteration() -> UICollectionView.CellRegistration<IssueListCollectionViewCell, ItemType> {
-      let issueCellNib = UINib(nibName: issueCellID, bundle: nil)
+      let issueCellNib = UINib(nibName: Section.issue.cellIdentifier, bundle: nil)
       return .init(cellNib: issueCellNib) { cell, indexPath, itemIdentifier in
          guard indexPath.section == 0, case Item.issue(let issue) = itemIdentifier else { return }
          cell.configure(issue: issue)
@@ -86,7 +85,7 @@ class IssueListViewController: UIViewController {
    }
    
    private func createLoadCellRegisteration() -> UICollectionView.CellRegistration<LoadCollectionViewCell, ItemType> {
-      let loadCellNib = UINib(nibName: loadCellID, bundle: nil)
+      let loadCellNib = UINib(nibName: Section.loadIndicator.cellIdentifier, bundle: nil)
       return .init(cellNib: loadCellNib, handler: { _, _, _ in })
    }
    
@@ -109,14 +108,13 @@ class IssueListViewController: UIViewController {
    private func applyUpdatedSnapshot(animated: Bool = true) {
       var snapshot = NSDiffableDataSourceSnapshot<SectionType, ItemType>()
       snapshot.appendSections([.issue, .loadIndicator])
-      snapshot.appendItems(objects.map { object in Item.issue(issue: object) }, toSection: .issue)
+      snapshot.appendItems(list.issues.map { issue in Item.issue(issue: issue) }, toSection: .issue)
       snapshot.appendItems([.load], toSection: .loadIndicator)
       dataSource.apply(snapshot, animatingDifferences: animated)
    }
    
-   func setNetworkManagerAndData() {
+   func setNetworkManager() {
       networkManager = NetworkManager(session: URLSession.shared)
-      fetchIssues()
    }
    
    @IBAction func filter(_ sender: Any) {
@@ -175,7 +173,15 @@ extension IssueListViewController {
       case load
    }
    
-   private class DataSource: UICollectionViewDiffableDataSource<SectionType, ItemType> {
-      
+   private class DataSource: UICollectionViewDiffableDataSource<SectionType, ItemType> { }
+}
+
+extension IssueListViewController {
+   func addObservers() {
+      var noti = NotificationCenter.default.addObserver(
+         forName: IssueList.Notifications.didAddIssues,
+         object: list, queue: .main,
+         using: { [weak self] _ in self?.applyUpdatedSnapshot() })
+      self.observers.append(noti)
    }
 }
