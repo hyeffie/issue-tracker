@@ -11,13 +11,13 @@ class MilestoneList {
    class Milestone: Hashable {
       let milestoneId: Int
       var name: String
-      var description: String
-      var completedAt: Date
+      var description: String?
+      var completedAt: String?
       let countAllOpenedIssues: Int
       let countAllClosedIssues: Int
       var progress: Double
       
-      init(milestoneId: Int, name: String, description: String, completedAt: Date,
+      init(milestoneId: Int, name: String, description: String?, completedAt: String?,
            countAllOpenedIssues: Int, countAllClosedIssues: Int, progress: Double) {
          self.milestoneId = milestoneId
          self.name = name

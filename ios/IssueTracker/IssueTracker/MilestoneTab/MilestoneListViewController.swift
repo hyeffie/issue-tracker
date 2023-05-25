@@ -13,8 +13,12 @@ class MilestoneListViewController: UIViewController {
    
    private var networkManager: NetworkManager?
    private var list: MilestoneList = MilestoneList(milestones: [
-      .init(milestoneId: 0, name: "[BE] 이슈 관리 기능", description: "평냉엔 소주", completedAt: Date(), countAllOpenedIssues: 20, countAllClosedIssues: 2, progress: Double(2 / 22)),
-      .init(milestoneId: 1, name: "[iOS] 이슈 관리 기능", description: "평냉엔 소주? 이게 맞아?", completedAt: Date(), countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: Double(2 / 2)),
+      .init(milestoneId: 0, name: "[BE] 이슈 관리 기능", description: "평냉엔 소주", completedAt: "2023-01-01", countAllOpenedIssues: 20, countAllClosedIssues: 2, progress: Double(2 / 22)),
+      .init(milestoneId: 1, name: "[iOS] 이슈 관리 기능", description: "평냉엔 소주? 이게 맞아?", completedAt: "2023-06-30", countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: Double(2 / 2)),
+      .init(milestoneId: 2, name: "[iOS] 이슈 관리 기능", description: nil, completedAt: "2023-06-30", countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: Double(2 / 2)),
+      .init(milestoneId: 3, name: "[iOS] 이슈 관리 기능", description: "사랑해요", completedAt: nil, countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: Double(2 / 2)),
+      .init(milestoneId: 4, name: "[iOS] 이슈 관리 기능", description: nil, completedAt: nil, countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: Double(2 / 2)),
+      .init(milestoneId: 5, name: "[iOS] 힘들어요", description: nil, completedAt: nil, countAllOpenedIssues: 0, countAllClosedIssues: 2, progress: 100),
    ])
    
    override func viewDidLoad() {
@@ -55,16 +59,17 @@ extension MilestoneListViewController {
 extension MilestoneListViewController {
    func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
       return { _ in
-         var actions: [UIContextualAction]
-         let delete = SwiptAction.delete.makeAction(hasImage: false, withHandler: { _, _, _ in })
-         let edit = SwiptAction.edit.makeAction(hasImage: false, withHandler: { _, _, _ in })
-         return UISwipeActionsConfiguration(actions: [delete, edit])
+         let delete = SwiptAction.delete.makeAction(withHandler: { _, _, _ in })
+         let edit = SwiptAction.edit.makeAction(withHandler: { _, _, _ in })
+         let config = UISwipeActionsConfiguration(actions: [delete, edit])
+         config.performsFirstActionWithFullSwipe = false
+         return config
       }
    }
 }
 
 extension MilestoneListViewController {
-   typealias MilestoneCell = LabelListCell
+   typealias MilestoneCell = MilestoneListCell
    private enum Section {
       case milestone
       
@@ -85,7 +90,7 @@ extension MilestoneListViewController {
       let cellNib = UINib(nibName: MilestoneCell.cellId, bundle: nil)
       return .init(cellNib: cellNib) { cell, indexPath, itemIdentifier in
          guard case Item.milestone(let milestone) = itemIdentifier else { return }
-//         cell.configure(with: milestone)
+         cell.configure(with: milestone)
       }
    }
    
