@@ -35,10 +35,18 @@ class TabBarController: UITabBarController {
       // 내 계정
       let profileVC = UIViewController()
       profileVC.view.backgroundColor = .systemBackground
-      profileVC.tabBarItem.title = "내 계정"
-      profileVC.tabBarItem.image = UIImage(named: "profileS")
+      profileVC.title = "내 계정"
+      let profileNavigationController = UINavigationController(rootViewController: profileVC)
+      profileNavigationController.navigationBar.prefersLargeTitles = true
+      profileNavigationController.tabBarItem.title = "내 계정"
+      profileNavigationController.tabBarItem.image = UIImage(named: "profileS")
       
-      let controllers = [issueListController, labelNavigationController, milestoneNavigationController, profileVC]
+      let controllers = [
+         issueListController,
+         labelNavigationController,
+         milestoneNavigationController,
+         profileNavigationController
+      ]
       setViewControllers(controllers, animated: false)
    }
 }

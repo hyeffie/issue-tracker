@@ -73,12 +73,6 @@ extension MilestoneListViewController {
    typealias MilestoneCell = MilestoneListCell
    private enum Section {
       case milestone
-      
-      var cellClass: UICollectionViewCell.Type {
-         switch self {
-         case .milestone: return MilestoneCell.self
-         }
-      }
    }
    
    private enum Item: Hashable {

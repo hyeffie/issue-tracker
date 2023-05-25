@@ -48,10 +48,6 @@ extension MilestoneList {
    enum Notifications {
       static let didAddMilestones = Notification.Name(rawValue: "didAddMilestones")
    }
-   
-   enum Keys {
-      static let MileStones = "MileStones"
-   }
 }
 
 extension MilestoneList {

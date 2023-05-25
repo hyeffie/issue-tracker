@@ -49,7 +49,7 @@ struct ListingItemFactory {
    }
    
    struct MilestoneTab {
-      private static func makeMilestone(with milestone: MilestoneDTO.Milestone) -> MilestoneList.Milestone {
+      private static func makeMilestone(with milestone: MilestoneListDTO.Milestone) -> MilestoneList.Milestone {
          return .init(milestoneId: milestone.milestoneId,
                       name: milestone.name,
                       description: milestone.description,
@@ -59,7 +59,7 @@ struct ListingItemFactory {
                       progress: milestone.progress)
       }
       
-      static func makeMilestoneList(with dto: MilestoneDTO) -> [MilestoneList.Milestone] {
+      static func makeMilestoneList(with dto: MilestoneListDTO) -> [MilestoneList.Milestone] {
          let milestones = dto.milestoneList.map { milestone in makeMilestone(with: milestone) }
          return milestones
       }

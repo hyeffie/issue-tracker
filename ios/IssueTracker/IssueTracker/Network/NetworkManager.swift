@@ -104,11 +104,11 @@ final class NetworkManager {
       }
    }
    
-   func requestMilestoneList(completion: @escaping (MilestoneDTO) -> Void) {
+   func requestMilestoneList(completion: @escaping (MilestoneListDTO) -> Void) {
       let url = baseURL + "/milestones"
       
       fetchData(for: url,
-                dataType: MilestoneDTO.self) { result in
+                dataType: MilestoneListDTO.self) { result in
          switch result {
          case .success(let dto):
             completion(dto)

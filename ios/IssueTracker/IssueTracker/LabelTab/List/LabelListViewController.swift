@@ -74,12 +74,6 @@ extension LabelListViewController {
    
    private enum Section {
       case label
-      
-      var cellClass: UICollectionViewCell.Type {
-         switch self {
-         case .label: return LabelCell.self
-         }
-      }
    }
    
    private enum Item: Hashable {
