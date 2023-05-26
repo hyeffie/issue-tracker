@@ -18,6 +18,11 @@
                     AND l.id = #{labelId}
                 </foreach>
             </if>
+            <if test="assignee != null and assignee.size() > 0">
+                <foreach item="assigneeId" collection="assignee">
+                    AND a.user_id = #{assigneeId}
+                </foreach>
+            </if>
             <if test="milestone != null">
                 AND m.id = #{milestone}
             </if>
