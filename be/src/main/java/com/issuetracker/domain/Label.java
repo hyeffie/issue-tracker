@@ -20,9 +20,9 @@ public class Label {
     @Id
     private Integer id;
     private String name;
-    @Column("backgroundColor")
+    @Column("background_color")
     private String backgroundColor;
-    @Column("fontColor")
+    @Column("font_color")
     private String fontColor;
     private String description;
     private boolean deleted;
