@@ -11,6 +11,8 @@
 		635342AC2A20DEB300668765 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342AB2A20DEB300668765 /* IssueDetailViewController.swift */; };
 		635342AE2A20DEFE00668765 /* UIViewController+hideTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342AD2A20DEFE00668765 /* UIViewController+hideTabBar.swift */; };
 		635342B02A20DF8400668765 /* IssueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635342AF2A20DF8400668765 /* IssueDetail.storyboard */; };
+		635342B22A20E56700668765 /* IssueDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342B12A20E56700668765 /* IssueDetailUseCase.swift */; };
+		635342B42A20E5DB00668765 /* IssueDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342B32A20E5DB00668765 /* IssueDetailDTO.swift */; };
 		638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */; };
 		638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */; };
 		63D6CFCF2A15B7F6000876D5 /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6CFCE2A15B7F6000876D5 /* FilterListViewController.swift */; };
@@ -65,6 +67,8 @@
 		635342AB2A20DEB300668765 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		635342AD2A20DEFE00668765 /* UIViewController+hideTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+hideTabBar.swift"; sourceTree = "<group>"; };
 		635342AF2A20DF8400668765 /* IssueDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueDetail.storyboard; sourceTree = "<group>"; };
+		635342B12A20E56700668765 /* IssueDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailUseCase.swift; sourceTree = "<group>"; };
+		635342B32A20E5DB00668765 /* IssueDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailDTO.swift; sourceTree = "<group>"; };
 		638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueListCollectionViewCell.xib; sourceTree = "<group>"; };
 		638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionViewCell.swift; sourceTree = "<group>"; };
 		63D6CFCE2A15B7F6000876D5 /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 			children = (
 				635342AF2A20DF8400668765 /* IssueDetail.storyboard */,
 				635342AB2A20DEB300668765 /* IssueDetailViewController.swift */,
+				635342B12A20E56700668765 /* IssueDetailUseCase.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				F48583CE2A1380D100322C9F /* IssueListDTO.swift */,
+				635342B32A20E5DB00668765 /* IssueDetailDTO.swift */,
 				F4A28CF12A1F56FB0091A940 /* LabelListDTO.swift */,
 				F4A28CF72A1F77B20091A940 /* MilestoneListDTO.swift */,
 			);
@@ -430,6 +436,7 @@
 			files = (
 				F48926FE2A175DF3000EBE9C /* LoadCollectionViewCell.swift in Sources */,
 				F4BF7CF72A0D231D001C22F0 /* UILabel+font.swift in Sources */,
+				635342B42A20E5DB00668765 /* IssueDetailDTO.swift in Sources */,
 				F4A28CCE2A1E3A200091A940 /* SwipeAction.swift in Sources */,
 				F48583CC2A13802E00322C9F /* NetworkError.swift in Sources */,
 				F4A28CF82A1F77B20091A940 /* MilestoneListDTO.swift in Sources */,
@@ -446,6 +453,7 @@
 				F4A28CF22A1F56FB0091A940 /* LabelListDTO.swift in Sources */,
 				F48583CF2A1380D100322C9F /* IssueListDTO.swift in Sources */,
 				F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */,
+				635342B22A20E56700668765 /* IssueDetailUseCase.swift in Sources */,
 				F4A28CED2A1F40B70091A940 /* MilestoneListCell.swift in Sources */,
 				F4A28CE22A1F23030091A940 /* LabelList.swift in Sources */,
 				F4A28CE72A1F32B90091A940 /* MilestoneListViewController.swift in Sources */,

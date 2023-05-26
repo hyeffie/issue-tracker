@@ -201,6 +201,7 @@ extension IssueListViewController {
       guard let viewController = storyboard.instantiateInitialViewController() as?
                                        IssueDetailViewController else { return }
       
+      viewController.issueId = list.issues[indexPath.row].issueId
       self.navigationController?.pushViewController(viewController, animated: true)
    }
 }

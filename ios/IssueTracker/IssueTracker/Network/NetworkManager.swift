@@ -90,6 +90,20 @@ final class NetworkManager {
       }
    }
    
+   func requestIssueDetail(issueId: Int, completion: @escaping (IssueDetailDTO) -> Void) {
+      let issueDetailURL = baseURL + "/issues/\(issueId)"
+
+      fetchData(for: issueDetailURL,
+                dataType: IssueDetailDTO.self) { result in
+         switch result {
+         case .success(let dto):
+            completion(dto)
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+   
    func requestLabelList(completion: @escaping (LabelListDTO) -> Void) {
       let labelListURL = baseURL + "/labels"
       
