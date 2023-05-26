@@ -13,6 +13,10 @@
 		635342B02A20DF8400668765 /* IssueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635342AF2A20DF8400668765 /* IssueDetail.storyboard */; };
 		635342B22A20E56700668765 /* IssueDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342B12A20E56700668765 /* IssueDetailUseCase.swift */; };
 		635342B42A20E5DB00668765 /* IssueDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342B32A20E5DB00668765 /* IssueDetailDTO.swift */; };
+		635342BB2A20FAF800668765 /* IssueDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342B72A20FAF700668765 /* IssueDetailCollectionViewCell.swift */; };
+		635342BC2A20FAF800668765 /* IssueDetailCollectionViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 635342B82A20FAF800668765 /* IssueDetailCollectionViewHeader.xib */; };
+		635342BD2A20FAF800668765 /* IssueDetailCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342B92A20FAF800668765 /* IssueDetailCollectionViewHeader.swift */; };
+		635342BE2A20FAF800668765 /* IssueDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 635342BA2A20FAF800668765 /* IssueDetailCollectionViewCell.xib */; };
 		638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */; };
 		638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */; };
 		63D6CFCF2A15B7F6000876D5 /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6CFCE2A15B7F6000876D5 /* FilterListViewController.swift */; };
@@ -69,6 +73,10 @@
 		635342AF2A20DF8400668765 /* IssueDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueDetail.storyboard; sourceTree = "<group>"; };
 		635342B12A20E56700668765 /* IssueDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailUseCase.swift; sourceTree = "<group>"; };
 		635342B32A20E5DB00668765 /* IssueDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailDTO.swift; sourceTree = "<group>"; };
+		635342B72A20FAF700668765 /* IssueDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		635342B82A20FAF800668765 /* IssueDetailCollectionViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueDetailCollectionViewHeader.xib; sourceTree = "<group>"; };
+		635342B92A20FAF800668765 /* IssueDetailCollectionViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailCollectionViewHeader.swift; sourceTree = "<group>"; };
+		635342BA2A20FAF800668765 /* IssueDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueListCollectionViewCell.xib; sourceTree = "<group>"; };
 		638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionViewCell.swift; sourceTree = "<group>"; };
 		63D6CFCE2A15B7F6000876D5 /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +144,10 @@
 			children = (
 				635342AF2A20DF8400668765 /* IssueDetail.storyboard */,
 				635342AB2A20DEB300668765 /* IssueDetailViewController.swift */,
+				635342B82A20FAF800668765 /* IssueDetailCollectionViewHeader.xib */,
+				635342B92A20FAF800668765 /* IssueDetailCollectionViewHeader.swift */,
+				635342BA2A20FAF800668765 /* IssueDetailCollectionViewCell.xib */,
+				635342B72A20FAF700668765 /* IssueDetailCollectionViewCell.swift */,
 				635342B12A20E56700668765 /* IssueDetailUseCase.swift */,
 			);
 			path = Detail;
@@ -387,6 +399,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				635342BC2A20FAF800668765 /* IssueDetailCollectionViewHeader.xib in Resources */,
 				F48927002A175FCB000EBE9C /* LoadCollectionViewCell.xib in Resources */,
 				F4BF7CE32A0C89BD001C22F0 /* .swiftlint.yml in Resources */,
 				638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */,
@@ -401,6 +414,7 @@
 				63D6CFD22A15F099000876D5 /* FilterList.storyboard in Resources */,
 				F4A28CE02A1E3F8E0091A940 /* LabelListCell.xib in Resources */,
 				635342B02A20DF8400668765 /* IssueDetail.storyboard in Resources */,
+				635342BE2A20FAF800668765 /* IssueDetailCollectionViewCell.xib in Resources */,
 				63D6CFE52A168C0C000876D5 /* FilterListCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,6 +468,7 @@
 				F48583CF2A1380D100322C9F /* IssueListDTO.swift in Sources */,
 				F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */,
 				635342B22A20E56700668765 /* IssueDetailUseCase.swift in Sources */,
+				635342BD2A20FAF800668765 /* IssueDetailCollectionViewHeader.swift in Sources */,
 				F4A28CED2A1F40B70091A940 /* MilestoneListCell.swift in Sources */,
 				F4A28CE22A1F23030091A940 /* LabelList.swift in Sources */,
 				F4A28CE72A1F32B90091A940 /* MilestoneListViewController.swift in Sources */,
@@ -472,6 +487,7 @@
 				635342AE2A20DEFE00668765 /* UIViewController+hideTabBar.swift in Sources */,
 				638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */,
 				63D6CFEA2A1698E7000876D5 /* FilterListCollectionViewHeader.swift in Sources */,
+				635342BB2A20FAF800668765 /* IssueDetailCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

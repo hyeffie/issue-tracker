@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="IssueDetailCollectionViewHeader" customModule="IssueTracker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="395" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXw-sD-2MX">
+                    <rect key="frame" x="16" y="8" width="363" height="56"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cF2-x6-toS">
+                            <rect key="frame" x="0.0" y="0.0" width="134.66666666666666" height="20.333333333333332"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이슈 제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BzM-3o-tBX">
+                                    <rect key="frame" x="0.0" y="0.0" width="63.333333333333336" height="20.333333333333332"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이슈 번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ouy-O5-wN4">
+                                    <rect key="frame" x="71.333333333333329" y="0.0" width="63.333333333333329" height="20.333333333333332"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YxO-j9-Nnt">
+                            <rect key="frame" x="0.0" y="28.333333333333336" width="134.66666666666666" height="20.333333333333336"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닫힘 여부" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzM-Bi-riG" customClass="IssueLabel" customModule="IssueTracker" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="63.333333333333336" height="20.333333333333332"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="작성 시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWT-Hx-ndR">
+                                    <rect key="frame" x="71.333333333333329" y="0.0" width="63.333333333333329" height="20.333333333333332"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="YxO-j9-Nnt" secondAttribute="bottom" id="3ZC-P8-W7L"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YxO-j9-Nnt" secondAttribute="trailing" id="60s-Pz-BCb"/>
+                        <constraint firstItem="cF2-x6-toS" firstAttribute="top" secondItem="fXw-sD-2MX" secondAttribute="top" id="BbR-VQ-ZpA"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cF2-x6-toS" secondAttribute="trailing" id="DNs-9Z-4h3"/>
+                        <constraint firstItem="YxO-j9-Nnt" firstAttribute="top" secondItem="cF2-x6-toS" secondAttribute="bottom" constant="8" id="r1U-Td-mW4"/>
+                        <constraint firstItem="cF2-x6-toS" firstAttribute="leading" secondItem="fXw-sD-2MX" secondAttribute="leading" id="xFT-cr-RoJ"/>
+                        <constraint firstItem="YxO-j9-Nnt" firstAttribute="leading" secondItem="fXw-sD-2MX" secondAttribute="leading" id="xiy-hn-yyk"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fXw-sD-2MX" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="16" id="OER-92-pY1"/>
+                <constraint firstAttribute="bottom" secondItem="fXw-sD-2MX" secondAttribute="bottom" constant="16" id="Pae-Rc-feD"/>
+                <constraint firstItem="fXw-sD-2MX" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="8" id="e2G-Jp-nQh"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="fXw-sD-2MX" secondAttribute="trailing" constant="16" id="i7E-m5-Guq"/>
+            </constraints>
+            <connections>
+                <outlet property="editTime" destination="vWT-Hx-ndR" id="wvX-Df-PuD"/>
+                <outlet property="number" destination="Ouy-O5-wN4" id="xAI-Zk-atH"/>
+                <outlet property="status" destination="PzM-Bi-riG" id="HOO-mt-sDj"/>
+                <outlet property="title" destination="BzM-3o-tBX" id="2nT-yt-1Cc"/>
+            </connections>
+            <point key="canvasLocation" x="67.938931297709928" y="29.577464788732396"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
