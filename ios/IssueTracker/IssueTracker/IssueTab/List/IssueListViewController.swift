@@ -194,3 +194,13 @@ extension IssueListViewController {
       self.observers.append(noti)
    }
 }
+
+extension IssueListViewController {
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      let storyboard = UIStoryboard(name: "IssueDetail", bundle: nil)
+      guard let viewController = storyboard.instantiateInitialViewController() as?
+                                       IssueDetailViewController else { return }
+      
+      self.navigationController?.pushViewController(viewController, animated: true)
+   }
+}

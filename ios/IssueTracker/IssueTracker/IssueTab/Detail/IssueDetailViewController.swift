@@ -8,6 +8,8 @@
 import UIKit
 
 class IssueDetailViewController: UIViewController {
+   var issueId: Int?
+   
    override func viewDidLoad() {
       super.viewDidLoad()
       hideTabBar()
