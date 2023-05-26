@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -115,12 +116,11 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#FFFFFF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LR-VH-fgf">
+                                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="#FFFFFF" placeholder="선택 사항" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JDT-wX-xGb">
                                                             <rect key="frame" x="93.999999999999986" y="0.0" width="218.66666666666663" height="32.333333333333336"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CwT-XD-Qs1">
                                                             <rect key="frame" x="328.66666666666669" y="0.0" width="32.333333333333314" height="32.333333333333336"/>
                                                             <constraints>
@@ -130,6 +130,9 @@
                                                             <buttonConfiguration key="configuration" style="plain">
                                                                 <imageReference key="image" image="arrow.clockwise" catalog="system" symbolScale="medium"/>
                                                             </buttonConfiguration>
+                                                            <connections>
+                                                                <action selector="randomizeColor:" destination="QNp-Xm-RLw" eventType="touchUpInside" id="Hb0-t5-MQ8"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -145,12 +148,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="643" id="8qD-Nr-Chl">
-                                        <rect key="frame" x="0.0" y="150.99999618530273" width="393" height="643"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="257" id="8qD-Nr-Chl">
+                                        <rect key="frame" x="0.0" y="150.99999618530273" width="393" height="257"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8qD-Nr-Chl" id="rS8-rD-Tqm">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="643"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="257"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DEB-eY-2kO">
+                                                    <rect key="frame" x="36" y="51" width="321" height="155"/>
+                                                    <color key="backgroundColor" name="gray100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="160" id="wgI-dU-wfv"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="DEB-eY-2kO" firstAttribute="leading" secondItem="rS8-rD-Tqm" secondAttribute="leadingMargin" constant="16" id="5R5-no-1ZL"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="DEB-eY-2kO" secondAttribute="trailing" constant="16" id="7MP-Ja-c0e"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="DEB-eY-2kO" secondAttribute="bottom" constant="40" id="ruc-ak-n6S"/>
+                                                <constraint firstItem="DEB-eY-2kO" firstAttribute="top" secondItem="rS8-rD-Tqm" secondAttribute="topMargin" constant="40" id="tzi-fA-NJ6"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -161,6 +179,15 @@
                             <outlet property="delegate" destination="QNp-Xm-RLw" id="Hn3-ko-uZj"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="backgroundColorLabel" destination="Vw3-DK-uCx" id="OyH-vE-hCs"/>
+                        <outlet property="colorField" destination="JDT-wX-xGb" id="giL-m8-LXC"/>
+                        <outlet property="descriptionField" destination="M3o-Zm-2YS" id="MmG-qt-cO2"/>
+                        <outlet property="descriptionLabel" destination="5dH-Ea-Taq" id="ta6-ar-40I"/>
+                        <outlet property="nameField" destination="fel-Xt-icp" id="cTy-Y4-ilI"/>
+                        <outlet property="nameLabel" destination="hpz-8T-6xC" id="ssf-CF-SCP"/>
+                        <outlet property="previewCanvas" destination="DEB-eY-2kO" id="gl2-Kf-0B7"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zPO-TD-srh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -169,6 +196,9 @@
     </scenes>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="113" height="128"/>
+        <namedColor name="gray100">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

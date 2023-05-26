@@ -19,6 +19,7 @@
 		63D6CFEB2A1698E7000876D5 /* FilterListCollectionViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63D6CFE92A1698E7000876D5 /* FilterListCollectionViewHeader.xib */; };
 		F40809732A0DE2470005E0AB /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40809722A0DE2470005E0AB /* IssueList.storyboard */; };
 		F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40809742A0DE61C0005E0AB /* IssueListViewController.swift */; };
+		F415D2882A202F8B00712189 /* UITextField+font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F415D2872A202F8B00712189 /* UITextField+font.swift */; };
 		F43B37472A1F870F00EEB7C5 /* LabelCreateEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F43B37462A1F870F00EEB7C5 /* LabelCreateEditViewController.storyboard */; };
 		F43B37492A1F8AA000EEB7C5 /* LabelCreateEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B37482A1F8AA000EEB7C5 /* LabelCreateEditViewController.swift */; };
 		F48583AC2A10E1FC00322C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48583AB2A10E1FC00322C9F /* TabBarController.swift */; };
@@ -69,6 +70,7 @@
 		63D6CFE92A1698E7000876D5 /* FilterListCollectionViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterListCollectionViewHeader.xib; sourceTree = "<group>"; };
 		F40809722A0DE2470005E0AB /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
 		F40809742A0DE61C0005E0AB /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
+		F415D2872A202F8B00712189 /* UITextField+font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+font.swift"; sourceTree = "<group>"; };
 		F43B37462A1F870F00EEB7C5 /* LabelCreateEditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LabelCreateEditViewController.storyboard; sourceTree = "<group>"; };
 		F43B37482A1F8AA000EEB7C5 /* LabelCreateEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCreateEditViewController.swift; sourceTree = "<group>"; };
 		F48583AB2A10E1FC00322C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */,
+				F415D2872A202F8B00712189 /* UITextField+font.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				F48583AC2A10E1FC00322C9F /* TabBarController.swift in Sources */,
 				63D6CFD82A1624D3000876D5 /* DataSender.swift in Sources */,
 				F48583C82A13802E00322C9F /* URLSessionDataTaskInterface.swift in Sources */,
+				F415D2882A202F8B00712189 /* UITextField+font.swift in Sources */,
 				F48583CA2A13802E00322C9F /* URLSessionInterface.swift in Sources */,
 				F43B37492A1F8AA000EEB7C5 /* LabelCreateEditViewController.swift in Sources */,
 				F48583C92A13802E00322C9F /* NetworkManager.swift in Sources */,
