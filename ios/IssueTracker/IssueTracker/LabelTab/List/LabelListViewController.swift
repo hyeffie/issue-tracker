@@ -22,6 +22,7 @@ class LabelListViewController: UIViewController {
       self.title = "레이블"
       addObservers()
       setCollectionView()
+      setCreateButton()
       configureDataSource()
       setNetworkManager()
       fetchLabels()
@@ -138,5 +139,21 @@ extension LabelListViewController {
             self?.list.add(labels: labels)
          }
       }
+   }
+}
+
+extension LabelListViewController {
+   @objc func presentCreateEditVC() {
+      let storyboard = UIStoryboard(name: "LabelCreateEditViewController", bundle: nil)
+      guard let viewController = storyboard.instantiateInitialViewController() as? LabelCreateEditViewController else { return }
+      self.navigationController?.pushViewController(viewController, animated: true)
+   }
+   
+   func setCreateButton() {
+      self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+         title: "추가",
+         style: .plain,
+         target: self,
+         action: #selector(presentCreateEditVC))
    }
 }

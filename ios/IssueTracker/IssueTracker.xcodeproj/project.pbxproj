@@ -19,6 +19,8 @@
 		63D6CFEB2A1698E7000876D5 /* FilterListCollectionViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63D6CFE92A1698E7000876D5 /* FilterListCollectionViewHeader.xib */; };
 		F40809732A0DE2470005E0AB /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40809722A0DE2470005E0AB /* IssueList.storyboard */; };
 		F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40809742A0DE61C0005E0AB /* IssueListViewController.swift */; };
+		F43B37472A1F870F00EEB7C5 /* LabelCreateEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F43B37462A1F870F00EEB7C5 /* LabelCreateEditViewController.storyboard */; };
+		F43B37492A1F8AA000EEB7C5 /* LabelCreateEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B37482A1F8AA000EEB7C5 /* LabelCreateEditViewController.swift */; };
 		F48583AC2A10E1FC00322C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48583AB2A10E1FC00322C9F /* TabBarController.swift */; };
 		F48583C82A13802E00322C9F /* URLSessionDataTaskInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48583C32A13802E00322C9F /* URLSessionDataTaskInterface.swift */; };
 		F48583C92A13802E00322C9F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48583C42A13802E00322C9F /* NetworkManager.swift */; };
@@ -67,6 +69,8 @@
 		63D6CFE92A1698E7000876D5 /* FilterListCollectionViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterListCollectionViewHeader.xib; sourceTree = "<group>"; };
 		F40809722A0DE2470005E0AB /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
 		F40809742A0DE61C0005E0AB /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
+		F43B37462A1F870F00EEB7C5 /* LabelCreateEditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LabelCreateEditViewController.storyboard; sourceTree = "<group>"; };
+		F43B37482A1F8AA000EEB7C5 /* LabelCreateEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCreateEditViewController.swift; sourceTree = "<group>"; };
 		F48583AB2A10E1FC00322C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F48583C32A13802E00322C9F /* URLSessionDataTaskInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskInterface.swift; sourceTree = "<group>"; };
 		F48583C42A13802E00322C9F /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -267,6 +271,8 @@
 				63D6CFD72A1624D3000876D5 /* DataSender.swift */,
 				F4A28CCB2A1E2F700091A940 /* ListingItemFactory.swift */,
 				F4A28CCD2A1E3A200091A940 /* SwipeAction.swift */,
+				F43B37462A1F870F00EEB7C5 /* LabelCreateEditViewController.storyboard */,
+				F43B37482A1F8AA000EEB7C5 /* LabelCreateEditViewController.swift */,
 				F4A28CFB2A1F7F060091A940 /* Model */,
 				F48583A92A0E21DA00322C9F /* IssueTab */,
 				F4A28CDB2A1E3D4A0091A940 /* LabelTab */,
@@ -358,6 +364,7 @@
 				F48927002A175FCB000EBE9C /* LoadCollectionViewCell.xib in Resources */,
 				F4BF7CE32A0C89BD001C22F0 /* .swiftlint.yml in Resources */,
 				638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */,
+				F43B37472A1F870F00EEB7C5 /* LabelCreateEditViewController.storyboard in Resources */,
 				F4BF7CD82A0C8887001C22F0 /* LaunchScreen.storyboard in Resources */,
 				F40809732A0DE2470005E0AB /* IssueList.storyboard in Resources */,
 				63D6CFEB2A1698E7000876D5 /* FilterListCollectionViewHeader.xib in Resources */,
@@ -411,6 +418,7 @@
 				63D6CFD82A1624D3000876D5 /* DataSender.swift in Sources */,
 				F48583C82A13802E00322C9F /* URLSessionDataTaskInterface.swift in Sources */,
 				F48583CA2A13802E00322C9F /* URLSessionInterface.swift in Sources */,
+				F43B37492A1F8AA000EEB7C5 /* LabelCreateEditViewController.swift in Sources */,
 				F48583C92A13802E00322C9F /* NetworkManager.swift in Sources */,
 				F4D5E3D72A1DE5CF00722AD1 /* CellIdentifiable.swift in Sources */,
 				F4A28CF22A1F56FB0091A940 /* LabelListDTO.swift in Sources */,
