@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6343A0662A0F7B65005FFC3E /* IssueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6343A0652A0F7B65005FFC3E /* IssueLabel.swift */; };
+		635342AC2A20DEB300668765 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342AB2A20DEB300668765 /* IssueDetailViewController.swift */; };
+		635342AE2A20DEFE00668765 /* UIViewController+hideTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342AD2A20DEFE00668765 /* UIViewController+hideTabBar.swift */; };
+		635342B02A20DF8400668765 /* IssueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 635342AF2A20DF8400668765 /* IssueDetail.storyboard */; };
 		638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */; };
 		638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */; };
 		63D6CFCF2A15B7F6000876D5 /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6CFCE2A15B7F6000876D5 /* FilterListViewController.swift */; };
@@ -59,6 +62,9 @@
 
 /* Begin PBXFileReference section */
 		6343A0652A0F7B65005FFC3E /* IssueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueLabel.swift; sourceTree = "<group>"; };
+		635342AB2A20DEB300668765 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
+		635342AD2A20DEFE00668765 /* UIViewController+hideTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+hideTabBar.swift"; sourceTree = "<group>"; };
+		635342AF2A20DF8400668765 /* IssueDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueDetail.storyboard; sourceTree = "<group>"; };
 		638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueListCollectionViewCell.xib; sourceTree = "<group>"; };
 		638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionViewCell.swift; sourceTree = "<group>"; };
 		63D6CFCE2A15B7F6000876D5 /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +127,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		635342AA2A20DE9900668765 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				635342AF2A20DF8400668765 /* IssueDetail.storyboard */,
+				635342AB2A20DEB300668765 /* IssueDetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		63D6CFD02A15B80D000876D5 /* IssueListFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +164,7 @@
 			children = (
 				F4A28CFC2A1F7F310091A940 /* List */,
 				63D6CFD02A15B80D000876D5 /* IssueListFilter */,
+				635342AA2A20DE9900668765 /* Detail */,
 			);
 			path = IssueTab;
 			sourceTree = "<group>";
@@ -158,6 +174,7 @@
 			children = (
 				F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */,
 				F415D2872A202F8B00712189 /* UITextField+font.swift */,
+				635342AD2A20DEFE00668765 /* UIViewController+hideTabBar.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -377,6 +394,7 @@
 				F4A28CEE2A1F40B70091A940 /* MilestoneListCell.xib in Resources */,
 				63D6CFD22A15F099000876D5 /* FilterList.storyboard in Resources */,
 				F4A28CE02A1E3F8E0091A940 /* LabelListCell.xib in Resources */,
+				635342B02A20DF8400668765 /* IssueDetail.storyboard in Resources */,
 				63D6CFE52A168C0C000876D5 /* FilterListCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,10 +456,12 @@
 				63D6CFCF2A15B7F6000876D5 /* FilterListViewController.swift in Sources */,
 				F4A28CEA2A1F3C6E0091A940 /* MilestoneList.swift in Sources */,
 				F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */,
+				635342AC2A20DEB300668765 /* IssueDetailViewController.swift in Sources */,
 				F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */,
 				F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */,
 				F4A28CDA2A1E3D460091A940 /* LabelListViewController.swift in Sources */,
 				F48583CB2A13802E00322C9F /* MockResponse.swift in Sources */,
+				635342AE2A20DEFE00668765 /* UIViewController+hideTabBar.swift in Sources */,
 				638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */,
 				63D6CFEA2A1698E7000876D5 /* FilterListCollectionViewHeader.swift in Sources */,
 			);
