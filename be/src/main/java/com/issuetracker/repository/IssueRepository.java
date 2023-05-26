@@ -29,7 +29,7 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
      * @param issueId
      * @return
      */
-    @Query("SELECT l.id, l.name, l.background_color AS backgroundColor, l.font_color AS fontColor, l.description AS description, l.deleted AS deleted\n"
+    @Query("SELECT l.id, l.name, l.background_color, l.font_color, l.description, l.deleted\n"
             + "FROM issue i\n"
             + "JOIN issue_label il ON i.id = il.issue_id\n"
             + "JOIN label l ON il.label_id = l.id\n"
