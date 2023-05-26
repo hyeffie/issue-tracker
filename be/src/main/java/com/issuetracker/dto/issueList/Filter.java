@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FilterDto {
+public class Filter {
     private String status;
     private List<Long> assignee;
     private List<Integer> label;
@@ -21,10 +21,11 @@ public class FilterDto {
     private String search;
 
     public boolean getOpenStatus() {
-        if (status.equals("open")) {
-            return true;
+
+        if (status != null && status.equals("close")) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     public int getOffset() {

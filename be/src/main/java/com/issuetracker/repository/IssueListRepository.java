@@ -14,8 +14,7 @@ public interface IssueListRepository extends CrudRepository<IssueListPage, Long>
 
     @Query("SELECT i.id AS issueId, i.title AS title, i.content AS content, u.login_id AS userName,\n" +
             "u.profile_url AS profileUrl, i.opened AS opened, i.created_at AS createdAt, i.closed_at AS closedAt\n" +
-            ", m.name AS milestoneName, l.id AS labelId, l.name AS labelName, l.background_color AS backgroundColor, l.font_color AS fontColor\n"
-            +
+            ", m.name AS milestoneName, l.id AS labelId, l.name AS labelName, l.background_color AS backgroundColor, l.font_color AS fontColor\n" +
             "FROM issue i\n" +
             "LEFT OUTER JOIN issue_label il ON i.id = il.issue_id\n" +
             "LEFT OUTER JOIN label l ON l.id = il.label_id\n" +
@@ -28,7 +27,7 @@ public interface IssueListRepository extends CrudRepository<IssueListPage, Long>
     /**
      * 라벨 필터에 사용할 전체 라벨의 목록을 조회합니다.
      */
-    @Query("SELECT id, name, background_color AS backgroundColor, font_color AS fontColor, description, deleted FROM label WHERE deleted IS FALSE;")
+    @Query("SELECT id, name, background_color, font_color, description, deleted FROM label WHERE deleted IS FALSE;")
     List<Label> getFilterLabelList();
 
     /**

@@ -1,6 +1,6 @@
 package com.issuetracker.controller;
 
-import com.issuetracker.dto.issueList.FilterDto;
+import com.issuetracker.dto.issueList.Filter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +19,7 @@ public class IssueListController {
     private final IssueListService labelService;
 
     @GetMapping(value = {"/api/issues", "/api"})
-    public IssueListDto listIssues(@ModelAttribute FilterDto filterDto) {
+    public IssueListDto listIssues(@ModelAttribute Filter filterDto) {
 
         return labelService.fetchMain(filterDto);
     }
