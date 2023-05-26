@@ -9,11 +9,13 @@ import UIKit
 
 class IssueDetailViewController: UIViewController {
    var issueId: Int?
+   var issueDetailUseCase = IssueDetailUseCase()
    
    override func viewDidLoad() {
       super.viewDidLoad()
       hideTabBar()
       addEditButton()
+      issueDetailUseCase.loadData(issueId: issueId)
    }
    
    private func addEditButton() {
