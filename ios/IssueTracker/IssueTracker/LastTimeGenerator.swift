@@ -27,7 +27,7 @@ struct LastTimeGenerator {
          return ""
       }
       
-      var lastTime = now.timeIntervalSince(pastTime) / 60
+      var lastTime = Int(now.timeIntervalSince(pastTime)) / 60
       guard lastTime > 60 else {
          let time = Int(lastTime) % 60
          return "\(time)분"
