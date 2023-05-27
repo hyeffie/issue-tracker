@@ -23,4 +23,21 @@ class IssueDetailUseCase {
          self?.detail = dto
       }
    }
+   
+   func sendHeaderData() -> IssueDetailHeaderData {
+      guard let data = self.detail?.issue else {
+         return IssueDetailHeaderData()
+      }
+      
+      var time = data.createdAt
+      if !data.open, let closedAt = data.closedAt {
+         time = closedAt
+      }
+
+      return IssueDetailHeaderData(title: data.title,
+                                   number: data.issueId,
+                                   status: data.open,
+                                   userName: data.userName,
+                                   editTime: time)
+   }
 }
