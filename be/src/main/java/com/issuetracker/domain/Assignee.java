@@ -15,10 +15,7 @@ import lombok.NoArgsConstructor;
 public class Assignee {
     @Id
     private Long id;
-    @Column("issue_id")
     private Long issueId;
-    @Column("user_id")
-
     private Long userId;
 
     public static Assignee assign(Long issueId, Long userId) {

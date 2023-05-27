@@ -13,9 +13,7 @@ import lombok.NoArgsConstructor;
 public class IssueLabel {
     @Id
     private Long id;
-    @Column("issue_id")
     private Long issueId;
-    @Column("label_id")
     private Integer labelId;
 
     public static IssueLabel attach(Long issueId, Integer labelId) {

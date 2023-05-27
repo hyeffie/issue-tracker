@@ -13,9 +13,7 @@ import lombok.Setter;
 public class User {
     @Id
     private int id;
-    @Column("login_id")
     private String loginId;
-    @Column("profile_url")
     private String profileUrl;
 }
 

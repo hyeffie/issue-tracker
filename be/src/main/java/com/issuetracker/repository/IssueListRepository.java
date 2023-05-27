@@ -25,27 +25,8 @@ public interface IssueListRepository extends CrudRepository<IssueListPage, Long>
     List<IssueListPage> getIssues(long id);
 
     /**
-     * 라벨 필터에 사용할 전체 라벨의 목록을 조회합니다.
-     */
-    @Query("SELECT id, name, background_color, font_color, description, deleted FROM label WHERE deleted IS FALSE;")
-    List<Label> getFilterLabelList();
-
-    /**
-     * 유저 필터에 사용할 전체 유저의 목록을 조회합니다.
-     */
-    @Query("SELECT id, login_id, profile_url FROM user")
-    List<User> getFilterUserList();
-
-    /**
-     * 마일스톤 필터에 사용할 전체 마일스톤의 목록을 조회합니다.
-     */
-    @Query("SELECT id, name, description FROM milestone WHERE deleted IS FALSE")
-    List<Milestone> getFilterMilestoneList();
-
-    /**
      * 닫혀 있는 이슈의 총 개수를 조회합니다.
      */
     @Query("SELECT count(id) FROM issue WHERE deleted_at IS NULL AND opened IS FALSE")
     long getTotalClosedIssueCount();
-
 }
