@@ -23,6 +23,7 @@ class IssueDetailViewController: UIViewController {
       super.viewDidLoad()
       setUI()
       setCollectionView()
+      setObserver()
       issueDetailUseCase.loadData(issueId: issueId)
    }
    
@@ -50,6 +51,19 @@ class IssueDetailViewController: UIViewController {
       let detailCell = UINib(nibName: cellId, bundle: nil)
       collectionView.register(detailCell,
                               forCellWithReuseIdentifier: cellId)
+   }
+   
+   private func setObserver() {
+      NotificationCenter.default.addObserver(self,
+                                             selector: #selector(updateCell(_:)),
+                                             name: IssueDetailDTO.Notifications.didLoadDetail,
+                                             object: nil)
+   }
+   
+   @objc func updateCell(_ notification: Notification) {
+      DispatchQueue.main.async {
+         self.collectionView.reloadData()
+      }
    }
 }
 

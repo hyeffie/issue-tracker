@@ -22,6 +22,9 @@ class IssueDetailUseCase {
       networkManager?.requestIssueDetail(issueId: id) { [weak self] dto in
          self?.detail = dto
       }
+      
+      NotificationCenter.default.post(name: IssueDetailDTO.Notifications.didLoadDetail,
+                                      object: nil)
    }
    
    func sendHeaderData() -> IssueDetailHeaderData {

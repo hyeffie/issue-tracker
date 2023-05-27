@@ -27,4 +27,3 @@ struct IssueDetailHeaderData {
       self.editTime = editTime
    }
 }
-

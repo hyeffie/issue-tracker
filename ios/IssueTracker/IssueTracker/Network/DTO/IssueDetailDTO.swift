@@ -60,3 +60,9 @@ struct IssueDetailDTO: Codable {
    let labelList: [IssueListDTO.Label]
    let milestoneList: [IssueListDTO.Milestone]
 }
+
+extension IssueDetailDTO {
+   enum Notifications {
+      static let didLoadDetail = Notification.Name(rawValue: "didLoadDetails")
+   }
+}
