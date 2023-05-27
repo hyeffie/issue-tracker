@@ -28,7 +28,6 @@
 		63D6CFE72A168F40000876D5 /* FilterListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6CFE62A168F40000876D5 /* FilterListCollectionViewCell.swift */; };
 		63D6CFEA2A1698E7000876D5 /* FilterListCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6CFE82A1698E7000876D5 /* FilterListCollectionViewHeader.swift */; };
 		63D6CFEB2A1698E7000876D5 /* FilterListCollectionViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63D6CFE92A1698E7000876D5 /* FilterListCollectionViewHeader.xib */; };
-		F40809732A0DE2470005E0AB /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40809722A0DE2470005E0AB /* IssueList.storyboard */; };
 		F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40809742A0DE61C0005E0AB /* IssueListViewController.swift */; };
 		F415D2882A202F8B00712189 /* UITextField+font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F415D2872A202F8B00712189 /* UITextField+font.swift */; };
 		F43B37472A1F870F00EEB7C5 /* LabelEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F43B37462A1F870F00EEB7C5 /* LabelEditViewController.storyboard */; };
@@ -91,7 +90,6 @@
 		63D6CFE62A168F40000876D5 /* FilterListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListCollectionViewCell.swift; sourceTree = "<group>"; };
 		63D6CFE82A1698E7000876D5 /* FilterListCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListCollectionViewHeader.swift; sourceTree = "<group>"; };
 		63D6CFE92A1698E7000876D5 /* FilterListCollectionViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterListCollectionViewHeader.xib; sourceTree = "<group>"; };
-		F40809722A0DE2470005E0AB /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
 		F40809742A0DE61C0005E0AB /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		F415D2872A202F8B00712189 /* UITextField+font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+font.swift"; sourceTree = "<group>"; };
 		F43B37462A1F870F00EEB7C5 /* LabelEditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LabelEditViewController.storyboard; sourceTree = "<group>"; };
@@ -175,12 +173,13 @@
 		F48583A82A0E216A00322C9F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F4BF7CF22A0D1312001C22F0 /* Color.swift */,
+				F4BF7CF42A0D13FF001C22F0 /* Typography.swift */,
+				6343A0652A0F7B65005FFC3E /* IssueLabel.swift */,
 				F4A28CCB2A1E2F700091A940 /* ListingItemFactory.swift */,
 				635342C32A21043100668765 /* UIColorFactory.swift */,
 				635342C12A21032700668765 /* LastTimeGenerator.swift */,
 				F4A28CCD2A1E3A200091A940 /* SwipeAction.swift */,
-				F4BF7CF22A0D1312001C22F0 /* Color.swift */,
-				F4BF7CF42A0D13FF001C22F0 /* Typography.swift */,
 				F4D5E3D62A1DE5CF00722AD1 /* CellIdentifiable.swift */,
 			);
 			path = Common;
@@ -281,11 +280,9 @@
 		F4A28CFC2A1F7F310091A940 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				F40809722A0DE2470005E0AB /* IssueList.storyboard */,
 				F40809742A0DE61C0005E0AB /* IssueListViewController.swift */,
 				638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */,
 				638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */,
-				6343A0652A0F7B65005FFC3E /* IssueLabel.swift */,
 				F48926FC2A175DF3000EBE9C /* LoadCollectionViewCell.swift */,
 				F48926FD2A175DF3000EBE9C /* LoadCollectionViewCell.xib */,
 			);
@@ -423,7 +420,6 @@
 				638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */,
 				F43B37472A1F870F00EEB7C5 /* LabelEditViewController.storyboard in Resources */,
 				F4BF7CD82A0C8887001C22F0 /* LaunchScreen.storyboard in Resources */,
-				F40809732A0DE2470005E0AB /* IssueList.storyboard in Resources */,
 				63D6CFEB2A1698E7000876D5 /* FilterListCollectionViewHeader.xib in Resources */,
 				F4BF7CD52A0C8887001C22F0 /* Assets.xcassets in Resources */,
 				F4BF7CD32A0C8886001C22F0 /* Main.storyboard in Resources */,

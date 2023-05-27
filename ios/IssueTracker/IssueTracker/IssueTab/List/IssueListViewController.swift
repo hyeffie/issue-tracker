@@ -8,8 +8,10 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-   typealias IssueCell = IssueListCollectionViewCell
-   typealias LoadCell = LoadCollectionViewCell
+   var collectionView: UICollectionView!
+   private var dataSource: DataSource!
+   
+   var observers: [NSObjectProtocol] = []
    
    let filterListID = "FilterList"
    
@@ -21,138 +23,60 @@ class IssueListViewController: UIViewController {
    var isPaging = false
    var hasNextPage = true
    
-   var observers: [NSObjectProtocol] = []
-   
-   @IBOutlet weak var collectionView: UICollectionView!
-   private var dataSource: DataSource!
-   
    override func viewDidLoad() {
       super.viewDidLoad()
+      self.view.backgroundColor = .systemBackground
       self.title = "이슈"
       addObservers()
       setCollectionView()
+      setFilterButton()
+      setSelectButton()
+      configureDataSource()
       setNetworkManager()
       fetchIssues()
-   }
-   
-   func setCollectionView() {
-      collectionView.collectionViewLayout = createLayout()
-      collectionView.delegate = self
-      configureDataSource()
-   }
-   
-   func createLayout() -> UICollectionViewLayout {
-      let sectionProvider: UICollectionViewCompositionalLayoutSectionProvider = { _, layoutEnvironment in
-         var config = UICollectionLayoutListConfiguration(appearance: .plain)
-         config.showsSeparators = true
-         config.trailingSwipeActionsConfigurationProvider = { _ in
-            let closeAction = SwiptAction.close.makeAction(withHandler: { _, _, _ in })
-            let deleteAction = SwiptAction.delete.makeAction(withHandler: { _, _, _ in })
-            
-            let config = UISwipeActionsConfiguration(actions: [deleteAction, closeAction])
-            config.performsFirstActionWithFullSwipe = false
-            return config
-         }
-         return NSCollectionLayoutSection.list(using: config, layoutEnvironment: layoutEnvironment)
-      }
-      return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
-   }
-   
-   func fetchIssues(cellCompletion: (() -> Void)? = nil) {
-      guard hasNextPage else { return }
-      isPaging = true
-      networkManager?.fetchIssueList { [weak self] dto in
-         cellCompletion?()
-         self?.isPaging = false
-         self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
-         if dto.issues.count > 0 {
-            self?.list.emptyList()
-            let newIssues = ListingItemFactory.IssueTab.makeIssues(with: dto.issues)
-            self?.list.add(issues: newIssues) // -> POST NOTIFICATION
-            self?.fetchedAllData = dto
-            self?.currentPageNumber += 1
-         }
-      }
-   }
-   
-   private func createIssueCellRegisteration() -> UICollectionView.CellRegistration<IssueCell, ItemType> {
-      let issueCellNib = UINib(nibName: IssueCell.cellId, bundle: nil)
-      return .init(cellNib: issueCellNib) { cell, _, itemIdentifier in
-         guard case Item.issue(let issue) = itemIdentifier else { return }
-         cell.configure(issue: issue)
-      }
-   }
-   
-   private func createLoadCellRegisteration() -> UICollectionView.CellRegistration<LoadCell, ItemType> {
-      let loadCellNib = UINib(nibName: LoadCell.cellId, bundle: nil)
-      return .init(cellNib: loadCellNib, handler: { _, _, _ in })
-   }
-   
-   private func createCellRegisteration<Cell: CellIdentifiable, Item>(
-      cellCompletion: @escaping UICollectionView.CellRegistration<Cell, Item>.Handler
-   ) -> UICollectionView.CellRegistration<Cell, Item>  {
-      let cellNib = UINib(nibName: Cell.cellId, bundle: nil)
-      return .init(cellNib: cellNib, handler: cellCompletion)
-   }
-   
-   private func configureDataSource() {
-      let issueCellRegistration = createIssueCellRegisteration()
-      let loadCellRegistration = createLoadCellRegisteration()
-      
-      dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
-         switch item {
-         case .issue:
-            return collectionView.dequeueConfiguredReusableCell(
-               using: issueCellRegistration,
-               for: indexPath,
-               item: item)
-         case .load:
-            return collectionView.dequeueConfiguredReusableCell(
-               using: loadCellRegistration,
-               for: indexPath,
-               item: item)
-         }
-      }
-   }
-   
-   private func applyUpdatedSnapshot(animated: Bool = true) {
-      var snapshot = NSDiffableDataSourceSnapshot<SectionType, ItemType>()
-      snapshot.appendSections([.issue, .loadIndicator])
-//      let issues =
-      snapshot.appendItems(list.issues.map { issue in Item.issue(issue: issue) }, toSection: .issue)
-      snapshot.appendItems([.load], toSection: .loadIndicator)
-      dataSource.apply(snapshot, animatingDifferences: animated)
    }
    
    func setNetworkManager() {
       networkManager = NetworkManager(session: URLSession.shared)
    }
+}
+
+extension IssueListViewController {
+   private func setCollectionView() {
+      collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
+      collectionView.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(collectionView)
+      
+      NSLayoutConstraint.activate([
+         collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+      ])
+      
+      collectionView.delegate = self
+   }
    
-   @IBAction func filter(_ sender: Any) {
-      let storyboard = UIStoryboard(name: filterListID, bundle: nil)
-      guard let filterListViewController = storyboard.instantiateInitialViewController() as? FilterListViewController else { return }
-      filterListViewController.delegate = self
-      self.present(filterListViewController, animated: true)
+   private func setCollectionViewLayout() -> UICollectionViewCompositionalLayout {
+      let sectionProvider: UICollectionViewCompositionalLayoutSectionProvider = { [weak self] _, layoutEnvironment in
+         var config = UICollectionLayoutListConfiguration(appearance: .plain)
+         config.showsSeparators = true
+         config.trailingSwipeActionsConfigurationProvider = self?.createSwipeActionProvider()
+         return NSCollectionLayoutSection.list(using: config, layoutEnvironment: layoutEnvironment)
+      }
+      return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
    }
 }
 
-extension IssueListViewController: UICollectionViewDelegate {
-   func collectionView(
-      _ collectionView: UICollectionView,
-      willDisplay cell: UICollectionViewCell,
-      forItemAt indexPath: IndexPath)
-   {
-      if indexPath == IndexPath(item: 0, section: 1) {
-         guard let loadCell = cell as? LoadCollectionViewCell else { return }
-         loadCell.start()
-         fetchIssues(cellCompletion: { DispatchQueue.main.async { [weak loadCell] in loadCell?.stop() } })
+extension IssueListViewController {
+   func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
+      return { _ in
+         let delete = SwiptAction.delete.makeAction(hasImage: false, withHandler: { _, _, _ in })
+         let edit = SwiptAction.edit.makeAction(hasImage: false, withHandler: { _, _, _ in })
+         let config = UISwipeActionsConfiguration(actions: [delete, edit])
+         config.performsFirstActionWithFullSwipe = false
+         return config
       }
-   }
-}
-   
-extension IssueListViewController: DataSenderDelegate {
-   func receive() -> IssueListDTO {
-      fetchedAllData
    }
 }
 
@@ -178,6 +102,65 @@ extension IssueListViewController {
    }
    
    private class DataSource: UICollectionViewDiffableDataSource<SectionType, ItemType> { }
+   
+   typealias IssueCell = IssueListCollectionViewCell
+   typealias LoadCell = LoadCollectionViewCell
+   
+   private func createIssueCellRegisteration() -> UICollectionView.CellRegistration<IssueCell, ItemType> {
+      let issueCellNib = UINib(nibName: IssueCell.cellId, bundle: nil)
+      return .init(cellNib: issueCellNib) { cell, _, itemIdentifier in
+         guard case Item.issue(let issue) = itemIdentifier else { return }
+         cell.configure(issue: issue)
+      }
+   }
+   
+   private func createLoadCellRegisteration() -> UICollectionView.CellRegistration<LoadCell, ItemType> {
+      let loadCellNib = UINib(nibName: LoadCell.cellId, bundle: nil)
+      return .init(cellNib: loadCellNib, handler: { _, _, _ in })
+   }
+   
+   private func configureDataSource() {
+      let issueCellRegistration = createIssueCellRegisteration()
+      let loadCellRegistration = createLoadCellRegisteration()
+      
+      dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+         switch item {
+         case .issue:
+            return collectionView.dequeueConfiguredReusableCell(
+               using: issueCellRegistration,
+               for: indexPath,
+               item: item)
+         case .load:
+            return collectionView.dequeueConfiguredReusableCell(
+               using: loadCellRegistration,
+               for: indexPath,
+               item: item)
+         }
+      }
+   }
+   
+   private func applyUpdatedSnapshot(animated: Bool = true) {
+      var snapshot = NSDiffableDataSourceSnapshot<SectionType, ItemType>()
+      snapshot.appendSections([.issue, .loadIndicator])
+      let issues = list.issues.map { issue in Item.issue(issue: issue) }
+      snapshot.appendItems(issues, toSection: .issue)
+      snapshot.appendItems([.load], toSection: .loadIndicator)
+      dataSource.apply(snapshot, animatingDifferences: animated)
+   }
+}
+
+extension IssueListViewController: UICollectionViewDelegate {
+   func collectionView(
+      _ collectionView: UICollectionView,
+      willDisplay cell: UICollectionViewCell,
+      forItemAt indexPath: IndexPath)
+   {
+      if indexPath == IndexPath(item: 0, section: 1) {
+         guard let loadCell = cell as? LoadCollectionViewCell else { return }
+         loadCell.start()
+         fetchIssues(cellCompletion: { DispatchQueue.main.async { [weak loadCell] in loadCell?.stop() } })
+      }
+   }
 }
 
 extension IssueListViewController {
@@ -191,6 +174,25 @@ extension IssueListViewController {
 }
 
 extension IssueListViewController {
+   func fetchIssues(cellCompletion: (() -> Void)? = nil) {
+      guard hasNextPage else { return }
+      isPaging = true
+      networkManager?.fetchIssueList { [weak self] dto in
+         cellCompletion?()
+         self?.isPaging = false
+         self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
+         if dto.issues.count > 0 {
+            self?.list.emptyList()
+            let newIssues = ListingItemFactory.IssueTab.makeIssues(with: dto.issues)
+            self?.list.add(issues: newIssues) // -> POST NOTIFICATION
+            self?.fetchedAllData = dto
+            self?.currentPageNumber += 1
+         }
+      }
+   }
+}
+
+extension IssueListViewController {
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       let storyboard = UIStoryboard(name: "IssueDetail", bundle: nil)
       guard let viewController = storyboard.instantiateInitialViewController() as?
@@ -198,5 +200,47 @@ extension IssueListViewController {
       
       viewController.issueId = list.issues[indexPath.row].issueId
       self.navigationController?.pushViewController(viewController, animated: true)
+   }
+}
+
+// MARK: - Filter
+
+extension IssueListViewController: DataSenderDelegate {
+   func receive() -> IssueListDTO {
+      fetchedAllData
+   }
+}
+
+extension IssueListViewController {
+   @objc func presentFilterViewController() {
+      let storyboard = UIStoryboard(name: "FilterList", bundle: nil)
+      guard let viewController = storyboard.instantiateInitialViewController() as? FilterListViewController else { return }
+      viewController.delegate = self
+      self.present(viewController, animated: true)
+   }
+   
+   func setFilterButton() {
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+         title: "추가",
+         style: .plain,
+         target: self,
+         action: #selector(presentFilterViewController))
+   }
+}
+
+// MARK: - Select Mode
+
+extension IssueListViewController {
+   @objc func toggleSelectMode() {
+      
+   }
+   
+   func setSelectButton() {
+      let selectButton = UIBarButtonItem(
+         title: "선택",
+         style: .plain,
+         target: self,
+         action: #selector(toggleSelectMode))
+      self.navigationItem.rightBarButtonItems = [selectButton]
    }
 }

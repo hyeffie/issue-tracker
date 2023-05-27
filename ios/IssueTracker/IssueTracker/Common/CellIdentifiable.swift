@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol CellIdentifiable {
-   static var cellId: String { get set }
-}
+//protocol CellIdentifiable {
+//   static var cellId: String { get set }
+//}

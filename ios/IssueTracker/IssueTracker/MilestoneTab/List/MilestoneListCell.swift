@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MilestoneListCell: UICollectionViewCell, CellIdentifiable {
+class MilestoneListCell: UICollectionViewCell {
    static var cellId: String = "MilestoneListCell"
    
    @IBOutlet weak var nameLabel: UILabel!

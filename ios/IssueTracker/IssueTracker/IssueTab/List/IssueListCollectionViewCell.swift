@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IssueListCollectionViewCell: UICollectionViewCell, CellIdentifiable {
+class IssueListCollectionViewCell: UICollectionViewCell {
    static var cellId: String = "IssueListCollectionViewCell"
    
    @IBOutlet var titleLabel: UILabel!

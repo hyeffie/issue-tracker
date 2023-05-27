@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LoadCollectionViewCell: UICollectionViewCell, CellIdentifiable {
+final class LoadCollectionViewCell: UICollectionViewCell {
    static var cellId: String = "LoadCollectionViewCell"
    
    @IBOutlet weak var indicator: UIActivityIndicatorView!

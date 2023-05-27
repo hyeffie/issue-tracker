@@ -15,8 +15,11 @@ class TabBarController: UITabBarController {
    
    func setViewControllers() {
       // issue
-      let issueListStoryBoard = UIStoryboard(name: "IssueList", bundle: nil)
-      guard let issueListController = issueListStoryBoard.instantiateInitialViewController() as? UINavigationController else { return }
+      let issueListVC = IssueListViewController()
+      let issueNavigationController = UINavigationController(rootViewController: issueListVC)
+      issueNavigationController.navigationBar.prefersLargeTitles = true
+      issueNavigationController.tabBarItem.title = "이슈"
+      issueNavigationController.tabBarItem.image = UIImage(named: "exclamation")
       
       // label
       let labelListVC = LabelListViewController()
@@ -42,7 +45,7 @@ class TabBarController: UITabBarController {
       profileNavigationController.tabBarItem.image = UIImage(named: "profileS")
       
       let controllers = [
-         issueListController,
+         issueNavigationController,
          labelNavigationController,
          milestoneNavigationController,
          profileNavigationController
