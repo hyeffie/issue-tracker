@@ -9,10 +9,9 @@ import UIKit
 
 extension UITextField {
    func apply(
-      typography: TypoGraphy,
-      textColor: Color,
-      willApplyHeight: Bool = true)
-   {
+      typography: Typography,
+      textColor: Color
+   ) {
       self.font = typography.font
       self.textColor = textColor.color
    }

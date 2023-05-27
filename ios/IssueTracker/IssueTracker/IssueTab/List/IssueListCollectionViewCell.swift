@@ -30,12 +30,11 @@ class IssueListCollectionViewCell: UICollectionViewCell, CellIdentifiable {
    }
    
    func configureFont() {
-      self.titleLabel.apply(typography: TypoGraphy(weight: .bold, size: .large),
+      self.titleLabel.apply(typography: Typography(weight: .bold, size: .large),
                             textColor: .gray900)
-      self.descriptionLabel.apply(typography: TypoGraphy(weight: .regular, size: .medium),
-                                  textColor: .gray800,
-                                  willApplyHeight: false)
-      self.milestoneLabel.apply(typography: TypoGraphy(weight: .regular, size: .medium),
+      self.descriptionLabel.apply(typography: Typography(weight: .regular, size: .medium),
+                                  textColor: .gray800)
+      self.milestoneLabel.apply(typography: Typography(weight: .regular, size: .medium),
                                 textColor: .gray800)
    }
    

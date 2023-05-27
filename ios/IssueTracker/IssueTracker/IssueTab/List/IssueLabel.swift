@@ -20,7 +20,7 @@ class IssueLabel: UILabel {
    convenience init(name: String, color: String) {
       self.init()
       self.text = name
-      self.font = TypoGraphy(weight: .regular, size: .small).font
+      self.font = Typography(weight: .regular, size: .small).font
       self.backgroundColor = convertToUIColor(color: color)
       self.textColor = isBright(self.backgroundColor) ? .black : .white
    }

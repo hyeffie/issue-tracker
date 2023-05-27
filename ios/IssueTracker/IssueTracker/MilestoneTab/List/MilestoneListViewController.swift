@@ -83,7 +83,7 @@ extension MilestoneListViewController {
    
    private func createMilestoneCellRegisteration() -> UICollectionView.CellRegistration<MilestoneCell, Item> {
       let cellNib = UINib(nibName: MilestoneCell.cellId, bundle: nil)
-      return .init(cellNib: cellNib) { cell, indexPath, itemIdentifier in
+      return .init(cellNib: cellNib) { cell, _, itemIdentifier in
          guard case Item.milestone(let milestone) = itemIdentifier else { return }
          cell.configure(with: milestone)
       }
@@ -108,14 +108,15 @@ extension MilestoneListViewController {
    private func applyUpdatedSnapshot(animated: Bool = true) {
       var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
       snapshot.appendSections([.milestone])
-      snapshot.appendItems(list.milestones.map { milestone in Item.milestone(milestone: milestone) }, toSection: .milestone)
+      let milestoneItems = list.milestones.map { milestone in Item.milestone(milestone: milestone) }
+      snapshot.appendItems(milestoneItems, toSection: .milestone)
       dataSource.apply(snapshot, animatingDifferences: animated)
    }
 }
 
 extension MilestoneListViewController {
    private func addObservers() {
-      var noti = NotificationCenter.default.addObserver(
+      let noti = NotificationCenter.default.addObserver(
          forName: MilestoneList.Notifications.didAddMilestones,
          object: list,
          queue: .main,
@@ -128,7 +129,7 @@ extension MilestoneListViewController {
 
 extension MilestoneListViewController {
    func fetchMilestones(cellCompletion: (() -> Void)? = nil) {
-      networkManager?.requestMilestoneList() { [weak self] dto in
+      networkManager?.requestMilestoneList { [weak self] dto in
          cellCompletion?()
          if dto.milestoneList.count > 0 {
             let milestones = ListingItemFactory.MilestoneTab.makeMilestoneList(with: dto)

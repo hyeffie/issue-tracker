@@ -1,5 +1,5 @@
 //
-//  TypoGraphy.swift
+//  Typography.swift
 //  IssueTracker
 //
 //  Created by Effie on 2023/05/11.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct TypoGraphy {
+struct Typography {
    enum Weight {
       case bold
       case regular

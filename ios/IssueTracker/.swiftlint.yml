@@ -3,6 +3,7 @@ disabled_rules:
   - trailing_whitespace
   - trailing_comma
   - opening_brace
+  - class_delegate_protocol
 opt_in_rules:
   -
-line_length: 120
+line_length: 150

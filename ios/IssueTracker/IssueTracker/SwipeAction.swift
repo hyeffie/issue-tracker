@@ -40,7 +40,10 @@ enum SwiptAction {
       }
    }
    
-   func makeAction(hasImage: Bool = true, withHandler handler: @escaping UIContextualAction.Handler) -> UIContextualAction {
+   func makeAction(
+      hasImage: Bool = true,
+      withHandler handler: @escaping UIContextualAction.Handler
+   ) -> UIContextualAction {
       let action = UIContextualAction(style: .normal, title: title, handler: handler)
       if hasImage { action.image = icon }
       action.backgroundColor = color

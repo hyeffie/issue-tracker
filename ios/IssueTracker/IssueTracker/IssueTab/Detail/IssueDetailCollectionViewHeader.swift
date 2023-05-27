@@ -20,11 +20,11 @@ class IssueDetailCollectionViewHeader: UICollectionReusableView {
    }
    
    func configureFont() {
-      title.apply(typography: TypoGraphy(weight: .bold, size: .xlarge),
+      title.apply(typography: Typography(weight: .bold, size: .xlarge),
                   textColor: .gray900)
-      number.apply(typography: TypoGraphy(weight: .regular, size: .xlarge),
+      number.apply(typography: Typography(weight: .regular, size: .xlarge),
                    textColor: .gray600)
-      status.apply(typography: TypoGraphy(weight: .regular, size: .medium),
+      status.apply(typography: Typography(weight: .regular, size: .medium),
                    textColor: .gray50)
    }
 }

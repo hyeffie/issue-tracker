@@ -42,7 +42,9 @@ class LabelListCell: UICollectionViewCell, CellIdentifiable {
       emptyLabelStack()
    }
    
-   override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+   override func preferredLayoutAttributesFitting(
+      _ layoutAttributes: UICollectionViewLayoutAttributes
+   ) -> UICollectionViewLayoutAttributes {
       let atts = super.preferredLayoutAttributesFitting(layoutAttributes)
       atts.size = .init(width: atts.size.width, height: 84)
       return atts

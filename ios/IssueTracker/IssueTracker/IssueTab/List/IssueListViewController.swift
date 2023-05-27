@@ -45,14 +45,9 @@ class IssueListViewController: UIViewController {
       let sectionProvider: UICollectionViewCompositionalLayoutSectionProvider = { _, layoutEnvironment in
          var config = UICollectionLayoutListConfiguration(appearance: .plain)
          config.showsSeparators = true
-         config.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
-            let closeAction = SwiptAction.close.makeAction(withHandler: { action, view, handler in
-               
-            })
-            
-            let deleteAction = SwiptAction.delete.makeAction(withHandler: { action, view, handler in
-               
-            })
+         config.trailingSwipeActionsConfigurationProvider = { _ in
+            let closeAction = SwiptAction.close.makeAction(withHandler: { _, _, _ in })
+            let deleteAction = SwiptAction.delete.makeAction(withHandler: { _, _, _ in })
             
             let config = UISwipeActionsConfiguration(actions: [deleteAction, closeAction])
             config.performsFirstActionWithFullSwipe = false
@@ -66,7 +61,7 @@ class IssueListViewController: UIViewController {
    func fetchIssues(cellCompletion: (() -> Void)? = nil) {
       guard hasNextPage else { return }
       isPaging = true
-      networkManager?.fetchIssueList() { [weak self] dto in
+      networkManager?.fetchIssueList { [weak self] dto in
          cellCompletion?()
          self?.isPaging = false
          self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
@@ -80,20 +75,22 @@ class IssueListViewController: UIViewController {
       }
    }
    
-   private func createIssueCellRegisteration() -> UICollectionView.CellRegistration<IssueListCollectionViewCell, ItemType> {
+   private func createIssueCellRegisteration() -> UICollectionView.CellRegistration<IssueCell, ItemType> {
       let issueCellNib = UINib(nibName: IssueCell.cellId, bundle: nil)
-      return .init(cellNib: issueCellNib) { cell, indexPath, itemIdentifier in
+      return .init(cellNib: issueCellNib) { cell, _, itemIdentifier in
          guard case Item.issue(let issue) = itemIdentifier else { return }
          cell.configure(issue: issue)
       }
    }
    
-   private func createLoadCellRegisteration() -> UICollectionView.CellRegistration<LoadCollectionViewCell, ItemType> {
+   private func createLoadCellRegisteration() -> UICollectionView.CellRegistration<LoadCell, ItemType> {
       let loadCellNib = UINib(nibName: LoadCell.cellId, bundle: nil)
       return .init(cellNib: loadCellNib, handler: { _, _, _ in })
    }
    
-   private func createCellRegisteration<Cell: CellIdentifiable, Item>(cellCompletion: @escaping UICollectionView.CellRegistration<Cell, Item>.Handler) -> UICollectionView.CellRegistration<Cell, Item>  {
+   private func createCellRegisteration<Cell: CellIdentifiable, Item>(
+      cellCompletion: @escaping UICollectionView.CellRegistration<Cell, Item>.Handler
+   ) -> UICollectionView.CellRegistration<Cell, Item>  {
       let cellNib = UINib(nibName: Cell.cellId, bundle: nil)
       return .init(cellNib: cellNib, handler: cellCompletion)
    }
@@ -104,7 +101,7 @@ class IssueListViewController: UIViewController {
       
       dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
          switch item {
-         case .issue(let issue):
+         case .issue:
             return collectionView.dequeueConfiguredReusableCell(
                using: issueCellRegistration,
                for: indexPath,
@@ -114,8 +111,6 @@ class IssueListViewController: UIViewController {
                using: loadCellRegistration,
                for: indexPath,
                item: item)
-         default:
-            return nil
          }
       }
    }
@@ -187,7 +182,7 @@ extension IssueListViewController {
 
 extension IssueListViewController {
    private func addObservers() {
-      var noti = NotificationCenter.default.addObserver(
+      let noti = NotificationCenter.default.addObserver(
          forName: IssueList.Notifications.didAddIssues,
          object: list, queue: .main,
          using: { [weak self] _ in self?.applyUpdatedSnapshot() })

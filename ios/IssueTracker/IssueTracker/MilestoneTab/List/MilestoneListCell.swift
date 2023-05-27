@@ -54,7 +54,8 @@ class MilestoneListCell: UICollectionViewCell, CellIdentifiable {
          descriptionLabel.isHidden = true
       }
       
-      if let completedAt = milestone.completedAt, completedAt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false {
+      if let completedAt = milestone.completedAt,
+         completedAt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false {
          completedAtLabel.text = milestone.completedAt
       } else {
          dueContainer.isHidden = true

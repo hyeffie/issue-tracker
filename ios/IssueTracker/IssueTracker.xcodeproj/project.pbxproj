@@ -63,7 +63,7 @@
 		F4BF7CD82A0C8887001C22F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4BF7CD62A0C8887001C22F0 /* LaunchScreen.storyboard */; };
 		F4BF7CE32A0C89BD001C22F0 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F4BF7CE22A0C89BD001C22F0 /* .swiftlint.yml */; };
 		F4BF7CF32A0D1312001C22F0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF22A0D1312001C22F0 /* Color.swift */; };
-		F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */; };
+		F4BF7CF52A0D13FF001C22F0 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF42A0D13FF001C22F0 /* Typography.swift */; };
 		F4BF7CF72A0D231D001C22F0 /* UILabel+font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */; };
 		F4D5E3D42A1C50AF00722AD1 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5E3D32A1C50AF00722AD1 /* IssueList.swift */; };
 		F4D5E3D72A1DE5CF00722AD1 /* CellIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5E3D62A1DE5CF00722AD1 /* CellIdentifiable.swift */; };
@@ -128,7 +128,7 @@
 		F4BF7CD92A0C8887001C22F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4BF7CE22A0C89BD001C22F0 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F4BF7CF22A0D1312001C22F0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypoGraphy.swift; sourceTree = "<group>"; };
+		F4BF7CF42A0D13FF001C22F0 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+font.swift"; sourceTree = "<group>"; };
 		F4D5E3D32A1C50AF00722AD1 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
 		F4D5E3D62A1DE5CF00722AD1 /* CellIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifiable.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				F4BF7CF22A0D1312001C22F0 /* Color.swift */,
-				F4BF7CF42A0D13FF001C22F0 /* TypoGraphy.swift */,
+				F4BF7CF42A0D13FF001C22F0 /* Typography.swift */,
 				F4D5E3D62A1DE5CF00722AD1 /* CellIdentifiable.swift */,
 			);
 			path = Common;
@@ -476,7 +476,7 @@
 				F4D5E3D72A1DE5CF00722AD1 /* CellIdentifiable.swift in Sources */,
 				F4A28CF22A1F56FB0091A940 /* LabelListDTO.swift in Sources */,
 				F48583CF2A1380D100322C9F /* IssueListDTO.swift in Sources */,
-				F4BF7CF52A0D13FF001C22F0 /* TypoGraphy.swift in Sources */,
+				F4BF7CF52A0D13FF001C22F0 /* Typography.swift in Sources */,
 				635342B22A20E56700668765 /* IssueDetailUseCase.swift in Sources */,
 				635342BD2A20FAF800668765 /* IssueDetailCollectionViewHeader.swift in Sources */,
 				F4A28CED2A1F40B70091A940 /* MilestoneListCell.swift in Sources */,

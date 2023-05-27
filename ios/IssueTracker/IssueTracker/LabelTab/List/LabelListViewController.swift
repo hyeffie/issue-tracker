@@ -85,7 +85,7 @@ extension LabelListViewController {
    
    private func createLabelCellRegisteration() -> UICollectionView.CellRegistration<LabelCell, Item> {
       let cellNib = UINib(nibName: LabelCell.cellId, bundle: nil)
-      return .init(cellNib: cellNib) { cell, indexPath, itemIdentifier in
+      return .init(cellNib: cellNib) { cell, _, itemIdentifier in
          guard case Item.label(let label) = itemIdentifier else { return }
          cell.configure(with: label)
       }
@@ -117,7 +117,7 @@ extension LabelListViewController {
 
 extension LabelListViewController {
    private func addObservers() {
-      var noti = NotificationCenter.default.addObserver(
+      let noti = NotificationCenter.default.addObserver(
          forName: LabelList.Notifications.didAddLabels,
          object: list,
          queue: .main,
@@ -131,7 +131,7 @@ extension LabelListViewController {
 
 extension LabelListViewController {
    func fetchLabels(cellCompletion: (() -> Void)? = nil) {
-      networkManager?.requestLabelList() { [weak self] dto in
+      networkManager?.requestLabelList { [weak self] dto in
          cellCompletion?()
          if dto.labelList.count > 0 {
             let labels = ListingItemFactory.LabelTab.makeLabelList(with: dto)

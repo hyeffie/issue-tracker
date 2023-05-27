@@ -74,14 +74,16 @@ extension IssueDetailViewController: UICollectionViewDataSource {
       return 1
    }
    
-   func collectionView(_ collectionView: UICollectionView,
-                       viewForSupplementaryElementOfKind kind: String,
-                       at indexPath: IndexPath) -> UICollectionReusableView {
-      guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                         withReuseIdentifier: headerId,
-                                                                         for: indexPath) as? IssueDetailCollectionViewHeader else {
-         return UICollectionReusableView()
-      }
+   func collectionView(
+      _ collectionView: UICollectionView,
+      viewForSupplementaryElementOfKind kind: String,
+      at indexPath: IndexPath
+   ) -> UICollectionReusableView {
+      guard let header = collectionView.dequeueReusableSupplementaryView(
+         ofKind: kind,
+         withReuseIdentifier: headerId,
+         for: indexPath
+      ) as? IssueDetailCollectionViewHeader else { return UICollectionReusableView() }
       
       let headerData = issueDetailUseCase.sendHeaderData()
       
@@ -92,44 +94,50 @@ extension IssueDetailViewController: UICollectionViewDataSource {
       
       switch headerData.status {
       case false:
-            header.status.text = "열린 이슈"
-            header.status.backgroundColor = uiColorFactory.make(hexColor: openColor)
+         header.status.text = "열린 이슈"
+         header.status.backgroundColor = uiColorFactory.make(hexColor: openColor)
       case true:
-            header.status.text = "닫힌 이슈"
-            header.status.backgroundColor = uiColorFactory.make(hexColor: closeColor)
+         header.status.text = "닫힌 이슈"
+         header.status.backgroundColor = uiColorFactory.make(hexColor: closeColor)
       }
-
+      
       return header
    }
    
-   func collectionView(_ collectionView: UICollectionView,
-                       numberOfItemsInSection section: Int) -> Int {
+   func collectionView(
+      _ collectionView: UICollectionView,
+      numberOfItemsInSection section: Int
+   ) -> Int {
       return 5
    }
    
-   func collectionView(_ collectionView: UICollectionView,
-                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId,
-                                                          for: indexPath) as? IssueDetailCollectionViewCell else {
-         return UICollectionViewCell()
-      }
+   func collectionView(
+      _ collectionView: UICollectionView,
+      cellForItemAt indexPath: IndexPath
+   ) -> UICollectionViewCell {
+      guard let cell = collectionView.dequeueReusableCell(
+         withReuseIdentifier: cellId,
+         for: indexPath
+      ) as? IssueDetailCollectionViewCell else { return UICollectionViewCell() }
       return cell
    }
 }
 
 extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
-   func collectionView(_ collectionView: UICollectionView,
-                       layout collectionViewLayout: UICollectionViewLayout,
-                       referenceSizeForHeaderInSection section: Int) -> CGSize {
-      return CGSize(width: self.collectionView.frame.width,
-                    height: 100)
+   func collectionView(
+      _ collectionView: UICollectionView,
+      layout collectionViewLayout: UICollectionViewLayout,
+      referenceSizeForHeaderInSection section: Int
+   ) -> CGSize {
+      return CGSize(width: self.collectionView.frame.width, height: 100)
    }
    
-   func collectionView(_ collectionView: UICollectionView,
-                       layout collectionViewLayout: UICollectionViewLayout,
-                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-      return CGSize(width: self.collectionView.frame.width,
-                    height: 100)
+   func collectionView(
+      _ collectionView: UICollectionView,
+      layout collectionViewLayout: UICollectionViewLayout,
+      sizeForItemAt indexPath: IndexPath
+   ) -> CGSize {
+      return CGSize(width: self.collectionView.frame.width, height: 100)
    }
    
    func collectionView(
@@ -140,9 +148,11 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
       return 1.0
    }
    
-   func collectionView(_ collectionView: UICollectionView,
-                       layout collectionViewLayout: UICollectionViewLayout,
-                       insetForSectionAt section: Int) -> UIEdgeInsets {
+   func collectionView(
+      _ collectionView: UICollectionView,
+      layout collectionViewLayout: UICollectionViewLayout,
+      insetForSectionAt section: Int
+   ) -> UIEdgeInsets {
       return UIEdgeInsets(top: 4.0, left: 0, bottom: 0, right: 0)
    }
 }

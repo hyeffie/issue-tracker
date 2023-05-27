@@ -15,7 +15,7 @@ class FilterListCollectionViewHeader: UICollectionReusableView {
    }
    
    func configureFont() {
-      self.sectionName.apply(typography: TypoGraphy(weight: .bold, size: .medium),
+      self.sectionName.apply(typography: Typography(weight: .bold, size: .medium),
                              textColor: .gray900)
    }
     

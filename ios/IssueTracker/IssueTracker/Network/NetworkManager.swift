@@ -37,7 +37,7 @@ final class NetworkManager {
       guard let url else { return }
       let request = URLRequest(url: url)
       
-      let completionHandler = { (data: Data?, response: URLResponse?, error: Error?) in
+      let completionHandler = { @Sendable (data: Data?, response: URLResponse?, error: Error?) in
          if let error {
             completion(.failure(error))
             return
