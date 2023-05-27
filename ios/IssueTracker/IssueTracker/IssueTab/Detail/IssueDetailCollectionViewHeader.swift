@@ -25,6 +25,6 @@ class IssueDetailCollectionViewHeader: UICollectionReusableView {
       number.apply(typography: TypoGraphy(weight: .regular, size: .xlarge),
                    textColor: .gray600)
       status.apply(typography: TypoGraphy(weight: .regular, size: .medium),
-                   textColor: .gray600)
+                   textColor: .gray50)
    }
 }
