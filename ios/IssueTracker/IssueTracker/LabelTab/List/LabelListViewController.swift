@@ -145,7 +145,7 @@ extension LabelListViewController {
 extension LabelListViewController {
    @objc func presentCreateEditVC() {
       let storyboard = UIStoryboard(name: "LabelCreateEditViewController", bundle: nil)
-      guard let viewController = storyboard.instantiateInitialViewController() as? LabelCreateEditViewController else { return }
+      guard let viewController = storyboard.instantiateInitialViewController() as? LabelEditViewController else { return }
       self.navigationController?.pushViewController(viewController, animated: true)
    }
    

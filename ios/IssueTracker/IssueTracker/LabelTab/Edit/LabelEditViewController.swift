@@ -1,5 +1,5 @@
 //
-//  LabelCreateEditViewController.swift
+//  LabelEditViewController.swift
 //  IssueTracker
 //
 //  Created by Effie on 2023/05/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LabelCreateEditViewController: UITableViewController {
+class LabelEditViewController: UITableViewController {
    private let defaultName = "example"
    
    @IBOutlet weak var nameLabel: UILabel!
@@ -69,7 +69,7 @@ class LabelCreateEditViewController: UITableViewController {
    }
 }
 
-extension LabelCreateEditViewController: UITextFieldDelegate {
+extension LabelEditViewController: UITextFieldDelegate {
    func textField(
       _ textField: UITextField,
       shouldChangeCharactersIn range: NSRange,
