@@ -13,14 +13,14 @@ class FilterListViewController: UIViewController {
    let filterHeaderNames = ["상태", "담당자", "레이블", "마일스톤"]
    
    var delegate: (any DataSenderDelegate)?
-   var useCase = IssueFilterList()
-   let statusCellCount = 4
+   var useCase: FilterListUseCase?
    let sectionCount = 4
    
    @IBOutlet weak var collectionView: UICollectionView!
    
    override func viewDidLoad() {
       super.viewDidLoad()
+      loadData()
       setCollectionView()
    }
    
@@ -29,7 +29,7 @@ class FilterListViewController: UIViewController {
          return
       }
       
-      self.useCase = receivedData
+      self.useCase = FilterListUseCase(filterList: receivedData)
    }
    
    private func setCollectionView() {
@@ -53,7 +53,6 @@ class FilterListViewController: UIViewController {
    }
    
    @IBAction func save(_ sender: Any) {
-      
       self.dismiss(animated: true)
    }
 }
@@ -85,16 +84,11 @@ extension FilterListViewController: UICollectionViewDataSource {
       _ collectionView: UICollectionView,
       numberOfItemsInSection section: Int)
    -> Int {
-      switch section {
-      case 0:
-         return filterStatusList.count
-      case 1:
-         return useCase.userList.count
-      case 2:
-         return useCase.labelList.count
-      default:
-         return useCase.milestoneList.count
+      guard let countOfItems = useCase?.sendCount(section: section) else {
+         return 1
       }
+      
+      return countOfItems
    }
    
    func collectionView(
@@ -106,19 +100,12 @@ extension FilterListViewController: UICollectionViewDataSource {
          for: indexPath
       ) as? FilterListCollectionViewCell else { return UICollectionViewCell() }
       
-      let filterElement: String
-      switch indexPath.section {
-      case 0:
-         filterElement = filterStatusList[indexPath.row]
-      case 1:
-         filterElement = useCase.userList[indexPath.row].userName
-      case 2:
-         filterElement = useCase.labelList[indexPath.row].labelName
-      default:
-         filterElement = useCase.milestoneList[indexPath.row].milestoneName!
+      guard let itemName = useCase?.sendItemName(section: indexPath.section,
+                                                 index: indexPath.row) else {
+         return cell
       }
       
-      cell.filterName.text = filterElement
+      cell.filterName.text = itemName
       cell.configureFont()
       cell.configureImage()
       return cell
