@@ -14,6 +14,8 @@ class FilterListViewController: UIViewController {
    var delegate: (any DataSenderDelegate)?
    var filterListUseCase: FilterListUseCase?
    var filterApplyList = FilterApplyList()
+   var pastSelectionStatus: IndexPath?
+   var pastSelectionMilestone: IndexPath?
    
    @IBOutlet weak var collectionView: UICollectionView!
    
@@ -160,15 +162,42 @@ extension FilterListViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension FilterListViewController {
-   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+   func collectionView(_ collectionView: UICollectionView,
+                       didSelectItemAt indexPath: IndexPath) {
       guard let cell = collectionView.cellForItem(at: indexPath) as? FilterListCollectionViewCell else {
          return
       }
       
+      switch indexPath.section {
+      case 0:
+         guard let pastSelectionIndexPath = pastSelectionStatus else {
+            pastSelectionStatus = indexPath
+            break
+         }
+         collectionView.deselectItem(at: pastSelectionIndexPath, animated: true)
+         let cell = collectionView.cellForItem(at: pastSelectionIndexPath) as? FilterListCollectionViewCell
+         cell?.setDeselected()
+         pastSelectionStatus = indexPath
+      
+      case 3:
+         guard let pastSelectionIndexPath = pastSelectionMilestone else {
+            pastSelectionMilestone = indexPath
+            break
+         }
+         collectionView.deselectItem(at: pastSelectionIndexPath, animated: true)
+         let cell = collectionView.cellForItem(at: pastSelectionIndexPath) as? FilterListCollectionViewCell
+         cell?.setDeselected()
+         pastSelectionMilestone = indexPath
+      
+      default: break
+      }
+      
+      print(collectionView.indexPathsForSelectedItems)
       cell.setSelected()
    }
    
-   func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+   func collectionView(_ collectionView: UICollectionView,
+                       didDeselectItemAt indexPath: IndexPath) {
       guard let cell = collectionView.cellForItem(at: indexPath) as? FilterListCollectionViewCell else {
          return
       }
