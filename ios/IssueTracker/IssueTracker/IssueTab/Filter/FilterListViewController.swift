@@ -59,7 +59,11 @@ class FilterListViewController: UIViewController {
 
 extension FilterListViewController: UICollectionViewDataSource {
    func numberOfSections(in collectionView: UICollectionView) -> Int {
-      return sectionCount
+      guard let countOfSections = useCase?.sendHeaderCount() else {
+         return 0
+      }
+      
+      return countOfSections
    }
    
    func collectionView(
@@ -75,7 +79,11 @@ extension FilterListViewController: UICollectionViewDataSource {
          return UICollectionReusableView()
       }
       
-      header.sectionName.text = filterHeaderNames[indexPath.section]
+      guard let sectionName = useCase?.sendHeaderName(section: indexPath.section) else {
+         return header
+      }
+      
+      header.sectionName.text = sectionName
       header.configureFont()
       return header
    }
@@ -138,4 +146,8 @@ extension FilterListViewController: UICollectionViewDelegateFlowLayout {
                        insetForSectionAt section: Int) -> UIEdgeInsets {
       return UIEdgeInsets(top: 1.0, left: 0, bottom: 4.0, right: 0)
    }
+}
+
+extension FilterListViewController {
+   
 }

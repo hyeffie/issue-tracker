@@ -9,17 +9,27 @@ import Foundation
 
 class FilterListUseCase {
    private var filterList: IssueFilterList
-   var countAllStatus: Int
-   var countAllUsers: Int
-   var countAllLabels: Int
-   var countAllMilestones: Int
+   private var countAllHeaders: Int
+   private var countAllStatus: Int
+   private var countAllUsers: Int
+   private var countAllLabels: Int
+   private var countAllMilestones: Int
    
    init(filterList: IssueFilterList) {
       self.filterList = filterList
+      self.countAllHeaders = filterList.headerList.count
       self.countAllStatus = 4
       self.countAllUsers = filterList.userList.count
       self.countAllLabels = filterList.labelList.count
       self.countAllMilestones = filterList.milestoneList.count
+   }
+   
+   func sendHeaderCount() -> Int {
+      countAllHeaders
+   }
+   
+   func sendHeaderName(section: Int) -> String {
+      return self.filterList.headerList[section]
    }
    
    func sendCount(section: Int) -> Int {
