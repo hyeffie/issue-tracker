@@ -10,11 +10,10 @@ import UIKit
 class FilterListViewController: UIViewController {
    let filterCellID = "FilterListCollectionViewCell"
    let filterHeaderID = "FilterListCollectionViewHeader"
-   let filterStatusList = ["열린 이슈", "내가 작성한 이슈", "내가 댓글을 남긴 이슈", "닫힌 이슈"]
    let filterHeaderNames = ["상태", "담당자", "레이블", "마일스톤"]
    
-   var delegate: DataSenderDelegate?
-   var useCase = IssueListDTO()
+   var delegate: (any DataSenderDelegate)?
+   var useCase = IssueFilterList()
    let statusCellCount = 4
    let sectionCount = 4
    
@@ -22,14 +21,18 @@ class FilterListViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      guard let receivedData = delegate?.receive() else {
-         return
-      }
-      useCase = receivedData
       setCollectionView()
    }
    
-   func setCollectionView() {
+   private func loadData() {
+      guard let receivedData = delegate?.send() as? IssueFilterList else {
+         return
+      }
+      
+      self.useCase = receivedData
+   }
+   
+   private func setCollectionView() {
       collectionView.delegate = self
       collectionView.dataSource = self
       
@@ -88,9 +91,9 @@ extension FilterListViewController: UICollectionViewDataSource {
       case 1:
          return useCase.userList.count
       case 2:
-         return useCase.countAllLabels
+         return useCase.labelList.count
       default:
-         return useCase.countAllMilestones
+         return useCase.milestoneList.count
       }
    }
    

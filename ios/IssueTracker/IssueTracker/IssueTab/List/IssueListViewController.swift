@@ -17,7 +17,7 @@ class IssueListViewController: UIViewController {
    
    var networkManager: NetworkManager?
    private var list: IssueList = IssueList()
-   var fetchedAllData = IssueListDTO()
+   private var filterList = IssueFilterList()
    
    var currentPageNumber: Int = 0
    var isPaging = false
@@ -185,7 +185,7 @@ extension IssueListViewController {
             self?.list.emptyList()
             let newIssues = ListingItemFactory.IssueTab.makeIssues(with: dto.issues)
             self?.list.add(issues: newIssues) // -> POST NOTIFICATION
-            self?.fetchedAllData = dto
+            self?.filterList = FilterListFactory.make(issueList: dto)
             self?.currentPageNumber += 1
          }
       }
@@ -206,8 +206,10 @@ extension IssueListViewController {
 // MARK: - Filter
 
 extension IssueListViewController: DataSenderDelegate {
-   func receive() -> IssueListDTO {
-      fetchedAllData
+   typealias DataType = IssueFilterList
+   
+   func send() -> IssueFilterList {
+      filterList
    }
 }
 
