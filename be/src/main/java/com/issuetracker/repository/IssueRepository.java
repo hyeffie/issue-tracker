@@ -60,4 +60,10 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
     @Modifying
     @Query("UPDATE issue SET opened=1, closed_at=NULL WHERE id=:issueId AND opened=0")
     void openIssueById(long issueId);
+
+    /**
+     * 닫혀 있는 이슈의 총 개수를 조회합니다.
+     */
+    @Query("SELECT count(id) FROM issue WHERE deleted_at IS NULL AND opened IS FALSE")
+    long getTotalClosedIssueCount();
 }

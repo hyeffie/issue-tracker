@@ -1,12 +1,12 @@
 package com.issuetracker.mapper;
 
-import com.issuetracker.domain.IssueListPage;
-import com.issuetracker.dto.issueList.Filter;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
+import com.issuetracker.domain.IssueListPage;
 
 @Mapper
 public interface IssueListMapper {
-    List<IssueListPage> findIssueList(Filter filterDto);
+    List<IssueListPage> findIssueList(List<Long> filteredIssueIdList);
 }

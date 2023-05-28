@@ -1,10 +1,6 @@
 package com.issuetracker.service;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -13,12 +9,11 @@ import com.issuetracker.dto.issueList.Filter;
 import com.issuetracker.dto.issueList.FilterLabelDto;
 import com.issuetracker.dto.issueList.FilterMilestoneDto;
 import com.issuetracker.dto.issueList.FilterUserDto;
-import com.issuetracker.dto.issueList.IssueDto;
 import com.issuetracker.dto.issueList.IssueListDto;
 import com.issuetracker.mapper.FilterListMapper;
-import com.issuetracker.mapper.IssueListDtoMapper;
+import com.issuetracker.mapper.IssueIdListMapper;
 import com.issuetracker.mapper.IssueListMapper;
-import com.issuetracker.repository.IssueListRepository;
+import com.issuetracker.repository.IssueRepository;
 import com.issuetracker.repository.LabelRepository;
 import com.issuetracker.repository.MilestoneRepository;
 import com.issuetracker.repository.UserRepository;
@@ -28,8 +23,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class IssueListService {
-    private final IssueListRepository issueListRepository;
+    private final IssueRepository issueRepository;
     private final IssueListMapper issueListMapper;
+    private final IssueIdListMapper issueIdListMapper;
     private final UserRepository userRepository;
     private final LabelRepository labelRepository;
     private final MilestoneRepository milestoneRepository;
@@ -41,13 +37,8 @@ public class IssueListService {
      */
     public IssueListDto fetchMain(Filter filterDto) {
 
-        List<IssueListPage> filteredIssueList = issueListMapper.findIssueList(filterDto);
-
-        List<IssueListPage> issueMainPageDtoList = new ArrayList<>();
-
-        for (IssueListPage issueListPage : filteredIssueList) {
-            issueListRepository.getIssues(issueListPage.getId()).forEach(e -> issueMainPageDtoList.add(e));
-        }
+        List<Long> filteredIssueIdList = issueIdListMapper.findIssueIdList(filterDto);
+        List<IssueListPage> issueMainPageDtoList = issueListMapper.findIssueList(filteredIssueIdList);
 
         List<FilterLabelDto> filterLabelDtoList = FilterListMapper.getFilterLabelDtos(
                 labelRepository.getFilterLabelList());
@@ -55,9 +46,10 @@ public class IssueListService {
                 milestoneRepository.getFilterMilestoneList());
         List<FilterUserDto> filterUserList = FilterListMapper.getFilterUserDtos(userRepository.getFilterUserList());
 
-        long closedIssues = issueListRepository.getTotalClosedIssueCount();
+        long closedIssues = issueRepository.getTotalClosedIssueCount();
 
-        return IssueListDto.of(issueMainPageDtoList, filterUserList, filterLabelDtoList, filterMilestoneList, closedIssues);
+        return IssueListDto.of(issueMainPageDtoList, filterUserList, filterLabelDtoList, filterMilestoneList,
+                closedIssues);
     }
 
 }
