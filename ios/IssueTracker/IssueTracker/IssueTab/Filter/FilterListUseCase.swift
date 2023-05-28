@@ -57,4 +57,18 @@ class FilterListUseCase {
          return self.filterList.milestoneList[index].milestoneName ?? ""
       }
    }
+   
+   func sendItemId(section: Int, index: Int) -> Int {
+      switch section {
+      case 0:
+         guard index < 3 else { return 0 }
+         return 1
+      case 1:
+         return self.filterList.userList[index].userId
+      case 2:
+         return self.filterList.labelList[index].labelId
+      default:
+         return self.filterList.milestoneList[index].milestoneId
+      }
+   }
 }

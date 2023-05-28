@@ -54,6 +54,15 @@ class FilterListViewController: UIViewController {
    }
    
    @IBAction func save(_ sender: Any) {
+      let filterElements = collectionView.indexPathsForSelectedItems
+      filterElements?.forEach {
+         filterApplyList.addFilter(section: $0.section,
+                                   id: filterListUseCase?.sendItemId(section: $0.section, index: $0.row))
+      }
+      
+      NotificationCenter.default.post(name: FilterApplyList.applyFilter,
+                                            object: nil,
+                                            userInfo: [0 : filterApplyList])
       
       self.dismiss(animated: true)
    }
