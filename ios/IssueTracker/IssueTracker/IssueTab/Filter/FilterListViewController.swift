@@ -149,3 +149,21 @@ extension FilterListViewController: UICollectionViewDelegateFlowLayout {
       return UIEdgeInsets(top: 1.0, left: 0, bottom: 4.0, right: 0)
    }
 }
+
+extension FilterListViewController {
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      guard let cell = collectionView.cellForItem(at: indexPath) as? FilterListCollectionViewCell else {
+         return
+      }
+      
+      cell.setSelected()
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+      guard let cell = collectionView.cellForItem(at: indexPath) as? FilterListCollectionViewCell else {
+         return
+      }
+      
+      cell.setDeselected()
+   }
+}
