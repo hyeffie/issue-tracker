@@ -10,26 +10,25 @@ import UIKit
 class FilterListViewController: UIViewController {
    let filterCellID = "FilterListCollectionViewCell"
    let filterHeaderID = "FilterListCollectionViewHeader"
-   let filterHeaderNames = ["상태", "담당자", "레이블", "마일스톤"]
    
    var delegate: (any DataSenderDelegate)?
-   var useCase: FilterListUseCase?
-   let sectionCount = 4
+   var filterListUseCase: FilterListUseCase?
+   var filterApplyList = FilterApplyList()
    
    @IBOutlet weak var collectionView: UICollectionView!
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      loadData()
+      receiveData()
       setCollectionView()
    }
    
-   private func loadData() {
+   private func receiveData() {
       guard let receivedData = delegate?.send() as? IssueFilterList else {
          return
       }
       
-      self.useCase = FilterListUseCase(filterList: receivedData)
+      self.filterListUseCase = FilterListUseCase(filterList: receivedData)
    }
    
    private func setCollectionView() {
@@ -46,6 +45,8 @@ class FilterListViewController: UIViewController {
       if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
          flowLayout.estimatedItemSize = .zero
       }
+      
+      collectionView.allowsMultipleSelection = true
    }
    
    @IBAction func cancel(_ sender: Any) {
@@ -53,13 +54,14 @@ class FilterListViewController: UIViewController {
    }
    
    @IBAction func save(_ sender: Any) {
+      
       self.dismiss(animated: true)
    }
 }
 
 extension FilterListViewController: UICollectionViewDataSource {
    func numberOfSections(in collectionView: UICollectionView) -> Int {
-      guard let countOfSections = useCase?.sendHeaderCount() else {
+      guard let countOfSections = filterListUseCase?.sendHeaderCount() else {
          return 0
       }
       
@@ -79,7 +81,7 @@ extension FilterListViewController: UICollectionViewDataSource {
          return UICollectionReusableView()
       }
       
-      guard let sectionName = useCase?.sendHeaderName(section: indexPath.section) else {
+      guard let sectionName = filterListUseCase?.sendHeaderName(section: indexPath.section) else {
          return header
       }
       
@@ -92,7 +94,7 @@ extension FilterListViewController: UICollectionViewDataSource {
       _ collectionView: UICollectionView,
       numberOfItemsInSection section: Int)
    -> Int {
-      guard let countOfItems = useCase?.sendCount(section: section) else {
+      guard let countOfItems = filterListUseCase?.sendCount(section: section) else {
          return 1
       }
       
@@ -108,7 +110,7 @@ extension FilterListViewController: UICollectionViewDataSource {
          for: indexPath
       ) as? FilterListCollectionViewCell else { return UICollectionViewCell() }
       
-      guard let itemName = useCase?.sendItemName(section: indexPath.section,
+      guard let itemName = filterListUseCase?.sendItemName(section: indexPath.section,
                                                  index: indexPath.row) else {
          return cell
       }
@@ -146,8 +148,4 @@ extension FilterListViewController: UICollectionViewDelegateFlowLayout {
                        insetForSectionAt section: Int) -> UIEdgeInsets {
       return UIEdgeInsets(top: 1.0, left: 0, bottom: 4.0, right: 0)
    }
-}
-
-extension FilterListViewController {
-   
 }

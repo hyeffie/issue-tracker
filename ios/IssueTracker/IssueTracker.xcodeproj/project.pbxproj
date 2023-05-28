@@ -24,6 +24,7 @@
 		635342D62A2303DD00668765 /* FilterListFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342D52A2303DD00668765 /* FilterListFactory.swift */; };
 		635342D82A23115300668765 /* FilterListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342D72A23115300668765 /* FilterListUseCase.swift */; };
 		635342DA2A23145F00668765 /* FilterListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342D92A23145F00668765 /* FilterListType.swift */; };
+		635342DC2A231F9000668765 /* FilterApplyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635342DB2A231F9000668765 /* FilterApplyList.swift */; };
 		638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */; };
 		638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */; };
 		63D6CFCF2A15B7F6000876D5 /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6CFCE2A15B7F6000876D5 /* FilterListViewController.swift */; };
@@ -90,6 +91,7 @@
 		635342D52A2303DD00668765 /* FilterListFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListFactory.swift; sourceTree = "<group>"; };
 		635342D72A23115300668765 /* FilterListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListUseCase.swift; sourceTree = "<group>"; };
 		635342D92A23145F00668765 /* FilterListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListType.swift; sourceTree = "<group>"; };
+		635342DB2A231F9000668765 /* FilterApplyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterApplyList.swift; sourceTree = "<group>"; };
 		638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueListCollectionViewCell.xib; sourceTree = "<group>"; };
 		638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionViewCell.swift; sourceTree = "<group>"; };
 		63D6CFCE2A15B7F6000876D5 /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				63D6CFE92A1698E7000876D5 /* FilterListCollectionViewHeader.xib */,
 				63D6CFE82A1698E7000876D5 /* FilterListCollectionViewHeader.swift */,
 				635342D92A23145F00668765 /* FilterListType.swift */,
+				635342DB2A231F9000668765 /* FilterApplyList.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				F48583CC2A13802E00322C9F /* NetworkError.swift in Sources */,
 				F4A28CF82A1F77B20091A940 /* MilestoneListDTO.swift in Sources */,
 				63D6CFE72A168F40000876D5 /* FilterListCollectionViewCell.swift in Sources */,
+				635342DC2A231F9000668765 /* FilterApplyList.swift in Sources */,
 				F4BF7CF32A0D1312001C22F0 /* Color.swift in Sources */,
 				F48583AC2A10E1FC00322C9F /* TabBarController.swift in Sources */,
 				63D6CFD82A1624D3000876D5 /* DataSenderDelegate.swift in Sources */,

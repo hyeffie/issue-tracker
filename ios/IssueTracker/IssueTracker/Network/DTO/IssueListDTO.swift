@@ -29,7 +29,7 @@ struct IssueListDTO: Codable {
       }
    }
    
-   struct User: Codable {
+   struct User: Codable, Hashable {
       let userId: Int
       let userName: String
       let profileUrl: String?
