@@ -168,6 +168,38 @@ final class NetworkManager {
       dataTask.resume()
    }
    
+   private func deleteData(for urlString: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+      guard let url = URL(string: urlString) else { return }
+      var request = URLRequest(url: url)
+      request.httpMethod = "DELETE"
+      request.timeoutInterval = 15
+      
+      let dataTask = session.dataTask(with: request) { _, response, error in
+         if let error {
+            completion(.failure(error))
+            return
+         }
+         
+         guard let response = response as? HTTPURLResponse else {
+            completion(.failure(NetworkError.noResponse))
+            return
+         }
+         
+         switch response.statusCode {
+         case (200..<300):
+            completion(.success(nil))
+            return
+         case 400:
+            completion(.failure(NetworkError.failToDelete))
+            return
+         default:
+            completion(.failure(NetworkError.someError))
+            return
+         }
+      }
+      dataTask.resume()
+   }
+   
    // MARK: - Util
    
    func requestIssueList(filterList: FilterApplyList? = nil, pageNumber: Int? = nil, completion: @escaping (IssueListDTO) -> Void) {
