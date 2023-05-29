@@ -146,7 +146,7 @@ extension IssueListViewController {
       snapshot.appendSections([.issue, .loadIndicator])
       let issues = list.issues.map { issue in Item.issue(issue: issue) }
       snapshot.appendItems(issues, toSection: .issue)
-      snapshot.appendItems([.load], toSection: .loadIndicator)
+      if hasNextPage { snapshot.appendItems([.load], toSection: .loadIndicator) }
       dataSource?.apply(snapshot, animatingDifferences: animated)
    }
 }
@@ -204,12 +204,11 @@ extension IssueListViewController {
    func fetchIssues(cellCompletion: (() -> Void)? = nil) {
       guard hasNextPage else { return }
       isPaging = true
-      networkManager?.fetchIssueList { [weak self] dto in
+      networkManager?.fetchIssueList(pageNumber: currentPageNumber) { [weak self] dto in
          cellCompletion?()
          self?.isPaging = false
          self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
          if dto.issues.count > 0 {
-            self?.list.emptyList()
             let newIssues = ListingItemFactory.IssueTab.makeIssues(with: dto.issues)
             self?.list.add(issues: newIssues) // -> POST NOTIFICATION
             self?.filterList = FilterListFactory.make(issueList: dto)
