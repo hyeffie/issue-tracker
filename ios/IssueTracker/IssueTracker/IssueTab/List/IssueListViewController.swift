@@ -8,20 +8,21 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-   var collectionView: UICollectionView!
+   private var collectionView: UICollectionView!
    private var dataSource: DataSource?
    
-   var observers: [NSObjectProtocol] = []
+   private var observers: [NSObjectProtocol] = []
    
-   let filterListID = "FilterList"
+   private let filterListID = "FilterList"
    
-   var networkManager: NetworkManager?
+   private var networkManager: NetworkManager?
    private var list: IssueList = IssueList()
    private var filterList = IssueFilterList()
+   private var filterApplyList: FilterApplyList? = nil
    
-   var currentPageNumber: Int = 0
-   var isPaging = false
-   var hasNextPage = true
+   private var currentPageNumber: Int = 0
+   private var isPaging = false
+   private var hasNextPage = true
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -37,10 +38,18 @@ class IssueListViewController: UIViewController {
       fetchIssues()
    }
    
-   func setNetworkManager() {
+   private func setNetworkManager() {
       networkManager = NetworkManager(session: URLSession.shared)
    }
+   
+   private func reset() {
+      list.emptyList()
+      currentPageNumber = 0
+      hasNextPage = true
+   }
 }
+
+// MARK: - CollectionView
 
 extension IssueListViewController {
    private func setCollectionView() {
@@ -70,7 +79,7 @@ extension IssueListViewController {
 }
 
 extension IssueListViewController {
-   func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
+   private func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
       return { _ in
          let delete = SwipeAction.delete.makeAction(hasImage: false, withHandler: { _, _, _ in })
          let edit = SwipeAction.edit.makeAction(hasImage: false, withHandler: { _, _, _ in })
@@ -80,6 +89,8 @@ extension IssueListViewController {
       }
    }
 }
+
+// MARK: - CollectionView Data Source
 
 extension IssueListViewController {
    typealias SectionType = Section
@@ -164,6 +175,8 @@ extension IssueListViewController: UICollectionViewDelegate {
    }
 }
 
+// MARK: - Notification
+
 extension IssueListViewController {
    private func addObservers() {
       self.observers.append(NotificationCenter.default.addObserver(
@@ -181,17 +194,21 @@ extension IssueListViewController {
          object: nil, queue: .main,
          using: { [weak self] notification in
             guard let filterApplyList = notification.userInfo?[FilterApplyList.Keys.Filters] as? FilterApplyList else { return }
-            self?.list.emptyList()
-            self?.fetchFilteredIssues(filterApplyList)
-         }))
+            self?.filterApplyList = filterApplyList
+            self?.reset()
+            self?.fetchIssues() }))
    }
 }
 
+// MARK: - Request
+
 extension IssueListViewController {
-   func fetchIssues(cellCompletion: (() -> Void)? = nil) {
+   private func fetchIssues(cellCompletion: (() -> Void)? = nil) {
       guard hasNextPage else { return }
       isPaging = true
-      networkManager?.fetchIssueList(pageNumber: currentPageNumber) { [weak self] dto in
+      networkManager?.requestIssueList(
+         filterList: filterApplyList,
+         pageNumber: currentPageNumber) { [weak self] dto in
          cellCompletion?()
          self?.isPaging = false
          self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
@@ -203,23 +220,9 @@ extension IssueListViewController {
          }
       }
    }
-   
-   func fetchFilteredIssues(_ filter: FilterApplyList, cellCompletion: (() -> Void)? = nil) {
-      guard hasNextPage else { return }
-      isPaging = true
-      networkManager?.requestIssueList(filterList: filter) { [weak self] dto in
-         cellCompletion?()
-         self?.isPaging = false
-         self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
-         if dto.issues.count > 0 {
-            self?.list.emptyList()
-            let newIssues = ListingItemFactory.IssueTab.makeIssues(with: dto.issues)
-            self?.list.add(issues: newIssues, isFiltered: true) // -> POST NOTIFICATION
-            self?.currentPageNumber += 1
-         }
-      }
-   }
 }
+
+// MARK: - Detail
 
 extension IssueListViewController {
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -250,7 +253,7 @@ extension IssueListViewController {
       self.present(viewController, animated: true)
    }
    
-   func setFilterButton() {
+   private func setFilterButton() {
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(
          title: "필터",
          style: .plain,
@@ -266,7 +269,7 @@ extension IssueListViewController {
       
    }
    
-   func setSelectButton() {
+   private func setSelectButton() {
       let selectButton = UIBarButtonItem(
          title: "선택",
          style: .plain,

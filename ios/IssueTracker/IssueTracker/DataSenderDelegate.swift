@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DataSenderDelegate {
+protocol DataSenderDelegate: NSObject {
    associatedtype DataType
    
    func send() -> DataType
