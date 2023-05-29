@@ -3,31 +3,38 @@ package com.issuetracker.service;
 import static com.issuetracker.mapper.FilterListMapper.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.issuetracker.domain.Assignee;
+import com.issuetracker.domain.Comment;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.domain.IssueLabel;
+import com.issuetracker.domain.Milestone;
 import com.issuetracker.domain.User;
-import com.issuetracker.dto.issue.AssigneeDto;
 import com.issuetracker.dto.issue.IssueCommentDto;
 import com.issuetracker.dto.issue.IssueDetailDto;
 import com.issuetracker.dto.issue.IssueDetailPageDto;
 import com.issuetracker.dto.issue.IssueLabelDto;
 import com.issuetracker.dto.issue.IssueMilestone;
 import com.issuetracker.dto.issue.IssuePostDto;
+import com.issuetracker.dto.issue.IssueStatusDto;
 import com.issuetracker.dto.issueList.FilterLabelDto;
 import com.issuetracker.dto.issueList.FilterMilestoneDto;
 import com.issuetracker.dto.issueList.FilterUserDto;
 import com.issuetracker.dto.issueList.IssueStatusListDto;
 import com.issuetracker.mapper.LabelToDtoMapper;
 import com.issuetracker.repository.AssigneeRepository;
+import com.issuetracker.repository.CommentRepository;
 import com.issuetracker.repository.IssueLabelRepository;
-import com.issuetracker.repository.IssueListRepository;
 import com.issuetracker.repository.IssueRepository;
+import com.issuetracker.repository.LabelRepository;
+import com.issuetracker.repository.MilestoneRepository;
 import com.issuetracker.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -39,8 +46,10 @@ public class IssueService {
     private final IssueRepository issueRepository;
     private final IssueLabelRepository issueLabelRepository;
     private final AssigneeRepository assigneeRepository;
-    private final IssueListRepository issueListRepository;
+    private final CommentRepository commentRepository;
+    private final MilestoneRepository milestoneRepository;
     private final UserRepository userRepository;
+    private final LabelRepository labelRepository;
 
     /**
      * 데이터베이스에서 가져온 데이터들로 이슈 상세 조회 시 필요한 데이터들을 조립
@@ -53,26 +62,50 @@ public class IssueService {
         Issue issue = issueRepository.findIssueByIssueId(issueId);
         User user = userRepository.findById(issue.getUserId()).get();
         IssueDetailDto issueDetailDto = new IssueDetailDto(issueId, issue.getTitle(), issue.getContent(),
-                user.getLoginId(), user.getProfileUrl(), issue.getOpened(), issue.getCreatedAt(), issue.getClosedAt());
+                user.getLoginId(), user.getProfileUrl(), issue.isOpened(), issue.getCreatedAt(), issue.getClosedAt());
 
-        List<AssigneeDto> assigneeList = issueRepository.findAssigneeListByIssueId(issueId);
-        List<IssueLabelDto> labelList = issueRepository.findLabelListByIssueId(issueId).stream()
-                .map(LabelToDtoMapper.INSTANCE::toDto)
+        List<User> assigneeList = issueRepository.findAssigneeListByIssueId(issueId);
+        List<IssueLabelDto> labelList = labelRepository.findLabelListByIssueId(issueId).stream()
+                .map(LabelToDtoMapper::toDto)
                 .collect(Collectors.toList());
-        List<IssueCommentDto> commentList = issueRepository.findCommentListByIssueId(issueId);
-        IssueMilestone milestone = issueRepository.findMilestoneByIssueId(issueId);
 
-        List<FilterLabelDto> filterLabelDtoList = getFilterLabelDtos(issueListRepository.getFilterLabelList());
+        List<IssueCommentDto> commentList = new ArrayList<>();
+        for (Comment comment : commentRepository.findCommentListByIssueId(issueId)) {
+            User commentWriter = userRepository.findByUserId(comment.getUserId());
+            commentList.add(IssueCommentDto.builder()
+                    .commentId(comment.getId())
+                    .userId(comment.getUserId())
+                    .userName(commentWriter.getLoginId())
+                    .profileUrl(commentWriter.getProfileUrl())
+                    .content(comment.getContent())
+                    .createdAt(comment.getCreatedAt())
+                    .updatedAt(comment.getUpdatedAt())
+                    .build());
+        }
+
+        Milestone milestone = milestoneRepository.findMilestoneByIssueId(issueId);
+        long countAllIssuesOnMilestone = issueRepository.countAllIssuesOnMilestone(milestone.getId());
+        long countAllClosedIssuesOnMilestone = issueRepository.countAllClosedIssuesOnMilestone(milestone.getId());
+        IssueMilestone issueMilestone = IssueMilestone.builder()
+                .milestoneId(milestone.getId())
+                .milestoneName(milestone.getName())
+                .countAllIssues(countAllIssuesOnMilestone)
+                .countAllClosedIssues(countAllClosedIssuesOnMilestone)
+                .build();
+
+        List<FilterLabelDto> filterLabelDtoList = getFilterLabelDtos(
+                labelRepository.getFilterLabelList());
         List<FilterMilestoneDto> filterMilestoneList = getFilterMilestoneDtos(
-                issueListRepository.getFilterMilestoneList());
-        List<FilterUserDto> filterUserList = getFilterUserDtos(issueListRepository.getFilterUserList());
+                milestoneRepository.getFilterMilestoneList());
+        List<FilterUserDto> filterUserList = getFilterUserDtos(userRepository.getFilterUserList());
 
-        return new IssueDetailPageDto(issueDetailDto, milestone, labelList, assigneeList, commentList, filterUserList,
+        return new IssueDetailPageDto(issueDetailDto, issueMilestone, labelList, assigneeList, commentList,
+                filterUserList,
                 filterLabelDtoList, filterMilestoneList);
     }
 
     public void createIssue(IssuePostDto issuePostDto) {
-        Issue issue = issueRepository.save(Issue.createIssue(issuePostDto));
+        Issue issue = issueRepository.save(Issue.ofCreated(issuePostDto));
 
         issuePostDto.getUserList()
                 .stream()
@@ -85,7 +118,7 @@ public class IssueService {
 
     public void modifyIssue(IssuePostDto issuePostDto, long id) {
         Issue issueUnmodified = issueRepository.findById(id).get();
-        Issue issue = issueRepository.save(Issue.updateIssue(issuePostDto, issueUnmodified, id));
+        Issue issue = issueRepository.save(Issue.ofUpdated(issuePostDto, issueUnmodified, id));
         //Label, Assignee 삭제 후 다시 추가
         assigneeRepository.findByIssueId(id).forEach(assigneeId -> assigneeRepository.deleteById((assigneeId)));
         issueLabelRepository.findByIssueId(id).forEach(issueLabelId -> issueLabelRepository.deleteById(issueLabelId));
@@ -101,20 +134,30 @@ public class IssueService {
     public void deleteIssue(long id) {
         Issue issue = issueRepository.findById(id).get();
         //soft-delete
-        issueRepository.save(Issue.deleteIssue(issue));
+        issueRepository.save(Issue.ofDeleted(issue));
     }
 
-    public void changeIssueStatus(IssueStatusListDto is) {
+    @Transactional
+    public void changeIssueStatus(IssueStatusListDto issueStatusListDto) {
         //모두 Open이거나 모두 Close인 경우
-        if (is.getIssues().stream().filter(e -> e.getIsOpen() != null && e.getIsOpen()).count() == is.getIssues()
-                .size()) {
-            is.getIssues().stream().forEach(e -> issueRepository.openIssueById(e.getIssueId()));
-            return;
-        } else if (is.getIssues().stream().filter(e -> e.getIsOpen() != null && !e.getIsOpen()).count()
-                == is.getIssues().size()) {
-            is.getIssues().stream().forEach(e -> issueRepository.closeIssueById(e.getIssueId(), LocalDateTime.now()));
-            return;
+        long openCount = 0;
+        long closeCount = 0;
+
+        Iterator<IssueStatusDto> iterator = issueStatusListDto.getIssues().stream().iterator();
+        while (iterator.hasNext()) {
+            IssueStatusDto e = iterator.next();
+            if (e.getIsOpen() != null && e.getIsOpen()) {
+                issueRepository.openIssueById(e.getIssueId());
+                openCount++;
+            }
+            else if (e.getIsOpen() != null && !e.getIsOpen()) {
+                issueRepository.closeIssueById(e.getIssueId(), LocalDateTime.now());
+                closeCount++;
+            }
+
+            if (openCount > 0 && closeCount > 0) {
+                throw new IllegalArgumentException("Open 혹은 Close인 이슈만을 골라주세요.");
+            }
         }
-        throw new IllegalArgumentException("Open 혹은 Close인 이슈만을 골라주세요.");
     }
 }

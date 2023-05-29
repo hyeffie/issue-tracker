@@ -1,18 +1,23 @@
 package com.issuetracker.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.issuetracker.domain.Label;
 import com.issuetracker.dto.issue.IssueLabelDto;
 
-@Mapper
-public interface LabelToDtoMapper {
-    LabelToDtoMapper INSTANCE = Mappers.getMapper(LabelToDtoMapper.class);
+public class LabelToDtoMapper {
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Mapping(source = "id", target = "labelId")
-    @Mapping(source = "name", target = "labelName")
-    IssueLabelDto toDto(Label label);
+    public static IssueLabelDto toDto(Label label) {
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        try {
+            String jsonString = objectMapper.writeValueAsString(label);
+            jsonString = jsonString.replace("id", "labelId").replace("name", "labelName");
+            return objectMapper.readValue(jsonString, IssueLabelDto.class);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException("Json Parse Error");
+        }
+    }
 }
 

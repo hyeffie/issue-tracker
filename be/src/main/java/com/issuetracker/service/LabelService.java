@@ -25,12 +25,12 @@ public class LabelService {
 
     public void createLabel(LabelDto labelDto) {
         labelRepository.save(
-                Label.createAutoIncrementedLabel(labelDto.getLabelName(), labelDto.getBackgroundColor(),
+                Label.ofCreated(labelDto.getLabelName(), labelDto.getBackgroundColor(),
                         labelDto.getFontColor(), labelDto.getDescription()));
     }
 
     public void updateLabel(int labelId, LabelDto labelDto) {
-        labelRepository.save(Label.createUpdateLabel(labelId, labelDto.getLabelName(), labelDto.getBackgroundColor(),
+        labelRepository.save(Label.ofUpdated(labelId, labelDto.getLabelName(), labelDto.getBackgroundColor(),
                 labelDto.getFontColor(), labelDto.getDescription()));
     }
 

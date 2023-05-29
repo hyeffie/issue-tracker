@@ -16,7 +16,6 @@ public class MilestoneDto {
     private int milestoneId;
     private String name;
     private String description;
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime completedAt;
     private long countAllOpenedIssues;
     private long countAllClosedIssues;
