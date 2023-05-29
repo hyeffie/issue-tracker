@@ -45,8 +45,40 @@ class FilterApplyList {
       self.labels = []
       self.milestone = nil
    }
+   
+   func makeQuery() -> RequestParameters {
+      var query: RequestParameters = [:]
+
+      let filterList = self
+      let statusString = filterList.status ? "open" : "closed"
+      query.updateValue("\(statusString)", forKey: "status")
+      
+      var userString = ""
+      filterList.users.forEach {
+         userString += String($0) + ","
+      }
+      userString = String(userString.dropLast())
+      query.updateValue("\(userString)", forKey: "assignee")
+      
+      var labelString = ""
+      filterList.labels.forEach {
+         labelString += String($0) + ","
+      }
+      labelString = String(labelString.dropLast())
+      query.updateValue("\(labelString)", forKey: "label")
+      
+      if let milestoneString = filterList.milestone {
+         query.updateValue("\(milestoneString)", forKey: "milestone")
+      }
+      
+      return query
+   }
 }
 
 extension FilterApplyList {
    static let applyFilter = Notification.Name(rawValue: "applyFilter")
+   
+   enum Keys {
+      static let Filters = "Filters"
+   }
 }

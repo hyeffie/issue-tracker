@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias RequestParameters = [String: String]
+
 final class NetworkManager {
    static let dummyURLString = "https://example.com"
    static let defaultPagingOffSet = 10
@@ -69,59 +71,16 @@ final class NetworkManager {
    
    // MARK: - Util
    
-   func fetchIssueList(pageNumber: Int? = nil, completion: @escaping (IssueListDTO) -> Void) {
-      var query: [String: String] = [:]
+   func requestIssueList(filterList: FilterApplyList? = nil, pageNumber: Int? = nil, completion: @escaping (IssueListDTO) -> Void) {
+      let issueListURL = baseURL + "/issues"
+      
+      var query: RequestParameters = [:]
+      if let filters = filterList?.makeQuery() { filters.forEach { filter in query.updateValue(filter.value, forKey: filter.key) } }
       if let pageNumber {
          query.updateValue("\(Self.defaultPagingOffSet)", forKey: "offset")
          query.updateValue("\(pageNumber)", forKey: "pageNum")
       }
       
-      let issueListURL = baseURL + "/issues"
-      
-      fetchData(for: issueListURL,
-                with: query,
-                dataType: IssueListDTO.self) { result in
-         switch result {
-         case .success(let issueList):
-            completion(issueList)
-         case .failure(let error):
-            print(error)
-         }
-      }
-   }
-
-   func requestIssueList(filterList: FilterApplyList, pageNumber: Int? = nil, completion: @escaping (IssueListDTO) -> Void) {
-      var query: [String: String] = [:]
-
-      let filterList = filterList
-      let statusString = filterList.status ? "open" : "closed"
-      query.updateValue("\(statusString)", forKey: "status")
-      
-      var userString = ""
-      filterList.users.forEach {
-         userString += String($0) + ","
-      }
-      userString = String(userString.dropLast())
-      query.updateValue("\(userString)", forKey: "assignee")
-      
-      var labelString = ""
-      filterList.labels.forEach {
-         labelString += String($0) + ","
-      }
-      labelString = String(labelString.dropLast())
-      query.updateValue("\(labelString)", forKey: "label")
-      
-      if let milestoneString = filterList.milestone {
-         query.updateValue("\(milestoneString)", forKey: "milestone")
-      }
-
-      if let pageNumber {
-         query.updateValue("\(Self.defaultPagingOffSet)", forKey: "offset")
-         query.updateValue("\(pageNumber)", forKey: "pageNum")
-      }
-
-      let issueListURL = baseURL + "/issues"
-
       fetchData(for: issueListURL,
                 with: query,
                 dataType: IssueListDTO.self) { result in
@@ -136,7 +95,7 @@ final class NetworkManager {
    
    func requestIssueDetail(issueId: Int, completion: @escaping (IssueDetailDTO) -> Void) {
       let issueDetailURL = baseURL + "/issues/\(issueId)"
-
+      
       fetchData(for: issueDetailURL,
                 dataType: IssueDetailDTO.self) { result in
          switch result {

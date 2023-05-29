@@ -11,7 +11,7 @@ class FilterListViewController: UIViewController {
    let filterCellID = "FilterListCollectionViewCell"
    let filterHeaderID = "FilterListCollectionViewHeader"
    
-   var delegate: (any DataSenderDelegate)?
+   weak var delegate: (any DataSenderDelegate)?
    var filterListUseCase: FilterListUseCase?
    var filterApplyList = FilterApplyList()
    var pastSelectionStatus: IndexPath?
@@ -65,7 +65,7 @@ class FilterListViewController: UIViewController {
       
       NotificationCenter.default.post(name: FilterApplyList.applyFilter,
                                       object: nil,
-                                      userInfo: [0 : filterApplyList])
+                                      userInfo: [FilterApplyList.Keys.Filters : filterApplyList])
       
       self.dismiss(animated: true)
    }
@@ -192,8 +192,6 @@ extension FilterListViewController {
       
       default: break
       }
-      
-      print(collectionView.indexPathsForSelectedItems)
       cell.setSelected()
    }
    

@@ -8,7 +8,7 @@
 import Foundation
 
 struct LabelListDTO: Codable {
-   struct Label: Codable, Hashable {
+   struct Label: Codable {
       let id: Int
       let name: String
       let backgroundColor: String?
