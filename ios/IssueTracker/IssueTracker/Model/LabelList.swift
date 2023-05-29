@@ -41,6 +41,7 @@ extension LabelList {
    enum Notifications {
       static let didAddLabels = Notification.Name(rawValue: "didAddLabels")
       static let didAddLabel = Notification.Name(rawValue: "didAddLabel")
+      static let didEditLabel = Notification.Name(rawValue: "didEditLabel")
    }
    
    enum Keys {

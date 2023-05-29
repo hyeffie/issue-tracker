@@ -104,6 +104,7 @@ class LabelEditViewController: UITableViewController {
       colorField.text = detail.backgroundColor
       labelPreview.changeName(to: detail.labelName)
       labelPreview.changeColor(to: detail.backgroundColor ?? defaultBackgroundColor)
+      saveButton.isEnabled = true
    }
    
    @objc private func save() {
@@ -118,9 +119,17 @@ class LabelEditViewController: UITableViewController {
          fontColor: fontColor,
          description: descriptionField.text ?? "")
       
-      networkManager?.postNewLabel(postData) { [weak self] in
-         NotificationCenter.default.post(name: LabelList.Notifications.didAddLabel, object: nil)
-         DispatchQueue.main.async { self?.navigationController?.popViewController(animated: true) }
+      if let detail {
+         networkManager?.patchLabel(id: detail.labelId, newDetail: postData) { [weak self] in
+            NotificationCenter.default.post(name: LabelList.Notifications.didEditLabel, object: nil)
+            DispatchQueue.main.async { self?.navigationController?.popViewController(animated: true) }
+         }
+      } else {
+         networkManager?.postNewLabel(postData) { [weak self] in
+            NotificationCenter.default.post(name: LabelList.Notifications.didAddLabel, object: nil)
+            DispatchQueue.main.async { self?.navigationController?.popViewController(animated: true) }
+         }
       }
+      
    }
 }
