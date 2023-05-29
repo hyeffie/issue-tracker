@@ -128,6 +128,46 @@ final class NetworkManager {
       dataTask.resume()
    }
    
+   private func patchData<DataType: Encodable, Response: Codable>(
+      for urlString: String,
+      with query: [String: String]? = nil,
+      data: DataType,
+      completion: @escaping (Result<Response?, Error>) -> Void)
+   {
+      guard let url = URL(string: urlString) else { return }
+      var request = URLRequest(url: url)
+      request.httpMethod = "PATCH"
+      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+      request.timeoutInterval = 15
+      
+      request.httpBody = encodeJson(data: data)
+      
+      let dataTask = session.dataTask(with: request) { _, response, error in
+         if let error {
+            completion(.failure(error))
+            return
+         }
+         
+         guard let response = response as? HTTPURLResponse else {
+            completion(.failure(NetworkError.noResponse))
+            return
+         }
+         
+         switch response.statusCode {
+         case (200..<300):
+            completion(.success(nil))
+            return
+         case 400:
+            completion(.failure(NetworkError.failToPost))
+            return
+         default:
+            completion(.failure(NetworkError.someError))
+            return
+         }
+      }
+      dataTask.resume()
+   }
+   
    // MARK: - Util
    
    func requestIssueList(filterList: FilterApplyList? = nil, pageNumber: Int? = nil, completion: @escaping (IssueListDTO) -> Void) {
@@ -198,6 +238,18 @@ extension NetworkManager {
    func postNewLabel(_ newLabel: LabelDetailPostDTO, completion: @escaping () -> Void) {
       let urlString = baseURL + "/labels"
       postData(for: urlString, data: newLabel) { (result: Result<Data?, Error>) in
+         switch result {
+         case .success:
+            completion()
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+   
+   func patchLabel(id: Int, newDetail: LabelDetailPostDTO, completion: @escaping () -> Void) {
+      let urlString = baseURL + "/labels" + "/\(id)"
+      patchData(for: urlString, data: newDetail) { (result: Result<Data?, Error>) in
          switch result {
          case .success:
             completion()
