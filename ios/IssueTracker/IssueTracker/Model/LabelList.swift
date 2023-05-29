@@ -7,32 +7,32 @@
 
 import Foundation
 
-class LabelList {
-   class Label: Hashable {
-      let labelId: Int
-      let labelName: String
-      let backgroundColor: String?
-      let description: String?
-      
-      init(labelId: Int, labelName: String, backgroundColor: String?, description: String?) {
-         self.labelId = labelId
-         self.labelName = labelName
-         self.backgroundColor = backgroundColor
-         self.description = description
-      }
-      
-      func hash(into hasher: inout Hasher) {
-         hasher.combine(labelId)
-      }
-      
-      static func == (lhs: LabelList.Label, rhs: LabelList.Label) -> Bool {
-         return lhs.labelId == rhs.labelId
-      }
+class LabelDetail: Hashable {
+   let labelId: Int
+   let labelName: String
+   let backgroundColor: String?
+   let description: String?
+   
+   init(labelId: Int, labelName: String, backgroundColor: String?, description: String?) {
+      self.labelId = labelId
+      self.labelName = labelName
+      self.backgroundColor = backgroundColor
+      self.description = description
    }
    
-   private(set) var labels: [Label]
+   func hash(into hasher: inout Hasher) {
+      hasher.combine(labelId)
+   }
    
-   init(labels: [Label] = []) {
+   static func == (lhs: LabelDetail, rhs: LabelDetail) -> Bool {
+      return lhs.labelId == rhs.labelId
+   }
+}
+
+class LabelList {
+   private(set) var labels: [LabelDetail]
+   
+   init(labels: [LabelDetail] = []) {
       self.labels = labels
    }
 }
@@ -48,7 +48,7 @@ extension LabelList {
 }
 
 extension LabelList {
-   private func append(_ newLabels: [Label]) {
+   private func append(_ newLabels: [LabelDetail]) {
       self.labels.append(contentsOf: newLabels)
       
       NotificationCenter.default.post(
@@ -57,7 +57,7 @@ extension LabelList {
          userInfo: [:])
    }
    
-   func add(labels: [Label]) {
+   func add(labels: [LabelDetail]) {
       self.append(labels)
    }
    

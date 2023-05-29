@@ -9,7 +9,7 @@ import UIKit
 
 class IssueListViewController: UIViewController {
    var collectionView: UICollectionView!
-   private var dataSource: DataSource!
+   private var dataSource: DataSource?
    
    var observers: [NSObjectProtocol] = []
    
@@ -73,8 +73,8 @@ extension IssueListViewController {
 extension IssueListViewController {
    func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
       return { _ in
-         let delete = SwiptAction.delete.makeAction(hasImage: false, withHandler: { _, _, _ in })
-         let edit = SwiptAction.edit.makeAction(hasImage: false, withHandler: { _, _, _ in })
+         let delete = SwipeAction.delete.makeAction(hasImage: false, withHandler: { _, _, _ in })
+         let edit = SwipeAction.edit.makeAction(hasImage: false, withHandler: { _, _, _ in })
          let config = UISwipeActionsConfiguration(actions: [delete, edit])
          config.performsFirstActionWithFullSwipe = false
          return config
@@ -99,7 +99,7 @@ extension IssueListViewController {
    }
    
    enum Item: Hashable {
-      case issue(issue: IssueList.Issue)
+      case issue(issue: IssueSummary)
       case load
    }
    
@@ -147,7 +147,7 @@ extension IssueListViewController {
       let issues = list.issues.map { issue in Item.issue(issue: issue) }
       snapshot.appendItems(issues, toSection: .issue)
       snapshot.appendItems([.load], toSection: .loadIndicator)
-      dataSource.apply(snapshot, animatingDifferences: animated)
+      dataSource?.apply(snapshot, animatingDifferences: animated)
    }
 }
 
@@ -167,11 +167,10 @@ extension IssueListViewController: UICollectionViewDelegate {
 
 extension IssueListViewController {
    private func addObservers() {
-      let noti = NotificationCenter.default.addObserver(
+      self.observers.append(NotificationCenter.default.addObserver(
          forName: IssueList.Notifications.didAddIssues,
          object: list, queue: .main,
-         using: { [weak self] _ in self?.applyUpdatedSnapshot() })
-      self.observers.append(noti)
+         using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
    }
    
    private func addFilterLoadObservers() {
@@ -267,7 +266,7 @@ extension IssueListViewController {
    
    func setFilterButton() {
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-         title: "추가",
+         title: "필터",
          style: .plain,
          target: self,
          action: #selector(presentFilterViewController))

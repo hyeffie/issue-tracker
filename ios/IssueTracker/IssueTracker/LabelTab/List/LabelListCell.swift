@@ -23,7 +23,7 @@ class LabelListCell: UICollectionViewCell {
       descriptionLabel.apply(typography: .init(weight: .regular, size: .medium), textColor: .gray800)
    }
    
-   func configure(with label: LabelList.Label) {
+   func configure(with label: LabelDetail) {
       nameLabel = IssueLabel(name: label.labelName, color: label.backgroundColor ?? "#FFFFFF")
       container.insertArrangedSubview(nameLabel, at: 0)
       if let description = label.description,

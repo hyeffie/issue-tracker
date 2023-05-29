@@ -9,7 +9,7 @@ import UIKit
 
 class MilestoneListViewController: UIViewController {
    private var collectionView: UICollectionView!
-   private var dataSource: DataSource!
+   private var dataSource: DataSource?
    
    var observers: [NSObjectProtocol] = []
    
@@ -60,8 +60,8 @@ extension MilestoneListViewController {
 extension MilestoneListViewController {
    func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
       return { _ in
-         let delete = SwiptAction.delete.makeAction(withHandler: { _, _, _ in })
-         let edit = SwiptAction.edit.makeAction(withHandler: { _, _, _ in })
+         let delete = SwipeAction.delete.makeAction(withHandler: { _, _, _ in })
+         let edit = SwipeAction.edit.makeAction(withHandler: { _, _, _ in })
          let config = UISwipeActionsConfiguration(actions: [delete, edit])
          config.performsFirstActionWithFullSwipe = false
          return config
@@ -76,7 +76,7 @@ extension MilestoneListViewController {
    }
    
    private enum Item: Hashable {
-      case milestone(milestone: MilestoneList.Milestone)
+      case milestone(milestone: MilestoneDetail)
    }
    
    private class DataSource: UICollectionViewDiffableDataSource<Section, Item> { }
@@ -110,20 +110,17 @@ extension MilestoneListViewController {
       snapshot.appendSections([.milestone])
       let milestoneItems = list.milestones.map { milestone in Item.milestone(milestone: milestone) }
       snapshot.appendItems(milestoneItems, toSection: .milestone)
-      dataSource.apply(snapshot, animatingDifferences: animated)
+      dataSource?.apply(snapshot, animatingDifferences: animated)
    }
 }
 
 extension MilestoneListViewController {
    private func addObservers() {
-      let noti = NotificationCenter.default.addObserver(
+      self.observers.append(NotificationCenter.default.addObserver(
          forName: MilestoneList.Notifications.didAddMilestones,
          object: list,
          queue: .main,
-         using: { [weak self] _ in
-            self?.applyUpdatedSnapshot()
-         })
-      self.observers.append(noti)
+         using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
    }
 }
 

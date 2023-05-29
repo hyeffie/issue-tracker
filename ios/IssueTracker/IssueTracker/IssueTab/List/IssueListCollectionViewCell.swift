@@ -53,8 +53,8 @@ class IssueListCollectionViewCell: UICollectionViewCell {
       labelStackView.arrangedSubviews.forEach { view in view.removeFromSuperview() }
    }
    
-   func configure(issue: IssueList.Issue) {
-      titleLabel.text = issue.title
+   func configure(issue: IssueSummary) {
+      titleLabel.text = "#\(issue.issueId) \(issue.title)"
       descriptionLabel.text = issue.content
       milestoneLabel.text = issue.milestoneName
       

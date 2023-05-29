@@ -7,59 +7,59 @@
 
 import Foundation
 
-class IssueList {
-   class Issue: Hashable {
-      class Label {
-         let labelName: String
-         let backgroundColor: String
-         
-         init(labelName: String, backgroundColor: String) {
-            self.labelName = labelName
-            self.backgroundColor = backgroundColor
-         }
-      }
-      
-      let issueId: Int
-      var title: String
-      let content: String
-      var isOpen: Bool
-      let milestoneName: String?
-      let labelList: [Label]
-      
-      init(issueId: Int, title: String, content: String, isOpen: Bool, milestoneName: String?, labelList: [Label]) {
-         self.issueId = issueId
-         self.title = title
-         self.content = content
-         self.isOpen = isOpen
-         self.milestoneName = milestoneName
-         self.labelList = labelList
-      }
-      
-      static func == (lhs: Issue, rhs: Issue) -> Bool {
-         return lhs.issueId == rhs.issueId
-      }
-      
-      func hash(into hasher: inout Hasher) {
-         hasher.combine(issueId)
-      }
-      
-      func open() {
-         self.isOpen = true
-      }
-      
-      func close() {
-         self.isOpen = false
-      }
+class CompactLabel {
+   let labelName: String
+   let backgroundColor: String
+   
+   init(labelName: String, backgroundColor: String) {
+      self.labelName = labelName
+      self.backgroundColor = backgroundColor
+   }
+}
+
+class IssueSummary: Hashable {
+   let issueId: Int
+   var title: String
+   let content: String
+   var isOpen: Bool
+   let milestoneName: String?
+   let labelList: [CompactLabel]
+   
+   init(issueId: Int, title: String, content: String, isOpen: Bool, milestoneName: String?, labelList: [CompactLabel]) {
+      self.issueId = issueId
+      self.title = title
+      self.content = content
+      self.isOpen = isOpen
+      self.milestoneName = milestoneName
+      self.labelList = labelList
    }
    
-   private(set) var issues: [Issue]
-   private(set) var selectedIssues: [Issue] = []
+   static func == (lhs: IssueSummary, rhs: IssueSummary) -> Bool {
+      return lhs.issueId == rhs.issueId
+   }
    
-   init(issues: [Issue] = []) {
+   func hash(into hasher: inout Hasher) {
+      hasher.combine(issueId)
+   }
+   
+   func open() {
+      self.isOpen = true
+   }
+   
+   func close() {
+      self.isOpen = false
+   }
+}
+
+class IssueList {
+   private(set) var issues: [IssueSummary]
+   private(set) var selectedIssues: [IssueSummary] = []
+   
+   init(issues: [IssueSummary] = []) {
       self.issues = issues
    }
    
-   private func issue(at index: Int) -> Issue? {
+   private func issue(at index: Int) -> IssueSummary? {
       guard index < issues.count else { return nil }
       return issues[index]
    }
@@ -80,7 +80,7 @@ extension IssueList {
 }
 
 extension IssueList {
-   private func append(_ newIssues: [Issue], _ isFiltered: Bool = false) {
+   private func append(_ newIssues: [IssueSummary], _ isFiltered: Bool = false) {
       self.issues.append(contentsOf: newIssues)
       
       let notiName = isFiltered ? Notifications.didAddFilteredIssues : Notifications.didAddIssues
@@ -91,15 +91,15 @@ extension IssueList {
          userInfo: [Keys.Issues: self.issues])
    }
    
-   func add(issues: [Issue], isFiltered: Bool = false) {
+   func add(issues: [IssueSummary], isFiltered: Bool = false) {
       self.append(issues, isFiltered)
    }
    
-   private func append(_ issue: Issue) {
+   private func append(_ issue: IssueSummary) {
       self.issues.append(issue)
    }
    
-   func add(issue: Issue) {
+   func add(issue: IssueSummary) {
       self.append(issue)
    }
    
@@ -130,7 +130,7 @@ extension IssueList {
    func closeIssue(at index: Int) {
       close(at: index)
    }
-
+   
    private func delete(at index: Int) {
       guard index < issues.count else { return }
       issues.remove(at: index)

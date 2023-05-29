@@ -44,7 +44,7 @@ class MilestoneListCell: UICollectionViewCell {
       closedCountLabel.apply(typography: .init(weight: .regular, size: .small), textColor: .gray700)
    }
    
-   func configure(with milestone: MilestoneList.Milestone) {
+   func configure(with milestone: MilestoneDetail) {
       nameLabel.text = milestone.name
       progressLabel.text = "\(milestone.progress)%"
       

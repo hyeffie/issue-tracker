@@ -7,39 +7,39 @@
 
 import Foundation
 
-class MilestoneList {
-   class Milestone: Hashable {
-      let milestoneId: Int
-      var name: String
-      var description: String?
-      var completedAt: String?
-      let countAllOpenedIssues: Int
-      let countAllClosedIssues: Int
-      var progress: Int
-      
-      init(milestoneId: Int, name: String, description: String?, completedAt: String?,
-           countAllOpenedIssues: Int, countAllClosedIssues: Int, progress: Int) {
-         self.milestoneId = milestoneId
-         self.name = name
-         self.description = description
-         self.completedAt = completedAt
-         self.countAllOpenedIssues = countAllOpenedIssues
-         self.countAllClosedIssues = countAllClosedIssues
-         self.progress = progress
-      }
-      
-      func hash(into hasher: inout Hasher) {
-         hasher.combine(milestoneId)
-      }
-      
-      static func == (lhs: MilestoneList.Milestone, rhs: MilestoneList.Milestone) -> Bool {
-         lhs.milestoneId == rhs.milestoneId
-      }
+class MilestoneDetail: Hashable {
+   let milestoneId: Int
+   var name: String
+   var description: String?
+   var completedAt: String?
+   let countAllOpenedIssues: Int
+   let countAllClosedIssues: Int
+   var progress: Int
+   
+   init(milestoneId: Int, name: String, description: String?, completedAt: String?,
+        countAllOpenedIssues: Int, countAllClosedIssues: Int, progress: Int) {
+      self.milestoneId = milestoneId
+      self.name = name
+      self.description = description
+      self.completedAt = completedAt
+      self.countAllOpenedIssues = countAllOpenedIssues
+      self.countAllClosedIssues = countAllClosedIssues
+      self.progress = progress
    }
    
-   private(set) var milestones: [Milestone]
+   func hash(into hasher: inout Hasher) {
+      hasher.combine(milestoneId)
+   }
    
-   init(milestones: [Milestone] = []) {
+   static func == (lhs: MilestoneDetail, rhs: MilestoneDetail) -> Bool {
+      lhs.milestoneId == rhs.milestoneId
+   }
+}
+
+class MilestoneList {
+   private(set) var milestones: [MilestoneDetail]
+   
+   init(milestones: [MilestoneDetail] = []) {
       self.milestones = milestones
    }
 }
@@ -51,7 +51,7 @@ extension MilestoneList {
 }
 
 extension MilestoneList {
-   private func append(_ newMilestones: [Milestone]) {
+   private func append(_ newMilestones: [MilestoneDetail]) {
       self.milestones.append(contentsOf: newMilestones)
       
       NotificationCenter.default.post(
@@ -60,7 +60,7 @@ extension MilestoneList {
          userInfo: [:])
    }
    
-   func add(milestones: [Milestone]) {
+   func add(milestones: [MilestoneDetail]) {
       self.append(milestones)
    }
    
