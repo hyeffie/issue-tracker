@@ -28,6 +28,7 @@ class IssueListViewController: UIViewController {
       self.view.backgroundColor = .systemBackground
       self.title = "이슈"
       addObservers()
+      addFilterLoadObservers()
       addFilterObserver()
       setCollectionView()
       setFilterButton()
@@ -173,6 +174,17 @@ extension IssueListViewController {
       self.observers.append(noti)
    }
    
+   private func addFilterLoadObservers() {
+      let noti = NotificationCenter.default.addObserver(
+         forName: IssueList.Notifications.didAddFilteredIssues,
+         object: list, queue: .main,
+         using: {
+            [weak self] _ in self?.applyUpdatedSnapshot()
+            self?.collectionView.reloadData()
+         })
+      self.observers.append(noti)
+   }
+   
    private func addFilterObserver() {
       NotificationCenter.default.addObserver(self,
                                              selector: #selector(showFilteredIssues(_:)),
@@ -183,6 +195,7 @@ extension IssueListViewController {
    @objc func showFilteredIssues(_ notification: Notification) {
       guard let filterApplyList = notification.userInfo?[0] as? FilterApplyList else { return }
       
+      self.observers.removeAll()
       self.list.emptyList()
       fetchFilteredIssues(filterApplyList)
    }
@@ -216,8 +229,7 @@ extension IssueListViewController {
          if dto.issues.count > 0 {
             self?.list.emptyList()
             let newIssues = ListingItemFactory.IssueTab.makeIssues(with: dto.issues)
-            self?.list.add(issues: newIssues) // -> POST NOTIFICATION
-            print(self?.list)
+            self?.list.add(issues: newIssues, isFiltered: true) // -> POST NOTIFICATION
             self?.currentPageNumber += 1
          }
       }
