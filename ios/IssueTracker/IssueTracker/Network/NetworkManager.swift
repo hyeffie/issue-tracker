@@ -21,6 +21,30 @@ final class NetworkManager {
       self.session = session
    }
    
+   private func decodeJson<T: Decodable>(type: T.Type, fromJson data: Data) -> T? {
+      var result: T? = nil
+      do {
+         result = try JSONDecoder().decode(type, from: data)
+      } catch {
+         // TODO: failToParse 에러 핸들링
+         print("fail to parse \(String(describing: type.self))")
+         print(error)
+      }
+      return result
+   }
+   
+   private func encodeJson<T: Encodable>(data: T) -> Data? {
+      var json: Data? = nil
+      do {
+         json = try JSONEncoder().encode(data)
+      } catch {
+         // TODO: failToEncode 에러 핸들링
+         print("fail to encode \(String(describing: data))")
+         print(error)
+      }
+      return json
+   }
+   
    private func getData<T: Decodable>(
       for urlString: String,
       with query: [String: String]? = nil,
@@ -40,7 +64,7 @@ final class NetworkManager {
       var request = URLRequest(url: url)
       request.timeoutInterval = 15
       
-      let completionHandler = { @Sendable (data: Data?, response: URLResponse?, error: Error?) in
+      let completionHandler = { @Sendable [weak self] (data: Data?, response: URLResponse?, error: Error?) in
          if let error {
             completion(.failure(error))
             return
@@ -56,17 +80,51 @@ final class NetworkManager {
             return
          }
          
-         do {
-            let newData = try JSONDecoder().decode(dataType, from: data)
-            completion(.success(newData))
-            return
-         } catch {
-            completion(.failure(NetworkError.failToParse))
-            return
-         }
+         guard let newData = self?.decodeJson(type: dataType, fromJson: data) else { return }
+         completion(.success(newData))
       }
       
       let dataTask = session.dataTask(with: request, handler: completionHandler)
+      dataTask.resume()
+   }
+   
+   private func postData<Data: Encodable, Response: Codable>(
+      for urlString: String,
+      with query: [String: String]? = nil,
+      data: Data,
+      completion: @escaping (Result<Response?, Error>) -> Void)
+   {
+      guard let url = URL(string: urlString) else { return }
+      var request = URLRequest(url: url)
+      request.httpMethod = "POST"
+      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+      request.timeoutInterval = 15
+      
+      request.httpBody = encodeJson(data: data)
+      
+      let dataTask = session.dataTask(with: request) { _, response, error in
+         if let error {
+            completion(.failure(error))
+            return
+         }
+         
+         guard let response = response as? HTTPURLResponse else {
+            completion(.failure(NetworkError.noResponse))
+            return
+         }
+         
+         switch response.statusCode {
+         case (200..<300):
+            completion(.success(nil))
+            return
+         case 400:
+            completion(.failure(NetworkError.failToPost))
+            return
+         default:
+            completion(.failure(NetworkError.someError))
+            return
+         }
+      }
       dataTask.resume()
    }
    

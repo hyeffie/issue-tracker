@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LabelDetailPostDTO {
+struct LabelDetailPostDTO: Encodable {
    let labelName: String
    let backgroundColor: String
    let fontColor: String
