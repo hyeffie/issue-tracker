@@ -11,5 +11,6 @@ enum NetworkError: Error {
    case noResponse
    case invalidData
    case failToPost
+   case failToDelete
    case someError
 }
