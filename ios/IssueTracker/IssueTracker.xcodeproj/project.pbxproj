@@ -38,6 +38,7 @@
 		F43B37472A1F870F00EEB7C5 /* LabelEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F43B37462A1F870F00EEB7C5 /* LabelEditViewController.storyboard */; };
 		F43B37492A1F8AA000EEB7C5 /* LabelEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B37482A1F8AA000EEB7C5 /* LabelEditViewController.swift */; };
 		F47681B12A248DD100C4FFA5 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = F47681B02A248DD100C4FFA5 /* OrderedCollections */; };
+		F47681B32A24F0A200C4FFA5 /* LabelDetailPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47681B22A24F0A200C4FFA5 /* LabelDetailPostDTO.swift */; };
 		F48583AC2A10E1FC00322C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48583AB2A10E1FC00322C9F /* TabBarController.swift */; };
 		F48583C82A13802E00322C9F /* URLSessionDataTaskInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48583C32A13802E00322C9F /* URLSessionDataTaskInterface.swift */; };
 		F48583C92A13802E00322C9F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48583C42A13802E00322C9F /* NetworkManager.swift */; };
@@ -104,6 +105,7 @@
 		F415D2872A202F8B00712189 /* UITextField+font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+font.swift"; sourceTree = "<group>"; };
 		F43B37462A1F870F00EEB7C5 /* LabelEditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LabelEditViewController.storyboard; sourceTree = "<group>"; };
 		F43B37482A1F8AA000EEB7C5 /* LabelEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelEditViewController.swift; sourceTree = "<group>"; };
+		F47681B22A24F0A200C4FFA5 /* LabelDetailPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDetailPostDTO.swift; sourceTree = "<group>"; };
 		F48583AB2A10E1FC00322C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F48583C32A13802E00322C9F /* URLSessionDataTaskInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskInterface.swift; sourceTree = "<group>"; };
 		F48583C42A13802E00322C9F /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				635342B32A20E5DB00668765 /* IssueDetailDTO.swift */,
 				F4A28CF12A1F56FB0091A940 /* LabelListDTO.swift */,
 				F4A28CF72A1F77B20091A940 /* MilestoneListDTO.swift */,
+				F47681B22A24F0A200C4FFA5 /* LabelDetailPostDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				635342D62A2303DD00668765 /* FilterListFactory.swift in Sources */,
 				F4A28CCC2A1E2F700091A940 /* ListingItemFactory.swift in Sources */,
 				635342DA2A23145F00668765 /* FilterListType.swift in Sources */,
+				F47681B32A24F0A200C4FFA5 /* LabelDetailPostDTO.swift in Sources */,
 				63D6CFCF2A15B7F6000876D5 /* FilterListViewController.swift in Sources */,
 				F4A28CEA2A1F3C6E0091A940 /* MilestoneList.swift in Sources */,
 				F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */,
