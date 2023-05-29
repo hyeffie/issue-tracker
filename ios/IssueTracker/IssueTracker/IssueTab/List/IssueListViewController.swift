@@ -338,6 +338,8 @@ extension IssueListViewController {
       configureTabBar(isHiding: false)
       deselectAllCells()
       self.collectionView.allowsMultipleSelection = false
+      self.isSelectMode = false
+      self.navigationItem.title = "이슈"
    }
    
    private func setSelectButton() {
