@@ -49,4 +49,8 @@ class FilterApplyList {
 
 extension FilterApplyList {
    static let applyFilter = Notification.Name(rawValue: "applyFilter")
+   
+   enum Keys {
+      static let Filters = "Filters"
+   }
 }

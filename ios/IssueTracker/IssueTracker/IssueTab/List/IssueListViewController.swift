@@ -27,14 +27,13 @@ class IssueListViewController: UIViewController {
       super.viewDidLoad()
       self.view.backgroundColor = .systemBackground
       self.title = "이슈"
-      addObservers()
-      addFilterLoadObservers()
-      addFilterObserver()
+      setNetworkManager()
       setCollectionView()
+      configureDataSource()
+      addObservers()
       setFilterButton()
       setSelectButton()
-      configureDataSource()
-      setNetworkManager()
+
       fetchIssues()
    }
    
@@ -171,32 +170,20 @@ extension IssueListViewController {
          forName: IssueList.Notifications.didAddIssues,
          object: list, queue: .main,
          using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
-   }
-   
-   private func addFilterLoadObservers() {
-      let noti = NotificationCenter.default.addObserver(
+      
+      self.observers.append(NotificationCenter.default.addObserver(
          forName: IssueList.Notifications.didAddFilteredIssues,
          object: list, queue: .main,
-         using: {
-            [weak self] _ in self?.applyUpdatedSnapshot()
-            self?.collectionView.reloadData()
-         })
-      self.observers.append(noti)
-   }
-   
-   private func addFilterObserver() {
-      NotificationCenter.default.addObserver(self,
-                                             selector: #selector(showFilteredIssues(_:)),
-                                             name: FilterApplyList.applyFilter,
-                                             object: nil)
-   }
-   
-   @objc func showFilteredIssues(_ notification: Notification) {
-      guard let filterApplyList = notification.userInfo?[0] as? FilterApplyList else { return }
+         using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
       
-      self.observers.removeAll()
-      self.list.emptyList()
-      fetchFilteredIssues(filterApplyList)
+      self.observers.append(NotificationCenter.default.addObserver(
+         forName: FilterApplyList.applyFilter,
+         object: nil, queue: .main,
+         using: { [weak self] notification in
+            guard let filterApplyList = notification.userInfo?[FilterApplyList.Keys.Filters] as? FilterApplyList else { return }
+            self?.list.emptyList()
+            self?.fetchFilteredIssues(filterApplyList)
+         }))
    }
 }
 
