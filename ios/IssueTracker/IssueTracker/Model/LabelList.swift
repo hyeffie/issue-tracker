@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OrderedCollections
 
 class LabelDetail: Hashable {
    let labelId: Int
@@ -22,6 +23,9 @@ class LabelDetail: Hashable {
    
    func hash(into hasher: inout Hasher) {
       hasher.combine(labelId)
+      hasher.combine(labelName)
+      hasher.combine(backgroundColor)
+      hasher.combine(description)
    }
    
    static func == (lhs: LabelDetail, rhs: LabelDetail) -> Bool {
@@ -30,10 +34,10 @@ class LabelDetail: Hashable {
 }
 
 class LabelList {
-   private(set) var labels: [LabelDetail]
+   private(set) var labels: OrderedSet<LabelDetail>
    
    init(labels: [LabelDetail] = []) {
-      self.labels = labels
+      self.labels = OrderedSet(labels)
    }
 }
 
