@@ -61,7 +61,19 @@ extension LabelListViewController {
 extension LabelListViewController {
    func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
       return { indexPath in
-         let delete = SwipeAction.delete.makeAction(hasImage: false) { _, _, _ in }
+         let delete = SwipeAction.delete.makeAction(hasImage: false) { [weak self] _, _, complete in
+            guard let labelId = self?.list.getLabelId(of: indexPath.item) else {
+               DispatchQueue.main.async { complete(false) }
+               return
+            }
+            self?.networkManager?.deleteLabel(
+               id: labelId,
+               completion: {
+                  DispatchQueue.main.async { complete(true) }
+                  self?.list.deleteLabel(id: labelId)
+               },
+               failHandler: { DispatchQueue.main.async { complete(false) } })
+         }
          
          let edit = SwipeAction.edit.makeAction(hasImage: false, withHandler: { [weak self] _, _, complete in
             let detail = self?.list.getLabelDetail(of: indexPath.item)
@@ -140,6 +152,12 @@ extension LabelListViewController {
          object: nil,
          queue: .main,
          using: { [weak self] _ in self?.fetchLabels() }))
+      
+      self.observers.append(NotificationCenter.default.addObserver(
+         forName: LabelList.Notifications.didDeleteLabel,
+         object: list,
+         queue: .main,
+         using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
    }
 }
 

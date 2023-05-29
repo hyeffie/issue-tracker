@@ -46,6 +46,7 @@ extension LabelList {
       static let didAddLabels = Notification.Name(rawValue: "didAddLabels")
       static let didAddLabel = Notification.Name(rawValue: "didAddLabel")
       static let didEditLabel = Notification.Name(rawValue: "didEditLabel")
+      static let didDeleteLabel = Notification.Name(rawValue: "didEditLabel")
    }
    
    enum Keys {
@@ -77,9 +78,33 @@ extension LabelList {
    }
 }
 
-extension LabelList {   
+extension LabelList {
    func getLabelDetail(of index: Int) -> LabelDetail? {
       guard index < labels.count else { return nil }
       return labels[index]
+   }
+}
+
+extension LabelList {
+   func getLabelId(of index: Int) -> Int? {
+      guard index < labels.count else { return nil }
+      return labels[index].labelId
+   }
+   
+   private func getIndexOfLabel(withId id: Int) -> Int? {
+      self.labels.firstIndex(where: { label in label.labelId == id })
+   }
+   
+   private func remove(at index: Int) {
+      self.labels.remove(at: index)
+      
+      NotificationCenter.default.post(
+         name: Notifications.didDeleteLabel,
+         object: self)
+   }
+   
+   func deleteLabel(id: Int) {
+      guard let index = self.getIndexOfLabel(withId: id) else { return }
+      remove(at: index)
    }
 }
