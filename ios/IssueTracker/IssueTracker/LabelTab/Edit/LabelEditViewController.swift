@@ -34,7 +34,17 @@ class LabelEditViewController: UITableViewController {
       setLabelFont()
       setPreview()
       setSaveButton()
-      nameField.delegate = self
+   }
+   
+   @IBAction func nameHasChanged(_ sender: UITextField) {
+      guard let final = sender.text else { return }
+      if final.count > 0 {
+         saveButton.isEnabled = true
+         labelPreview.text = final
+      } else {
+         saveButton.isEnabled = false
+         labelPreview.text = defaultName
+      }
    }
    
    @IBAction func randomizeColor(_ sender: Any) {
@@ -66,23 +76,5 @@ class LabelEditViewController: UITableViewController {
       labelPreview?.translatesAutoresizingMaskIntoConstraints = false
       labelPreview?.centerXAnchor.constraint(equalTo: previewCanvas.centerXAnchor).isActive = true
       labelPreview?.centerYAnchor.constraint(equalTo: previewCanvas.centerYAnchor).isActive = true
-   }
-}
-
-extension LabelEditViewController: UITextFieldDelegate {
-   func textField(
-      _ textField: UITextField,
-      shouldChangeCharactersIn range: NSRange,
-      replacementString string: String
-   ) -> Bool {
-      let final = NSString(string: textField.text ?? "").replacingCharacters(in: range, with: string)
-      if final.count > 0 {
-         saveButton.isEnabled = true
-         labelPreview.text = final
-      } else {
-         saveButton.isEnabled = false
-         labelPreview.text = defaultName
-      }
-      return true
    }
 }
