@@ -28,6 +28,7 @@ class IssueListViewController: UIViewController {
       self.view.backgroundColor = .systemBackground
       self.title = "이슈"
       addObservers()
+      addFilterObserver()
       setCollectionView()
       setFilterButton()
       setSelectButton()
@@ -171,6 +172,20 @@ extension IssueListViewController {
          using: { [weak self] _ in self?.applyUpdatedSnapshot() })
       self.observers.append(noti)
    }
+   
+   private func addFilterObserver() {
+      NotificationCenter.default.addObserver(self,
+                                             selector: #selector(showFilteredIssues(_:)),
+                                             name: FilterApplyList.applyFilter,
+                                             object: nil)
+   }
+   
+   @objc func showFilteredIssues(_ notification: Notification) {
+      guard let filterApplyList = notification.userInfo?[0] as? FilterApplyList else { return }
+      
+      self.list.emptyList()
+      fetchFilteredIssues(filterApplyList)
+   }
 }
 
 extension IssueListViewController {
@@ -186,6 +201,23 @@ extension IssueListViewController {
             let newIssues = ListingItemFactory.IssueTab.makeIssues(with: dto.issues)
             self?.list.add(issues: newIssues) // -> POST NOTIFICATION
             self?.filterList = FilterListFactory.make(issueList: dto)
+            self?.currentPageNumber += 1
+         }
+      }
+   }
+   
+   func fetchFilteredIssues(_ filter: FilterApplyList, cellCompletion: (() -> Void)? = nil) {
+      guard hasNextPage else { return }
+      isPaging = true
+      networkManager?.requestIssueList(filterList: filter) { [weak self] dto in
+         cellCompletion?()
+         self?.isPaging = false
+         self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
+         if dto.issues.count > 0 {
+            self?.list.emptyList()
+            let newIssues = ListingItemFactory.IssueTab.makeIssues(with: dto.issues)
+            self?.list.add(issues: newIssues) // -> POST NOTIFICATION
+            print(self?.list)
             self?.currentPageNumber += 1
          }
       }

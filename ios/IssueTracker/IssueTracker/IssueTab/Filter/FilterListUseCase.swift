@@ -61,8 +61,8 @@ class FilterListUseCase {
    func sendItemId(section: Int, index: Int) -> Int {
       switch section {
       case 0:
-         guard index < 3 else { return 0 }
-         return 1
+         guard index < 3 else { return 1 }
+         return 0
       case 1:
          return self.filterList.userList[index].userId
       case 2:

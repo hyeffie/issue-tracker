@@ -8,20 +8,20 @@
 import Foundation
 
 class FilterApplyList {
-   private var status: Bool
-   private var users: Set<Int>
-   private var labels: Set<Int>
-   private var milestones: Set<Int>
+   var status: Bool
+   var users: Set<Int>
+   var labels: Set<Int>
+   var milestone: Int?
    
    init(status: Bool = true,
         users: Set<Int> = [],
         labels: Set<Int> = [],
-        milestones: Set<Int> = []) {
+        milestone: Int? = nil) {
       
       self.status = status
       self.users = users
       self.labels = labels
-      self.milestones = milestones
+      self.milestone = milestone
    }
    
    func addFilter(section: Int, id: Int?) {
@@ -29,14 +29,21 @@ class FilterApplyList {
       
       switch section {
       case 0:
-         break
+         self.status = id == 3 ? false : true
       case 1:
          self.users.insert(id)
       case 2:
          self.labels.insert(id)
       default:
-         self.milestones.insert(id)
+         self.milestone = id
       }
+   }
+   
+   func emptyList() {
+      self.status = true
+      self.users = []
+      self.labels = []
+      self.milestone = nil
    }
 }
 

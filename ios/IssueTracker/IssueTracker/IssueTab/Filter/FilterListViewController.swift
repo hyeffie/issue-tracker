@@ -21,6 +21,7 @@ class FilterListViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
+      filterApplyList.emptyList()
       receiveData()
       setCollectionView()
    }
@@ -63,8 +64,8 @@ class FilterListViewController: UIViewController {
       }
       
       NotificationCenter.default.post(name: FilterApplyList.applyFilter,
-                                            object: nil,
-                                            userInfo: [0 : filterApplyList])
+                                      object: nil,
+                                      userInfo: [0 : filterApplyList])
       
       self.dismiss(animated: true)
    }
