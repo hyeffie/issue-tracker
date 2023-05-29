@@ -13,15 +13,15 @@ final class NetworkManager {
    static let dummyURLString = "https://example.com"
    static let defaultPagingOffSet = 10
    
-   let baseURL = "http://43.200.199.205:8080/api"
+   private let baseURL = "http://43.200.199.205:8080/api"
    
-   let session: URLSessionInterface
+   private let session: URLSessionInterface
    
    init(session: URLSessionInterface = URLSession.shared) {
       self.session = session
    }
    
-   func fetchData<T: Decodable>(
+   private func getData<T: Decodable>(
       for urlString: String,
       with query: [String: String]? = nil,
       dataType: T.Type,
@@ -82,7 +82,7 @@ final class NetworkManager {
          query.updateValue("\(pageNumber)", forKey: "pageNum")
       }
       
-      fetchData(for: issueListURL,
+      getData(for: issueListURL,
                 with: query,
                 dataType: IssueListDTO.self) { result in
          switch result {
@@ -97,7 +97,7 @@ final class NetworkManager {
    func requestIssueDetail(issueId: Int, completion: @escaping (IssueDetailDTO) -> Void) {
       let issueDetailURL = baseURL + "/issues/\(issueId)"
       
-      fetchData(for: issueDetailURL,
+      getData(for: issueDetailURL,
                 dataType: IssueDetailDTO.self) { result in
          switch result {
          case .success(let dto):
@@ -111,7 +111,7 @@ final class NetworkManager {
    func requestLabelList(completion: @escaping (LabelListDTO) -> Void) {
       let labelListURL = baseURL + "/labels"
       
-      fetchData(for: labelListURL,
+      getData(for: labelListURL,
                 dataType: LabelListDTO.self) { result in
          switch result {
          case .success(let dto):
@@ -125,7 +125,7 @@ final class NetworkManager {
    func requestMilestoneList(completion: @escaping (MilestoneListDTO) -> Void) {
       let url = baseURL + "/milestones"
       
-      fetchData(for: url,
+      getData(for: url,
                 dataType: MilestoneListDTO.self) { result in
          switch result {
          case .success(let dto):
