@@ -23,6 +23,15 @@ class LabelEditViewController: UITableViewController {
    
    private var saveButton: UIBarButtonItem!
    
+   private var detail: LabelDetail? = nil
+   
+   static func instantiate(detail: LabelDetail? = nil) -> Self {
+      let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
+      let viewController = storyboard.instantiateInitialViewController() as! Self
+      viewController.detail = detail
+      return viewController
+   }
+   
    override func viewDidLoad() {
       super.viewDidLoad()
       self.title = "새로운 레이블"
@@ -53,8 +62,12 @@ class LabelEditViewController: UITableViewController {
       labelPreview.changeColor(to: "#\(newColorHex)")
    }
    
+   @objc private func save() {
+      
+   }
+   
    private func setSaveButton() {
-      saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: nil)
+      saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(save))
       self.navigationItem.rightBarButtonItem = saveButton
       saveButton.isEnabled = false
    }
