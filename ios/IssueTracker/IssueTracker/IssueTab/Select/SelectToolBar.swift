@@ -25,6 +25,7 @@ class SelectToolBar: UIToolbar {
       self.descriptionItem.title = "\(countOfSelectedCells)개의 이슈가 선택됨"
       
       guard countOfSelectedCells > 0 else {
+         self.checkBoxItem.image = UIImage(systemName: "checkmark.circle")
          return
       }
       self.checkBoxItem.image = UIImage(systemName: "checkmark.circle.fill")

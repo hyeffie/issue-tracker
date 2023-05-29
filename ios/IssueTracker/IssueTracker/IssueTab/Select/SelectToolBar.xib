@@ -13,7 +13,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <items>
                 <barButtonItem image="checkmark.circle" catalog="system" id="V6f-8x-WI9"/>
-                <barButtonItem width="302" style="plain" id="3pE-Ux-dFh"/>
+                <barButtonItem width="302" style="plain" id="3pE-Ux-dFh">
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </barButtonItem>
                 <barButtonItem image="archivebox" catalog="system" id="5dO-IC-roA"/>
             </items>
             <connections>
