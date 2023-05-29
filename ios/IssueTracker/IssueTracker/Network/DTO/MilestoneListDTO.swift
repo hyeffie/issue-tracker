@@ -8,7 +8,7 @@
 import Foundation
 
 struct MilestoneListDTO: Codable {
-   struct Milestone: Codable, Hashable {
+   struct Milestone: Codable {
       let milestoneId: Int
       let name: String
       let description: String?

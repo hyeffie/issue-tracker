@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OrderedCollections
 
 class CompactLabel {
    let labelName: String
@@ -52,11 +53,11 @@ class IssueSummary: Hashable {
 }
 
 class IssueList {
-   private(set) var issues: [IssueSummary]
-   private(set) var selectedIssues: [IssueSummary] = []
+   private(set) var issues: OrderedSet<IssueSummary>
+//   private(set) var selectedIssues: [IssueSummary] = []
    
    init(issues: [IssueSummary] = []) {
-      self.issues = issues
+      self.issues = OrderedSet(issues)
    }
    
    private func issue(at index: Int) -> IssueSummary? {
@@ -81,6 +82,7 @@ extension IssueList {
 
 extension IssueList {
    private func append(_ newIssues: [IssueSummary], _ isFiltered: Bool = false) {
+      if isFiltered { self.empty() }
       self.issues.append(contentsOf: newIssues)
       
       let notiName = isFiltered ? Notifications.didAddFilteredIssues : Notifications.didAddIssues
@@ -141,41 +143,41 @@ extension IssueList {
    }
 }
 
-extension IssueList {
-   private func select(at index: Int) {
-      guard let target = issue(at: index) else { return }
-      guard selectedIssues.contains(target) == false else { return }
-      selectedIssues.append(target)
-   }
-   
-   private func deselect(at index: Int) {
-      guard index < issues.count else { return }
-      let target = issues[index]
-      guard let index = selectedIssues.firstIndex(where: { issue in issue == target }) else { return }
-      selectedIssues.remove(at: index)
-   }
-   
-   func addSelection(at index: Int) {
-      self.select(at: index)
-   }
-   
-   func subSelection(at index: Int) {
-      self.deselect(at: index)
-   }
-   
-   func selectAll() {
-      selectedIssues = issues
-   }
-   
-   func deselectAll() {
-      selectedIssues = []
-   }
-   
-   func openSelectedIssues() {
-      selectedIssues.forEach { target in target.open() }
-   }
-   
-   func closeSelectedIssues() {
-      selectedIssues.forEach { target in target.close() }
-   }
-}
+//extension IssueList {
+//   private func select(at index: Int) {
+//      guard let target = issue(at: index) else { return }
+//      guard selectedIssues.contains(target) == false else { return }
+//      selectedIssues.append(target)
+//   }
+//
+//   private func deselect(at index: Int) {
+//      guard index < issues.count else { return }
+//      let target = issues[index]
+//      guard let index = selectedIssues.firstIndex(where: { issue in issue == target }) else { return }
+//      selectedIssues.remove(at: index)
+//   }
+//
+//   func addSelection(at index: Int) {
+//      self.select(at: index)
+//   }
+//
+//   func subSelection(at index: Int) {
+//      self.deselect(at: index)
+//   }
+//
+//   func selectAll() {
+//      selectedIssues = issues
+//   }
+//
+//   func deselectAll() {
+//      selectedIssues = []
+//   }
+//
+//   func openSelectedIssues() {
+//      selectedIssues.forEach { target in target.open() }
+//   }
+//
+//   func closeSelectedIssues() {
+//      selectedIssues.forEach { target in target.close() }
+//   }
+//}
