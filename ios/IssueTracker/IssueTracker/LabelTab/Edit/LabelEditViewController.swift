@@ -9,6 +9,8 @@ import UIKit
 
 class LabelEditViewController: UITableViewController {
    private let defaultName = "example"
+   private let defaultBackgroundColor = "#FFFFFF"
+   private let defaultTextColor = "#000000"
    
    @IBOutlet weak var nameLabel: UILabel!
    @IBOutlet weak var descriptionLabel: UILabel!
@@ -23,7 +25,8 @@ class LabelEditViewController: UITableViewController {
    
    private var saveButton: UIBarButtonItem!
    
-   private var detail: LabelDetail? = nil
+   private var networkManager: NetworkManager?
+   private var detail: LabelDetail?
    
    static func instantiate(detail: LabelDetail? = nil) -> Self {
       let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
@@ -43,6 +46,7 @@ class LabelEditViewController: UITableViewController {
       setLabelFont()
       setPreview()
       setSaveButton()
+      setNetwork()
    }
    
    @IBAction func nameHasChanged(_ sender: UITextField) {
@@ -62,8 +66,8 @@ class LabelEditViewController: UITableViewController {
       labelPreview.changeColor(to: "#\(newColorHex)")
    }
    
-   @objc private func save() {
-      
+   private func setNetwork() {
+      networkManager = NetworkManager()
    }
    
    private func setSaveButton() {
@@ -84,10 +88,29 @@ class LabelEditViewController: UITableViewController {
    
    private func setPreview() {
       previewCanvas.layer.cornerRadius = 20
-      labelPreview = IssueLabel(name: defaultName, color: "#FFFFFF")
+      labelPreview = IssueLabel(name: defaultName,
+                                color: defaultBackgroundColor)
       previewCanvas.addSubview(labelPreview)
       labelPreview?.translatesAutoresizingMaskIntoConstraints = false
       labelPreview?.centerXAnchor.constraint(equalTo: previewCanvas.centerXAnchor).isActive = true
       labelPreview?.centerYAnchor.constraint(equalTo: previewCanvas.centerYAnchor).isActive = true
+   }
+   
+   @objc private func save() {
+      guard let name = nameField.text else {
+         // TODO: Label 이름 빈 문자열 케이스 처리
+         return
+      }
+      let fontColor = defaultTextColor
+      let postData = LabelDetailPostDTO(
+         labelName: name,
+         backgroundColor: colorField.text ?? defaultBackgroundColor,
+         fontColor: fontColor,
+         description: descriptionField.text ?? "")
+      
+      networkManager?.postNewLabel(postData) { [weak self] in
+         NotificationCenter.default.post(name: LabelList.Notifications.didAddLabel, object: nil)
+         DispatchQueue.main.async { self?.navigationController?.popViewController(animated: true) }
+      }
    }
 }

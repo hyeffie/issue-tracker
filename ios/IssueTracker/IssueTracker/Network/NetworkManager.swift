@@ -88,10 +88,10 @@ final class NetworkManager {
       dataTask.resume()
    }
    
-   private func postData<Data: Encodable, Response: Codable>(
+   private func postData<DataType: Encodable, Response: Codable>(
       for urlString: String,
       with query: [String: String]? = nil,
-      data: Data,
+      data: DataType,
       completion: @escaping (Result<Response?, Error>) -> Void)
    {
       guard let url = URL(string: urlString) else { return }
@@ -141,8 +141,8 @@ final class NetworkManager {
       }
       
       getData(for: issueListURL,
-                with: query,
-                dataType: IssueListDTO.self) { result in
+              with: query,
+              dataType: IssueListDTO.self) { result in
          switch result {
          case .success(let issueList):
             completion(issueList)
@@ -156,7 +156,7 @@ final class NetworkManager {
       let issueDetailURL = baseURL + "/issues/\(issueId)"
       
       getData(for: issueDetailURL,
-                dataType: IssueDetailDTO.self) { result in
+              dataType: IssueDetailDTO.self) { result in
          switch result {
          case .success(let dto):
             completion(dto)
@@ -170,7 +170,7 @@ final class NetworkManager {
       let labelListURL = baseURL + "/labels"
       
       getData(for: labelListURL,
-                dataType: LabelListDTO.self) { result in
+              dataType: LabelListDTO.self) { result in
          switch result {
          case .success(let dto):
             completion(dto)
@@ -183,11 +183,24 @@ final class NetworkManager {
    func requestMilestoneList(completion: @escaping (MilestoneListDTO) -> Void) {
       let url = baseURL + "/milestones"
       
-      getData(for: url,
-                dataType: MilestoneListDTO.self) { result in
+      getData(for: url, dataType: MilestoneListDTO.self) { result in
          switch result {
          case .success(let dto):
             completion(dto)
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+}
+
+extension NetworkManager {
+   func postNewLabel(_ newLabel: LabelDetailPostDTO, completion: @escaping () -> Void) {
+      let urlString = baseURL + "/labels"
+      postData(for: urlString, data: newLabel) { (result: Result<Data?, Error>) in
+         switch result {
+         case .success:
+            completion()
          case .failure(let error):
             print(error)
          }

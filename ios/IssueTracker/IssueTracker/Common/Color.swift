@@ -35,3 +35,19 @@ extension Color {
       return hexString
    }
 }
+
+extension Color {
+   static func makeString(from uiColor: UIColor) -> String {
+      let defaultColor = "FFFFFF"
+      guard let components = uiColor.cgColor.components else { return defaultColor }
+      // TODO: components index out of range
+      let red = components[0]
+      let green = components[1]
+      let blue = components[2]
+      let resultHex = [red, green, blue].reduce("#") { resultString, value in
+         let partialHex = String(format: "%02X", value)
+         return resultString + partialHex
+      }
+      return resultHex.count == 6 ? resultHex : defaultColor
+   }
+}

@@ -40,10 +40,12 @@ class LabelList {
 extension LabelList {
    enum Notifications {
       static let didAddLabels = Notification.Name(rawValue: "didAddLabels")
+      static let didAddLabel = Notification.Name(rawValue: "didAddLabel")
    }
    
    enum Keys {
       static let Labels = "Labels"
+      static let Label = "Label"
    }
 }
 
