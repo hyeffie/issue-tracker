@@ -46,6 +46,7 @@ class LabelEditViewController: UITableViewController {
       setLabelFont()
       setPreview()
       setSaveButton()
+      setEditForm()
       setNetwork()
    }
    
@@ -94,6 +95,15 @@ class LabelEditViewController: UITableViewController {
       labelPreview?.translatesAutoresizingMaskIntoConstraints = false
       labelPreview?.centerXAnchor.constraint(equalTo: previewCanvas.centerXAnchor).isActive = true
       labelPreview?.centerYAnchor.constraint(equalTo: previewCanvas.centerYAnchor).isActive = true
+   }
+   
+   private func setEditForm() {
+      guard let detail else { return }
+      nameField.text = detail.labelName
+      descriptionField.text = detail.description
+      colorField.text = detail.backgroundColor
+      labelPreview.changeName(to: detail.labelName)
+      labelPreview.changeColor(to: detail.backgroundColor ?? defaultBackgroundColor)
    }
    
    @objc private func save() {

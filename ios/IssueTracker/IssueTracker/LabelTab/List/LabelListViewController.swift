@@ -60,9 +60,14 @@ extension LabelListViewController {
 
 extension LabelListViewController {
    func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
-      return { _ in
-         let delete = SwipeAction.delete.makeAction(hasImage: false, withHandler: { _, _, _ in })
-         let edit = SwipeAction.edit.makeAction(hasImage: false, withHandler: { _, _, _ in })
+      return { indexPath in
+         let delete = SwipeAction.delete.makeAction(hasImage: false) { _, _, _ in }
+         
+         let edit = SwipeAction.edit.makeAction(hasImage: false, withHandler: { [weak self] _, _, _ in
+            let detail = self?.list.getLabelDetail(of: indexPath.item)
+            let viewController = LabelEditViewController.instantiate(detail: detail)
+            self?.navigationController?.pushViewController(viewController, animated: true)
+         })
          let config = UISwipeActionsConfiguration(actions: [delete, edit])
          config.performsFirstActionWithFullSwipe = false
          return config

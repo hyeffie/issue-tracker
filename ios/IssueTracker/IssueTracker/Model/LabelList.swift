@@ -71,3 +71,10 @@ extension LabelList {
       self.empty()
    }
 }
+
+extension LabelList {   
+   func getLabelDetail(of index: Int) -> LabelDetail? {
+      guard index < labels.count else { return nil }
+      return labels[index]
+   }
+}
