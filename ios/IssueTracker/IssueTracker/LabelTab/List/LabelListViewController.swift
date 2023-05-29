@@ -9,7 +9,7 @@ import UIKit
 
 class LabelListViewController: UIViewController {
    private var collectionView: UICollectionView!
-   private var dataSource: DataSource!
+   private var dataSource: DataSource?
    
    var observers: [NSObjectProtocol] = []
    
@@ -61,8 +61,8 @@ extension LabelListViewController {
 extension LabelListViewController {
    func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
       return { _ in
-         let delete = SwiptAction.delete.makeAction(hasImage: false, withHandler: { _, _, _ in })
-         let edit = SwiptAction.edit.makeAction(hasImage: false, withHandler: { _, _, _ in })
+         let delete = SwipeAction.delete.makeAction(hasImage: false, withHandler: { _, _, _ in })
+         let edit = SwipeAction.edit.makeAction(hasImage: false, withHandler: { _, _, _ in })
          let config = UISwipeActionsConfiguration(actions: [delete, edit])
          config.performsFirstActionWithFullSwipe = false
          return config
@@ -111,21 +111,17 @@ extension LabelListViewController {
       var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
       snapshot.appendSections([.label])
       snapshot.appendItems(list.labels.map { label in Item.label(label: label) }, toSection: .label)
-      dataSource.apply(snapshot, animatingDifferences: animated)
+      dataSource?.apply(snapshot, animatingDifferences: animated)
    }
 }
 
 extension LabelListViewController {
    private func addObservers() {
-      let noti = NotificationCenter.default.addObserver(
+      self.observers.append(NotificationCenter.default.addObserver(
          forName: LabelList.Notifications.didAddLabels,
          object: list,
          queue: .main,
-         using: { [weak self] _ in
-            self?.applyUpdatedSnapshot()
-            
-         })
-      self.observers.append(noti)
+         using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
    }
 }
 
@@ -144,7 +140,7 @@ extension LabelListViewController {
 
 extension LabelListViewController {
    @objc func presentCreateEditVC() {
-      let storyboard = UIStoryboard(name: "LabelCreateEditViewController", bundle: nil)
+      let storyboard = UIStoryboard(name: "LabelEditViewController", bundle: nil)
       guard let viewController = storyboard.instantiateInitialViewController() as? LabelEditViewController else { return }
       self.navigationController?.pushViewController(viewController, animated: true)
    }

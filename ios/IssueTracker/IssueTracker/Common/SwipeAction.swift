@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum SwiptAction {
+enum SwipeAction {
    case close
    case open
    case delete
