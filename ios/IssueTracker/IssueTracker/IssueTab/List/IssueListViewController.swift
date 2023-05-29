@@ -236,6 +236,30 @@ extension IssueListViewController {
       self.navigationController?.pushViewController(viewController, animated: true)
    }
 }
+
+extension IssueListViewController {
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      guard isSelectMode, let cell = collectionView.cellForItem(at: indexPath) as? IssueListCollectionViewCell else {
+         let storyboard = UIStoryboard(name: "IssueDetail", bundle: nil)
+         guard let viewController = storyboard.instantiateInitialViewController() as?
+                                          IssueDetailViewController else { return }
+         
+         viewController.issueId = list.issues[indexPath.row].issueId
+         self.navigationController?.pushViewController(viewController, animated: true)
+         return
+      }
+      
+      cell.didSelect()
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+      guard let cell = collectionView.cellForItem(at: indexPath) as? IssueListCollectionViewCell else {
+         return
+      }
+      
+      cell.didDeSelect()
+   }
+}
 =======
 >>>>>>> d911147 (design #74: 요구사항 UI 적용)
 

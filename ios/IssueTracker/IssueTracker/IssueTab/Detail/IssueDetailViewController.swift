@@ -29,7 +29,7 @@ class IssueDetailViewController: UIViewController {
    
    private func setUI() {
       addEditButton()
-      hideTabBar()
+      configureTabBar(isHiding: true)
       hideTitleView()
    }
    

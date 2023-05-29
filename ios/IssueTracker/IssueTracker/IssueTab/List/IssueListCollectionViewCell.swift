@@ -9,6 +9,7 @@ import UIKit
 
 class IssueListCollectionViewCell: UICollectionViewCell {
    static var cellId: String = "IssueListCollectionViewCell"
+   let imageInset = UIEdgeInsets(top: -7, left: -7, bottom: -7, right: -7)
    
    @IBOutlet var titleLabel: UILabel!
    @IBOutlet var checkBoxImageView: UIImageView!
@@ -40,7 +41,6 @@ class IssueListCollectionViewCell: UICollectionViewCell {
    
    func configureImage() {
       guard let chevron = UIImage(systemName: "chevron.right") else { return }
-      let imageInset = UIEdgeInsets(top: -7, left: -7, bottom: -7, right: -7)
       self.checkBoxImageView.image = chevron.withAlignmentRectInsets(imageInset)
    }
    
@@ -67,5 +67,17 @@ class IssueListCollectionViewCell: UICollectionViewCell {
          addLabel(name: label.labelName, color: label.backgroundColor)
       }
       labelStackView.sizeToFit()
+   }
+   
+   func didSelect() {
+      let filledCheckmark = UIImage(systemName: "checkmark.circle.fill")
+      self.checkBoxImageView.image = filledCheckmark?.withAlignmentRectInsets(imageInset)
+      self.checkBoxImageView.tintColor = .systemBlue
+      self.backgroundColor = Color.gray100.color
+   }
+   
+   func didDeSelect() {
+      configureImage()
+      self.backgroundColor = .systemBackground
    }
 }
