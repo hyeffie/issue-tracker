@@ -61,18 +61,9 @@ extension LabelListViewController {
 extension LabelListViewController {
    func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
       return { indexPath in
-         let delete = SwipeAction.delete.makeAction(hasImage: false) { [weak self] _, _, complete in
-            guard let labelId = self?.list.getLabelId(of: indexPath.item) else {
-               DispatchQueue.main.async { complete(false) }
-               return
-            }
-            self?.networkManager?.deleteLabel(
-               id: labelId,
-               completion: {
-                  DispatchQueue.main.async { complete(true) }
-                  self?.list.deleteLabel(id: labelId)
-               },
-               failHandler: { DispatchQueue.main.async { complete(false) } })
+         var delete = SwipeAction.delete.makeAction(hasImage: false) { [weak self] _, _, _ in
+            guard let labelId = self?.list.getLabelId(of: indexPath.item) else { return }
+            self?.networkManager?.deleteLabel( id: labelId) { self?.list.deleteLabel(id: labelId) }
          }
          
          let edit = SwipeAction.edit.makeAction(hasImage: false, withHandler: { [weak self] _, _, complete in

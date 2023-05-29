@@ -291,7 +291,7 @@ extension NetworkManager {
       }
    }
    
-   func deleteLabel(id: Int, completion: @escaping () -> Void, failHandler: @escaping () -> Void) {
+   func deleteLabel(id: Int, completion: @escaping () -> Void) {
       let urlString = baseURL + "/labels" + "/\(id)"
       deleteData(for: urlString) { (result: Result<Data?, Error>) in
          switch result {
