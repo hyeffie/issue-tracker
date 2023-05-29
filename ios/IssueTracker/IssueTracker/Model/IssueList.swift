@@ -54,7 +54,6 @@ class IssueSummary: Hashable {
 
 class IssueList {
    private(set) var issues: OrderedSet<IssueSummary>
-//   private(set) var selectedIssues: [IssueSummary] = []
    
    init(issues: [IssueSummary] = []) {
       self.issues = OrderedSet(issues)
@@ -142,42 +141,3 @@ extension IssueList {
       self.delete(at: index)
    }
 }
-
-//extension IssueList {
-//   private func select(at index: Int) {
-//      guard let target = issue(at: index) else { return }
-//      guard selectedIssues.contains(target) == false else { return }
-//      selectedIssues.append(target)
-//   }
-//
-//   private func deselect(at index: Int) {
-//      guard index < issues.count else { return }
-//      let target = issues[index]
-//      guard let index = selectedIssues.firstIndex(where: { issue in issue == target }) else { return }
-//      selectedIssues.remove(at: index)
-//   }
-//
-//   func addSelection(at index: Int) {
-//      self.select(at: index)
-//   }
-//
-//   func subSelection(at index: Int) {
-//      self.deselect(at: index)
-//   }
-//
-//   func selectAll() {
-//      selectedIssues = issues
-//   }
-//
-//   func deselectAll() {
-//      selectedIssues = []
-//   }
-//
-//   func openSelectedIssues() {
-//      selectedIssues.forEach { target in target.open() }
-//   }
-//
-//   func closeSelectedIssues() {
-//      selectedIssues.forEach { target in target.close() }
-//   }
-//}
