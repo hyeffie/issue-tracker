@@ -266,7 +266,7 @@ extension IssueListViewController {
    
    func setFilterButton() {
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-         title: "추가",
+         title: "필터",
          style: .plain,
          target: self,
          action: #selector(presentFilterViewController))

@@ -54,7 +54,7 @@ class IssueListCollectionViewCell: UICollectionViewCell {
    }
    
    func configure(issue: IssueSummary) {
-      titleLabel.text = issue.title
+      titleLabel.text = "#\(issue.issueId) \(issue.title)"
       descriptionLabel.text = issue.content
       milestoneLabel.text = issue.milestoneName
       
