@@ -18,11 +18,8 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    private var networkManager: NetworkManager?
    private var list: IssueList = IssueList()
    private var filterList = IssueFilterList()
-<<<<<<< HEAD
    private var filterApplyList: FilterApplyList? = nil
-=======
    private var selectToolbar: SelectToolBar?
->>>>>>> c93b5fe (feat #74: 일괄 선택 취소 기능 추가)
    
    var currentPageNumber: Int = 0
    var isPaging = false
@@ -228,17 +225,6 @@ extension IssueListViewController {
 }
 
 // MARK: - Detail
-
-extension IssueListViewController {
-   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      let storyboard = UIStoryboard(name: "IssueDetail", bundle: nil)
-      guard let viewController = storyboard.instantiateInitialViewController() as?
-                                       IssueDetailViewController else { return }
-      
-      viewController.issueId = list.issues[indexPath.row].issueId
-      self.navigationController?.pushViewController(viewController, animated: true)
-   }
-}
 
 extension IssueListViewController {
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
