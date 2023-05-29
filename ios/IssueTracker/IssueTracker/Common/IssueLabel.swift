@@ -72,4 +72,8 @@ class IssueLabel: UILabel {
       self.backgroundColor = convertToUIColor(color: colorHex)
       self.textColor = isBright(self.backgroundColor) ? .black : .white
    }
+   
+   func changeName(to newName: String) {
+      self.text = newName
+   }
 }

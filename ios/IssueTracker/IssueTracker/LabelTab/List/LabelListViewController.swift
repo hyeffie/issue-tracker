@@ -60,9 +60,15 @@ extension LabelListViewController {
 
 extension LabelListViewController {
    func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
-      return { _ in
-         let delete = SwipeAction.delete.makeAction(hasImage: false, withHandler: { _, _, _ in })
-         let edit = SwipeAction.edit.makeAction(hasImage: false, withHandler: { _, _, _ in })
+      return { indexPath in
+         let delete = SwipeAction.delete.makeAction(hasImage: false) { _, _, _ in }
+         
+         let edit = SwipeAction.edit.makeAction(hasImage: false, withHandler: { [weak self] _, _, complete in
+            let detail = self?.list.getLabelDetail(of: indexPath.item)
+            let viewController = LabelEditViewController.instantiate(detail: detail)
+            self?.navigationController?.pushViewController(viewController, animated: true)
+            complete(true)
+         })
          let config = UISwipeActionsConfiguration(actions: [delete, edit])
          config.performsFirstActionWithFullSwipe = false
          return config
@@ -125,6 +131,12 @@ extension LabelListViewController {
       
       self.observers.append(NotificationCenter.default.addObserver(
          forName: LabelList.Notifications.didAddLabel,
+         object: nil,
+         queue: .main,
+         using: { [weak self] _ in self?.fetchLabels() }))
+      
+      self.observers.append(NotificationCenter.default.addObserver(
+         forName: LabelList.Notifications.didEditLabel,
          object: nil,
          queue: .main,
          using: { [weak self] _ in self?.fetchLabels() }))
