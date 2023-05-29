@@ -7,8 +7,8 @@
 
 import UIKit
 
-class IssueListViewController: UIViewController {
-   private var collectionView: UICollectionView!
+class IssueListViewController: UIViewController, UIToolbarDelegate {
+   var collectionView: UICollectionView!
    private var dataSource: DataSource?
    
    private var observers: [NSObjectProtocol] = []
@@ -20,9 +20,10 @@ class IssueListViewController: UIViewController {
    private var filterList = IssueFilterList()
    private var filterApplyList: FilterApplyList? = nil
    
-   private var currentPageNumber: Int = 0
-   private var isPaging = false
-   private var hasNextPage = true
+   var currentPageNumber: Int = 0
+   var isPaging = false
+   var hasNextPage = true
+   var isSelectMode = false
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -222,6 +223,7 @@ extension IssueListViewController {
    }
 }
 
+<<<<<<< HEAD
 // MARK: - Detail
 
 extension IssueListViewController {
@@ -234,6 +236,8 @@ extension IssueListViewController {
       self.navigationController?.pushViewController(viewController, animated: true)
    }
 }
+=======
+>>>>>>> d911147 (design #74: 요구사항 UI 적용)
 
 // MARK: - Filter
 
@@ -266,7 +270,43 @@ extension IssueListViewController {
 
 extension IssueListViewController {
    @objc func toggleSelectMode() {
-      
+      isSelectMode = true
+      self.navigationItem.leftBarButtonItem?.isHidden = true
+      self.navigationItem.rightBarButtonItem = createCancelButton()
+      self.collectionView.allowsMultipleSelection = true
+      configureTabBar(isHiding: true)
+      addToolbar()
+   }
+   
+   func addToolbar() {
+      let nib = UINib(nibName: "SelectToolBar", bundle: nil)
+      guard let toolBar = nib.instantiate(withOwner: self,
+                                                options: nil).first as? SelectToolBar else {
+         return
+      }
+      toolBar.delegate = self
+      self.view.addSubview(toolBar)
+      toolBar.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+         toolBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+         toolBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+         toolBar.topAnchor.constraint(equalTo: (self.tabBarController?.tabBar.topAnchor)!),
+         toolBar.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+      ])
+   }
+   
+   func createCancelButton() -> UIBarButtonItem {
+      return UIBarButtonItem(title: "취소",
+                             style: .plain,
+                             target: self,
+                             action: #selector(cancelSelectMode))
+   }
+   
+   @objc func cancelSelectMode() {
+      self.navigationItem.leftBarButtonItem?.isHidden = false
+      setSelectButton()
+      self.collectionView.allowsMultipleSelection = false
+      configureTabBar(isHiding: false)
    }
    
    private func setSelectButton() {

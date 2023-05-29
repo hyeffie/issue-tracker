@@ -9,7 +9,7 @@ import UIKit
 
 extension UIViewController {
    /// Wood: Using for Issue Detail Page & Issue choosing Page
-   func hideTabBar() {
-      self.tabBarController?.tabBar.isHidden = true
+   func configureTabBar(isHiding: Bool) {
+      self.tabBarController?.tabBar.isHidden = isHiding
    }
 }
