@@ -122,6 +122,12 @@ extension LabelListViewController {
          object: list,
          queue: .main,
          using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
+      
+      self.observers.append(NotificationCenter.default.addObserver(
+         forName: LabelList.Notifications.didAddLabel,
+         object: nil,
+         queue: .main,
+         using: { [weak self] _ in self?.fetchLabels() }))
    }
 }
 
@@ -140,8 +146,7 @@ extension LabelListViewController {
 
 extension LabelListViewController {
    @objc func presentCreateEditVC() {
-      let storyboard = UIStoryboard(name: "LabelEditViewController", bundle: nil)
-      guard let viewController = storyboard.instantiateInitialViewController() as? LabelEditViewController else { return }
+      let viewController = LabelEditViewController.instantiate()
       self.navigationController?.pushViewController(viewController, animated: true)
    }
    

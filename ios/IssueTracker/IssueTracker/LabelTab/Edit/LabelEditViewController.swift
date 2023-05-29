@@ -9,6 +9,8 @@ import UIKit
 
 class LabelEditViewController: UITableViewController {
    private let defaultName = "example"
+   private let defaultBackgroundColor = "#FFFFFF"
+   private let defaultTextColor = "#000000"
    
    @IBOutlet weak var nameLabel: UILabel!
    @IBOutlet weak var descriptionLabel: UILabel!
@@ -23,6 +25,16 @@ class LabelEditViewController: UITableViewController {
    
    private var saveButton: UIBarButtonItem!
    
+   private var networkManager: NetworkManager?
+   private var detail: LabelDetail?
+   
+   static func instantiate(detail: LabelDetail? = nil) -> Self {
+      let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
+      let viewController = storyboard.instantiateInitialViewController() as! Self
+      viewController.detail = detail
+      return viewController
+   }
+   
    override func viewDidLoad() {
       super.viewDidLoad()
       self.title = "새로운 레이블"
@@ -34,7 +46,18 @@ class LabelEditViewController: UITableViewController {
       setLabelFont()
       setPreview()
       setSaveButton()
-      nameField.delegate = self
+      setNetwork()
+   }
+   
+   @IBAction func nameHasChanged(_ sender: UITextField) {
+      guard let final = sender.text else { return }
+      if final.count > 0 {
+         saveButton.isEnabled = true
+         labelPreview.text = final
+      } else {
+         saveButton.isEnabled = false
+         labelPreview.text = defaultName
+      }
    }
    
    @IBAction func randomizeColor(_ sender: Any) {
@@ -43,8 +66,12 @@ class LabelEditViewController: UITableViewController {
       labelPreview.changeColor(to: "#\(newColorHex)")
    }
    
+   private func setNetwork() {
+      networkManager = NetworkManager()
+   }
+   
    private func setSaveButton() {
-      saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: nil)
+      saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(save))
       self.navigationItem.rightBarButtonItem = saveButton
       saveButton.isEnabled = false
    }
@@ -61,28 +88,29 @@ class LabelEditViewController: UITableViewController {
    
    private func setPreview() {
       previewCanvas.layer.cornerRadius = 20
-      labelPreview = IssueLabel(name: defaultName, color: "#FFFFFF")
+      labelPreview = IssueLabel(name: defaultName,
+                                color: defaultBackgroundColor)
       previewCanvas.addSubview(labelPreview)
       labelPreview?.translatesAutoresizingMaskIntoConstraints = false
       labelPreview?.centerXAnchor.constraint(equalTo: previewCanvas.centerXAnchor).isActive = true
       labelPreview?.centerYAnchor.constraint(equalTo: previewCanvas.centerYAnchor).isActive = true
    }
-}
-
-extension LabelEditViewController: UITextFieldDelegate {
-   func textField(
-      _ textField: UITextField,
-      shouldChangeCharactersIn range: NSRange,
-      replacementString string: String
-   ) -> Bool {
-      let final = NSString(string: textField.text ?? "").replacingCharacters(in: range, with: string)
-      if final.count > 0 {
-         saveButton.isEnabled = true
-         labelPreview.text = final
-      } else {
-         saveButton.isEnabled = false
-         labelPreview.text = defaultName
+   
+   @objc private func save() {
+      guard let name = nameField.text else {
+         // TODO: Label 이름 빈 문자열 케이스 처리
+         return
       }
-      return true
+      let fontColor = defaultTextColor
+      let postData = LabelDetailPostDTO(
+         labelName: name,
+         backgroundColor: colorField.text ?? defaultBackgroundColor,
+         fontColor: fontColor,
+         description: descriptionField.text ?? "")
+      
+      networkManager?.postNewLabel(postData) { [weak self] in
+         NotificationCenter.default.post(name: LabelList.Notifications.didAddLabel, object: nil)
+         DispatchQueue.main.async { self?.navigationController?.popViewController(animated: true) }
+      }
    }
 }

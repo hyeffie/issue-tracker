@@ -65,7 +65,7 @@ class FilterListViewController: UIViewController {
       
       NotificationCenter.default.post(name: FilterApplyList.applyFilter,
                                       object: nil,
-                                      userInfo: [FilterApplyList.Keys.Filters : filterApplyList])
+                                      userInfo: [FilterApplyList.Keys.Filters: filterApplyList])
       
       self.dismiss(animated: true)
    }
