@@ -20,14 +20,14 @@ class FilterListCollectionViewCell: UICollectionViewCell {
       guard let checkmark = UIImage(systemName: "checkmark") else { return }
       let imageInset = UIEdgeInsets(top: -7, left: -7, bottom: -7, right: -7)
       self.selectionImageView.image = checkmark.withAlignmentRectInsets(imageInset)
-      self.selectionImageView.tintColor = .systemBlue
+      self.selectionImageView.tintColor = .systemGray
    }
    
    func setSelected() {
-      selectionImageView.tintColor = .systemGray
+      selectionImageView.tintColor = .systemBlue
    }
    
    func setDeselected() {
-      self.selectionImageView.tintColor = .systemBlue
+      self.selectionImageView.tintColor = .systemGray
    }
 }

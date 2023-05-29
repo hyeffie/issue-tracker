@@ -70,6 +70,7 @@ extension IssueList {
       static let didAddIssues = Notification.Name(rawValue: "didAddIssues")
       static let didOpenIssue = Notification.Name("didOpenIssue")
       static let didCloseIssue = Notification.Name("didCloseIssue")
+      static let didAddFilteredIssues = Notification.Name(rawValue: "didAddFilteredIssues")
    }
    
    enum Keys {
@@ -79,17 +80,19 @@ extension IssueList {
 }
 
 extension IssueList {
-   private func append(_ newIssues: [Issue]) {
+   private func append(_ newIssues: [Issue], _ isFiltered: Bool = false) {
       self.issues.append(contentsOf: newIssues)
       
+      let notiName = isFiltered ? Notifications.didAddFilteredIssues : Notifications.didAddIssues
+      
       NotificationCenter.default.post(
-         name: Notifications.didAddIssues,
+         name: notiName,
          object: self,
          userInfo: [Keys.Issues: self.issues])
    }
    
-   func add(issues: [Issue]) {
-      self.append(issues)
+   func add(issues: [Issue], isFiltered: Bool = false) {
+      self.append(issues, isFiltered)
    }
    
    private func append(_ issue: Issue) {

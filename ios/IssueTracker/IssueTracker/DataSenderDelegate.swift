@@ -8,5 +8,7 @@
 import Foundation
 
 protocol DataSenderDelegate {
-   func receive() -> IssueListDTO
+   associatedtype DataType
+   
+   func send() -> DataType
 }

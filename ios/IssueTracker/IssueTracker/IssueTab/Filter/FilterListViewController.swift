@@ -10,26 +10,31 @@ import UIKit
 class FilterListViewController: UIViewController {
    let filterCellID = "FilterListCollectionViewCell"
    let filterHeaderID = "FilterListCollectionViewHeader"
-   let filterStatusList = ["열린 이슈", "내가 작성한 이슈", "내가 댓글을 남긴 이슈", "닫힌 이슈"]
-   let filterHeaderNames = ["상태", "담당자", "레이블", "마일스톤"]
    
-   var delegate: DataSenderDelegate?
-   var useCase = IssueListDTO()
-   let statusCellCount = 4
-   let sectionCount = 4
+   var delegate: (any DataSenderDelegate)?
+   var filterListUseCase: FilterListUseCase?
+   var filterApplyList = FilterApplyList()
+   var pastSelectionStatus: IndexPath?
+   var pastSelectionMilestone: IndexPath?
    
    @IBOutlet weak var collectionView: UICollectionView!
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      guard let receivedData = delegate?.receive() else {
-         return
-      }
-      useCase = receivedData
+      filterApplyList.emptyList()
+      receiveData()
       setCollectionView()
    }
    
-   func setCollectionView() {
+   private func receiveData() {
+      guard let receivedData = delegate?.send() as? IssueFilterList else {
+         return
+      }
+      
+      self.filterListUseCase = FilterListUseCase(filterList: receivedData)
+   }
+   
+   private func setCollectionView() {
       collectionView.delegate = self
       collectionView.dataSource = self
       
@@ -43,6 +48,8 @@ class FilterListViewController: UIViewController {
       if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
          flowLayout.estimatedItemSize = .zero
       }
+      
+      collectionView.allowsMultipleSelection = true
    }
    
    @IBAction func cancel(_ sender: Any) {
@@ -50,6 +57,15 @@ class FilterListViewController: UIViewController {
    }
    
    @IBAction func save(_ sender: Any) {
+      let filterElements = collectionView.indexPathsForSelectedItems
+      filterElements?.forEach {
+         filterApplyList.addFilter(section: $0.section,
+                                   id: filterListUseCase?.sendItemId(section: $0.section, index: $0.row))
+      }
+      
+      NotificationCenter.default.post(name: FilterApplyList.applyFilter,
+                                      object: nil,
+                                      userInfo: [0 : filterApplyList])
       
       self.dismiss(animated: true)
    }
@@ -57,7 +73,11 @@ class FilterListViewController: UIViewController {
 
 extension FilterListViewController: UICollectionViewDataSource {
    func numberOfSections(in collectionView: UICollectionView) -> Int {
-      return sectionCount
+      guard let countOfSections = filterListUseCase?.sendHeaderCount() else {
+         return 0
+      }
+      
+      return countOfSections
    }
    
    func collectionView(
@@ -73,7 +93,11 @@ extension FilterListViewController: UICollectionViewDataSource {
          return UICollectionReusableView()
       }
       
-      header.sectionName.text = filterHeaderNames[indexPath.section]
+      guard let sectionName = filterListUseCase?.sendHeaderName(section: indexPath.section) else {
+         return header
+      }
+      
+      header.sectionName.text = sectionName
       header.configureFont()
       return header
    }
@@ -82,16 +106,11 @@ extension FilterListViewController: UICollectionViewDataSource {
       _ collectionView: UICollectionView,
       numberOfItemsInSection section: Int)
    -> Int {
-      switch section {
-      case 0:
-         return filterStatusList.count
-      case 1:
-         return useCase.userList.count
-      case 2:
-         return useCase.countAllLabels
-      default:
-         return useCase.countAllMilestones
+      guard let countOfItems = filterListUseCase?.sendCount(section: section) else {
+         return 1
       }
+      
+      return countOfItems
    }
    
    func collectionView(
@@ -103,19 +122,12 @@ extension FilterListViewController: UICollectionViewDataSource {
          for: indexPath
       ) as? FilterListCollectionViewCell else { return UICollectionViewCell() }
       
-      let filterElement: String
-      switch indexPath.section {
-      case 0:
-         filterElement = filterStatusList[indexPath.row]
-      case 1:
-         filterElement = useCase.userList[indexPath.row].userName
-      case 2:
-         filterElement = useCase.labelList[indexPath.row].labelName
-      default:
-         filterElement = useCase.milestoneList[indexPath.row].milestoneName!
+      guard let itemName = filterListUseCase?.sendItemName(section: indexPath.section,
+                                                 index: indexPath.row) else {
+         return cell
       }
       
-      cell.filterName.text = filterElement
+      cell.filterName.text = itemName
       cell.configureFont()
       cell.configureImage()
       return cell
@@ -147,5 +159,50 @@ extension FilterListViewController: UICollectionViewDelegateFlowLayout {
                        layout collectionViewLayout: UICollectionViewLayout,
                        insetForSectionAt section: Int) -> UIEdgeInsets {
       return UIEdgeInsets(top: 1.0, left: 0, bottom: 4.0, right: 0)
+   }
+}
+
+extension FilterListViewController {
+   func collectionView(_ collectionView: UICollectionView,
+                       didSelectItemAt indexPath: IndexPath) {
+      guard let cell = collectionView.cellForItem(at: indexPath) as? FilterListCollectionViewCell else {
+         return
+      }
+      
+      switch indexPath.section {
+      case 0:
+         guard let pastSelectionIndexPath = pastSelectionStatus else {
+            pastSelectionStatus = indexPath
+            break
+         }
+         collectionView.deselectItem(at: pastSelectionIndexPath, animated: true)
+         let cell = collectionView.cellForItem(at: pastSelectionIndexPath) as? FilterListCollectionViewCell
+         cell?.setDeselected()
+         pastSelectionStatus = indexPath
+      
+      case 3:
+         guard let pastSelectionIndexPath = pastSelectionMilestone else {
+            pastSelectionMilestone = indexPath
+            break
+         }
+         collectionView.deselectItem(at: pastSelectionIndexPath, animated: true)
+         let cell = collectionView.cellForItem(at: pastSelectionIndexPath) as? FilterListCollectionViewCell
+         cell?.setDeselected()
+         pastSelectionMilestone = indexPath
+      
+      default: break
+      }
+      
+      print(collectionView.indexPathsForSelectedItems)
+      cell.setSelected()
+   }
+   
+   func collectionView(_ collectionView: UICollectionView,
+                       didDeselectItemAt indexPath: IndexPath) {
+      guard let cell = collectionView.cellForItem(at: indexPath) as? FilterListCollectionViewCell else {
+         return
+      }
+      
+      cell.setDeselected()
    }
 }
