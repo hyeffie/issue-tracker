@@ -18,7 +18,11 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    private var networkManager: NetworkManager?
    private var list: IssueList = IssueList()
    private var filterList = IssueFilterList()
+<<<<<<< HEAD
    private var filterApplyList: FilterApplyList? = nil
+=======
+   private var selectToolbar: SelectToolBar?
+>>>>>>> c93b5fe (feat #74: 일괄 선택 취소 기능 추가)
    
    var currentPageNumber: Int = 0
    var isPaging = false
@@ -223,7 +227,6 @@ extension IssueListViewController {
    }
 }
 
-<<<<<<< HEAD
 // MARK: - Detail
 
 extension IssueListViewController {
@@ -249,6 +252,7 @@ extension IssueListViewController {
          return
       }
       
+      self.selectToolbar?.configureItems()
       cell.didSelect()
    }
    
@@ -257,11 +261,10 @@ extension IssueListViewController {
          return
       }
       
+      self.selectToolbar?.configureItems(isSelected: false)
       cell.didDeSelect()
    }
 }
-=======
->>>>>>> d911147 (design #74: 요구사항 UI 적용)
 
 // MARK: - Filter
 
@@ -295,19 +298,20 @@ extension IssueListViewController {
 extension IssueListViewController {
    @objc func toggleSelectMode() {
       isSelectMode = true
+      self.navigationItem.title = "이슈 선택"
       self.navigationItem.leftBarButtonItem?.isHidden = true
       self.navigationItem.rightBarButtonItem = createCancelButton()
       self.collectionView.allowsMultipleSelection = true
       configureTabBar(isHiding: true)
-      addToolbar()
+      self.selectToolbar = createSelectToolBar()
    }
    
-   func addToolbar() {
+   func createSelectToolBar() -> SelectToolBar? {
       let nib = UINib(nibName: "SelectToolBar", bundle: nil)
-      guard let toolBar = nib.instantiate(withOwner: self,
-                                                options: nil).first as? SelectToolBar else {
-         return
+      guard let toolBar = nib.instantiate(withOwner: self, options: nil).first as? SelectToolBar else {
+         return nil
       }
+      
       toolBar.delegate = self
       self.view.addSubview(toolBar)
       toolBar.translatesAutoresizingMaskIntoConstraints = false
@@ -317,6 +321,8 @@ extension IssueListViewController {
          toolBar.topAnchor.constraint(equalTo: (self.tabBarController?.tabBar.topAnchor)!),
          toolBar.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
       ])
+      
+      return toolBar
    }
    
    func createCancelButton() -> UIBarButtonItem {
@@ -329,8 +335,9 @@ extension IssueListViewController {
    @objc func cancelSelectMode() {
       self.navigationItem.leftBarButtonItem?.isHidden = false
       setSelectButton()
-      self.collectionView.allowsMultipleSelection = false
       configureTabBar(isHiding: false)
+      deselectAllCells()
+      self.collectionView.allowsMultipleSelection = false
    }
    
    private func setSelectButton() {
@@ -340,5 +347,19 @@ extension IssueListViewController {
          target: self,
          action: #selector(toggleSelectMode))
       self.navigationItem.rightBarButtonItems = [selectButton]
+   }
+   
+   func deselectAllCells() {
+      guard let indexPaths = collectionView.indexPathsForSelectedItems else {
+         return
+      }
+      
+      indexPaths.forEach {
+         guard let cell = collectionView.cellForItem(at: $0) as? IssueListCollectionViewCell else {
+            return
+         }
+         
+         cell.didDeSelect()
+      }
    }
 }
