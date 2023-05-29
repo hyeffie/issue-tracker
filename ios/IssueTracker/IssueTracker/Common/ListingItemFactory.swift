@@ -9,12 +9,12 @@ import Foundation
 
 struct ListingItemFactory {
    struct IssueTab {
-      private static func makeLabel(with lable: IssueListDTO.Label) -> IssueList.Issue.Label {
+      private static func makeLabel(with lable: IssueListDTO.Label) -> CompactLabel {
          return .init(labelName: lable.labelName,
                       backgroundColor: lable.backgroundColor)
       }
       
-      private static func makeIssue(with issue: IssueListDTO.Issue) -> IssueList.Issue {
+      private static func makeIssue(with issue: IssueListDTO.Issue) -> IssueSummary {
          let labelList = issue.labelList.map { label in makeLabel(with: label) }
          return .init(issueId: issue.issueId,
                       title: issue.title,
@@ -24,7 +24,7 @@ struct ListingItemFactory {
                       labelList: labelList)
       }
       
-      static func makeIssues(with issues: [IssueListDTO.Issue]) -> [IssueList.Issue] {
+      static func makeIssues(with issues: [IssueListDTO.Issue]) -> [IssueSummary] {
          return issues.map { issue in makeIssue(with: issue) }
       }
       
@@ -35,21 +35,21 @@ struct ListingItemFactory {
    }
    
    struct LabelTab {
-      private static func makeLabel(with label: LabelListDTO.Label) -> LabelList.Label {
+      private static func makeLabel(with label: LabelListDTO.Label) -> LabelDetail {
          return .init(labelId: label.id,
                       labelName: label.name,
                       backgroundColor: label.backgroundColor,
                       description: label.description)
       }
       
-      static func makeLabelList(with labelList: LabelListDTO) -> [LabelList.Label] {
+      static func makeLabelList(with labelList: LabelListDTO) -> [LabelDetail] {
          let labels = labelList.labelList.map { label in makeLabel(with: label) }
          return labels
       }
    }
    
    struct MilestoneTab {
-      private static func makeMilestone(with milestone: MilestoneListDTO.Milestone) -> MilestoneList.Milestone {
+      private static func makeMilestone(with milestone: MilestoneListDTO.Milestone) -> MilestoneDetail {
          return .init(milestoneId: milestone.milestoneId,
                       name: milestone.name,
                       description: milestone.description,
@@ -59,7 +59,7 @@ struct ListingItemFactory {
                       progress: milestone.progress)
       }
       
-      static func makeMilestoneList(with dto: MilestoneListDTO) -> [MilestoneList.Milestone] {
+      static func makeMilestoneList(with dto: MilestoneListDTO) -> [MilestoneDetail] {
          let milestones = dto.milestoneList.map { milestone in makeMilestone(with: milestone) }
          return milestones
       }

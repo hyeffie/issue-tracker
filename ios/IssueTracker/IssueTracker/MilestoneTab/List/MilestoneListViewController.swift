@@ -76,7 +76,7 @@ extension MilestoneListViewController {
    }
    
    private enum Item: Hashable {
-      case milestone(milestone: MilestoneList.Milestone)
+      case milestone(milestone: MilestoneDetail)
    }
    
    private class DataSource: UICollectionViewDiffableDataSource<Section, Item> { }

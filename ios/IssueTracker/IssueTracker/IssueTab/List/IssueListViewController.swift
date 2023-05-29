@@ -99,7 +99,7 @@ extension IssueListViewController {
    }
    
    enum Item: Hashable {
-      case issue(issue: IssueList.Issue)
+      case issue(issue: IssueSummary)
       case load
    }
    

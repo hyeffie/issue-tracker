@@ -78,7 +78,7 @@ extension LabelListViewController {
    }
    
    private enum Item: Hashable {
-      case label(label: LabelList.Label)
+      case label(label: LabelDetail)
    }
    
    private class DataSource: UICollectionViewDiffableDataSource<Section, Item> { }
