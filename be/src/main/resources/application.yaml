@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: db10041004
+    url: jdbc:mysql://issue-tracker-database.cyq7txapdcxh.ap-northeast-2.rds.amazonaws.com:3306/issue_tracker
+  logging:
+    level:
+      org.springframework.data.jdbc.core: DEBUG
+mybatis:
+  type-aliases-package: com.example.BE
+  configuration:
+    map-underscore-to-camel-case: true
