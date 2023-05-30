@@ -25,8 +25,7 @@ jobs:
         with:
           java-version: 11
 
-      - name: Check pwd
-        run: pwd
+
         
       - name: make application.properties
         run:
@@ -37,32 +36,20 @@ jobs:
         run: echo "${{ secrets.DI_FROM_SECRET }}" > ./be/src/main/resources/application.yaml
         shell: bash
         
-      - name: Check pwd
-        run: pwd
-      
-      - name: Check list
-        run: ls
-        
-      - name: Change Directory
-        run: cd ./be
-        shell: bash
-        
-      - name: Check pwd
-        run: pwd
-        
-      - name: Check list
-        run: ls
+     
         
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+        run: chmod +x ./be/gradlew
         shell: bash
         
       - name: Build with Gradle
-        run: gradlew build
+        run: ./be/gradlew build
         shell: bash
-      - name: Change Undo Directory
-        run: cd ./..
+        
+      - name: find
+        run: find ./be/build
         shell: bash
+    
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip .
         shell: bash
