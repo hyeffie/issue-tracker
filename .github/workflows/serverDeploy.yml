@@ -7,7 +7,7 @@ on:
 
 env:
   S3_BUCKET_NAME: issuetracker-web
-  RESOURCE_PATH: ./src/main/resources/application.yaml
+  RESOURCE_PATH: ./be/src/main/resources/application.yaml
   CODE_DEPLOY_APPLICATION_NAME: issue-tracker
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: issue-tracker
 
