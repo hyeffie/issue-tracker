@@ -48,29 +48,30 @@ class FilterApplyList {
    
    func makeQuery() -> RequestParameters {
       var query: RequestParameters = [:]
-
       let filterList = self
       let statusString = filterList.status ? "open" : "closed"
       query.updateValue("\(statusString)", forKey: "status")
       
       var userString = ""
-      filterList.users.forEach {
-         userString += String($0) + ","
+      filterList.users.enumerated().forEach {
+         userString += String($0.1) + ($0.0 == filterList.users.count - 1 ? "" : ",")
       }
-      userString = String(userString.dropLast())
-      query.updateValue("\(userString)", forKey: "assignee")
+      if !userString.isEmpty {
+         query.updateValue(userString, forKey: "assignee")
+      }
       
       var labelString = ""
-      filterList.labels.forEach {
-         labelString += String($0) + ","
+      filterList.labels.enumerated().forEach {
+         labelString += String($0.1) + ($0.0 == filterList.labels.count - 1 ? "" : ",")
       }
-      labelString = String(labelString.dropLast())
-      query.updateValue("\(labelString)", forKey: "label")
+      
+      if !labelString.isEmpty {
+         query.updateValue(labelString, forKey: "label")
+      }
       
       if let milestoneString = filterList.milestone {
          query.updateValue("\(milestoneString)", forKey: "milestone")
       }
-      
       return query
    }
 }
