@@ -223,7 +223,6 @@ extension NetworkManager {
       }
       
       if let pageNumber {
-         query.updateValue("\(Self.defaultPagingOffSet)", forKey: "offset")
          query.updateValue("\(pageNumber)", forKey: "pageNum")
       }
       

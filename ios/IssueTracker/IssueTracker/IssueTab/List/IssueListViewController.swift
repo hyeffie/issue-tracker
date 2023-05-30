@@ -23,7 +23,7 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    
    private var selectToolbar: SelectToolBar?
    
-   var currentPageNumber: Int = 0
+   var currentPageNumber: Int = 1
    var isPaging = false
    var hasNextPage = true
    var isSelectMode = false
@@ -48,7 +48,7 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    
    private func reset() {
       list.emptyList()
-      currentPageNumber = 0
+      currentPageNumber = 1
       hasNextPage = true
    }
 }
