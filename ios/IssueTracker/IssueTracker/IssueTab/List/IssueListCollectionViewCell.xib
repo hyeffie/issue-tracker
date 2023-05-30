@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="I7B-VG-nnl">
-                        <rect key="frame" x="24" y="16" width="615" height="107"/>
+                        <rect key="frame" x="24" y="16" width="615" height="116"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5L8-B3-LIn">
                                 <rect key="frame" x="0.0" y="0.0" width="615" height="21.666666666666668"/>
@@ -39,14 +39,14 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="설명(최대 두 줄까지 보여줄 수 있다)" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XvL-EA-VVf">
-                                <rect key="frame" x="0.0" y="30.333333333333336" width="615" height="17"/>
+                                <rect key="frame" x="0.0" y="33.333333333333336" width="615" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <lineBreakStrategy key="lineBreakStrategy" hangulWordPriority="YES"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PXH-uF-cRC">
-                                <rect key="frame" x="0.0" y="56.333333333333329" width="615" height="18"/>
+                                <rect key="frame" x="0.0" y="62.333333333333329" width="615" height="18"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="milestone" translatesAutoresizingMaskIntoConstraints="NO" id="dst-1V-35T">
                                         <rect key="frame" x="0.0" y="0.0" width="17" height="18"/>
@@ -64,7 +64,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uuh-kf-CLw">
-                                <rect key="frame" x="0.0" y="83" width="615" height="24"/>
+                                <rect key="frame" x="0.0" y="92" width="615" height="24"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dyV-HA-oXT">
                                         <rect key="frame" x="0.0" y="0.0" width="615" height="24"/>
@@ -86,7 +86,7 @@
                 <constraints>
                     <constraint firstItem="I7B-VG-nnl" firstAttribute="top" secondItem="URj-8g-Jwl" secondAttribute="top" constant="16" id="I7g-G5-OZH"/>
                     <constraint firstAttribute="trailing" secondItem="I7B-VG-nnl" secondAttribute="trailing" constant="16" id="XNa-JK-xw5"/>
-                    <constraint firstAttribute="bottom" secondItem="I7B-VG-nnl" secondAttribute="bottom" constant="25" id="XOq-77-NKw"/>
+                    <constraint firstAttribute="bottom" secondItem="I7B-VG-nnl" secondAttribute="bottom" priority="250" constant="16" id="XOq-77-NKw"/>
                     <constraint firstItem="I7B-VG-nnl" firstAttribute="leading" secondItem="URj-8g-Jwl" secondAttribute="leading" constant="24" id="ac5-HC-Jl4"/>
                 </constraints>
             </collectionViewCellContentView>
