@@ -199,6 +199,11 @@ extension IssueListViewController {
             self?.filterApplyList = filterApplyList
             self?.reset()
             self?.fetchIssues() }))
+      
+      self.observers.append(NotificationCenter.default.addObserver(
+         forName: IssueList.Notifications.didEmptyIssue,
+         object: list, queue: .main,
+         using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
    }
 }
 

@@ -71,6 +71,7 @@ extension IssueList {
       static let didOpenIssue = Notification.Name("didOpenIssue")
       static let didCloseIssue = Notification.Name("didCloseIssue")
       static let didAddFilteredIssues = Notification.Name(rawValue: "didAddFilteredIssues")
+      static let didEmptyIssue = Notification.Name(rawValue: "didEmptyIssue")
    }
    
    enum Keys {
@@ -106,6 +107,7 @@ extension IssueList {
    
    private func empty() {
       self.issues = []
+      NotificationCenter.default.post(name: Notifications.didEmptyIssue, object: self)
    }
    
    func emptyList() {
