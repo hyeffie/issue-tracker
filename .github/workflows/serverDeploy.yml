@@ -43,7 +43,7 @@ jobs:
         shell: bash
         
       - name: Build with Gradle
-        run: ./be/gradlew build
+        run: ./gradlew -p be build
         shell: bash
         
       - name: find
