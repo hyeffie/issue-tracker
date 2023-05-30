@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;

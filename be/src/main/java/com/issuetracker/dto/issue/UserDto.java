@@ -2,7 +2,6 @@ package com.issuetracker.dto.issue;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter

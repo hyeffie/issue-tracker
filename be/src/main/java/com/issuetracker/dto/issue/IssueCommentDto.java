@@ -2,9 +2,6 @@ package com.issuetracker.dto.issue;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.relational.core.mapping.Column;
-
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
