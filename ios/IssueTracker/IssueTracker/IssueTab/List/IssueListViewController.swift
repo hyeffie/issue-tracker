@@ -308,6 +308,12 @@ extension IssueListViewController: UISearchBarDelegate {
       self.reset()
       self.fetchIssues()
    }
+   
+   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+      self.searchQuery = nil
+      self.reset()
+      self.fetchIssues()
+   }
 }
 
 // MARK: - Select Mode
