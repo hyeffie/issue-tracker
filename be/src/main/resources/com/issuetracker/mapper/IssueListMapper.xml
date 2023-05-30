@@ -16,7 +16,7 @@
         <foreach item="item" collection="filteredIssueIdList" open="(" separator="," close=")">
             #{item}
         </foreach>
-
+        ORDER BY i.id DESC
     </select>
 
     <resultMap type="com.issuetracker.domain.IssueListPage" id="issueList">
