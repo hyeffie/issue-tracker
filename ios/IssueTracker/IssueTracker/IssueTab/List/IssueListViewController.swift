@@ -203,7 +203,10 @@ extension IssueListViewController {
       self.observers.append(NotificationCenter.default.addObserver(
          forName: IssueList.Notifications.didEmptyIssue,
          object: list, queue: .main,
-         using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
+         using: { [weak self] _ in
+            self?.hasNextPage = false
+            self?.applyUpdatedSnapshot()
+         }))
    }
 }
 
