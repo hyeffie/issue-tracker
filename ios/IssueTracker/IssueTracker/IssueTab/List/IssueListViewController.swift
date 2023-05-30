@@ -19,6 +19,8 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    private var list: IssueList = IssueList()
    private var filterList = IssueFilterList()
    private var filterApplyList: FilterApplyList? = nil
+   private var searchQuery: String? = nil
+   
    private var selectToolbar: SelectToolBar?
    
    var currentPageNumber: Int = 0
@@ -36,7 +38,7 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
       addObservers()
       setFilterButton()
       setSelectButton()
-
+      
       fetchIssues()
    }
    
@@ -217,18 +219,20 @@ extension IssueListViewController {
       guard hasNextPage else { return }
       isPaging = true
       networkManager?.requestIssueList(
+         searchQuery: self.searchQuery,
          filterList: filterApplyList,
          pageNumber: currentPageNumber) { [weak self] dto in
-         cellCompletion?()
-         self?.isPaging = false
-         self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
-         if dto.issues.count > 0 {
-            let newIssues = ListingItemFactory.IssueTab.makeIssues(with: dto.issues)
-            self?.list.add(issues: newIssues) // -> POST NOTIFICATION
-            self?.filterList = FilterListFactory.make(issueList: dto)
-            self?.currentPageNumber += 1
+            cellCompletion?()
+            self?.isPaging = false
+            self?.hasNextPage = dto.issues.count < NetworkManager.defaultPagingOffSet ? false : true
+            if dto.issues.count > 0 {
+               let newIssues = ListingItemFactory.IssueTab.makeIssues(with: dto.issues)
+               self?.list.add(issues: newIssues) // -> POST NOTIFICATION
+               self?.filterList = FilterListFactory.make(issueList: dto)
+               self?.currentPageNumber += 1
+            }
+            DispatchQueue.main.async { self?.setSearchBar() }
          }
-      }
    }
 }
 
@@ -238,8 +242,7 @@ extension IssueListViewController {
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       guard isSelectMode, let cell = collectionView.cellForItem(at: indexPath) as? IssueListCollectionViewCell else {
          let storyboard = UIStoryboard(name: "IssueDetail", bundle: nil)
-         guard let viewController = storyboard.instantiateInitialViewController() as?
-                                          IssueDetailViewController else { return }
+         guard let viewController = storyboard.instantiateInitialViewController() as? IssueDetailViewController else { return }
          
          viewController.issueId = list.issues[indexPath.row].issueId
          self.navigationController?.pushViewController(viewController, animated: true)
@@ -284,6 +287,32 @@ extension IssueListViewController {
          style: .plain,
          target: self,
          action: #selector(presentFilterViewController))
+   }
+}
+
+// MARK: - Search
+
+extension IssueListViewController {
+   private func setSearchBar() {
+      guard navigationItem.searchController == nil else { return }
+      var searchController = UISearchController()
+      searchController.searchBar.placeholder = "이슈 제목으로 검색"
+      navigationItem.searchController = searchController
+      navigationItem.searchController?.searchBar.delegate = self
+   }
+}
+
+extension IssueListViewController: UISearchBarDelegate {
+   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+      self.searchQuery = searchText
+      self.reset()
+      self.fetchIssues()
+   }
+   
+   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+      self.searchQuery = nil
+      self.reset()
+      self.fetchIssues()
    }
 }
 
