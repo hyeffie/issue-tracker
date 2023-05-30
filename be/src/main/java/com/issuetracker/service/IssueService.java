@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +40,7 @@ import com.issuetracker.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class IssueService {
@@ -143,15 +145,19 @@ public class IssueService {
         long openCount = 0;
         long closeCount = 0;
 
+        log.info("ok1");
+
         Iterator<IssueStatusDto> iterator = issueStatusListDto.getIssues().stream().iterator();
         while (iterator.hasNext()) {
             IssueStatusDto e = iterator.next();
             if (e.getIsOpen() != null && e.getIsOpen()) {
                 issueRepository.openIssueById(e.getIssueId());
+                log.info("open");
                 openCount++;
             }
             else if (e.getIsOpen() != null && !e.getIsOpen()) {
                 issueRepository.closeIssueById(e.getIssueId(), LocalDateTime.now());
+                log.info("close");
                 closeCount++;
             }
 
