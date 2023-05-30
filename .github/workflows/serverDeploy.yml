@@ -25,9 +25,7 @@ jobs:
         with:
           java-version: 11
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./be/gradlew
-        shell: bash
+      
         
       - name: make application.properties
         run:
@@ -41,8 +39,13 @@ jobs:
       - name: Change Directory
         run: cd be
         shell: bash
+        
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        shell: bash
+        
       - name: Build with Gradle
-        run: ./gradlew build -x test
+        run: ./gradlew build
         shell: bash
       - name: Change Undo Directory
         run: cd ..
