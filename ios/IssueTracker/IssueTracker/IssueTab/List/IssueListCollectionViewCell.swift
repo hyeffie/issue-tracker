@@ -16,7 +16,6 @@ class IssueListCollectionViewCell: UICollectionViewCell {
    @IBOutlet var descriptionLabel: UILabel!
    @IBOutlet var milestoneLabel: UILabel!
    @IBOutlet var labelStackView: UIStackView!
-   @IBOutlet weak var labelStackContainer: UIView!
    
    override func awakeFromNib() {
       super.awakeFromNib()
@@ -26,7 +25,7 @@ class IssueListCollectionViewCell: UICollectionViewCell {
    
    override func prepareForReuse() {
       super.prepareForReuse()
-      labelStackContainer.isHidden = false
+      labelStackView.isHidden = false
       emptyLabelStack()
    }
    
@@ -46,11 +45,14 @@ class IssueListCollectionViewCell: UICollectionViewCell {
    
    func addLabel(name: String, color: String) {
       let label = IssueLabel(name: name, color: color)
-      self.labelStackView.addArrangedSubview(label)
+      self.labelStackView.insertArrangedSubview(label, at: 0)
    }
    
    func emptyLabelStack() {
-      labelStackView.arrangedSubviews.forEach { view in view.removeFromSuperview() }
+      labelStackView.arrangedSubviews.forEach { view in
+         guard let label = view as? IssueLabel else { return }
+         view.removeFromSuperview()
+      }
    }
    
    func configure(issue: IssueSummary) {
@@ -59,7 +61,7 @@ class IssueListCollectionViewCell: UICollectionViewCell {
       milestoneLabel.text = issue.milestoneName
       
       if issue.labelList.isEmpty {
-         labelStackContainer.isHidden = true
+         labelStackView.isHidden = true
          return
       }
       
