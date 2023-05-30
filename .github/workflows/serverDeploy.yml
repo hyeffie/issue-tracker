@@ -25,7 +25,8 @@ jobs:
         with:
           java-version: 11
 
-      
+      - name: Check pwd
+        run: pwd
         
       - name: make application.properties
         run:
@@ -36,9 +37,15 @@ jobs:
         run: echo "${{ secrets.DI_FROM_SECRET }}" > ./be/src/main/resources/application.yaml
         shell: bash
         
+      - name: Check pwd
+        run: pwd
+        
       - name: Change Directory
         run: cd ./be
         shell: bash
+        
+      - name: Check pwd
+        run: pwd
         
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
