@@ -1,5 +1,5 @@
 # issue-tracker
- 
+   
 ## 멤버 소개
    
 | ![제이든](https://ca.slack-edge.com/T74H5245A-U04G7GJ0P2L-bacfbaf4a8b0-512) | ![릴리](https://ca.slack-edge.com/T74H5245A-U04G792TR7S-523e48733e32-512) | ![루크](https://ca.slack-edge.com/T74H5245A-U04FWAZSZED-3482eadd3837-512) | ![포로](https://ca.slack-edge.com/T74H5245A-U04GE6HKBTJ-08f3100ac358-512) | ![우드](https://ca.slack-edge.com/T74H5245A-U04GHTGGCE4-339eb09b8d0d-512) | ![에피](https://ca.slack-edge.com/T74H5245A-U04FL9VKFDJ-b8cf1a0a5454-512) |
