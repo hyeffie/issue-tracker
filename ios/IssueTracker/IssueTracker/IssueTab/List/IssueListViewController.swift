@@ -84,9 +84,12 @@ extension IssueListViewController {
 
 extension IssueListViewController {
    private func createSwipeActionProvider() -> UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider {
-      return { _ in
-         let delete = SwipeAction.delete.makeAction(hasImage: false, withHandler: { _, _, _ in })
-         let edit = SwipeAction.edit.makeAction(hasImage: false, withHandler: { _, _, _ in })
+      return { indexPath in
+         let delete = SwipeAction.delete.makeAction(hasImage: true, withHandler: { [weak self] _, _, _ in
+            guard let issueId = self?.list.getIssueId(of: indexPath.item) else { return }
+            self?.networkManager?.deleteIssue(id: issueId, completion: { self?.list.deleteIssue(id: issueId) })
+         })
+         let edit = SwipeAction.edit.makeAction(hasImage: true, withHandler: { _, _, _ in })
          let config = UISwipeActionsConfiguration(actions: [delete, edit])
          config.performsFirstActionWithFullSwipe = false
          return config
@@ -207,8 +210,12 @@ extension IssueListViewController {
          object: list, queue: .main,
          using: { [weak self] _ in
             self?.hasNextPage = false
-            self?.applyUpdatedSnapshot()
-         }))
+            self?.applyUpdatedSnapshot() }))
+      
+      self.observers.append(NotificationCenter.default.addObserver(
+         forName: IssueList.Notifications.didDeleteIssue,
+         object: list, queue: .main,
+         using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
    }
 }
 
