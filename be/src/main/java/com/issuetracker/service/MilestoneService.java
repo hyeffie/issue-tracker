@@ -44,11 +44,11 @@ public class MilestoneService {
     }
 
     public void createMilestone(MilestoneDto milestoneDto) {
-        milestoneRepository.save(Milestone.createAutoIncrementedMilestone(milestoneDto.getName(), milestoneDto.getDescription(), milestoneDto.getCompletedAt()));
+        milestoneRepository.save(Milestone.ofCreated(milestoneDto.getName(), milestoneDto.getDescription(), milestoneDto.getCompletedAt()));
     }
 
     public void updateMilestone(int milestoneId, MilestoneDto milestoneDto) {
-        milestoneRepository.save(Milestone.createUpdateMilestone(milestoneId, milestoneDto.getName(), milestoneDto.getDescription(), milestoneDto.getCompletedAt()));
+        milestoneRepository.save(Milestone.ofUpdated(milestoneId, milestoneDto.getName(), milestoneDto.getDescription(), milestoneDto.getCompletedAt()));
     }
 
     public void deleteMilestone(int milestoneId) {

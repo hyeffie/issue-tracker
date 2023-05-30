@@ -1,21 +1,15 @@
 package com.issuetracker.dto.issue;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class IssueMilestone {
-    @Id
-    @Column("id")
     private int milestoneId;
-    @Column("name")
     private String milestoneName;
-    @Column("countAllIssues")
-    private int countAllIssues;
-    @Column("countAllClosedIssues")
-    private int countAllClosedIssues;
+    private long countAllIssues;
+    private long countAllClosedIssues;
     private int progress;
 
     public int getProgress() {
@@ -24,6 +18,6 @@ public class IssueMilestone {
             return 0;
         }
 
-        return 100 * countAllClosedIssues / countAllIssues;
+        return (int)(100 * countAllClosedIssues / countAllIssues);
     }
 }

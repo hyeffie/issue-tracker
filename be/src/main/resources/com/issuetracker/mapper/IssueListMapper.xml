@@ -2,43 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.issuetracker.mapper.IssueListMapper">
-    <select id="findIssueList" resultMap="issueList" parameterType="com.issuetracker.dto.issueList.Filter">
-        <bind name="pattern" value="'%' + (search != null ? search : '') + '%'" />
-        SELECT i.id AS issueId
+    <select id="findIssueList" resultMap="issueList" parameterType="java.lang.Long">
+        SELECT i.id AS issueId, i.title AS title, i.content AS content, u.login_id AS userName,
+        u.profile_url AS profileUrl, i.opened AS opened, i.created_at AS createdAt, i.closed_at AS closedAt
+        , m.name AS milestoneName, l.id AS labelId, l.name AS labelName, l.background_color AS backgroundColor, l.font_color AS fontColor
         FROM issue i
         LEFT OUTER JOIN issue_label il ON i.id = il.issue_id
-        LEFT OUTER JOIN (SELECT * from label WHERE deleted IS FALSE) l ON l.id = il.label_id
+        LEFT OUTER JOIN label l ON l.id = il.label_id
         LEFT OUTER JOIN assignee a ON a.issue_id = i.id
         JOIN user u ON u.id =  i.user_id
-        LEFT OUTER JOIN (SELECT * from milestone WHERE deleted IS FALSE) m ON m.id = i.milestone_id
-        <where>
-            i.deleted_at IS NULL AND i.opened = #{openStatus}
-            <if test="label != null and label.size() > 0">
-                <foreach item="labelId" collection="label">
-                    AND l.id = #{labelId}
-                </foreach>
-            </if>
-            <if test="assignee != null and assignee.size() > 0">
-                <foreach item="assigneeId" collection="assignee">
-                    AND a.user_id = #{assigneeId}
-                </foreach>
-            </if>
-            <if test="milestone != null">
-                AND m.id = #{milestone}
-            </if>
-            <if test="writer != null">
-                AND i.user_id = #{writer}
-            </if>
-            <if test="search != null">
-                AND i.title LIKE #{pattern}
-            </if>
-            GROUP BY i.id
-            ORDER BY i.id DESC
-            LIMIT 10
-            <if test="pageNum != null">
-                OFFSET #{offset}
-            </if>
-        </where>
+        LEFT OUTER JOIN milestone m ON m.id = i.milestone_id
+        WHERE i.id IN
+        <foreach item="item" collection="filteredIssueIdList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY i.id DESC
     </select>
 
     <resultMap type="com.issuetracker.domain.IssueListPage" id="issueList">

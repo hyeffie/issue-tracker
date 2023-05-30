@@ -1,39 +1,57 @@
 package com.issuetracker.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
-
-import lombok.Getter;
-
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
+import lombok.Builder;
+import lombok.Getter;
+
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Builder
 @Table("milestone")
 public class Milestone {
     @Id
     private Integer id;
     private String name;
     private String description;
-    @Column("completed_at")
     private LocalDateTime completedAt;
     private boolean opened;
     private boolean deleted;
 
-    public static Milestone createAutoIncrementedMilestone(String name, String description, LocalDateTime completedAt) {
-        return new Milestone(null, name, description, completedAt, true, false);
+    public static Milestone ofCreated(String name, String description, LocalDateTime completedAt) {
+        return new MilestoneBuilder()
+                .name(name)
+                .description(description)
+                .completedAt(completedAt)
+                .opened(true)
+                .deleted(false)
+                .build();
     }
 
-    public static Milestone createUpdateMilestone(Integer id, String name, String description, LocalDateTime completedAt) {
-        return new Milestone(id, name, description, completedAt, true, false);
+    public static Milestone ofUpdated(Integer id, String name, String description,
+            LocalDateTime completedAt) {
+        return new MilestoneBuilder()
+                .id(id)
+                .name(name)
+                .description(description)
+                .completedAt(completedAt)
+                .opened(true)
+                .deleted(false)
+                .build();
     }
 
-    public static Milestone ofDeleted(Integer id, String name, String description, LocalDateTime completedAt, boolean opened) {
-        return new Milestone(id, name, description, completedAt, opened, true);
+    public static Milestone ofDeleted(Integer id, String name, String description, LocalDateTime completedAt,
+            boolean opened) {
+        return new MilestoneBuilder()
+                .id(id)
+                .name(name)
+                .description(description)
+                .completedAt(completedAt)
+                .opened(opened)
+                .deleted(true)
+                .build();
     }
 }
 

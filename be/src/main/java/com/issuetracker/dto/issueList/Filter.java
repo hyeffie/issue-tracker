@@ -30,7 +30,7 @@ public class Filter {
 
     public int getOffset() {
         if (pageNum != null) {
-            return pageNum * 10;
+            return (pageNum - 1) * 10;
         }
         return 0;
     }

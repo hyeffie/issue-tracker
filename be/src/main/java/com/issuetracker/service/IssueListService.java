@@ -1,13 +1,6 @@
 package com.issuetracker.service;
 
-import static com.issuetracker.mapper.FilterListMapper.*;
-import static com.issuetracker.mapper.IssueListDtoMapper.*;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -16,18 +9,26 @@ import com.issuetracker.dto.issueList.Filter;
 import com.issuetracker.dto.issueList.FilterLabelDto;
 import com.issuetracker.dto.issueList.FilterMilestoneDto;
 import com.issuetracker.dto.issueList.FilterUserDto;
-import com.issuetracker.dto.issueList.IssueDto;
 import com.issuetracker.dto.issueList.IssueListDto;
+import com.issuetracker.mapper.FilterListMapper;
+import com.issuetracker.mapper.IssueIdListMapper;
 import com.issuetracker.mapper.IssueListMapper;
-import com.issuetracker.repository.IssueListRepository;
+import com.issuetracker.repository.IssueRepository;
+import com.issuetracker.repository.LabelRepository;
+import com.issuetracker.repository.MilestoneRepository;
+import com.issuetracker.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class IssueListService {
-    private final IssueListRepository issueListRepository;
+    private final IssueRepository issueRepository;
     private final IssueListMapper issueListMapper;
+    private final IssueIdListMapper issueIdListMapper;
+    private final UserRepository userRepository;
+    private final LabelRepository labelRepository;
+    private final MilestoneRepository milestoneRepository;
 
     /**
      * 이슈 목록을 가져온 후 API의 형식에 맞춰서 mapping한 후, filter 목록 데이터 DTO와 함께 조립합니다.
@@ -36,33 +37,20 @@ public class IssueListService {
      */
     public IssueListDto fetchMain(Filter filterDto) {
 
-        List<IssueListPage> filteredIssueList = issueListMapper.findIssueList(filterDto);
+        List<Long> filteredIssueIdList = issueIdListMapper.findIssueIdList(filterDto);
+        List<IssueListPage> issueMainPageDtoList = issueListMapper.findIssueList(filteredIssueIdList);
+        System.out.println(filteredIssueIdList);
 
-        List<IssueListPage> issueMainPageDtoList = new ArrayList<>();
+        List<FilterLabelDto> filterLabelDtoList = FilterListMapper.getFilterLabelDtos(
+                labelRepository.getFilterLabelList());
+        List<FilterMilestoneDto> filterMilestoneList = FilterListMapper.getFilterMilestoneDtos(
+                milestoneRepository.getFilterMilestoneList());
+        List<FilterUserDto> filterUserList = FilterListMapper.getFilterUserDtos(userRepository.getFilterUserList());
 
-        for (IssueListPage issueListPage : filteredIssueList) {
-            issueListRepository.getIssues(issueListPage.getId()).forEach(e -> issueMainPageDtoList.add(e));
-        }
+        long closedIssues = issueRepository.getTotalClosedIssueCount();
 
-        Map<Long, IssueDto> issueDtoMap = new LinkedHashMap<>();
-        for (IssueListPage issueListPage : issueMainPageDtoList) {
-            if (issueDtoMap.containsKey(issueListPage.getId())) {
-                addIssueLabelDto(issueDtoMap, issueListPage);
-            } else {
-                addIssueDto(issueDtoMap, issueListPage);
-                addIssueLabelDto(issueDtoMap, issueListPage);
-            }
-        }
-        List<IssueDto> issueDtoList = issueDtoMap.values().stream().collect(Collectors.toList());
-
-        List<FilterLabelDto> filterLabelDtoList = getFilterLabelDtos(issueListRepository.getFilterLabelList());
-        List<FilterMilestoneDto> filterMilestoneList = getFilterMilestoneDtos(issueListRepository.getFilterMilestoneList());
-        List<FilterUserDto> filterUserList = getFilterUserDtos(issueListRepository.getFilterUserList());
-
-        long openedIssues = issueDtoList.stream().filter(issueDto -> issueDto.isOpen()).count();
-        long closedIssues = issueListRepository.getTotalClosedIssueCount();
-        return new IssueListDto(issueDtoList, filterUserList, filterLabelDtoList, filterMilestoneList,
-                filterLabelDtoList.size(), filterMilestoneList.size(), openedIssues, closedIssues);
+        return IssueListDto.of(issueMainPageDtoList, filterUserList, filterLabelDtoList, filterMilestoneList,
+                closedIssues);
     }
 
 }
