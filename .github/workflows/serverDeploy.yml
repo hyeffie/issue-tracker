@@ -38,12 +38,15 @@ jobs:
         run: echo "${{ secrets.DI_FROM_SECRET }}" > ./be/src/main/resources/application.yaml
         shell: bash
         
-      - name: Build with Gradle
-        run: cd ./be
-              ls
-            ./gradlew build -x test
+      - name: Change Directory
+        run: cd be
         shell: bash
-       
+      - name: Build with Gradle
+        run: ./gradlew build -x test
+        shell: bash
+      - name: Change Undo Directory
+        run: cd ..
+        shell: bash
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip .
         shell: bash
