@@ -65,7 +65,7 @@ class IssueListCollectionViewCell: UICollectionViewCell {
          return
       }
       
-      for label in issue.labelList {
+      for label in issue.labelList.reversed() {
          addLabel(name: label.labelName, color: label.backgroundColor)
       }
       labelStackView.sizeToFit()
