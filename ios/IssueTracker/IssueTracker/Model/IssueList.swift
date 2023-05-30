@@ -72,6 +72,7 @@ extension IssueList {
       static let didCloseIssue = Notification.Name("didCloseIssue")
       static let didAddFilteredIssues = Notification.Name(rawValue: "didAddFilteredIssues")
       static let didEmptyIssue = Notification.Name(rawValue: "didEmptyIssue")
+      static let didDeleteIssue = Notification.Name(rawValue: "didDeleteIssue")
    }
    
    enum Keys {
@@ -141,5 +142,26 @@ extension IssueList {
    
    func deleteIssue(at index: Int) {
       self.delete(at: index)
+   }
+}
+
+extension IssueList {
+   func getIssueId(of index: Int) -> Int? {
+      guard index < issues.count else { return nil }
+      return issues[index].issueId
+   }
+   
+   private func getIndexOfIssue(withId id: Int) -> Int? {
+      self.issues.firstIndex(where: { issue in issue.issueId == id })
+   }
+   
+   private func remove(at index: Int) {
+      self.issues.remove(at: index)
+      NotificationCenter.default.post(name: Notifications.didDeleteIssue, object: self)
+   }
+   
+   func deleteIssue(id: Int) {
+      guard let index = self.getIndexOfIssue(withId: id) else { return }
+      self.remove(at: index)
    }
 }

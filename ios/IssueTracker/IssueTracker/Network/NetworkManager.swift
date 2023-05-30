@@ -252,6 +252,18 @@ extension NetworkManager {
       }
    }
    
+   func deleteIssue(id: Int, completion: @escaping () -> Void) {
+      let urlString = baseURL + "/issues" + "/\(id)"
+      deleteData(for: urlString) { (result: Result<Data?, Error>) in
+         switch result {
+         case .success:
+            completion()
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+   
    func requestLabelList(completion: @escaping (LabelListDTO) -> Void) {
       let labelListURL = baseURL + "/labels"
       
