@@ -200,13 +200,28 @@ final class NetworkManager {
       dataTask.resume()
    }
    
-   // MARK: - Util
-   
-   func requestIssueList(filterList: FilterApplyList? = nil, pageNumber: Int? = nil, completion: @escaping (IssueListDTO) -> Void) {
+}
+
+// MARK: - Util
+
+extension NetworkManager {
+   func requestIssueList(
+      searchQuery: String? = nil,
+      filterList: FilterApplyList? = nil,
+      pageNumber: Int? = nil,
+      completion: @escaping (IssueListDTO) -> Void
+   ) {
       let issueListURL = baseURL + "/issues"
       
       var query: RequestParameters = [:]
-      if let filters = filterList?.makeQuery() { filters.forEach { filter in query.updateValue(filter.value, forKey: filter.key) } }
+      if let filters = filterList?.makeQuery() {
+         filters.forEach { filter in query.updateValue(filter.value, forKey: filter.key) }
+      }
+      
+      if let searchQuery {
+         query.updateValue(searchQuery, forKey: "search")
+      }
+      
       if let pageNumber {
          query.updateValue("\(Self.defaultPagingOffSet)", forKey: "offset")
          query.updateValue("\(pageNumber)", forKey: "pageNum")

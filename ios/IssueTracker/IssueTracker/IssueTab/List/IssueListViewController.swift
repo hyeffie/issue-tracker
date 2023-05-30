@@ -19,6 +19,8 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    private var list: IssueList = IssueList()
    private var filterList = IssueFilterList()
    private var filterApplyList: FilterApplyList? = nil
+   private var searchQuery: String? = nil
+   
    private var selectToolbar: SelectToolBar?
    
    var currentPageNumber: Int = 0
@@ -217,6 +219,7 @@ extension IssueListViewController {
       guard hasNextPage else { return }
       isPaging = true
       networkManager?.requestIssueList(
+         searchQuery: self.searchQuery,
          filterList: filterApplyList,
          pageNumber: currentPageNumber) { [weak self] dto in
             cellCompletion?()
@@ -295,6 +298,15 @@ extension IssueListViewController {
       var searchController = UISearchController()
       searchController.searchBar.placeholder = "이슈 제목으로 검색"
       navigationItem.searchController = searchController
+      navigationItem.searchController?.searchBar.delegate = self
+   }
+}
+
+extension IssueListViewController: UISearchBarDelegate {
+   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+      self.searchQuery = searchText
+      self.reset()
+      self.fetchIssues()
    }
 }
 
