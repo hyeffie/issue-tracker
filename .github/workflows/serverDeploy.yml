@@ -39,6 +39,16 @@ jobs:
       - name: Build with Gradle
         run: ./be/gradlew build
         shell: bash
+       
+      - name: make application.properties
+        run:
+          mkdir ./be/src/main/resources | 
+          touch ./be/src/main/resources/application.yaml
+        shell: bash
+        
+      - name: deliver application.properties
+        run: echo "${{ secrets.DI_FROM_SECRET }}" > ./be/src/main/resources/application.yaml
+        shell: bash
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip .
         shell: bash
