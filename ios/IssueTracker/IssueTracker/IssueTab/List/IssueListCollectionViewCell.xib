@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,23 +64,18 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uuh-kf-CLw">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dyV-HA-oXT">
                                 <rect key="frame" x="0.0" y="92" width="615" height="24"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dyV-HA-oXT">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mao-sz-PeT">
                                         <rect key="frame" x="0.0" y="0.0" width="615" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="GeG-PP-kVI"/>
-                                        </constraints>
-                                    </stackView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="dyV-HA-oXT" firstAttribute="top" secondItem="Uuh-kf-CLw" secondAttribute="top" id="REp-FS-OJ8"/>
-                                    <constraint firstItem="dyV-HA-oXT" firstAttribute="leading" secondItem="Uuh-kf-CLw" secondAttribute="leading" id="gGN-Ty-jzK"/>
-                                    <constraint firstAttribute="bottom" secondItem="dyV-HA-oXT" secondAttribute="bottom" id="szN-FZ-x4f"/>
-                                    <constraint firstAttribute="trailing" secondItem="dyV-HA-oXT" secondAttribute="trailing" priority="250" id="xn9-la-G5B"/>
+                                    <constraint firstAttribute="height" constant="24" id="GeG-PP-kVI"/>
                                 </constraints>
-                            </view>
+                            </stackView>
                         </subviews>
                     </stackView>
                 </subviews>
@@ -95,7 +91,6 @@
             <connections>
                 <outlet property="checkBoxImageView" destination="k11-4I-sMu" id="oKp-AC-9Jh"/>
                 <outlet property="descriptionLabel" destination="XvL-EA-VVf" id="Ymn-pc-caw"/>
-                <outlet property="labelStackContainer" destination="Uuh-kf-CLw" id="rEu-5P-fWP"/>
                 <outlet property="labelStackView" destination="dyV-HA-oXT" id="gDG-qO-tJL"/>
                 <outlet property="milestoneLabel" destination="9CR-Vp-wLF" id="NNp-8o-Vfb"/>
                 <outlet property="titleLabel" destination="exc-QW-s87" id="AyX-53-RFb"/>
@@ -109,5 +104,8 @@
         <namedColor name="gray700">
             <color red="0.54117647058823526" green="0.54117647058823526" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
