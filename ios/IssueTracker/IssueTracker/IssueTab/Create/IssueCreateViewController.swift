@@ -34,6 +34,9 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       setFont()
    }
    
+   @IBAction func selectAssigneeSection(_ sender: Any) {
+   }
+   
    private func setNavigationItem() {
       self.navigationItem.largeTitleDisplayMode = .never
       let segmentedControl = UISegmentedControl(items: ["마크다운", "미리보기"])
