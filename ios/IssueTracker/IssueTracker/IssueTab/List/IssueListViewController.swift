@@ -97,7 +97,7 @@ extension IssueListViewController {
    }
 }
 
-// MARK: - CollectionView Data Source
+// MARK: - CollectionView DataSource
 
 extension IssueListViewController {
    typealias SectionType = Section
@@ -167,6 +167,8 @@ extension IssueListViewController {
       dataSource?.apply(snapshot, animatingDifferences: animated)
    }
 }
+
+// MARK: - CollectionView Delegate
 
 extension IssueListViewController: UICollectionViewDelegate {
    func collectionView(
@@ -302,24 +304,31 @@ extension IssueListViewController {
 extension IssueListViewController {
    private func setSearchBar() {
       guard navigationItem.searchController == nil else { return }
-      var searchController = UISearchController()
+      let searchController = UISearchController()
       searchController.searchBar.placeholder = "이슈 제목으로 검색"
       navigationItem.searchController = searchController
       navigationItem.searchController?.searchBar.delegate = self
+   }
+   
+   private func search(text: String?) {
+      self.searchQuery = text
+      self.reset()
+      self.fetchIssues()
    }
 }
 
 extension IssueListViewController: UISearchBarDelegate {
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-      self.searchQuery = searchText
-      self.reset()
-      self.fetchIssues()
+      search(text: searchText)
    }
    
-   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-      self.searchQuery = nil
-      self.reset()
-      self.fetchIssues()
+   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+      self.resignFirstResponder()
+      search(text: searchBar.text)
+   }
+   
+   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+      search(text: nil)
    }
 }
 
