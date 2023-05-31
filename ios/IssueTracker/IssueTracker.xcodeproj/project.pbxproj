@@ -39,6 +39,7 @@
 		F415D2882A202F8B00712189 /* UITextField+font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F415D2872A202F8B00712189 /* UITextField+font.swift */; };
 		F43B37472A1F870F00EEB7C5 /* LabelEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F43B37462A1F870F00EEB7C5 /* LabelEditViewController.storyboard */; };
 		F43B37492A1F8AA000EEB7C5 /* LabelEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B37482A1F8AA000EEB7C5 /* LabelEditViewController.swift */; };
+		F45FA3E02A27FED10041247D /* IssueDetailPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FA3DF2A27FED10041247D /* IssueDetailPostDTO.swift */; };
 		F47681B12A248DD100C4FFA5 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = F47681B02A248DD100C4FFA5 /* OrderedCollections */; };
 		F47681B32A24F0A200C4FFA5 /* LabelDetailPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47681B22A24F0A200C4FFA5 /* LabelDetailPostDTO.swift */; };
 		F48583AC2A10E1FC00322C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48583AB2A10E1FC00322C9F /* TabBarController.swift */; };
@@ -113,6 +114,7 @@
 		F415D2872A202F8B00712189 /* UITextField+font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+font.swift"; sourceTree = "<group>"; };
 		F43B37462A1F870F00EEB7C5 /* LabelEditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LabelEditViewController.storyboard; sourceTree = "<group>"; };
 		F43B37482A1F8AA000EEB7C5 /* LabelEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelEditViewController.swift; sourceTree = "<group>"; };
+		F45FA3DF2A27FED10041247D /* IssueDetailPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailPostDTO.swift; sourceTree = "<group>"; };
 		F47681B22A24F0A200C4FFA5 /* LabelDetailPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDetailPostDTO.swift; sourceTree = "<group>"; };
 		F48583AB2A10E1FC00322C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F48583C32A13802E00322C9F /* URLSessionDataTaskInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskInterface.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				F4A28CF12A1F56FB0091A940 /* LabelListDTO.swift */,
 				F4A28CF72A1F77B20091A940 /* MilestoneListDTO.swift */,
 				F47681B22A24F0A200C4FFA5 /* LabelDetailPostDTO.swift */,
+				F45FA3DF2A27FED10041247D /* IssueDetailPostDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				F4DBD6282A2787DB0034D090 /* ItemPickerViewController.swift in Sources */,
 				F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */,
 				F4DBD61F2A26F19D0034D090 /* IssueCreateViewController.swift in Sources */,
+				F45FA3E02A27FED10041247D /* IssueDetailPostDTO.swift in Sources */,
 				F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */,
 				F4A28CDA2A1E3D460091A940 /* LabelListViewController.swift in Sources */,
 				F48583CB2A13802E00322C9F /* MockResponse.swift in Sources */,
