@@ -24,8 +24,7 @@ public class IssueListDto {
     private long countClosedIssues;
 
     public static IssueListDto of(List<IssueListPage> issueMainPageDtoList, List<FilterUserDto> filterUserDtoList,
-            List<FilterLabelDto> filterLabelDtoList, List<FilterMilestoneDto> filterMilestoneDtoList,
-            long countClosedIssues) {
+            List<FilterLabelDto> filterLabelDtoList, List<FilterMilestoneDto> filterMilestoneDtoList, long countOpenedIssues, long countClosedIssues) {
 
         Map<Long, IssueDto> issueDtoMap = new LinkedHashMap<>();
         for (IssueListPage issueListPage : issueMainPageDtoList) {
@@ -37,7 +36,6 @@ public class IssueListDto {
             }
         }
         List<IssueDto> issueDtoList = issueDtoMap.values().stream().collect(Collectors.toList());
-        long countOpenedIssues = issueDtoList.stream().filter(issueDto -> issueDto.isOpen()).count();
 
         return IssueListDto.builder()
                 .issues(issueDtoList)

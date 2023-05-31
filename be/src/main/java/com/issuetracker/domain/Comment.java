@@ -38,7 +38,7 @@ public class Comment {
                 .id(id)
                 .userId(unmodifiedComment.getUserId())
                 .issueId(issueId)
-                .content(unmodifiedComment.getContent())
+                .content(commentPostDto.getContent())
                 .createdAt(unmodifiedComment.getCreatedAt())
                 .updatedAt(LocalDateTime.now())
                 .build();
