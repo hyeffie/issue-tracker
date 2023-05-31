@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -118,7 +119,15 @@ public class IssueService {
                         labelDto -> issueLabelRepository.save(IssueLabel.attach(issue.getId(), labelDto.getLabelId())));
     }
 
-    public void modifyIssue(IssuePostDto issuePostDto, long id) {
+    public void modifyIssueTitle(String title, long id) {
+        issueRepository.updateIssueTitle(id, title);
+    }
+
+    public void modifyIssueContent(String content, long id) {
+        issueRepository.updateIssueContent(id, content);
+    }
+
+    public void modifyIssueContent(IssuePostDto issuePostDto, long id) {
         Issue issueUnmodified = issueRepository.findById(id).get();
         Issue issue = issueRepository.save(Issue.ofUpdated(issuePostDto, issueUnmodified, id));
         //Label, Assignee 삭제 후 다시 추가
@@ -131,6 +140,23 @@ public class IssueService {
                 .stream()
                 .forEach(
                         labelDto -> issueLabelRepository.save(IssueLabel.attach(issue.getId(), labelDto.getLabelId())));
+    }
+
+    public void modifyMilestoneOnIssue(int milestoneId, long id) {
+        issueRepository.updateIssueMilestone(id, milestoneId);
+    }
+
+    public void modifyAssigneesOnIssue(long id, List<Long> userIdList) {
+        assigneeRepository.findByIssueId(id).forEach(assigneeId -> assigneeRepository.deleteById((assigneeId)));
+        userIdList.stream()
+                .forEach(assigneeId -> assigneeRepository.save(Assignee.assign(id, assigneeId)));
+    }
+
+    public void modifyLabelsOnIssue(long id, List<Integer> labelIdList) {
+        issueLabelRepository.findByIssueId(id).forEach(issueLabelId -> issueLabelRepository.deleteById(issueLabelId));
+
+        labelIdList.stream()
+                .forEach(labelId -> issueLabelRepository.save(IssueLabel.attach(id, labelId)));
     }
 
     public void deleteIssue(long id) {
@@ -154,8 +180,7 @@ public class IssueService {
                 issueRepository.openIssueById(e.getIssueId());
                 log.info("open");
                 openCount++;
-            }
-            else if (e.getIsOpen() != null && !e.getIsOpen()) {
+            } else if (e.getIsOpen() != null && !e.getIsOpen()) {
                 issueRepository.closeIssueById(e.getIssueId(), LocalDateTime.now());
                 log.info("close");
                 closeCount++;

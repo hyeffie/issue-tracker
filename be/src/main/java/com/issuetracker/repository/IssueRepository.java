@@ -53,6 +53,18 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
     @Query("UPDATE issue SET opened=0, closed_at=:now WHERE id=:issueId AND opened=1")
     void closeIssueById(long issueId, LocalDateTime now);
 
+    @Modifying
+    @Query("UPDATE issue SET title=:title WHERE id=:issueId")
+    void updateIssueTitle(long issueId, String title);
+
+    @Modifying
+    @Query("UPDATE issue SET content=:content WHERE id=:issueId")
+    void updateIssueContent(long issueId, String content);
+
+    @Modifying
+    @Query("UPDATE issue SET milestone_id=:milestoneId WHERE id=:issueId")
+    void updateIssueMilestone(long issueId, int milestoneId);
+
     /**
      * 닫혀있는 특정 이슈를 엽니다.
      * @param issueId
