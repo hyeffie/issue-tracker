@@ -41,6 +41,11 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
       fetchIssues()
    }
    
+   override func viewDidAppear(_ animated: Bool) {
+      super.viewDidAppear(animated)
+      self.tabBarController?.tabBar.isHidden = false
+   }
+   
    private func setNetworkManager() {
       networkManager = NetworkManager(session: URLSession.shared)
    }
