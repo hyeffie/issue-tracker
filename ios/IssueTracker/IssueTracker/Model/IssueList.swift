@@ -114,11 +114,6 @@ extension IssueList {
    func emptyList() {
       self.empty()
    }
-   
-   func findIssue(id: Int) -> Int {
-      return self.issues.first(where: { $0.issueId == id })?.issueId ?? 0
-   }
-
 }
 
 extension IssueList {
@@ -147,6 +142,10 @@ extension IssueList {
    
    func deleteIssue(at index: Int) {
       self.delete(at: index)
+   }
+   
+   func findIssue(row: Int) -> Int {
+      return self.issue(at: row)?.issueId ?? 0
    }
 }
 

@@ -15,7 +15,7 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    
    private let filterListID = "FilterList"
    
-   private var list: IssueList = IssueList()
+   var list: IssueList = IssueList()
    private var filterList = IssueFilterList()
 
    private var filterApplyList: FilterApplyList? = nil
@@ -260,9 +260,7 @@ extension IssueListViewController {
       
       self.selectToolbar?.configureItems()
       cell.didSelect()
-      self.selectedIssues.add(issue: IssuePatchDTO.Issue(issueId: list.findIssue(id: indexPath.row)))
-
-
+      self.selectedIssues.add(issue: IssuePatchDTO.Issue(issueId: list.findIssue(row: indexPath.row)))
    }
    
    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
