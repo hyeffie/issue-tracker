@@ -47,10 +47,11 @@ public class IssueListService {
                 milestoneRepository.getFilterMilestoneList());
         List<FilterUserDto> filterUserList = FilterListMapper.getFilterUserDtos(userRepository.getFilterUserList());
 
+        long openedIssues = issueRepository.getTotalOpendIssueCount();
         long closedIssues = issueRepository.getTotalClosedIssueCount();
 
         return IssueListDto.of(issueMainPageDtoList, filterUserList, filterLabelDtoList, filterMilestoneList,
-                closedIssues);
+                openedIssues, closedIssues);
     }
 
 }

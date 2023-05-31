@@ -66,4 +66,10 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
      */
     @Query("SELECT count(id) FROM issue WHERE deleted_at IS NULL AND opened IS FALSE")
     long getTotalClosedIssueCount();
+
+    /**
+     * 열려 있는 이슈의 총 개수를 조회합니다.
+     */
+    @Query("SELECT count(id) FROM issue WHERE deleted_at IS NULL AND opened IS TRUE")
+    long getTotalOpendIssueCount();
 }
