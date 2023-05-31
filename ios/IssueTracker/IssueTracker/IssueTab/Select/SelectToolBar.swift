@@ -30,4 +30,14 @@ class SelectToolBar: UIToolbar {
       }
       self.checkBoxItem.image = UIImage(systemName: "checkmark.circle.fill")
    }
+   
+   
+   @IBAction func closeAll(_ sender: Any) {
+      NotificationCenter.default.post(name: Notifications.didCloseSelectedIssues,
+                                      object: nil)
+   }
+   
+   enum Notifications {
+      static let didCloseSelectedIssues = Notification.Name(rawValue: "didCloseSelectedIssues")
+   }
 }

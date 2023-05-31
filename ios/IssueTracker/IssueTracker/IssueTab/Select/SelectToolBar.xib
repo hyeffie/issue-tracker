@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectToolBar" customModule="IssueTracker" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="xN8-La-tvb" customClass="SelectToolBar" customModule="IssueTracker" customModuleProvider="target">
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" tag="100" contentMode="scaleToFill" translucent="NO" id="xN8-La-tvb" customClass="SelectToolBar" customModule="IssueTracker" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <items>
@@ -16,7 +16,11 @@
                 <barButtonItem width="302" style="plain" id="3pE-Ux-dFh">
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </barButtonItem>
-                <barButtonItem image="archivebox" catalog="system" id="5dO-IC-roA"/>
+                <barButtonItem image="archivebox" catalog="system" id="5dO-IC-roA">
+                    <connections>
+                        <action selector="closeAll:" destination="-1" id="lrB-fA-4CV"/>
+                    </connections>
+                </barButtonItem>
             </items>
             <connections>
                 <outlet property="checkBoxItem" destination="V6f-8x-WI9" id="cit-Ra-gz3"/>
