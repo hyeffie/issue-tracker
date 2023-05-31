@@ -38,7 +38,6 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
       addObservers()
       setFilterButton()
       setSelectButton()
-      
       fetchIssues()
    }
    
@@ -69,6 +68,7 @@ extension IssueListViewController {
       ])
       
       collectionView.delegate = self
+      collectionView.keyboardDismissMode = .onDrag
    }
    
    private func setCollectionViewLayout() -> UICollectionViewCompositionalLayout {
