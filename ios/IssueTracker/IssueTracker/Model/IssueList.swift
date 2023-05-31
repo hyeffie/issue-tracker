@@ -143,6 +143,10 @@ extension IssueList {
    func deleteIssue(at index: Int) {
       self.delete(at: index)
    }
+   
+   func findIssue(row: Int) -> Int {
+      return self.issue(at: row)?.issueId ?? 0
+   }
 }
 
 extension IssueList {

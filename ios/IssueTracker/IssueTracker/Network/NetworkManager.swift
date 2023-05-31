@@ -13,7 +13,7 @@ final class NetworkManager {
    static let dummyURLString = "https://example.com"
    static let defaultPagingOffSet = 10
    
-   private let baseURL = "http://43.200.199.205:8080/api"
+   private let baseURL = ServerAPI.baseURL
    
    private let session: URLSessionInterface
    
@@ -63,6 +63,7 @@ final class NetworkManager {
       guard let url else { return }
       var request = URLRequest(url: url)
       request.timeoutInterval = 15
+      print(request)
       
       let completionHandler = { @Sendable [weak self] (data: Data?, response: URLResponse?, error: Error?) in
          if let error {
@@ -211,7 +212,7 @@ extension NetworkManager {
       pageNumber: Int? = nil,
       completion: @escaping (IssueListDTO) -> Void
    ) {
-      let issueListURL = baseURL + "/issues"
+      let issueListURL = ServerAPI.issueURL
       
       var query: RequestParameters = [:]
       if let filters = filterList?.makeQuery() {
@@ -239,7 +240,7 @@ extension NetworkManager {
    }
    
    func requestIssueDetail(issueId: Int, completion: @escaping (IssueDetailDTO) -> Void) {
-      let issueDetailURL = baseURL + "/issues/\(issueId)"
+      let issueDetailURL = ServerAPI.issueURL + "\(issueId)"
       
       getData(for: issueDetailURL,
               dataType: IssueDetailDTO.self) { result in
@@ -253,7 +254,7 @@ extension NetworkManager {
    }
    
    func deleteIssue(id: Int, completion: @escaping () -> Void) {
-      let urlString = baseURL + "/issues" + "/\(id)"
+      let urlString = ServerAPI.issueURL + "/\(id)"
       deleteData(for: urlString) { (result: Result<Data?, Error>) in
          switch result {
          case .success:
@@ -265,7 +266,7 @@ extension NetworkManager {
    }
    
    func requestLabelList(completion: @escaping (LabelListDTO) -> Void) {
-      let labelListURL = baseURL + "/labels"
+      let labelListURL = ServerAPI.labelURL
       
       getData(for: labelListURL,
               dataType: LabelListDTO.self) { result in
@@ -279,7 +280,7 @@ extension NetworkManager {
    }
    
    func requestMilestoneList(completion: @escaping (MilestoneListDTO) -> Void) {
-      let url = baseURL + "/milestones"
+      let url = ServerAPI.milestoneURL
       
       getData(for: url, dataType: MilestoneListDTO.self) { result in
          switch result {
@@ -293,8 +294,20 @@ extension NetworkManager {
 }
 
 extension NetworkManager {
+   func patchIssue(_ issue: IssuePatchDTO, completion: @escaping () -> Void) {
+      let urlString = ServerAPI.issueURL
+      patchData(for: urlString, data: issue) { (result: Result<Data?, Error>) in
+         switch result {
+         case .success:
+            completion()
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+   
    func postNewLabel(_ newLabel: LabelDetailPostDTO, completion: @escaping () -> Void) {
-      let urlString = baseURL + "/labels"
+      let urlString = ServerAPI.labelURL
       postData(for: urlString, data: newLabel) { (result: Result<Data?, Error>) in
          switch result {
          case .success:
@@ -306,7 +319,7 @@ extension NetworkManager {
    }
    
    func patchLabel(id: Int, newDetail: LabelDetailPostDTO, completion: @escaping () -> Void) {
-      let urlString = baseURL + "/labels" + "/\(id)"
+      let urlString = ServerAPI.labelURL + "/\(id)"
       patchData(for: urlString, data: newDetail) { (result: Result<Data?, Error>) in
          switch result {
          case .success:
@@ -318,7 +331,7 @@ extension NetworkManager {
    }
    
    func deleteLabel(id: Int, completion: @escaping () -> Void) {
-      let urlString = baseURL + "/labels" + "/\(id)"
+      let urlString = ServerAPI.labelURL + "/\(id)"
       deleteData(for: urlString) { (result: Result<Data?, Error>) in
          switch result {
          case .success:

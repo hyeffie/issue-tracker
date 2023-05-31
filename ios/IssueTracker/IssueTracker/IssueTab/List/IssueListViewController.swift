@@ -15,18 +15,20 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    
    private let filterListID = "FilterList"
    
-   private var networkManager: NetworkManager?
-   private var list: IssueList = IssueList()
+   var list: IssueList = IssueList()
    private var filterList = IssueFilterList()
+
    private var filterApplyList: FilterApplyList? = nil
    private var searchQuery: String? = nil
-   
-   private var selectToolbar: SelectToolBar?
-   
+
+   var networkManager: NetworkManager?
+   var selectToolbar: SelectToolBar?
+   var selectedIssues = IssuePatchDTO()
    var currentPageNumber: Int = 1
    var isPaging = false
    var hasNextPage = true
    var isSelectMode = false
+   let toolbarTag: Int = 100
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -50,7 +52,7 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
       networkManager = NetworkManager(session: URLSession.shared)
    }
    
-   private func reset() {
+   func reset() {
       list.emptyList()
       currentPageNumber = 1
       hasNextPage = true
@@ -229,7 +231,7 @@ extension IssueListViewController {
 // MARK: - Request
 
 extension IssueListViewController {
-   private func fetchIssues(cellCompletion: (() -> Void)? = nil) {
+   func fetchIssues(cellCompletion: (() -> Void)? = nil) {
       guard hasNextPage else { return }
       isPaging = true
       networkManager?.requestIssueList(
@@ -265,6 +267,7 @@ extension IssueListViewController {
       
       self.selectToolbar?.configureItems()
       cell.didSelect()
+      self.selectedIssues.add(issue: IssuePatchDTO.Issue(issueId: list.findIssue(row: indexPath.row)))
    }
    
    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -274,6 +277,7 @@ extension IssueListViewController {
       
       self.selectToolbar?.configureItems(isSelected: false)
       cell.didDeSelect()
+      self.selectedIssues.remove(id: indexPath.row)
    }
 }
 
@@ -334,78 +338,5 @@ extension IssueListViewController: UISearchBarDelegate {
    
    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
       search(text: nil)
-   }
-}
-
-// MARK: - Select Mode
-
-extension IssueListViewController {
-   @objc func toggleSelectMode() {
-      isSelectMode = true
-      self.navigationItem.title = "이슈 선택"
-      self.navigationItem.leftBarButtonItem?.isHidden = true
-      self.navigationItem.rightBarButtonItem = createCancelButton()
-      self.collectionView.allowsMultipleSelection = true
-      configureTabBar(isHiding: true)
-      self.selectToolbar = createSelectToolBar()
-   }
-   
-   func createSelectToolBar() -> SelectToolBar? {
-      let nib = UINib(nibName: "SelectToolBar", bundle: nil)
-      guard let toolBar = nib.instantiate(withOwner: self, options: nil).first as? SelectToolBar else {
-         return nil
-      }
-      
-      toolBar.delegate = self
-      self.view.addSubview(toolBar)
-      toolBar.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-         toolBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-         toolBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-         toolBar.topAnchor.constraint(equalTo: (self.tabBarController?.tabBar.topAnchor)!),
-         toolBar.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-      ])
-      
-      return toolBar
-   }
-   
-   func createCancelButton() -> UIBarButtonItem {
-      return UIBarButtonItem(title: "취소",
-                             style: .plain,
-                             target: self,
-                             action: #selector(cancelSelectMode))
-   }
-   
-   @objc func cancelSelectMode() {
-      self.navigationItem.leftBarButtonItem?.isHidden = false
-      setSelectButton()
-      configureTabBar(isHiding: false)
-      deselectAllCells()
-      self.collectionView.allowsMultipleSelection = false
-      self.isSelectMode = false
-      self.navigationItem.title = "이슈"
-   }
-   
-   private func setSelectButton() {
-      let selectButton = UIBarButtonItem(
-         title: "선택",
-         style: .plain,
-         target: self,
-         action: #selector(toggleSelectMode))
-      self.navigationItem.rightBarButtonItems = [selectButton]
-   }
-   
-   func deselectAllCells() {
-      guard let indexPaths = collectionView.indexPathsForSelectedItems else {
-         return
-      }
-      
-      indexPaths.forEach {
-         guard let cell = collectionView.cellForItem(at: $0) as? IssueListCollectionViewCell else {
-            return
-         }
-         
-         cell.didDeSelect()
-      }
    }
 }
