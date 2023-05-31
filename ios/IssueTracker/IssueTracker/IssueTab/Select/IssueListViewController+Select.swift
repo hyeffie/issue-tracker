@@ -52,6 +52,10 @@ extension IssueListViewController {
       self.collectionView.allowsMultipleSelection = false
       self.isSelectMode = false
       self.navigationItem.title = "이슈"
+      
+      if let toolbar = self.view.viewWithTag(toolbarTag) {
+         toolbar.removeFromSuperview()
+      }
    }
    
    func setSelectButton() {

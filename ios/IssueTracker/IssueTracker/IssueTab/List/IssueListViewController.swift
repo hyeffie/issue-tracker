@@ -18,10 +18,12 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    private var networkManager: NetworkManager?
    private var list: IssueList = IssueList()
    private var filterList = IssueFilterList()
+
    private var filterApplyList: FilterApplyList? = nil
    private var searchQuery: String? = nil
 
    var selectToolbar: SelectToolBar?
+   var selectedIssues = IssuePatchDTO()
    var currentPageNumber: Int = 1
    var isPaging = false
    var hasNextPage = true
@@ -216,6 +218,20 @@ extension IssueListViewController {
          forName: IssueList.Notifications.didDeleteIssue,
          object: list, queue: .main,
          using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
+      
+      self.observers.append(NotificationCenter.default.addObserver(
+         forName: SelectToolBar.Notifications.didCloseSelectedIssues,
+         object: list,
+         queue: .main,
+         using: { [weak self] _ in
+            guard let selected = self?.selectedIssues else {
+               return
+            }
+            
+            self?.networkManager?.patchIssue(selected) {
+               self?.reset()
+               self?.fetchIssues()
+            }}))
    }
 }
 

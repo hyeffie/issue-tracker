@@ -293,6 +293,18 @@ extension NetworkManager {
 }
 
 extension NetworkManager {
+   func patchIssue(_ issue: IssuePatchDTO, completion: @escaping () -> Void) {
+      let urlString = baseURL + "/issues"
+      patchData(for: urlString, data: issue) { (result: Result<Data?, Error>) in
+         switch result {
+         case .success:
+            completion()
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+   
    func postNewLabel(_ newLabel: LabelDetailPostDTO, completion: @escaping () -> Void) {
       let urlString = baseURL + "/labels"
       postData(for: urlString, data: newLabel) { (result: Result<Data?, Error>) in
