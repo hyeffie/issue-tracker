@@ -23,6 +23,8 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    
    private var selectToolbar: SelectToolBar?
    
+   private var floatingActionButton: UIButton?
+   
    var currentPageNumber: Int = 1
    var isPaging = false
    var hasNextPage = true
@@ -38,6 +40,7 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
       addObservers()
       setFilterButton()
       setSelectButton()
+      addFloatingActionButton()
       fetchIssues()
    }
    
@@ -407,5 +410,39 @@ extension IssueListViewController {
          
          cell.didDeSelect()
       }
+   }
+}
+
+// MARK: - FAB Action
+
+extension IssueListViewController {
+   private func addFloatingActionButton() {
+      let fabSize: CGFloat = 56
+      let fab = UIButton()
+      view.addSubview(fab)
+      fab.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+         fab.widthAnchor.constraint(equalToConstant: fabSize),
+         fab.heightAnchor.constraint(equalToConstant: fabSize),
+         fab.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+         fab.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
+      ])
+      
+      fab.backgroundColor = Color.blue.color
+      let symbolConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+      let plusImage = UIImage(systemName: "plus")?.applyingSymbolConfiguration(symbolConfig)
+      fab.setImage(plusImage, for: .normal)
+      fab.tintColor = .white
+      fab.layer.cornerRadius = fabSize / 2
+      fab.clipsToBounds = true
+      
+      fab.addTarget(self,
+                    action: #selector(presentIssueAddViewController),
+                    for: .primaryActionTriggered)
+   }
+   
+   @objc func presentIssueAddViewController() {
+      let viewController = IssueCreateViewController.instantiate()
+      self.navigationController?.pushViewController(viewController, animated: true)
    }
 }
