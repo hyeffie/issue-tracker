@@ -43,4 +43,12 @@ class IssueDetailUseCase {
                                    userName: data.userName,
                                    editTime: time)
    }
+   
+   func sendComent(row: Int) -> IssueDetailDTO.Comment? {
+      guard let comment = self.detail?.commentList[row] else {
+         return nil
+      }
+      
+      return comment
+   }
 }

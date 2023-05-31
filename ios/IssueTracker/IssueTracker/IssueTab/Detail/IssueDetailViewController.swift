@@ -11,7 +11,6 @@ class IssueDetailViewController: UIViewController {
    @IBOutlet weak var collectionView: UICollectionView!
    var issueId: Int?
    var issueDetailUseCase = IssueDetailUseCase()
-   var lastTimeGenerator = LastTimeGenerator()
    var uiColorFactory = UIColorFactory()
    
    let headerId = "IssueDetailCollectionViewHeader"
@@ -87,7 +86,7 @@ extension IssueDetailViewController: UICollectionViewDataSource {
       
       let headerData = issueDetailUseCase.sendHeaderData()
       
-      let time = lastTimeGenerator.calculateLastTime(past: headerData.editTime)
+      let time = LastTimeGenerator.calculateLastTime(past: headerData.editTime)
       header.editTime.text = "\(time) 전, \(headerData.userName)님이 작성했습니다."
       header.title.text = headerData.title
       header.number.text = "#\(headerData.number)"
@@ -120,14 +119,15 @@ extension IssueDetailViewController: UICollectionViewDataSource {
          for: indexPath
       ) as? CommentCell else { return UICollectionViewCell() }
 
-      // TODO: use case ?
-      let comment = IssueDetailDTO.Comment(
-         commentId: 0,
-         userId: 1, userName: "Chole", profileUrl: "",
-         content: content,
-         createdAt: "5분전", updateAt: "")
-      cell.configure(comment: comment)
+      guard let comment = issueDetailUseCase.sendComent(row: indexPath.row) else {
+         return cell
+      }
       
+      guard let id = issueId else {
+         return cell
+      }
+      
+      cell.configure(writerId: id, comment: comment)
       return cell
    }
 }

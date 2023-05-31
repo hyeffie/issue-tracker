@@ -45,10 +45,10 @@ class CommentCell: UICollectionViewCell {
       configureFont()
    }
    
-   func configure(comment: IssueDetailDTO.Comment) {
+   func configure(writerId: Int, comment: IssueDetailDTO.Comment) {
       commenterNameLabel.text = comment.userName
-      timeLabel.text = "5분전" // TODO: 댓글 시간 로직
-      timeLabel.text = comment.content
-      writerBadge.isHidden = true // TODO: 댓글 작성자가 본문 작성자인지 > bool > badge 추가
+      timeLabel.text = LastTimeGenerator.calculateLastTime(past: comment.updateAt)
+      commentBodyLabel.text = comment.content
+      writerBadge.isHidden = writerId == comment.userId ? true : false
    }
 }
