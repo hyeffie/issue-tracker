@@ -114,6 +114,11 @@ extension IssueList {
    func emptyList() {
       self.empty()
    }
+   
+   func findIssue(id: Int) -> Int {
+      return self.issues.first(where: { $0.issueId == id })?.issueId ?? 0
+   }
+
 }
 
 extension IssueList {

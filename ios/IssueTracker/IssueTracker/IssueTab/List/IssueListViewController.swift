@@ -15,13 +15,13 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    
    private let filterListID = "FilterList"
    
-   private var networkManager: NetworkManager?
    private var list: IssueList = IssueList()
    private var filterList = IssueFilterList()
 
    private var filterApplyList: FilterApplyList? = nil
    private var searchQuery: String? = nil
 
+   var networkManager: NetworkManager?
    var selectToolbar: SelectToolBar?
    var selectedIssues = IssuePatchDTO()
    var currentPageNumber: Int = 1
@@ -48,7 +48,7 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
       networkManager = NetworkManager(session: URLSession.shared)
    }
    
-   private func reset() {
+   func reset() {
       list.emptyList()
       currentPageNumber = 1
       hasNextPage = true
@@ -218,27 +218,13 @@ extension IssueListViewController {
          forName: IssueList.Notifications.didDeleteIssue,
          object: list, queue: .main,
          using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
-      
-      self.observers.append(NotificationCenter.default.addObserver(
-         forName: SelectToolBar.Notifications.didCloseSelectedIssues,
-         object: list,
-         queue: .main,
-         using: { [weak self] _ in
-            guard let selected = self?.selectedIssues else {
-               return
-            }
-            
-            self?.networkManager?.patchIssue(selected) {
-               self?.reset()
-               self?.fetchIssues()
-            }}))
    }
 }
 
 // MARK: - Request
 
 extension IssueListViewController {
-   private func fetchIssues(cellCompletion: (() -> Void)? = nil) {
+   func fetchIssues(cellCompletion: (() -> Void)? = nil) {
       guard hasNextPage else { return }
       isPaging = true
       networkManager?.requestIssueList(
@@ -274,6 +260,9 @@ extension IssueListViewController {
       
       self.selectToolbar?.configureItems()
       cell.didSelect()
+      self.selectedIssues.add(issue: IssuePatchDTO.Issue(issueId: list.findIssue(id: indexPath.row)))
+
+
    }
    
    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -283,6 +272,7 @@ extension IssueListViewController {
       
       self.selectToolbar?.configureItems(isSelected: false)
       cell.didDeSelect()
+      self.selectedIssues.remove(id: indexPath.row)
    }
 }
 
