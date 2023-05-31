@@ -1,5 +1,6 @@
 package com.issuetracker.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -38,9 +39,10 @@ public class IssueListService {
     public IssueListDto fetchMain(Filter filterDto) {
 
         List<Long> filteredIssueIdList = issueIdListMapper.findIssueIdList(filterDto);
-        List<IssueListPage> issueMainPageDtoList = issueListMapper.findIssueList(filteredIssueIdList);
-        System.out.println(filteredIssueIdList);
-
+        List<IssueListPage> issueMainPageDtoList = new ArrayList<>();
+        if (filteredIssueIdList.size() != 0) {
+            issueMainPageDtoList = issueListMapper.findIssueList(filteredIssueIdList);
+        }
         List<FilterLabelDto> filterLabelDtoList = FilterListMapper.getFilterLabelDtos(
                 labelRepository.getFilterLabelList());
         List<FilterMilestoneDto> filterMilestoneList = FilterListMapper.getFilterMilestoneDtos(
