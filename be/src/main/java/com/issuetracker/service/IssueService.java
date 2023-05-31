@@ -127,21 +127,6 @@ public class IssueService {
         issueRepository.updateIssueContent(id, content);
     }
 
-    public void modifyIssueContent(IssuePostDto issuePostDto, long id) {
-        Issue issueUnmodified = issueRepository.findById(id).get();
-        Issue issue = issueRepository.save(Issue.ofUpdated(issuePostDto, issueUnmodified, id));
-        //Label, Assignee 삭제 후 다시 추가
-        assigneeRepository.findByIssueId(id).forEach(assigneeId -> assigneeRepository.deleteById((assigneeId)));
-        issueLabelRepository.findByIssueId(id).forEach(issueLabelId -> issueLabelRepository.deleteById(issueLabelId));
-        issuePostDto.getUserList()
-                .stream()
-                .forEach(userDto -> assigneeRepository.save(Assignee.assign(issue.getId(), userDto.getUserId())));
-        issuePostDto.getLabelList()
-                .stream()
-                .forEach(
-                        labelDto -> issueLabelRepository.save(IssueLabel.attach(issue.getId(), labelDto.getLabelId())));
-    }
-
     public void modifyMilestoneOnIssue(int milestoneId, long id) {
         issueRepository.updateIssueMilestone(id, milestoneId);
     }
@@ -171,18 +156,14 @@ public class IssueService {
         long openCount = 0;
         long closeCount = 0;
 
-        log.info("ok1");
-
         Iterator<IssueStatusDto> iterator = issueStatusListDto.getIssues().stream().iterator();
         while (iterator.hasNext()) {
             IssueStatusDto e = iterator.next();
             if (e.getIsOpen() != null && e.getIsOpen()) {
                 issueRepository.openIssueById(e.getIssueId());
-                log.info("open");
                 openCount++;
             } else if (e.getIsOpen() != null && !e.getIsOpen()) {
                 issueRepository.closeIssueById(e.getIssueId(), LocalDateTime.now());
-                log.info("close");
                 closeCount++;
             }
 
