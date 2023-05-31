@@ -118,7 +118,7 @@ extension IssueDetailViewController: UICollectionViewDataSource {
       guard let cell = collectionView.dequeueReusableCell(
          withReuseIdentifier: cellId,
          for: indexPath
-      ) as? IssueDetailCollectionViewCell else { return UICollectionViewCell() }
+      ) as? CommentCell else { return UICollectionViewCell() }
       return cell
    }
 }
