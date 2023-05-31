@@ -16,18 +16,14 @@
                 <barButtonItem width="302" style="plain" id="3pE-Ux-dFh">
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </barButtonItem>
-                <barButtonItem image="archivebox" catalog="system" id="5dO-IC-roA">
-                    <connections>
-                        <action selector="closeAll:" destination="-1" id="lrB-fA-4CV"/>
-                    </connections>
-                </barButtonItem>
+                <barButtonItem image="archivebox" catalog="system" id="5dO-IC-roA"/>
             </items>
             <connections>
                 <outlet property="checkBoxItem" destination="V6f-8x-WI9" id="cit-Ra-gz3"/>
                 <outlet property="closeItem" destination="5dO-IC-roA" id="BXd-aS-XLl"/>
                 <outlet property="descriptionItem" destination="3pE-Ux-dFh" id="eHX-ti-ngo"/>
             </connections>
-            <point key="canvasLocation" x="119.84732824427481" y="18.30985915492958"/>
+            <point key="canvasLocation" x="-146" y="-6"/>
         </toolbar>
     </objects>
     <resources>

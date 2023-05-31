@@ -24,6 +24,8 @@ extension IssueListViewController {
          return nil
       }
       
+      toolBar.closeItem.action = #selector(closeAll)
+      
       toolBar.delegate = self
       self.view.addSubview(toolBar)
       toolBar.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +37,15 @@ extension IssueListViewController {
       ])
       
       return toolBar
+   }
+   
+   @objc func closeAll() {
+      networkManager?.patchIssue(selectedIssues) { [weak self] in
+         self?.reset()
+         self?.cancelSelectMode()
+         self?.fetchIssues()
+      }
+      
    }
    
    func createCancelButton() -> UIBarButtonItem {
