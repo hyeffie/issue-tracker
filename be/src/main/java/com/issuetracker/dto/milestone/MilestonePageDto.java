@@ -15,4 +15,6 @@ public class MilestonePageDto {
     private List<MilestoneDto> milestoneList;
     private int countOpenedMilestones;
     private int countClosedMilestones;
+    private int countAllMilestones;
+    private int countAllLabels;
 }

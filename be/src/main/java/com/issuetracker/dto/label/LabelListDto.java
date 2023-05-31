@@ -16,4 +16,5 @@ import lombok.Setter;
 public class LabelListDto {
     private List<Label> labelList;
     private int countAllLabels;
+    private int countAllMilestones;
 }

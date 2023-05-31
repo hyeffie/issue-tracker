@@ -45,4 +45,7 @@ public interface MilestoneRepository extends CrudRepository<Milestone, Long> {
     @Query("SELECT id, name, description, opened, deleted FROM milestone WHERE deleted IS FALSE")
     List<Milestone> getFilterMilestoneList();
 
+    @Query("SELECT count(id) FROM milestone WHERE deleted is FALSE")
+    int countAllMilestones();
+
 }
