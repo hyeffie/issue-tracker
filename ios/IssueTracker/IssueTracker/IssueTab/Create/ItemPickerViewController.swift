@@ -32,8 +32,18 @@ final class ItemPickerViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       setCollectionView()
+      addSaveButton()
       configureDataSource()
       applyUpdatedSnapshot()
+   }
+   
+   private func addSaveButton() {
+      self.navigationItem.rightBarButtonItem = .init(title: "완료", style: .done, target: self, action: #selector(save))
+   }
+   
+   @objc func save() {
+      // TODO: 선택 필터 저장 로직
+      self.dismiss(animated: true)
    }
 }
 
