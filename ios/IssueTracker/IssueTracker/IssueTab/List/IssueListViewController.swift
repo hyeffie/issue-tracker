@@ -442,7 +442,7 @@ extension IssueListViewController {
    }
    
    @objc func presentIssueAddViewController() {
-      let viewController = IssueCreateViewController.instantiate()
+      let viewController = IssueCreateViewController.instantiate(detail: nil)
       self.navigationController?.pushViewController(viewController, animated: true)
    }
 }

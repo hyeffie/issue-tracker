@@ -8,6 +8,17 @@
 import UIKit
 
 class IssueCreateViewController: UIViewController, StoryboardBased {
+   // MARK: Static
+   
+   static func instantiate(detail: IssueDetailPostDTO? = nil) -> Self {
+      let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
+      let viewController = storyboard.instantiateInitialViewController() as! Self
+      
+      let newDTO = IssueDetailPostDTO(title: "", content: "", imgUrl: nil, userId: 0, userList: [], labelList: [], milestoneId: 0)
+      viewController.detail = detail ?? newDTO
+      return viewController
+   }
+   
    // MARK: Outlets
    
    @IBOutlet weak var titleLabel: UILabel!
@@ -21,18 +32,11 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
    @IBOutlet weak var selectedLabelLabel: UILabel!
    @IBOutlet weak var selectedMilestoneLabel: UILabel!
    
-   // MARK: View life-cycle methods
+   // MARK: Properties
    
-   override func viewDidLoad() {
-      super.viewDidLoad()
-      
-      setUI()
-   }
+   var detail: IssueDetailPostDTO?
    
-   private func setUI() {
-      setNavigationItem()
-      setFont()
-   }
+   // MARK: Actions
    
    @IBAction func selectAssigneeSection(_ sender: Any) {
       let elements = [
@@ -41,12 +45,23 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
          PickerElement(id: 2, name: "클로이"),
          PickerElement(id: 3, name: "JK"),
       ]
-      let pickerViewController = ItemPickerViewController(title: "담당자", elements: elements) { selectedItems in
-         // TODO: 고생했다.. 에피......
-         print(selectedItems)
+      let pickerViewController = ItemPickerViewController(title: "담당자", elements: elements) { [weak self] selectedAssignees in
+         self?.detail?.replaceAssigneeList(selectedAssignees)
       }
       let navigationViewController = UINavigationController(rootViewController: pickerViewController)
       self.present(navigationViewController, animated: true)
+   }
+   
+   // MARK: View life-cycle methods
+   
+   override func viewDidLoad() {
+      super.viewDidLoad()
+      setUI()
+   }
+   
+   private func setUI() {
+      setNavigationItem()
+      setFont()
    }
    
    private func setNavigationItem() {
