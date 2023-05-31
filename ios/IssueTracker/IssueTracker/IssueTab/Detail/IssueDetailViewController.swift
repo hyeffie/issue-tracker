@@ -15,7 +15,7 @@ class IssueDetailViewController: UIViewController {
    var uiColorFactory = UIColorFactory()
    
    let headerId = "IssueDetailCollectionViewHeader"
-   let cellId = "IssueDetailCollectionViewCell"
+   let cellId = "CommentCell"
    let openColor  = "#007AFF"
    let closeColor = "#543ABE"
    
@@ -119,6 +119,15 @@ extension IssueDetailViewController: UICollectionViewDataSource {
          withReuseIdentifier: cellId,
          for: indexPath
       ) as? CommentCell else { return UICollectionViewCell() }
+
+      // TODO: use case ?
+      let comment = IssueDetailDTO.Comment(
+         commentId: 0,
+         userId: 1, userName: "Chole", profileUrl: "",
+         content: content,
+         createdAt: "5분전", updateAt: "")
+      cell.configure(comment: comment)
+      
       return cell
    }
 }
