@@ -35,13 +35,16 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
    }
    
    @IBAction func selectAssigneeSection(_ sender: Any) {
-      let items = [
-         PickerItem(id: 0, name: "에피"),
-         PickerItem(id: 1, name: "프레디"),
-         PickerItem(id: 0, name: "클로이"),
-         PickerItem(id: 0, name: "JK"),
+      let elements = [
+         PickerElement(id: 0, name: "에피"),
+         PickerElement(id: 1, name: "우드"),
+         PickerElement(id: 2, name: "클로이"),
+         PickerElement(id: 3, name: "JK"),
       ]
-      let pickerViewController = ItemPickerViewController(title: "담당자", items: items)
+      let pickerViewController = ItemPickerViewController(title: "담당자", elements: elements) { selectedItems in
+         // TODO: 고생했다.. 에피......
+         print(selectedItems)
+      }
       let navigationViewController = UINavigationController(rootViewController: pickerViewController)
       self.present(navigationViewController, animated: true)
    }

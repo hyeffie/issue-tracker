@@ -7,13 +7,25 @@
 
 import UIKit
 
-struct PickerItem: Hashable {
+struct PickerElement: Hashable {
    let id: Int
    let name: String
 }
 
+struct PickerElementItem: Hashable {
+   let element: PickerElement
+   var isSelected: Bool
+}
+
 final class ItemPickerViewController: UIViewController {
-   let items: [PickerItem]
+   let elements: [PickerElement]
+   var completion: ((Set<Int>) -> Void)? = nil
+   
+   var selectedItemIds = Set<Int>() {
+      didSet {
+         applyUpdatedSnapshot(animated: false)
+      }
+   }
    
    private var collectionView: UICollectionView!
    private var dataSource: DataSource?
@@ -22,8 +34,9 @@ final class ItemPickerViewController: UIViewController {
       fatalError("init(coder:) has not been implemented")
    }
    
-   init(title: String, items: [PickerItem]) {
-      self.items = items
+   init(title: String, elements: [PickerElement], completion: ((Set<Int>) -> Void)?) {
+      self.elements = elements
+      self.completion = completion
       super.init(nibName: nil, bundle: nil)
       
       self.title = "\(title) 선택"
@@ -42,7 +55,7 @@ final class ItemPickerViewController: UIViewController {
    }
    
    @objc func save() {
-      // TODO: 선택 필터 저장 로직
+      completion?(selectedItemIds)
       self.dismiss(animated: true)
    }
 }
@@ -61,6 +74,8 @@ extension ItemPickerViewController {
          collectionView.topAnchor.constraint(equalTo: view.topAnchor),
          collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
       ])
+      
+      collectionView.allowsMultipleSelection = true
       collectionView.delegate = self
    }
    
@@ -79,7 +94,7 @@ extension ItemPickerViewController {
 extension ItemPickerViewController {
    private class DataSource: UICollectionViewDiffableDataSource<Section, Item> { }
    
-   typealias Item = PickerItem
+   typealias Item = PickerElementItem
    
    enum Section {
       case items
@@ -88,7 +103,8 @@ extension ItemPickerViewController {
    private func configureDataSource() {
       let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { (cell, indexPath, item) in
          var content = cell.defaultContentConfiguration()
-         content.text = item.name
+         cell.accessories = item.isSelected ? [.checkmark()] : []
+         content.text = item.element.name
          cell.contentConfiguration = content
       }
       dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
@@ -99,6 +115,7 @@ extension ItemPickerViewController {
    private func applyUpdatedSnapshot(animated: Bool = true) {
       var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
       snapshot.appendSections([.items])
+      let items = elements.map { element in PickerElementItem(element: element, isSelected: selectedItemIds.contains(element.id)) }
       snapshot.appendItems(items, toSection: .items)
       dataSource?.apply(snapshot, animatingDifferences: animated)
    }
@@ -109,4 +126,15 @@ extension ItemPickerViewController {
 
 extension ItemPickerViewController: UICollectionViewDelegate {
    
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      collectionView.deselectItem(at: indexPath, animated: true)
+      
+      guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
+      let id = item.element.id
+      if selectedItemIds.contains(id) {
+         selectedItemIds.remove(id)
+      } else {
+         selectedItemIds.update(with: id)
+      }
+   }
 }
