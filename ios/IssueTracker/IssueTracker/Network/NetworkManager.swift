@@ -329,3 +329,17 @@ extension NetworkManager {
       }
    }
 }
+
+extension NetworkManager {
+   func getIssueForm(completion: @escaping () -> Void) {
+      let urlString = baseURL + "/issues" + "/create"
+      getData(for: urlString, dataType: IssueFormDTO.self) { result in
+         switch result {
+         case .success:
+            completion()
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+}

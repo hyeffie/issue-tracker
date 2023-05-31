@@ -64,6 +64,7 @@
 		F4A28CEE2A1F40B70091A940 /* MilestoneListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A28CEC2A1F40B70091A940 /* MilestoneListCell.xib */; };
 		F4A28CF22A1F56FB0091A940 /* LabelListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A28CF12A1F56FB0091A940 /* LabelListDTO.swift */; };
 		F4A28CF82A1F77B20091A940 /* MilestoneListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A28CF72A1F77B20091A940 /* MilestoneListDTO.swift */; };
+		F4AD2E672A28087E0072BD0C /* IssueFormDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD2E662A28087E0072BD0C /* IssueFormDTO.swift */; };
 		F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CCB2A0C8886001C22F0 /* AppDelegate.swift */; };
 		F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CCD2A0C8886001C22F0 /* SceneDelegate.swift */; };
 		F4BF7CD32A0C8886001C22F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4BF7CD12A0C8886001C22F0 /* Main.storyboard */; };
@@ -138,6 +139,7 @@
 		F4A28CEC2A1F40B70091A940 /* MilestoneListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MilestoneListCell.xib; sourceTree = "<group>"; };
 		F4A28CF12A1F56FB0091A940 /* LabelListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListDTO.swift; sourceTree = "<group>"; };
 		F4A28CF72A1F77B20091A940 /* MilestoneListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneListDTO.swift; sourceTree = "<group>"; };
+		F4AD2E662A28087E0072BD0C /* IssueFormDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFormDTO.swift; sourceTree = "<group>"; };
 		F4BF7CC82A0C8886001C22F0 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4BF7CCB2A0C8886001C22F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4BF7CCD2A0C8886001C22F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				F4A28CF72A1F77B20091A940 /* MilestoneListDTO.swift */,
 				F47681B22A24F0A200C4FFA5 /* LabelDetailPostDTO.swift */,
 				F45FA3DF2A27FED10041247D /* IssueDetailPostDTO.swift */,
+				F4AD2E662A28087E0072BD0C /* IssueFormDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				F4A28CE72A1F32B90091A940 /* MilestoneListViewController.swift in Sources */,
 				F4A28CDF2A1E3F8E0091A940 /* LabelListCell.swift in Sources */,
 				F4D5E3D42A1C50AF00722AD1 /* IssueList.swift in Sources */,
+				F4AD2E672A28087E0072BD0C /* IssueFormDTO.swift in Sources */,
 				6343A0662A0F7B65005FFC3E /* IssueLabel.swift in Sources */,
 				635342D62A2303DD00668765 /* FilterListFactory.swift in Sources */,
 				F4A28CCC2A1E2F700091A940 /* ListingItemFactory.swift in Sources */,
