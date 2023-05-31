@@ -5,6 +5,7 @@ import com.issuetracker.dto.label.LabelDto;
 import com.issuetracker.dto.label.LabelListDto;
 import com.issuetracker.repository.LabelRepository;
 
+import com.issuetracker.repository.MilestoneRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -16,11 +17,13 @@ import java.util.List;
 public class LabelService {
 
     private final LabelRepository labelRepository;
+    private final MilestoneRepository milestoneRepository;
 
     public LabelListDto findAllLabels() {
         List<Label> labelList = labelRepository.findAllLabels();
+        int countAllMilestones = milestoneRepository.countAllMilestones();
 
-        return new LabelListDto(labelList, labelList.size());
+        return new LabelListDto(labelList, labelList.size(), countAllMilestones);
     }
 
     public void createLabel(LabelDto labelDto) {
