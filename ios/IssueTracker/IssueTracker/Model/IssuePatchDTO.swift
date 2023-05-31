@@ -31,4 +31,14 @@ class IssuePatchDTO: Encodable {
    func remove(id: Int) {
       self.issues.removeAll(where: { $0.issueId == id })
    }
+   
+   func emptyList() {
+      self.issues = []
+   }
+   
+   func sendIds() -> [Int] {
+      var ids: [Int] = []
+      self.issues.forEach { ids.append($0.issueId) }
+      return ids
+   }
 }

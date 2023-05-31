@@ -41,11 +41,14 @@ extension IssueListViewController {
    
    @objc func closeAll() {
       networkManager?.patchIssue(selectedIssues) { [weak self] in
-         self?.reset()
-         self?.cancelSelectMode()
-         self?.fetchIssues()
+         self?.selectedIssues.sendIds().forEach {
+            self?.list.deleteIssue(id: $0)
+         }
+         self?.selectedIssues.emptyList()
+         DispatchQueue.main.async {
+            self?.cancelSelectMode()
+         }
       }
-      
    }
    
    func createCancelButton() -> UIBarButtonItem {
@@ -60,6 +63,7 @@ extension IssueListViewController {
       setSelectButton()
       configureTabBar(isHiding: false)
       deselectAllCells()
+      self.selectedIssues.emptyList()
       self.collectionView.allowsMultipleSelection = false
       self.isSelectMode = false
       self.navigationItem.title = "이슈"
