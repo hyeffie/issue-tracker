@@ -220,6 +220,9 @@
                                             <constraint firstItem="KRi-a1-nbb" firstAttribute="leading" secondItem="gbY-gL-3Ca" secondAttribute="leading" constant="16" id="exu-4t-GXv"/>
                                             <constraint firstItem="KRi-a1-nbb" firstAttribute="top" secondItem="gbY-gL-3Ca" secondAttribute="top" constant="6" id="yJ0-B5-fxp"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="selectLabelSection:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="dcT-XS-kxI"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMs-xm-1gQ">
                                         <rect key="frame" x="0.0" y="709" width="393" height="1"/>

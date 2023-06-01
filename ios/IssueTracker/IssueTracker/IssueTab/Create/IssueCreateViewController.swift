@@ -63,6 +63,21 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       self.present(navigationViewController, animated: true)
    }
    
+   @IBAction func selectLabelSection(_ sender: Any) {
+      guard let formData else {
+         // MARK: 데이터 없을 때 선택할 수 없음 > 알림창 등으로 처리
+         return
+      }
+      
+      let elements = formData.labelList.map { label in PickerElement(id: label.labelId, name: label.labelName) }
+      
+      let pickerViewController = ItemPickerViewController(title: "레이블", elements: elements) { [weak self] selectedLabels in
+         self?.detail?.replaceLabelList(selectedLabels)
+      }
+      let navigationViewController = UINavigationController(rootViewController: pickerViewController)
+      self.present(navigationViewController, animated: true)
+   }
+   
    // MARK: View life-cycle methods
    
    override func viewDidLoad() {
