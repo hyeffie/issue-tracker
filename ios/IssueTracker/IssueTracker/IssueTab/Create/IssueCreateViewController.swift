@@ -72,9 +72,14 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       getFormData()
    }
    
+   // MARK: Private Methods
+   
    private func setUI() {
       setNavigationItem()
       setFont()
+      titleTextField.delegate = self
+      titleTextField.inputAccessoryView = UIToolbar.makeDoneButtonToolBar(action: { [weak self] action in self?.doneInput() })
+      contentField.inputAccessoryView = UIToolbar.makeDoneButtonToolBar(action: { [weak self] action in self?.doneInput() })
    }
    
    private func setNavigationItem() {
@@ -107,6 +112,8 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
    }
 }
 
+// MARK: Request
+
 extension IssueCreateViewController {
    private func getFormData() {
       networkManager?.requestIssueList(completion: { [weak self] dto in
@@ -136,4 +143,15 @@ extension IssueCreateViewController {
          DispatchQueue.main.async { self.navigationController?.popViewController(animated: true) }
       })
    }
+}
+
+extension IssueCreateViewController: UITextFieldDelegate {
+   private func doneInput() {
+      self.view.endEditing(true)
+   }
+   
+   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+      doneInput()
+      return true
+   } 
 }
