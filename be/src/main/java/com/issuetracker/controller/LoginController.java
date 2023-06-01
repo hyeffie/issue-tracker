@@ -3,13 +3,10 @@ package com.issuetracker.controller;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,11 +27,6 @@ import lombok.RequiredArgsConstructor;
 public class LoginController {
 
     private final UserRepository userRepository;
-
-    @GetMapping("/api/oauth")
-    public ResponseEntity<String> getUserCode(@RequestParam String code) {
-        return ResponseEntity.ok(code);
-    }
 
     @GetMapping("/api/oauth/login")
     public User githubLogin(@RequestParam String code) throws JsonProcessingException {
@@ -57,7 +48,7 @@ public class LoginController {
         params.add("client_secret", "d7ca1f3354707d0dcb23ba4ecdee292d16f4d416");
         params.add("code", code);
         params.add("grant_type", "authorization_code");
-        params.add("redirect_uri", "http://43.200.199.205:8080/api/oauth");
+        params.add("redirect_uri", "http://13.209.93.177/oauth");
 
         HttpEntity<MultiValueMap<String, String>> accessTokenRequest = new HttpEntity<>(params, headers);
 
