@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
@@ -85,16 +86,20 @@ public class IssueService {
                     .updatedAt(comment.getUpdatedAt())
                     .build());
         }
-
-        Milestone milestone = milestoneRepository.findMilestoneByIssueId(issueId);
-        long countAllIssuesOnMilestone = issueRepository.countAllIssuesOnMilestone(milestone.getId());
-        long countAllClosedIssuesOnMilestone = issueRepository.countAllClosedIssuesOnMilestone(milestone.getId());
-        IssueMilestone issueMilestone = IssueMilestone.builder()
-                .milestoneId(milestone.getId())
-                .milestoneName(milestone.getName())
-                .countAllIssues(countAllIssuesOnMilestone)
-                .countAllClosedIssues(countAllClosedIssuesOnMilestone)
-                .build();
+        IssueMilestone issueMilestone;
+        if (milestoneRepository.isExistMilestoneByIssueId(issueId) > 0) {
+            Milestone milestone = milestoneRepository.findMilestoneByIssueId(issueId);
+            long countAllIssuesOnMilestone = issueRepository.countAllIssuesOnMilestone(milestone.getId());
+            long countAllClosedIssuesOnMilestone = issueRepository.countAllClosedIssuesOnMilestone(milestone.getId());
+            issueMilestone = IssueMilestone.builder()
+                    .milestoneId(milestone.getId())
+                    .milestoneName(milestone.getName())
+                    .countAllIssues(countAllIssuesOnMilestone)
+                    .countAllClosedIssues(countAllClosedIssuesOnMilestone)
+                    .build();
+        } else {
+            issueMilestone = null;
+        }
 
         List<FilterLabelDto> filterLabelDtoList = getFilterLabelDtos(
                 labelRepository.getFilterLabelList());
@@ -107,16 +112,22 @@ public class IssueService {
                 filterLabelDtoList, filterMilestoneList);
     }
 
+    @Transactional
     public void createIssue(IssuePostDto issuePostDto) {
         Issue issue = issueRepository.save(Issue.ofCreated(issuePostDto));
 
-        issuePostDto.getUserList()
-                .stream()
-                .forEach(userDto -> assigneeRepository.save(Assignee.assign(issue.getId(), userDto.getUserId())));
-        issuePostDto.getLabelList()
-                .stream()
-                .forEach(
-                        labelDto -> issueLabelRepository.save(IssueLabel.attach(issue.getId(), labelDto.getLabelId())));
+        if (issuePostDto.getUserList() != null) {
+            issuePostDto.getUserList()
+                    .stream()
+                    .forEach(userDto -> assigneeRepository.save(Assignee.assign(issue.getId(), userDto.getUserId())));
+        }
+        if (issuePostDto.getLabelList() != null) {
+            issuePostDto.getLabelList()
+                    .stream()
+                    .forEach(
+                            labelDto -> issueLabelRepository.save(
+                                    IssueLabel.attach(issue.getId(), labelDto.getLabelId())));
+        }
     }
 
     public void modifyIssueTitle(String title, long id) {
@@ -131,12 +142,14 @@ public class IssueService {
         issueRepository.updateIssueMilestone(id, milestoneId);
     }
 
+    @Transactional
     public void modifyAssigneesOnIssue(long id, List<Long> userIdList) {
         assigneeRepository.findByIssueId(id).forEach(assigneeId -> assigneeRepository.deleteById((assigneeId)));
         userIdList.stream()
                 .forEach(assigneeId -> assigneeRepository.save(Assignee.assign(id, assigneeId)));
     }
 
+    @Transactional
     public void modifyLabelsOnIssue(long id, List<Integer> labelIdList) {
         issueLabelRepository.findByIssueId(id).forEach(issueLabelId -> issueLabelRepository.deleteById(issueLabelId));
 
