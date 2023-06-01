@@ -226,6 +226,13 @@ extension IssueListViewController {
          forName: IssueList.Notifications.didDeleteIssue,
          object: list, queue: .main,
          using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
+      
+      self.observers.append(NotificationCenter.default.addObserver(
+         forName: IssueList.Notifications.didAddIssue,
+         object: nil, queue: .main,
+         using: { [weak self] _ in
+            self?.reset()
+            self?.fetchIssues() }))
    }
 }
 

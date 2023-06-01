@@ -16,19 +16,28 @@ struct IssueDetailPostDTO: Encodable {
       let labelId: Int
    }
    
-   let title: String
-   let content: String
-   let imgUrl: String? // 확실히 optional?
-   let userId: Int
+   private(set) var userId: Int
+   private(set) var title: String
+   private(set) var content: String
+   private(set) var imgUrl: String? // 확실히 optional?
    
-   var userList: [User]
-   var labelList: [Label]
-   var milestoneId: Int // optional?
+   private(set) var userList: [User]
+   private(set) var labelList: [Label]
+   private(set) var milestoneId: Int // optional?
    
    mutating func replaceAssigneeList(_ newAssignee: Set<Int>) {
       let array = newAssignee.getSortedArray()
       userList = array.map { id in User(userId: id) }
    }
+   
+   mutating func replaceData(userId: Int, title: String, content: String) {
+      self.userId = userId
+      self.title = title
+      self.content = content
+      
+   }
+   
+   //TODO: image url
 }
 
 extension Set where Element: Comparable {

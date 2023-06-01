@@ -14,7 +14,7 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
       let viewController = storyboard.instantiateInitialViewController() as! Self
       
-      let newDTO = IssueDetailPostDTO(title: "", content: "", imgUrl: nil, userId: 0, userList: [], labelList: [], milestoneId: 0)
+      let newDTO = IssueDetailPostDTO(userId: 0, title: "", content: "", imgUrl: nil, userList: [], labelList: [], milestoneId: 1)
       viewController.detail = detail ?? newDTO
       return viewController
    }
@@ -39,7 +39,14 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
    var formData: IssueFormData?
    var detail: IssueDetailPostDTO?
    
+   var saveButton: UIBarButtonItem?
+   
    // MARK: Actions
+   
+   @IBAction func titleChanged(_ sender: UITextField) {
+      guard let final = sender.text else { return }
+      saveButton?.isEnabled = final.count > 0
+   }
    
    @IBAction func selectAssigneeSection(_ sender: Any) {
       guard let formData else {
@@ -76,8 +83,8 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       segmentedControl.selectedSegmentIndex = 0
       self.navigationItem.titleView = segmentedControl
       
-      let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: nil)
-      saveButton.isEnabled = false
+      saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(save))
+      saveButton?.isEnabled = false
       self.navigationItem.rightBarButtonItem = saveButton
    }
    
@@ -105,6 +112,28 @@ extension IssueCreateViewController {
       networkManager?.requestIssueList(completion: { [weak self] dto in
          let issueFormData = ListingItemFactory.IssueTab.makeIssueFormData(with: dto)
          self?.formData = issueFormData
+      })
+   }
+}
+
+// MARK: 저장 (추가)
+
+extension IssueCreateViewController {
+   @objc func save() {
+      guard var detail else {
+         // TODO: 저장 불가
+         return
+      }
+      guard let title = titleTextField.text, title.isEmpty == false else {
+         // TODO: 저장 불가
+         return
+      }
+      let content = contentField.text ?? "문제가 뭐니"
+      detail.replaceData(userId: 1, title: title, content: content)
+      
+      networkManager?.postNewIssue(detail, completion: {
+         NotificationCenter.default.post(name: IssueList.Notifications.didAddIssue, object: self)
+         DispatchQueue.main.async { self.navigationController?.popViewController(animated: true) }
       })
    }
 }

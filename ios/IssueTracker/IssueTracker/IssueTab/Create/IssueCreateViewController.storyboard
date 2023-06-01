@@ -53,6 +53,9 @@
                                                         <rect key="frame" x="94" y="6.6666666666666732" width="267" height="18.666666666666671"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="titleChanged:" destination="Y6W-OH-hqX" eventType="editingChanged" id="Ici-wT-EEc"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
