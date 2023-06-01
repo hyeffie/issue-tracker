@@ -9,66 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Issue Detail View Controller-->
-        <scene sceneID="s0d-6b-0kx">
-            <objects>
-                <viewController id="Y6W-OH-hqX" customClass="IssueDetailViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gU2-qK-EdB">
-                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
-                                <color key="backgroundColor" white="0.59999999999999998" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="650-Zi-SFP">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="ekJ-du-CxY"/>
-                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="Lwz-Ue-qKe"/>
-                                </connections>
-                            </collectionView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epA-qQ-lg1">
-                                <rect key="frame" x="0.0" y="769" width="393" height="49"/>
-                                <items>
-                                    <barButtonItem image="chevron.up" catalog="system" id="SUe-Ck-NTh"/>
-                                    <barButtonItem image="chevron.down" catalog="system" id="Hb6-nz-Epx"/>
-                                    <barButtonItem style="plain" id="ASW-Go-ymD">
-                                        <textField key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="9Bb-Qt-Q5L">
-                                            <rect key="frame" x="78.333333333333314" y="10" width="297" height="34"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="epA-qQ-lg1" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="N9I-zy-0fW"/>
-                            <constraint firstItem="epA-qQ-lg1" firstAttribute="top" secondItem="gU2-qK-EdB" secondAttribute="bottom" id="NDg-dk-ReS"/>
-                            <constraint firstItem="gU2-qK-EdB" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Nmg-H5-4Bp"/>
-                            <constraint firstItem="epA-qQ-lg1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="XAb-OB-JpG"/>
-                            <constraint firstItem="gU2-qK-EdB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="icv-AN-2el"/>
-                            <constraint firstItem="epA-qQ-lg1" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="nL4-wY-EIl"/>
-                            <constraint firstItem="gU2-qK-EdB" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="o8g-53-UJa"/>
-                        </constraints>
-                    </view>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="collectionView" destination="gU2-qK-EdB" id="xzc-fW-cn6"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="9.9236641221374047" y="-2.1126760563380285"/>
-        </scene>
         <!--Issue Detail Table View Controller-->
         <scene sceneID="irh-3w-CTG">
             <objects>
