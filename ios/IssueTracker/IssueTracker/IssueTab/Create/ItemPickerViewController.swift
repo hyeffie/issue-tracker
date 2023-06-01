@@ -19,6 +19,7 @@ struct PickerElementItem: Hashable {
 
 final class ItemPickerViewController: UIViewController {
    let elements: [PickerElement]
+   let isMultiSelectable: Bool
    var completion: ((Set<Int>) -> Void)? = nil
    
    var selectedItemIds = Set<Int>() {
@@ -34,8 +35,9 @@ final class ItemPickerViewController: UIViewController {
       fatalError("init(coder:) has not been implemented")
    }
    
-   init(title: String, elements: [PickerElement], completion: ((Set<Int>) -> Void)?) {
+   init(title: String, elements: [PickerElement], multiSelectable: Bool = true, completion: ((Set<Int>) -> Void)?) {
       self.elements = elements
+      self.isMultiSelectable = multiSelectable
       self.completion = completion
       super.init(nibName: nil, bundle: nil)
       
@@ -131,6 +133,9 @@ extension ItemPickerViewController: UICollectionViewDelegate {
       
       guard let item = dataSource?.itemIdentifier(for: indexPath) else { return }
       let id = item.element.id
+      
+      if isMultiSelectable == false { selectedItemIds = [] }
+      
       if selectedItemIds.contains(id) {
          selectedItemIds.remove(id)
       } else {

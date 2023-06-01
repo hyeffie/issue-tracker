@@ -23,7 +23,7 @@ struct IssueDetailPostDTO: Encodable {
    
    private(set) var userList: [User]
    private(set) var labelList: [Label]
-   private(set) var milestoneId: Int // optional?
+   private(set) var milestoneId: Int? // optional?
    
    mutating func replaceAssigneeList(_ newAssignee: Set<Int>) {
       let array = newAssignee.getSortedArray()
@@ -33,6 +33,10 @@ struct IssueDetailPostDTO: Encodable {
    mutating func replaceLabelList(_ newLabel: Set<Int>) {
       let array = newLabel.getSortedArray()
       labelList = array.map { id in Label(labelId: id) }
+   }
+   
+   mutating func replaceMilestone(_ newMilestone: Int?) {
+      milestoneId = newMilestone
    }
    
    mutating func replaceData(userId: Int, title: String, content: String) {

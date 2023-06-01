@@ -74,6 +74,25 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       let pickerViewController = ItemPickerViewController(title: "레이블", elements: elements) { [weak self] selectedLabels in
          self?.detail?.replaceLabelList(selectedLabels)
       }
+      
+      let navigationViewController = UINavigationController(rootViewController: pickerViewController)
+      self.present(navigationViewController, animated: true)
+   }
+   
+   @IBAction func selectMilestoneSection(_ sender: Any) {
+      guard let formData else {
+         // MARK: 데이터 없을 때 선택할 수 없음 > 알림창 등으로 처리
+         return
+      }
+      
+      let elements = formData.miletoneList.map { milestone in PickerElement(id: milestone.milestoneId, name: milestone.milestoneName) }
+      
+      let pickerViewController = ItemPickerViewController(
+         title: "마일스톤",
+         elements: elements,
+         multiSelectable: false) { [weak self] selectedMilestone in
+            self?.detail?.replaceMilestone(selectedMilestone.first)
+      }
       let navigationViewController = UINavigationController(rootViewController: pickerViewController)
       self.present(navigationViewController, animated: true)
    }

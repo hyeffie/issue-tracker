@@ -272,6 +272,9 @@
                                             <constraint firstItem="C70-WZ-lQ5" firstAttribute="leading" secondItem="WrD-jZ-byi" secondAttribute="leading" constant="16" id="fAP-ZP-20v"/>
                                             <constraint firstItem="C70-WZ-lQ5" firstAttribute="top" secondItem="WrD-jZ-byi" secondAttribute="top" constant="6" id="x8y-av-ArH"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="selectMilestoneSection:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="0hh-iL-Zfb"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eNh-6X-VU1">
                                         <rect key="frame" x="0.0" y="758" width="393" height="1"/>
