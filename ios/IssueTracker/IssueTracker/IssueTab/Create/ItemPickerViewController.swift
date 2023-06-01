@@ -37,10 +37,12 @@ final class ItemPickerViewController: UIViewController {
    
    init(title: String,
         elements: [PickerElement],
+        selectedItems: Set<Int>,
         multiSelectable: Bool = true,
         completion: ((Set<Int>, String?) -> Void)?
    ) {
       self.elements = elements
+      self.selectedItemIds = selectedItems
       self.isMultiSelectable = multiSelectable
       self.completion = completion
       super.init(nibName: nil, bundle: nil)

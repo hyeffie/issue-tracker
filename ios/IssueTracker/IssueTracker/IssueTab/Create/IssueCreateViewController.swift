@@ -59,8 +59,11 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       }
       
       let elements = formData.userList.map { user in PickerElement(id: user.userId, name: user.userName) }
-      
-      let pickerViewController = ItemPickerViewController(title: "담당자", elements: elements) { [weak self] selectedAssignees, state in
+      guard let selectedIds = detail?.userList.map({ user in user.userId }) else { return }
+      let pickerViewController = ItemPickerViewController(
+         title: "담당자",
+         elements: elements,
+         selectedItems: Set(selectedIds)) { [weak self] selectedAssignees, state in
          self?.detail?.replaceAssigneeList(selectedAssignees)
          self?.assigneeStateLabel.text = state
       }
@@ -75,8 +78,11 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       }
       
       let elements = formData.labelList.map { label in PickerElement(id: label.labelId, name: label.labelName) }
-      
-      let pickerViewController = ItemPickerViewController(title: "레이블", elements: elements) { [weak self] selectedLabels, state in
+      guard let selectedIds = detail?.labelList.map({ label in label.labelId }) else { return }
+      let pickerViewController = ItemPickerViewController(
+         title: "레이블",
+         elements: elements,
+         selectedItems: Set(selectedIds)) { [weak self] selectedLabels, state in
          self?.detail?.replaceLabelList(selectedLabels)
          self?.labelStateLabel.text = state
       }
@@ -92,10 +98,11 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       }
       
       let elements = formData.miletoneList.map { milestone in PickerElement(id: milestone.milestoneId, name: milestone.milestoneName) }
-      
+      guard let selectedId = detail?.milestoneId else { return }
       let pickerViewController = ItemPickerViewController(
          title: "마일스톤",
          elements: elements,
+         selectedItems: Set([selectedId]),
          multiSelectable: false) { [weak self] selectedMilestone, state in
             self?.detail?.replaceMilestone(selectedMilestone.first)
             self?.milestoneStateLabel.text = state

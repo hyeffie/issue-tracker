@@ -79,7 +79,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dT9-pm-2xy">
                                         <rect key="frame" x="0.0" y="59.000000000000028" width="393" height="507.66666666666674"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="처음부터 전부 구현하려고 하지 않고 필수적인 기능부터 만든 후, 차근차근 완성도를 높여볼 계획" translatesAutoresizingMaskIntoConstraints="NO" id="pxr-iw-7Lf">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pxr-iw-7Lf">
                                                 <rect key="frame" x="16" y="11" width="361" height="485.66666666666669"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <color key="textColor" systemColor="labelColor"/>
