@@ -20,7 +20,7 @@ struct PickerElementItem: Hashable {
 final class ItemPickerViewController: UIViewController {
    let elements: [PickerElement]
    let isMultiSelectable: Bool
-   var completion: ((Set<Int>) -> Void)? = nil
+   var completion: ((Set<Int>, String?) -> Void)? = nil
    
    var selectedItemIds = Set<Int>() {
       didSet {
@@ -35,7 +35,11 @@ final class ItemPickerViewController: UIViewController {
       fatalError("init(coder:) has not been implemented")
    }
    
-   init(title: String, elements: [PickerElement], multiSelectable: Bool = true, completion: ((Set<Int>) -> Void)?) {
+   init(title: String,
+        elements: [PickerElement],
+        multiSelectable: Bool = true,
+        completion: ((Set<Int>, String?) -> Void)?
+   ) {
       self.elements = elements
       self.isMultiSelectable = multiSelectable
       self.completion = completion
@@ -56,8 +60,18 @@ final class ItemPickerViewController: UIViewController {
       self.navigationItem.rightBarButtonItem = .init(title: "완료", style: .done, target: self, action: #selector(save))
    }
    
+   private func makeStateDescription() -> String {
+      guard let targetId = selectedItemIds.first else { return "" }
+      
+      guard let target = elements.first(where: { element in element.id == targetId }) else { return "" }
+      var result = target.name
+      result += selectedItemIds.count > 1 ? "외 \(selectedItemIds.count - 1)개" : ""
+      return result
+   }
+   
    @objc func save() {
-      completion?(selectedItemIds)
+      let stateDescription = makeStateDescription()
+      completion?(selectedItemIds, stateDescription)
       self.dismiss(animated: true)
    }
 }

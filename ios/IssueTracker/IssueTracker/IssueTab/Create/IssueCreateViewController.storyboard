@@ -134,22 +134,22 @@
                                                 <rect key="frame" x="16" y="6" width="361" height="36"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="담당자" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWr-7T-wEo">
-                                                        <rect key="frame" x="0.0" y="7.9999999999999982" width="283" height="20.333333333333329"/>
+                                                        <rect key="frame" x="0.0" y="7.9999999999999982" width="310.33333333333331" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IkG-uM-flX">
-                                                        <rect key="frame" x="299" y="3" width="62" height="30"/>
+                                                        <rect key="frame" x="326.33333333333331" y="3" width="34.666666666666686" height="30"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="sam" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXc-z3-7nK">
-                                                                <rect key="frame" x="0.0" y="0.0" width="32" height="30"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXc-z3-7nK">
+                                                                <rect key="frame" x="0.0" y="0.0" width="4.666666666666667" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="K3C-x5-m3y">
-                                                                <rect key="frame" x="32" y="2" width="30" height="26.333333333333332"/>
+                                                                <rect key="frame" x="4.6666666666666856" y="2" width="30" height="26.333333333333332"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="30" id="vqa-uK-hp6"/>
                                                                     <constraint firstAttribute="width" secondItem="K3C-x5-m3y" secondAttribute="height" multiplier="1:1" id="zP9-Nz-39O"/>
@@ -186,22 +186,22 @@
                                                 <rect key="frame" x="16" y="6" width="361" height="36"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="레이블" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0NG-wz-su7">
-                                                        <rect key="frame" x="0.0" y="7.9999999999999982" width="283" height="20.333333333333329"/>
+                                                        <rect key="frame" x="0.0" y="7.9999999999999982" width="310.33333333333331" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQm-fV-VQ9">
-                                                        <rect key="frame" x="299" y="3" width="62" height="30"/>
+                                                        <rect key="frame" x="326.33333333333331" y="3" width="34.666666666666686" height="30"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="sam" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-3n-SPV">
-                                                                <rect key="frame" x="0.0" y="0.0" width="32" height="30"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-3n-SPV">
+                                                                <rect key="frame" x="0.0" y="0.0" width="4.666666666666667" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D2B-fp-CQc">
-                                                                <rect key="frame" x="32" y="2" width="30" height="26.333333333333332"/>
+                                                                <rect key="frame" x="4.6666666666666856" y="2" width="30" height="26.333333333333332"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="D2B-fp-CQc" secondAttribute="height" multiplier="1:1" id="LYc-KM-n7Q"/>
                                                                     <constraint firstAttribute="width" constant="30" id="Zvu-jk-zru"/>
@@ -238,22 +238,22 @@
                                                 <rect key="frame" x="16" y="6" width="361" height="36"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="마일스톤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKf-hY-7v1">
-                                                        <rect key="frame" x="0.0" y="7.9999999999999982" width="283" height="20.333333333333329"/>
+                                                        <rect key="frame" x="0.0" y="7.9999999999999982" width="310.33333333333331" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPm-yk-nXR">
-                                                        <rect key="frame" x="299" y="3" width="62" height="30"/>
+                                                        <rect key="frame" x="326.33333333333331" y="3" width="34.666666666666686" height="30"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="sam" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMk-Hg-qu8">
-                                                                <rect key="frame" x="0.0" y="0.0" width="32" height="30"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMk-Hg-qu8">
+                                                                <rect key="frame" x="0.0" y="0.0" width="4.666666666666667" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NFU-3m-585">
-                                                                <rect key="frame" x="32" y="2" width="30" height="26.333333333333332"/>
+                                                                <rect key="frame" x="4.6666666666666856" y="2" width="30" height="26.333333333333332"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="NFU-3m-585" secondAttribute="height" multiplier="1:1" id="Wej-Jv-WTw"/>
                                                                     <constraint firstAttribute="width" constant="30" id="kja-lN-7cN"/>
@@ -298,9 +298,12 @@
                     <connections>
                         <outlet property="additionalInfoLabel" destination="kJ9-5D-FUR" id="cTt-8K-oVX"/>
                         <outlet property="assigneeLabel" destination="JWr-7T-wEo" id="rdU-5d-bZu"/>
+                        <outlet property="assigneeStateLabel" destination="mXc-z3-7nK" id="9kx-xY-zEd"/>
                         <outlet property="contentField" destination="pxr-iw-7Lf" id="3nD-UB-TTu"/>
                         <outlet property="labelLabel" destination="0NG-wz-su7" id="i3G-4O-fWk"/>
+                        <outlet property="labelStateLabel" destination="bbO-3n-SPV" id="WxH-TR-nko"/>
                         <outlet property="milestoneLabel" destination="UKf-hY-7v1" id="Ymy-Z9-20E"/>
+                        <outlet property="milestoneStateLabel" destination="tMk-Hg-qu8" id="iXg-0q-TPp"/>
                         <outlet property="selectedAssigneeLabel" destination="mXc-z3-7nK" id="Pgq-GO-SqG"/>
                         <outlet property="selectedLabelLabel" destination="bbO-3n-SPV" id="U8D-lg-fq4"/>
                         <outlet property="selectedMilestoneLabel" destination="tMk-Hg-qu8" id="Ysv-Of-1l6"/>
