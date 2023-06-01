@@ -62,8 +62,8 @@ final class NetworkManager {
       }
       guard let url else { return }
       var request = URLRequest(url: url)
-      request.timeoutInterval = 15
       print(request)
+      request.timeoutInterval = 15
       
       let completionHandler = { @Sendable [weak self] (data: Data?, response: URLResponse?, error: Error?) in
          if let error {
@@ -73,6 +73,7 @@ final class NetworkManager {
          
          guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else {
             completion(.failure(NetworkError.noResponse))
+            print(error)
             return
          }
          
@@ -240,7 +241,7 @@ extension NetworkManager {
    }
    
    func requestIssueDetail(issueId: Int, completion: @escaping (IssueDetailDTO) -> Void) {
-      let issueDetailURL = ServerAPI.issueURL + "\(issueId)"
+      let issueDetailURL = ServerAPI.issueURL + "/\(issueId)"
       
       getData(for: issueDetailURL,
               dataType: IssueDetailDTO.self) { result in

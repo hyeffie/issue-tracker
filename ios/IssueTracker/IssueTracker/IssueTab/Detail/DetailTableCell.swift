@@ -1,13 +1,13 @@
 //
-//  CommentCell0.swift
+//  DetailTableCell.swift
 //  IssueTracker
 //
-//  Created by Wood on 2023/05/24.
+//  Created by Wood on 2023/06/01.
 //
 
 import UIKit
 
-class CommentCell: UICollectionViewCell {
+class DetailTableCell: UITableViewCell {
    let writerBadge = IssueLabel(name: "작성자", color: "#FFFFFF")
    
    @IBOutlet weak var profileImage: UIImageView!
@@ -30,7 +30,7 @@ class CommentCell: UICollectionViewCell {
       self.contentView.addSubview(writerBadge)
       writerBadge.translatesAutoresizingMaskIntoConstraints = false
       writerBadge.centerYAnchor.constraint(equalTo: actionButton.centerYAnchor).isActive = true
-      writerBadge.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1 * (50 + actionButton.frame.width + 27)).isActive = true
+      writerBadge.trailingAnchor.constraint(equalTo: actionButton.leadingAnchor, constant: -28).isActive = true
    }
    
    private func configureFont() {
@@ -49,8 +49,7 @@ class CommentCell: UICollectionViewCell {
       commenterNameLabel.text = comment.userName
       timeLabel.text = LastTimeGenerator.calculateLastTime(past: comment.updateAt ?? "")
       commentBodyLabel.text = comment.content
-//      addWriteBadge()
-      writerBadge.isHidden = writerName == comment.userName ? true : false
+      writerBadge.isHidden = writerName == comment.userName ? false : true
    }
    
    func configureImage(image: Data?) {

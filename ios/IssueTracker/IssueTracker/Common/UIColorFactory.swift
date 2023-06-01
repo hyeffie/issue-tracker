@@ -8,7 +8,7 @@
 import UIKit
 
 struct UIColorFactory {
-   func make(hexColor: String) -> UIColor {
+   static func make(hexColor: String) -> UIColor {
       var rgbList = Array(repeating: CGFloat(0), count: 3)
       for index in 0..<3 {
          let startIndex = hexColor.index(hexColor.startIndex, offsetBy: (2 * index) + 1)

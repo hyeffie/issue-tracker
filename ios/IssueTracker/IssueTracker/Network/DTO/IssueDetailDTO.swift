@@ -19,7 +19,7 @@ struct IssueDetailDTO: Codable {
       let closedAt: String?
       let open: Bool
    }
-   
+
    struct Milestone: Codable {
       let milestoneId: Int
       let milestoneName: String
@@ -36,8 +36,8 @@ struct IssueDetailDTO: Codable {
    }
    
    struct Assignee: Codable {
-      let userid: Int
-      let userName: String
+      let id: Int
+      let loginId: String
       let profileUrl: String
    }
    
@@ -48,7 +48,7 @@ struct IssueDetailDTO: Codable {
       let profileUrl: String
       let content: String
       let createdAt: String
-      let updateAt: String
+      let updateAt: String?
    }
    
    let issue: Issue
@@ -58,7 +58,7 @@ struct IssueDetailDTO: Codable {
    let commentList: [Comment]
    let userList: [IssueListDTO.User]
    let labelList: [IssueListDTO.Label]
-   let milestoneList: [IssueListDTO.Milestone]
+   let milestoneList: [IssueListDTO.Milestone]?
 }
 
 extension IssueDetailDTO {

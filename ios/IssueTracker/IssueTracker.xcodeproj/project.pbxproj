@@ -29,6 +29,11 @@
 		6361BDF62A249EDE0015D267 /* SelectToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6361BDF52A249EDE0015D267 /* SelectToolBar.xib */; };
 		638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */; };
 		638659DB2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */; };
+		63BBC2792A2830990019B1BC /* IssueDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BBC2782A2830990019B1BC /* IssueDetailTableViewController.swift */; };
+		63BBC2822A283C950019B1BC /* DetailTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BBC2812A283C950019B1BC /* DetailTableHeader.swift */; };
+		63BBC28B2A2841700019B1BC /* DetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BBC2892A2841700019B1BC /* DetailTableCell.swift */; };
+		63BBC28C2A2841700019B1BC /* DetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BBC28A2A2841700019B1BC /* DetailTableCell.xib */; };
+		63BBC2962A286BB50019B1BC /* DetailTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BBC2952A286BB50019B1BC /* DetailTableHeader.xib */; };
 		63D6CFCF2A15B7F6000876D5 /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6CFCE2A15B7F6000876D5 /* FilterListViewController.swift */; };
 		63D6CFD82A1624D3000876D5 /* DataSenderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D6CFD72A1624D3000876D5 /* DataSenderDelegate.swift */; };
 		63D6CFE52A168C0C000876D5 /* FilterListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63D6CFE42A168C0C000876D5 /* FilterListCollectionViewCell.xib */; };
@@ -103,6 +108,11 @@
 		6361BDF52A249EDE0015D267 /* SelectToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectToolBar.xib; sourceTree = "<group>"; };
 		638659D82A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueListCollectionViewCell.xib; sourceTree = "<group>"; };
 		638659DA2A0D3483006FE4F0 /* IssueListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionViewCell.swift; sourceTree = "<group>"; };
+		63BBC2782A2830990019B1BC /* IssueDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailTableViewController.swift; sourceTree = "<group>"; };
+		63BBC2812A283C950019B1BC /* DetailTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableHeader.swift; sourceTree = "<group>"; };
+		63BBC2892A2841700019B1BC /* DetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailTableCell.swift; path = ../DetailTableCell.swift; sourceTree = "<group>"; };
+		63BBC28A2A2841700019B1BC /* DetailTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DetailTableCell.xib; path = ../DetailTableCell.xib; sourceTree = "<group>"; };
+		63BBC2952A286BB50019B1BC /* DetailTableHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailTableHeader.xib; sourceTree = "<group>"; };
 		63D6CFCE2A15B7F6000876D5 /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
 		63D6CFD72A1624D3000876D5 /* DataSenderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSenderDelegate.swift; sourceTree = "<group>"; };
 		63D6CFE42A168C0C000876D5 /* FilterListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterListCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -171,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				635342AF2A20DF8400668765 /* IssueDetail.storyboard */,
+				63BBC27E2A28372F0019B1BC /* TableView */,
 				635342AB2A20DEB300668765 /* IssueDetailViewController.swift */,
 				635342B82A20FAF800668765 /* IssueDetailCollectionViewHeader.xib */,
 				635342B92A20FAF800668765 /* IssueDetailCollectionViewHeader.swift */,
@@ -189,6 +200,18 @@
 				6361BDF22A249B280015D267 /* SelectToolBar.swift */,
 			);
 			path = Select;
+			sourceTree = "<group>";
+		};
+		63BBC27E2A28372F0019B1BC /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				63BBC2782A2830990019B1BC /* IssueDetailTableViewController.swift */,
+				63BBC2952A286BB50019B1BC /* DetailTableHeader.xib */,
+				63BBC2812A283C950019B1BC /* DetailTableHeader.swift */,
+				63BBC28A2A2841700019B1BC /* DetailTableCell.xib */,
+				63BBC2892A2841700019B1BC /* DetailTableCell.swift */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 		63D6CFD02A15B80D000876D5 /* Filter */ = {
@@ -464,11 +487,13 @@
 			files = (
 				F4C0A6D32A21FF6D0045277D /* FilterList.storyboard in Resources */,
 				635342BC2A20FAF800668765 /* IssueDetailCollectionViewHeader.xib in Resources */,
+				63BBC28C2A2841700019B1BC /* DetailTableCell.xib in Resources */,
 				F48927002A175FCB000EBE9C /* LoadCollectionViewCell.xib in Resources */,
 				F4BF7CE32A0C89BD001C22F0 /* .swiftlint.yml in Resources */,
 				638659D92A0D30AD006FE4F0 /* IssueListCollectionViewCell.xib in Resources */,
 				F43B37472A1F870F00EEB7C5 /* LabelEditViewController.storyboard in Resources */,
 				F4BF7CD82A0C8887001C22F0 /* LaunchScreen.storyboard in Resources */,
+				63BBC2962A286BB50019B1BC /* DetailTableHeader.xib in Resources */,
 				63D6CFEB2A1698E7000876D5 /* FilterListCollectionViewHeader.xib in Resources */,
 				6361BDF62A249EDE0015D267 /* SelectToolBar.xib in Resources */,
 				F4BF7CD52A0C8887001C22F0 /* Assets.xcassets in Resources */,
@@ -529,6 +554,7 @@
 				F48583CA2A13802E00322C9F /* URLSessionInterface.swift in Sources */,
 				F43B37492A1F8AA000EEB7C5 /* LabelEditViewController.swift in Sources */,
 				F48583C92A13802E00322C9F /* NetworkManager.swift in Sources */,
+				63BBC2792A2830990019B1BC /* IssueDetailTableViewController.swift in Sources */,
 				6361BDF32A249B280015D267 /* SelectToolBar.swift in Sources */,
 				F4A28CF22A1F56FB0091A940 /* LabelListDTO.swift in Sources */,
 				F48583CF2A1380D100322C9F /* IssueListDTO.swift in Sources */,
@@ -547,6 +573,7 @@
 				F4A28CDF2A1E3F8E0091A940 /* LabelListCell.swift in Sources */,
 				F4D5E3D42A1C50AF00722AD1 /* IssueList.swift in Sources */,
 				F4DBD6232A2730C50034D090 /* UIView+Rounding.swift in Sources */,
+				63BBC2822A283C950019B1BC /* DetailTableHeader.swift in Sources */,
 				6343A0662A0F7B65005FFC3E /* IssueLabel.swift in Sources */,
 				635342D62A2303DD00668765 /* FilterListFactory.swift in Sources */,
 				F4A28CCC2A1E2F700091A940 /* ListingItemFactory.swift in Sources */,
@@ -555,6 +582,7 @@
 				63D6CFCF2A15B7F6000876D5 /* FilterListViewController.swift in Sources */,
 				F4A28CEA2A1F3C6E0091A940 /* MilestoneList.swift in Sources */,
 				F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */,
+				63BBC28B2A2841700019B1BC /* DetailTableCell.swift in Sources */,
 				635342AC2A20DEB300668765 /* IssueDetailViewController.swift in Sources */,
 				F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */,
 				F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */,
@@ -639,7 +667,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -693,7 +721,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -710,7 +738,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y67S3384LP;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "IssueTracker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -738,7 +766,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y67S3384LP;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "IssueTracker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
