@@ -31,7 +31,7 @@ public interface LabelRepository extends CrudRepository<Label, Long> {
     @Query("SELECT id, name, background_color, font_color, description, deleted FROM label WHERE deleted IS FALSE;")
     List<Label> getFilterLabelList();
 
-    @Query("SELECT count(id) FROM label WHERE delete is FALSE")
+    @Query("SELECT count(id) FROM label WHERE deleted is FALSE")
     int countAllLabels();
 
 }
