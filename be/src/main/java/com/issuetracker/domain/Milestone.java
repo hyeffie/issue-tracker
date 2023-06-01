@@ -31,13 +31,13 @@ public class Milestone {
     }
 
     public static Milestone ofUpdated(Integer id, String name, String description,
-            LocalDateTime completedAt) {
+            LocalDateTime completedAt, boolean isOpen) {
         return new MilestoneBuilder()
                 .id(id)
                 .name(name)
                 .description(description)
                 .completedAt(completedAt)
-                .opened(true)
+                .opened(isOpen)
                 .deleted(false)
                 .build();
     }

@@ -53,7 +53,7 @@ public class MilestoneService {
     }
 
     public void updateMilestone(int milestoneId, MilestoneDto milestoneDto) {
-        milestoneRepository.save(Milestone.ofUpdated(milestoneId, milestoneDto.getName(), milestoneDto.getDescription(), milestoneDto.getCompletedAt()));
+        milestoneRepository.save(Milestone.ofUpdated(milestoneId, milestoneDto.getName(), milestoneDto.getDescription(), milestoneDto.getCompletedAt(), milestoneDto.getIsOpen()));
     }
 
     public void deleteMilestone(int milestoneId) {
