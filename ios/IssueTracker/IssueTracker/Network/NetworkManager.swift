@@ -63,7 +63,6 @@ final class NetworkManager {
       guard let url else { return }
       var request = URLRequest(url: url)
       request.timeoutInterval = 15
-      print(request)
       
       let completionHandler = { @Sendable [weak self] (data: Data?, response: URLResponse?, error: Error?) in
          if let error {
