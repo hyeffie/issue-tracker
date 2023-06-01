@@ -70,6 +70,7 @@
 		F4AD2E672A28087E0072BD0C /* IssueFormDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD2E662A28087E0072BD0C /* IssueFormDTO.swift */; };
 		F4AD2E6B2A28309E0072BD0C /* IssueFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD2E6A2A28309E0072BD0C /* IssueFormData.swift */; };
 		F4AD2E6D2A284EBF0072BD0C /* UIToolbar+KeyboardAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD2E6C2A284EBF0072BD0C /* UIToolbar+KeyboardAccessory.swift */; };
+		F4AD2E6F2A28ADC50072BD0C /* UIView+Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD2E6E2A28ADC50072BD0C /* UIView+Rounding.swift */; };
 		F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CCB2A0C8886001C22F0 /* AppDelegate.swift */; };
 		F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CCD2A0C8886001C22F0 /* SceneDelegate.swift */; };
 		F4BF7CD32A0C8886001C22F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4BF7CD12A0C8886001C22F0 /* Main.storyboard */; };
@@ -150,6 +151,7 @@
 		F4AD2E662A28087E0072BD0C /* IssueFormDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFormDTO.swift; sourceTree = "<group>"; };
 		F4AD2E6A2A28309E0072BD0C /* IssueFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFormData.swift; sourceTree = "<group>"; };
 		F4AD2E6C2A284EBF0072BD0C /* UIToolbar+KeyboardAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIToolbar+KeyboardAccessory.swift"; sourceTree = "<group>"; };
+		F4AD2E6E2A28ADC50072BD0C /* UIView+Rounding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rounding.swift"; sourceTree = "<group>"; };
 		F4BF7CC82A0C8886001C22F0 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4BF7CCB2A0C8886001C22F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4BF7CCD2A0C8886001C22F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 		F48583AA2A0E21E500322C9F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				F4AD2E6E2A28ADC50072BD0C /* UIView+Rounding.swift */,
 				F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */,
 				F415D2872A202F8B00712189 /* UITextField+font.swift */,
 				635342AD2A20DEFE00668765 /* UIViewController+hideTabBar.swift */,
@@ -583,6 +586,7 @@
 				F4AD2E6D2A284EBF0072BD0C /* UIToolbar+KeyboardAccessory.swift in Sources */,
 				635342D62A2303DD00668765 /* FilterListFactory.swift in Sources */,
 				F4A28CCC2A1E2F700091A940 /* ListingItemFactory.swift in Sources */,
+				F4AD2E6F2A28ADC50072BD0C /* UIView+Rounding.swift in Sources */,
 				635342DA2A23145F00668765 /* FilterListType.swift in Sources */,
 				F47681B32A24F0A200C4FFA5 /* LabelDetailPostDTO.swift in Sources */,
 				63D6CFCF2A15B7F6000876D5 /* FilterListViewController.swift in Sources */,
