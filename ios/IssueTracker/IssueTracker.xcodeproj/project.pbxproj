@@ -42,6 +42,7 @@
 		F415D2882A202F8B00712189 /* UITextField+font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F415D2872A202F8B00712189 /* UITextField+font.swift */; };
 		F43B37472A1F870F00EEB7C5 /* LabelEditViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F43B37462A1F870F00EEB7C5 /* LabelEditViewController.storyboard */; };
 		F43B37492A1F8AA000EEB7C5 /* LabelEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B37482A1F8AA000EEB7C5 /* LabelEditViewController.swift */; };
+		F45FA3E02A27FED10041247D /* IssueDetailPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45FA3DF2A27FED10041247D /* IssueDetailPostDTO.swift */; };
 		F47681B12A248DD100C4FFA5 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = F47681B02A248DD100C4FFA5 /* OrderedCollections */; };
 		F47681B32A24F0A200C4FFA5 /* LabelDetailPostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47681B22A24F0A200C4FFA5 /* LabelDetailPostDTO.swift */; };
 		F48583AC2A10E1FC00322C9F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48583AB2A10E1FC00322C9F /* TabBarController.swift */; };
@@ -66,6 +67,9 @@
 		F4A28CEE2A1F40B70091A940 /* MilestoneListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A28CEC2A1F40B70091A940 /* MilestoneListCell.xib */; };
 		F4A28CF22A1F56FB0091A940 /* LabelListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A28CF12A1F56FB0091A940 /* LabelListDTO.swift */; };
 		F4A28CF82A1F77B20091A940 /* MilestoneListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A28CF72A1F77B20091A940 /* MilestoneListDTO.swift */; };
+		F4AD2E672A28087E0072BD0C /* IssueFormDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD2E662A28087E0072BD0C /* IssueFormDTO.swift */; };
+		F4AD2E6B2A28309E0072BD0C /* IssueFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD2E6A2A28309E0072BD0C /* IssueFormData.swift */; };
+		F4AD2E6D2A284EBF0072BD0C /* UIToolbar+KeyboardAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AD2E6C2A284EBF0072BD0C /* UIToolbar+KeyboardAccessory.swift */; };
 		F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CCB2A0C8886001C22F0 /* AppDelegate.swift */; };
 		F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CCD2A0C8886001C22F0 /* SceneDelegate.swift */; };
 		F4BF7CD32A0C8886001C22F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4BF7CD12A0C8886001C22F0 /* Main.storyboard */; };
@@ -77,6 +81,10 @@
 		F4BF7CF72A0D231D001C22F0 /* UILabel+font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */; };
 		F4C0A6D32A21FF6D0045277D /* FilterList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4C0A6D22A21FF6D0045277D /* FilterList.storyboard */; };
 		F4D5E3D42A1C50AF00722AD1 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5E3D32A1C50AF00722AD1 /* IssueList.swift */; };
+		F4DBD61F2A26F19D0034D090 /* IssueCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBD61E2A26F19D0034D090 /* IssueCreateViewController.swift */; };
+		F4DBD6212A26F1ED0034D090 /* IssueCreateViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4DBD6202A26F1ED0034D090 /* IssueCreateViewController.storyboard */; };
+		F4DBD6252A2771A80034D090 /* StoryboardBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBD6242A2771A80034D090 /* StoryboardBased.swift */; };
+		F4DBD6282A2787DB0034D090 /* ItemPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBD6272A2787DA0034D090 /* ItemPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +123,7 @@
 		F415D2872A202F8B00712189 /* UITextField+font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+font.swift"; sourceTree = "<group>"; };
 		F43B37462A1F870F00EEB7C5 /* LabelEditViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LabelEditViewController.storyboard; sourceTree = "<group>"; };
 		F43B37482A1F8AA000EEB7C5 /* LabelEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelEditViewController.swift; sourceTree = "<group>"; };
+		F45FA3DF2A27FED10041247D /* IssueDetailPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailPostDTO.swift; sourceTree = "<group>"; };
 		F47681B22A24F0A200C4FFA5 /* LabelDetailPostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDetailPostDTO.swift; sourceTree = "<group>"; };
 		F48583AB2A10E1FC00322C9F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F48583C32A13802E00322C9F /* URLSessionDataTaskInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskInterface.swift; sourceTree = "<group>"; };
@@ -138,6 +147,9 @@
 		F4A28CEC2A1F40B70091A940 /* MilestoneListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MilestoneListCell.xib; sourceTree = "<group>"; };
 		F4A28CF12A1F56FB0091A940 /* LabelListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListDTO.swift; sourceTree = "<group>"; };
 		F4A28CF72A1F77B20091A940 /* MilestoneListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneListDTO.swift; sourceTree = "<group>"; };
+		F4AD2E662A28087E0072BD0C /* IssueFormDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFormDTO.swift; sourceTree = "<group>"; };
+		F4AD2E6A2A28309E0072BD0C /* IssueFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFormData.swift; sourceTree = "<group>"; };
+		F4AD2E6C2A284EBF0072BD0C /* UIToolbar+KeyboardAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIToolbar+KeyboardAccessory.swift"; sourceTree = "<group>"; };
 		F4BF7CC82A0C8886001C22F0 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4BF7CCB2A0C8886001C22F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4BF7CCD2A0C8886001C22F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +163,10 @@
 		F4BF7CF62A0D231D001C22F0 /* UILabel+font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+font.swift"; sourceTree = "<group>"; };
 		F4C0A6D22A21FF6D0045277D /* FilterList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FilterList.storyboard; sourceTree = "<group>"; };
 		F4D5E3D32A1C50AF00722AD1 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
+		F4DBD61E2A26F19D0034D090 /* IssueCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCreateViewController.swift; sourceTree = "<group>"; };
+		F4DBD6202A26F1ED0034D090 /* IssueCreateViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueCreateViewController.storyboard; sourceTree = "<group>"; };
+		F4DBD6242A2771A80034D090 /* StoryboardBased.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardBased.swift; sourceTree = "<group>"; };
+		F4DBD6272A2787DA0034D090 /* ItemPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +233,8 @@
 				635342C12A21032700668765 /* LastTimeGenerator.swift */,
 				F4A28CCD2A1E3A200091A940 /* SwipeAction.swift */,
 				63DF68A82A26F254006C4D0E /* ServerAPI.swift */,
+				F4DBD6242A2771A80034D090 /* StoryboardBased.swift */,
+				F4AD2E6C2A284EBF0072BD0C /* UIToolbar+KeyboardAccessory.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -228,6 +246,7 @@
 				63D6CFD02A15B80D000876D5 /* Filter */,
 				635342AA2A20DE9900668765 /* Detail */,
 				6361BDF42A249B2E0015D267 /* Select */,
+				F4DBD6262A2773480034D090 /* Create */,
 			);
 			path = IssueTab;
 			sourceTree = "<group>";
@@ -263,6 +282,8 @@
 				F4A28CF12A1F56FB0091A940 /* LabelListDTO.swift */,
 				F4A28CF72A1F77B20091A940 /* MilestoneListDTO.swift */,
 				F47681B22A24F0A200C4FFA5 /* LabelDetailPostDTO.swift */,
+				F45FA3DF2A27FED10041247D /* IssueDetailPostDTO.swift */,
+				F4AD2E662A28087E0072BD0C /* IssueFormDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -313,6 +334,7 @@
 				F4A28CE92A1F3C6D0091A940 /* MilestoneList.swift */,
 				635342BF2A20FF3F00668765 /* IssueDetailHeaderData.swift */,
 				63DF68A62A26E0FB006C4D0E /* IssuePatchDTO.swift */,
+				F4AD2E6A2A28309E0072BD0C /* IssueFormData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -394,6 +416,16 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		F4DBD6262A2773480034D090 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				F4DBD61E2A26F19D0034D090 /* IssueCreateViewController.swift */,
+				F4DBD6202A26F1ED0034D090 /* IssueCreateViewController.storyboard */,
+				F4DBD6272A2787DA0034D090 /* ItemPickerViewController.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -470,6 +502,7 @@
 				6361BDF62A249EDE0015D267 /* SelectToolBar.xib in Resources */,
 				F4BF7CD52A0C8887001C22F0 /* Assets.xcassets in Resources */,
 				F4BF7CD32A0C8886001C22F0 /* Main.storyboard in Resources */,
+				F4DBD6212A26F1ED0034D090 /* IssueCreateViewController.storyboard in Resources */,
 				F48583D12A138DA400322C9F /* issues.json in Resources */,
 				F4A28CEE2A1F40B70091A940 /* MilestoneListCell.xib in Resources */,
 				F4A28CE02A1E3F8E0091A940 /* LabelListCell.xib in Resources */,
@@ -518,6 +551,7 @@
 				63D6CFE72A168F40000876D5 /* FilterListCollectionViewCell.swift in Sources */,
 				635342DC2A231F9000668765 /* FilterApplyList.swift in Sources */,
 				F4BF7CF32A0D1312001C22F0 /* Color.swift in Sources */,
+				F4DBD6252A2771A80034D090 /* StoryboardBased.swift in Sources */,
 				F48583AC2A10E1FC00322C9F /* TabBarController.swift in Sources */,
 				63D6CFD82A1624D3000876D5 /* DataSenderDelegate.swift in Sources */,
 				F48583C82A13802E00322C9F /* URLSessionDataTaskInterface.swift in Sources */,
@@ -526,6 +560,7 @@
 				F48583CA2A13802E00322C9F /* URLSessionInterface.swift in Sources */,
 				F43B37492A1F8AA000EEB7C5 /* LabelEditViewController.swift in Sources */,
 				F48583C92A13802E00322C9F /* NetworkManager.swift in Sources */,
+				F4AD2E6B2A28309E0072BD0C /* IssueFormData.swift in Sources */,
 				6361BDF32A249B280015D267 /* SelectToolBar.swift in Sources */,
 				F4A28CF22A1F56FB0091A940 /* LabelListDTO.swift in Sources */,
 				F48583CF2A1380D100322C9F /* IssueListDTO.swift in Sources */,
@@ -543,7 +578,9 @@
 				63DF68A52A26D77A006C4D0E /* IssueListViewController+Select.swift in Sources */,
 				F4A28CDF2A1E3F8E0091A940 /* LabelListCell.swift in Sources */,
 				F4D5E3D42A1C50AF00722AD1 /* IssueList.swift in Sources */,
+				F4AD2E672A28087E0072BD0C /* IssueFormDTO.swift in Sources */,
 				6343A0662A0F7B65005FFC3E /* IssueLabel.swift in Sources */,
+				F4AD2E6D2A284EBF0072BD0C /* UIToolbar+KeyboardAccessory.swift in Sources */,
 				635342D62A2303DD00668765 /* FilterListFactory.swift in Sources */,
 				F4A28CCC2A1E2F700091A940 /* ListingItemFactory.swift in Sources */,
 				635342DA2A23145F00668765 /* FilterListType.swift in Sources */,
@@ -552,7 +589,10 @@
 				F4A28CEA2A1F3C6E0091A940 /* MilestoneList.swift in Sources */,
 				F40809752A0DE61C0005E0AB /* IssueListViewController.swift in Sources */,
 				635342AC2A20DEB300668765 /* IssueDetailViewController.swift in Sources */,
+				F4DBD6282A2787DB0034D090 /* ItemPickerViewController.swift in Sources */,
 				F4BF7CCC2A0C8886001C22F0 /* AppDelegate.swift in Sources */,
+				F4DBD61F2A26F19D0034D090 /* IssueCreateViewController.swift in Sources */,
+				F45FA3E02A27FED10041247D /* IssueDetailPostDTO.swift in Sources */,
 				F4BF7CCE2A0C8886001C22F0 /* SceneDelegate.swift in Sources */,
 				F4A28CDA2A1E3D460091A940 /* LabelListViewController.swift in Sources */,
 				F48583CB2A13802E00322C9F /* MockResponse.swift in Sources */,
@@ -706,7 +746,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y67S3384LP;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "IssueTracker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -734,7 +774,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y67S3384LP;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "IssueTracker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

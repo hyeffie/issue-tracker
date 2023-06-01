@@ -342,3 +342,29 @@ extension NetworkManager {
       }
    }
 }
+
+extension NetworkManager {
+   func getIssueForm(completion: @escaping (IssueFormDTO) -> Void) {
+      let urlString = baseURL + "/issues" + "/create"
+      getData(for: urlString, dataType: IssueFormDTO.self) { result in
+         switch result {
+         case .success(let dto):
+            completion(dto)
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+   
+   func postNewIssue(_ newIssue: IssueDetailPostDTO, completion: @escaping () -> Void) {
+      let urlString = baseURL + "/issues"
+      postData(for: urlString, data: newIssue) { (result: Result<Data?, Error>) in
+         switch result {
+         case .success:
+            completion()
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+}
