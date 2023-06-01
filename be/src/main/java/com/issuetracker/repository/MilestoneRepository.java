@@ -39,6 +39,11 @@ public interface MilestoneRepository extends CrudRepository<Milestone, Long> {
             + "WHERE i.id = :issueId")
     Milestone findMilestoneByIssueId(long issueId);
 
+    @Query("SELECT count(m.id) FROM issue i\n" +
+            "LEFT JOIN milestone m ON m.id = i.milestone_id\n"
+            + "WHERE i.id = :issueId")
+    Integer isExistMilestoneByIssueId(long issueId);
+
     /**
      * 마일스톤 필터에 사용할 전체 마일스톤의 목록을 조회합니다.
      */
