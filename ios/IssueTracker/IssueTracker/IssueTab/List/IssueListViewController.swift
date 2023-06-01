@@ -269,7 +269,7 @@ extension IssueListViewController {
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       guard isSelectMode, let cell = collectionView.cellForItem(at: indexPath) as? IssueListCollectionViewCell else {
          let storyboard = UIStoryboard(name: "IssueDetail", bundle: nil)
-         guard let viewController = storyboard.instantiateInitialViewController() as? IssueDetailViewController else { return }
+         guard let viewController = storyboard.instantiateInitialViewController() as? IssueDetailTableViewController else { return }
          
          viewController.issueId = list.issues[indexPath.row].issueId
          self.navigationController?.pushViewController(viewController, animated: true)

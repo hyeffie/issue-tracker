@@ -17,12 +17,17 @@ class IssueLabel: UILabel {
       return contentSize
    }
    
-   convenience init(name: String, color: String) {
+   convenience init(name: String, color: String, forWriterBadge: Bool = false) {
       self.init()
-      self.text = name
+      self.text = forWriterBadge ? "작성자" : name
       self.font = Typography(weight: .regular, size: .small).font
-      self.backgroundColor = convertToUIColor(color: color)
-      self.textColor = isBright(self.backgroundColor) ? .black : .white
+      if forWriterBadge {
+         self.backgroundColor = .white
+         self.textColor = Color.gray700.color
+      } else {
+         self.backgroundColor = convertToUIColor(color: color)
+         self.textColor = isBright(self.backgroundColor) ? .black : .white
+      }
    }
    
    override func drawText(in rect: CGRect) {

@@ -72,6 +72,7 @@ final class NetworkManager {
          
          guard let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else {
             completion(.failure(NetworkError.noResponse))
+            print(error)
             return
          }
          
@@ -239,7 +240,7 @@ extension NetworkManager {
    }
    
    func requestIssueDetail(issueId: Int, completion: @escaping (IssueDetailDTO) -> Void) {
-      let issueDetailURL = ServerAPI.issueURL + "\(issueId)"
+      let issueDetailURL = ServerAPI.issueURL + "/\(issueId)"
       
       getData(for: issueDetailURL,
               dataType: IssueDetailDTO.self) { result in

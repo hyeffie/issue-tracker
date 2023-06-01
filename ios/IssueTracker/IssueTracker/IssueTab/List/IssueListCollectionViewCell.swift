@@ -16,6 +16,7 @@ class IssueListCollectionViewCell: UICollectionViewCell {
    @IBOutlet var descriptionLabel: UILabel!
    @IBOutlet var milestoneLabel: UILabel!
    @IBOutlet var labelStackView: UIStackView!
+   @IBOutlet weak var emptyView: UIView!
    
    override func awakeFromNib() {
       super.awakeFromNib()
@@ -76,10 +77,12 @@ class IssueListCollectionViewCell: UICollectionViewCell {
       self.checkBoxImageView.image = filledCheckmark?.withAlignmentRectInsets(imageInset)
       self.checkBoxImageView.tintColor = .systemBlue
       self.backgroundColor = Color.gray100.color
+      self.emptyView.backgroundColor = Color.gray100.color
    }
    
    func didDeSelect() {
       configureImage()
       self.backgroundColor = .systemBackground
+      self.emptyView.backgroundColor = .systemBackground
    }
 }

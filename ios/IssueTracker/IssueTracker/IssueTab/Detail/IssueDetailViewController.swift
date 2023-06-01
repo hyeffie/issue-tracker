@@ -9,15 +9,16 @@ import UIKit
 
 class IssueDetailViewController: UIViewController {
    @IBOutlet weak var collectionView: UICollectionView!
+   private var issueDetailUseCase = IssueDetailUseCase()
+   private var uiColorFactory = UIColorFactory()
+   private var observers: [NSObjectProtocol] = []
+
    var issueId: Int?
-   var issueDetailUseCase = IssueDetailUseCase()
-   var lastTimeGenerator = LastTimeGenerator()
-   var uiColorFactory = UIColorFactory()
-   
-   let headerId = "IssueDetailCollectionViewHeader"
-   let cellId = "IssueDetailCollectionViewCell"
-   let openColor  = "#007AFF"
-   let closeColor = "#543ABE"
+   private var writerName = ""
+   private let headerId = "IssueDetailCollectionViewHeader"
+   private let cellId = "CommentCell"
+   private let openColor  = "#007AFF"
+   private let closeColor = "#543ABE"
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -55,16 +56,34 @@ class IssueDetailViewController: UIViewController {
    
    private func setObserver() {
       NotificationCenter.default.addObserver(self,
-                                             selector: #selector(updateCell(_:)),
-                                             name: IssueDetailDTO.Notifications.didLoadDetail,
-                                             object: nil)
+                                             selector: #selector(reload(_:)),
+                                             name: IssueDetailUseCase.didLoadDetailData,
+                                             object: issueDetailUseCase)
+      
    }
    
-   @objc func updateCell(_ notification: Notification) {
+   @objc func reload(_ notification: Notification) {
       DispatchQueue.main.async {
          self.collectionView.reloadData()
       }
    }
+   
+//   func createLayout() -> UICollectionViewLayout {
+//      let sectionProvider = { (sectionIndex: Int,
+//                               layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+//
+//          var config = UICollectionLayoutListConfiguration(appearance: .plain)
+//          config.showsSeparators = false
+//
+//          let section = NSCollectionLayoutSection.list(
+//              using: config,
+//              layoutEnvironment: layoutEnvironment
+//          )
+//
+//          return section
+//      }
+//      return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
+//   }
 }
 
 extension IssueDetailViewController: UICollectionViewDelegate {}
@@ -86,20 +105,12 @@ extension IssueDetailViewController: UICollectionViewDataSource {
       ) as? IssueDetailCollectionViewHeader else { return UICollectionReusableView() }
       
       let headerData = issueDetailUseCase.sendHeaderData()
+      writerName = headerData.userName
       
-      let time = lastTimeGenerator.calculateLastTime(past: headerData.editTime)
+      let time = LastTimeGenerator.calculateLastTime(past: headerData.editTime)
       header.editTime.text = "\(time) 전, \(headerData.userName)님이 작성했습니다."
       header.title.text = headerData.title
       header.number.text = "#\(headerData.number)"
-      
-      switch headerData.status {
-      case false:
-         header.status.text = "열린 이슈"
-         header.status.backgroundColor = uiColorFactory.make(hexColor: openColor)
-      case true:
-         header.status.text = "닫힌 이슈"
-         header.status.backgroundColor = uiColorFactory.make(hexColor: closeColor)
-      }
       
       return header
    }
@@ -108,7 +119,7 @@ extension IssueDetailViewController: UICollectionViewDataSource {
       _ collectionView: UICollectionView,
       numberOfItemsInSection section: Int
    ) -> Int {
-      return 5
+      return issueDetailUseCase.commentCount
    }
    
    func collectionView(
@@ -118,7 +129,16 @@ extension IssueDetailViewController: UICollectionViewDataSource {
       guard let cell = collectionView.dequeueReusableCell(
          withReuseIdentifier: cellId,
          for: indexPath
-      ) as? IssueDetailCollectionViewCell else { return UICollectionViewCell() }
+      ) as? CommentCell else { return UICollectionViewCell() }
+
+      guard let comment = issueDetailUseCase.sendComent(row: indexPath.row) else {
+         return cell
+      }
+      
+      cell.configure(writerName: writerName, comment: comment)
+//      DispatchQueue.main.async {
+//         cell.configureImage(image: self.issueDetailUseCase.sendImage(row: indexPath.row))
+//      }
       return cell
    }
 }
@@ -137,7 +157,25 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
       layout collectionViewLayout: UICollectionViewLayout,
       sizeForItemAt indexPath: IndexPath
    ) -> CGSize {
-      return CGSize(width: self.collectionView.frame.width, height: 100)
+      let width = self.collectionView.frame.width
+      let estimatedHeight: CGFloat = 300.0
+      guard let dummyCell = collectionView.dequeueReusableCell(
+         withReuseIdentifier: cellId,
+         for: indexPath
+      ) as? CommentCell else { return CGSize() }
+      
+      referDetail(at: indexPath) { (detail) in
+         dummyCell.configure(writerName: writerName, comment: detail)
+      }
+      
+      return CGSize(width: self.collectionView.frame.width, height: estimatedHeight)
+   }
+   
+   func referDetail(at indexPath: IndexPath, handler: (IssueDetailDTO.Comment) -> Void) {
+      guard let detail = self.issueDetailUseCase.sendComent(row: indexPath.row) else {
+         return
+      }
+      handler(detail)
    }
    
    func collectionView(

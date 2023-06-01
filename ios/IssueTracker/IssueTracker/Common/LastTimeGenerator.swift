@@ -8,20 +8,20 @@
 import Foundation
 
 struct LastTimeGenerator {
-   let dateFormatter: DateFormatter = {
+   static let dateFormatter: DateFormatter = {
       let formatter = DateFormatter()
       formatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzzz"
       formatter.locale = Locale(identifier: "ko_KR")
       return formatter
    }()
    
-   let dateComponent: DateComponents = {
+   static let dateComponent: DateComponents = {
       var component = DateComponents()
       component.hour = 9
       return component
    }()
    
-   func calculateLastTime(past: String) -> String {
+   static func calculateLastTime(past: String) -> String {
       guard let pastTime = dateFormatter.date(from: past + " +0000"),
             let now = Calendar.current.date(byAdding: dateComponent, to: Date()) else {
          return ""

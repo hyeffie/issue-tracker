@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -91,6 +92,7 @@
             <connections>
                 <outlet property="checkBoxImageView" destination="k11-4I-sMu" id="oKp-AC-9Jh"/>
                 <outlet property="descriptionLabel" destination="XvL-EA-VVf" id="Ymn-pc-caw"/>
+                <outlet property="emptyView" destination="mao-sz-PeT" id="ctI-bN-RP9"/>
                 <outlet property="labelStackView" destination="dyV-HA-oXT" id="gDG-qO-tJL"/>
                 <outlet property="milestoneLabel" destination="9CR-Vp-wLF" id="NNp-8o-Vfb"/>
                 <outlet property="titleLabel" destination="exc-QW-s87" id="AyX-53-RFb"/>
