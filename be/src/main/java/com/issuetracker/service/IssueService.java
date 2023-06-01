@@ -62,8 +62,11 @@ public class IssueService {
      * @return
      */
     public IssueDetailPageDto getIssueDetail(long issueId) {
-        // TODO: 데이터베이스에 없는 이슈면 예외처리 (404 NOT FOUND)
         Issue issue = issueRepository.findIssueByIssueId(issueId);
+        // TODO: 없는 이슈면 예외처리 (404 NOT FOUND) 일단 비어있는 Dto를 리턴함.
+        if (issue == null) {
+            return new IssueDetailPageDto();
+        }
         User user = userRepository.findById(issue.getUserId()).get();
         IssueDetailDto issueDetailDto = new IssueDetailDto(issueId, issue.getTitle(), issue.getContent(),
                 user.getLoginId(), user.getProfileUrl(), issue.isOpened(), issue.getCreatedAt(), issue.getClosedAt());

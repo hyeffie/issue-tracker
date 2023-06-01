@@ -35,13 +35,13 @@ public interface MilestoneRepository extends CrudRepository<Milestone, Long> {
     int countClosedMilestones();
 
     @Query("SELECT m.id, m.name, m.opened, m.deleted FROM issue i\n" +
-            "LEFT JOIN milestone m ON m.id = i.milestone_id\n"
-            + "WHERE i.id = :issueId")
+            "LEFT JOIN milestone m ON m.id = i.milestone_id\n" +
+            "WHERE i.id = :issueId")
     Milestone findMilestoneByIssueId(long issueId);
 
     @Query("SELECT count(m.id) FROM issue i\n" +
-            "LEFT JOIN milestone m ON m.id = i.milestone_id\n"
-            + "WHERE i.id = :issueId")
+            "LEFT JOIN milestone m ON m.id = i.milestone_id\n" +
+            "WHERE i.id = :issueId AND m.deleted IS FALSE")
     Integer isExistMilestoneByIssueId(long issueId);
 
     /**
