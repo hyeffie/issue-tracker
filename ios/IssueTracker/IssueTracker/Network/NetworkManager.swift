@@ -331,12 +331,12 @@ extension NetworkManager {
 }
 
 extension NetworkManager {
-   func getIssueForm(completion: @escaping () -> Void) {
+   func getIssueForm(completion: @escaping (IssueFormDTO) -> Void) {
       let urlString = baseURL + "/issues" + "/create"
       getData(for: urlString, dataType: IssueFormDTO.self) { result in
          switch result {
-         case .success:
-            completion()
+         case .success(let dto):
+            completion(dto)
          case .failure(let error):
             print(error)
          }

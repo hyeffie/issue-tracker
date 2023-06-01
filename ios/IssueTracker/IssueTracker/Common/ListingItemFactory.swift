@@ -32,6 +32,17 @@ struct ListingItemFactory {
          let issues = makeIssues(with: issueList.issues)
          return IssueList(issues: issues)
       }
+      
+      static func makeIssueFormData(with issueListDTO: IssueListDTO) -> IssueFormData {
+         let users = issueListDTO.userList.map { user in IssueFormData.User(userId: user.userId, userName: user.userName) }
+         let labels = issueListDTO.labelList.map { label in
+            IssueFormData.Label(labelId: label.labelId, labelName: label.labelName)
+         }
+         let milestones = issueListDTO.milestoneList.map { milestone in
+            IssueFormData.Milestone(milestoneId: milestone.milestoneId, milestoneName: milestone.milestoneName ?? "이름 없음")
+         }
+         return IssueFormData(userList: users, labelList: labels, miletoneList: milestones)
+      }
    }
    
    struct LabelTab {

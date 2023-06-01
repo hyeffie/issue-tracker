@@ -34,17 +34,21 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
    
    // MARK: Properties
    
+   var networkManager: NetworkManager?
+   
+   var formData: IssueFormData?
    var detail: IssueDetailPostDTO?
    
    // MARK: Actions
    
    @IBAction func selectAssigneeSection(_ sender: Any) {
-      let elements = [
-         PickerElement(id: 0, name: "에피"),
-         PickerElement(id: 1, name: "우드"),
-         PickerElement(id: 2, name: "클로이"),
-         PickerElement(id: 3, name: "JK"),
-      ]
+      guard let formData else {
+         // MARK: 데이터 없을 때 선택할 수 없음 > 알림창 등으로 처리
+         return
+      }
+      
+      let elements = formData.userList.map { user in PickerElement(id: user.userId, name: user.userName) }
+      
       let pickerViewController = ItemPickerViewController(title: "담당자", elements: elements) { [weak self] selectedAssignees in
          self?.detail?.replaceAssigneeList(selectedAssignees)
       }
@@ -57,6 +61,8 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
    override func viewDidLoad() {
       super.viewDidLoad()
       setUI()
+      setNetworkManager()
+      getFormData()
    }
    
    private func setUI() {
@@ -87,5 +93,18 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
          label.apply(typography: .init(weight: .regular, size: .large), textColor: .gray700)
       }
       contentField.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+   }
+   
+   private func setNetworkManager() {
+      networkManager = NetworkManager()
+   }
+}
+
+extension IssueCreateViewController {
+   private func getFormData() {
+      networkManager?.requestIssueList(completion: { [weak self] dto in
+         let issueFormData = ListingItemFactory.IssueTab.makeIssueFormData(with: dto)
+         self?.formData = issueFormData
+      })
    }
 }
