@@ -39,7 +39,6 @@ public class IssueListService {
 
         List<Long> filteredIssueIdList = issueIdListMapper.findIssueIdList(filterDto);
         List<IssueListPage> issueMainPageDtoList = issueListMapper.findIssueList(filteredIssueIdList);
-        System.out.println(filteredIssueIdList);
 
         List<FilterLabelDto> filterLabelDtoList = FilterListMapper.getFilterLabelDtos(
                 labelRepository.getFilterLabelList());
