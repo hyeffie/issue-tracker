@@ -36,6 +36,7 @@ public class MilestoneService {
                     milestone.getName(),
                     milestone.getDescription(),
                     milestone.getCompletedAt(),
+                    milestone.isOpened(),
                     countOpenedIssues, countClosedIssues, progress));
         }
 
