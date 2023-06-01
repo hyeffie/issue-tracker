@@ -16,12 +16,15 @@ class SelectToolBar: UIToolbar {
    var countOfSelectedCells = 0
    
    func configureItems(isSelected: Bool = true) {
+      
       if isSelected {
          countOfSelectedCells += 1
       } else {
-         countOfSelectedCells -= 1
+         if countOfSelectedCells > 0 {
+            countOfSelectedCells -= 1
+         }
       }
-      
+
       self.descriptionItem.title = "\(countOfSelectedCells)개의 이슈가 선택됨"
       
       guard countOfSelectedCells > 0 else {
