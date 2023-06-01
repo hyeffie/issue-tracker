@@ -10,11 +10,11 @@ import UIKit
 class IssueListViewController: UIViewController, UIToolbarDelegate {
    var collectionView: UICollectionView!
    private var dataSource: DataSource?
-   
+
    private var observers: [NSObjectProtocol] = []
-   
+
    private let filterListID = "FilterList"
-   
+
    var list: IssueList = IssueList()
    private var filterList = IssueFilterList()
 
@@ -24,15 +24,16 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
    var networkManager: NetworkManager?
    var selectToolbar: SelectToolBar?
    var selectedIssues = IssuePatchDTO()
-   
+   var selectedCells = Set<Int>()
+
    private var floatingActionButton: UIButton?
-   
+
    var currentPageNumber: Int = 1
    var isPaging = false
    var hasNextPage = true
    var isSelectMode = false
    let toolbarTag: Int = 100
-   
+
    override func viewDidLoad() {
       super.viewDidLoad()
       self.view.backgroundColor = .systemBackground
@@ -46,16 +47,16 @@ class IssueListViewController: UIViewController, UIToolbarDelegate {
       addFloatingActionButton()
       fetchIssues()
    }
-   
+
    override func viewDidAppear(_ animated: Bool) {
       super.viewDidAppear(animated)
       self.tabBarController?.tabBar.isHidden = false
    }
-   
+
    private func setNetworkManager() {
       networkManager = NetworkManager(session: URLSession.shared)
    }
-   
+
    func reset() {
       list.emptyList()
       currentPageNumber = 1
@@ -70,18 +71,18 @@ extension IssueListViewController {
       collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
       collectionView.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview(collectionView)
-      
+
       NSLayoutConstraint.activate([
          collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
          collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
          collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
       ])
-      
+
       collectionView.delegate = self
       collectionView.keyboardDismissMode = .onDrag
    }
-   
+
    private func setCollectionViewLayout() -> UICollectionViewCompositionalLayout {
       let sectionProvider: UICollectionViewCompositionalLayoutSectionProvider = { [weak self] _, layoutEnvironment in
          var config = UICollectionLayoutListConfiguration(appearance: .plain)
@@ -113,7 +114,7 @@ extension IssueListViewController {
 extension IssueListViewController {
    typealias SectionType = Section
    typealias ItemType = Item
-   
+
    enum Section {
       case issue
       case loadIndicator
@@ -125,7 +126,7 @@ extension IssueListViewController {
          }
       }
    }
-   
+
    enum Item: Hashable {
       case issue(issue: IssueSummary)
       case load
@@ -138,12 +139,15 @@ extension IssueListViewController {
    
    private func createIssueCellRegisteration() -> UICollectionView.CellRegistration<IssueCell, ItemType> {
       let issueCellNib = UINib(nibName: IssueCell.cellId, bundle: nil)
-      return .init(cellNib: issueCellNib) { cell, _, itemIdentifier in
+      return .init(cellNib: issueCellNib) { cell, indexPath, itemIdentifier in
          guard case Item.issue(let issue) = itemIdentifier else { return }
-         cell.configure(issue: issue)
+         
+         
+         cell.configure(issue: issue, isSelected: self.selectedCells.contains(indexPath.row))
+         
       }
    }
-   
+
    private func createLoadCellRegisteration() -> UICollectionView.CellRegistration<LoadCell, ItemType> {
       let loadCellNib = UINib(nibName: LoadCell.cellId, bundle: nil)
       return .init(cellNib: loadCellNib, handler: { _, _, _ in })
@@ -176,6 +180,7 @@ extension IssueListViewController {
       snapshot.appendItems(issues, toSection: .issue)
       if hasNextPage { snapshot.appendItems([.load], toSection: .loadIndicator) }
       dataSource?.apply(snapshot, animatingDifferences: animated)
+      
    }
 }
 
@@ -203,12 +208,12 @@ extension IssueListViewController {
          forName: IssueList.Notifications.didAddIssues,
          object: list, queue: .main,
          using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
-      
+
       self.observers.append(NotificationCenter.default.addObserver(
          forName: IssueList.Notifications.didAddFilteredIssues,
          object: list, queue: .main,
          using: { [weak self] _ in self?.applyUpdatedSnapshot() }))
-      
+
       self.observers.append(NotificationCenter.default.addObserver(
          forName: FilterApplyList.applyFilter,
          object: nil, queue: .main,
@@ -217,7 +222,7 @@ extension IssueListViewController {
             self?.filterApplyList = filterApplyList
             self?.reset()
             self?.fetchIssues() }))
-      
+
       self.observers.append(NotificationCenter.default.addObserver(
          forName: IssueList.Notifications.didEmptyIssue,
          object: list, queue: .main,
@@ -270,15 +275,17 @@ extension IssueListViewController {
       guard isSelectMode, let cell = collectionView.cellForItem(at: indexPath) as? IssueListCollectionViewCell else {
          let storyboard = UIStoryboard(name: "IssueDetail", bundle: nil)
          guard let viewController = storyboard.instantiateInitialViewController() as? IssueDetailTableViewController else { return }
-         
+
          viewController.issueId = list.issues[indexPath.row].issueId
          self.navigationController?.pushViewController(viewController, animated: true)
          return
       }
       
       self.selectToolbar?.configureItems()
+      
       cell.didSelect()
       self.selectedIssues.add(issue: IssuePatchDTO.Issue(issueId: list.findIssue(row: indexPath.row)))
+      self.selectedCells.insert(indexPath.row)
    }
    
    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -289,6 +296,7 @@ extension IssueListViewController {
       self.selectToolbar?.configureItems(isSelected: false)
       cell.didDeSelect()
       self.selectedIssues.remove(id: indexPath.row)
+      self.selectedCells.remove(indexPath.row)
    }
 }
 

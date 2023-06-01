@@ -63,6 +63,7 @@ extension IssueListViewController {
       setSelectButton()
       configureTabBar(isHiding: false)
       deselectAllCells()
+      self.selectedCells.removeAll()
       self.selectedIssues.emptyList()
       self.collectionView.allowsMultipleSelection = false
       self.isSelectMode = false
@@ -93,6 +94,7 @@ extension IssueListViewController {
          }
          
          cell.didDeSelect()
+         self.selectedCells.remove($0.row)
       }
    }
 }

@@ -28,6 +28,7 @@ class IssueListCollectionViewCell: UICollectionViewCell {
       super.prepareForReuse()
       labelStackView.isHidden = false
       emptyLabelStack()
+      didDeSelect()
    }
    
    func configureFont() {
@@ -56,7 +57,7 @@ class IssueListCollectionViewCell: UICollectionViewCell {
       }
    }
    
-   func configure(issue: IssueSummary) {
+   func configure(issue: IssueSummary, isSelected: Bool) {
       titleLabel.text = "#\(issue.issueId) \(issue.title)"
       descriptionLabel.text = issue.content
       milestoneLabel.text = issue.milestoneName
@@ -69,7 +70,10 @@ class IssueListCollectionViewCell: UICollectionViewCell {
       for label in issue.labelList.reversed() {
          addLabel(name: label.labelName, color: label.backgroundColor)
       }
+      
       labelStackView.sizeToFit()
+      guard isSelected else { return }
+      didSelect()
    }
    
    func didSelect() {
