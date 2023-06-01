@@ -35,6 +35,11 @@ public class IssueController {
         issueService.createIssue(labelPostDto);
     }
 
+    @PatchMapping("/api/issues/{issueId}")
+    public void updateIssue(@RequestBody IssuePostDto issuePostDto, @PathVariable long issueId) {
+        issueService.modifyIssue(issuePostDto, issueId);
+    }
+
     @PatchMapping("/api/issues/{issueId}/title")
     public void updateTitle(@RequestBody Map<String, String> map, @PathVariable long issueId) {
         issueService.modifyIssueTitle(map.get("title"), issueId);
