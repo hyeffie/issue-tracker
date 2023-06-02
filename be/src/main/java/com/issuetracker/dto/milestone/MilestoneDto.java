@@ -16,6 +16,7 @@ public class MilestoneDto {
     private String name;
     private String description;
     private LocalDateTime completedAt;
+    private Boolean isOpen;
     private long countAllOpenedIssues;
     private long countAllClosedIssues;
     private int progress;

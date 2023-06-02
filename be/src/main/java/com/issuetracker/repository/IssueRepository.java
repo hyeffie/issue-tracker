@@ -17,8 +17,9 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
      * @param issueId
      * @return
      */
-    @Query("SELECT id, user_id, milestone_id, title, content, opened, created_at, closed_at, deleted_at\n"
-            + "FROM issue WHERE id = :issueId AND deleted_at IS NULL;")
+    @Query("SELECT id, user_id, milestone_id, title, content, opened, created_at, closed_at, deleted_at\n" +
+            "FROM issue " +
+            "WHERE id = :issueId AND deleted_at IS NULL;")
     Issue findIssueByIssueId(long issueId);
 
 
