@@ -29,7 +29,9 @@ import com.issuetracker.dto.issue.IssuePostDto;
 import com.issuetracker.dto.issue.IssueStatusDto;
 import com.issuetracker.dto.issueList.FilterLabelDto;
 import com.issuetracker.dto.issueList.FilterMilestoneDto;
+import com.issuetracker.dto.issueList.FilterMilestoneProgressDto;
 import com.issuetracker.dto.issueList.FilterUserDto;
+import com.issuetracker.dto.issueList.IssueFormDto;
 import com.issuetracker.dto.issueList.IssueStatusListDto;
 import com.issuetracker.mapper.LabelToDtoMapper;
 import com.issuetracker.repository.AssigneeRepository;
@@ -210,6 +212,30 @@ public class IssueService {
             return;
         }
         issueRepository.closeIssueById(issueId, LocalDateTime.now());
+    }
+
+    public IssueFormDto getIssueForm() {
+        List<FilterLabelDto> filterLabelDtoList = getFilterLabelDtos(
+                labelRepository.getFilterLabelList());
+
+        List<FilterUserDto> filterUserList = getFilterUserDtos(userRepository.getFilterUserList());
+        List<FilterMilestoneProgressDto> filterMilestoneProgressDtoList = new ArrayList<>();
+        for (FilterMilestoneDto milestone : getFilterMilestoneDtos(milestoneRepository.getFilterMilestoneList())) {
+            int progress = 0;
+            long countAllIssuesOnMilestone = issueRepository.countAllIssuesOnMilestone(milestone.getMilestoneId());
+            long countAllClosedIssuesOnMilestone = issueRepository.countAllClosedIssuesOnMilestone(
+                    milestone.getMilestoneId());
+            if (countAllIssuesOnMilestone != 0) {
+                progress = (int)(countAllClosedIssuesOnMilestone*1.0 / countAllIssuesOnMilestone * 100);
+            }
+
+            filterMilestoneProgressDtoList.add(new FilterMilestoneProgressDto(milestone.getMilestoneId(),
+                    milestone.getMilestoneName(), countAllIssuesOnMilestone, countAllClosedIssuesOnMilestone,
+                    progress));
+        }
+
+        return IssueFormDto.builder().userList(filterUserList).labelList(filterLabelDtoList).milestoneList(filterMilestoneProgressDtoList).build();
+
     }
 }
 

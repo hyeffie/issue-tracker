@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.issuetracker.dto.issue.IssueDetailPageDto;
 import com.issuetracker.dto.issue.IssuePostDto;
+import com.issuetracker.dto.issueList.IssueFormDto;
 import com.issuetracker.dto.issueList.IssueStatusListDto;
 import com.issuetracker.service.IssueService;
 
@@ -84,5 +85,10 @@ public class IssueController {
     @PatchMapping("/api/issues/{issueId}/status")
     public void changeSpecificIssueStatus(@PathVariable long issueId, @RequestBody Map<String, Boolean> map) {
         issueService.changeSpecificIssueStatus(issueId, map.get("isOpen"));
+    }
+
+    @GetMapping("/api/issues/create")
+    public IssueFormDto getIssueForm() {
+        return issueService.getIssueForm();
     }
 }
