@@ -48,7 +48,7 @@ public class LoginController {
         params.add("client_secret", "d7ca1f3354707d0dcb23ba4ecdee292d16f4d416");
         params.add("code", code);
         params.add("grant_type", "authorization_code");
-        params.add("redirect_uri", "http://13.209.93.177/oauth");
+        params.add("redirect_uri", "http://localhost:3000/oauth");
 
         HttpEntity<MultiValueMap<String, String>> accessTokenRequest = new HttpEntity<>(params, headers);
 
