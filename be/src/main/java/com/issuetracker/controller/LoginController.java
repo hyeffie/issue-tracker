@@ -3,6 +3,7 @@ package com.issuetracker.controller;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,9 +22,11 @@ import com.issuetracker.domain.User;
 import com.issuetracker.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class LoginController {
 
     private final UserRepository userRepository;
@@ -49,6 +52,10 @@ public class LoginController {
         params.add("code", code);
         params.add("grant_type", "authorization_code");
         params.add("redirect_uri", "http://localhost:3000/oauth");
+        log.info("code {} ", code);
+
+
+
 
         HttpEntity<MultiValueMap<String, String>> accessTokenRequest = new HttpEntity<>(params, headers);
 
@@ -58,6 +65,7 @@ public class LoginController {
                 accessTokenRequest,
                 String.class
         );
+        log.info("atr {} ", accessTokenResponse);
 
         String pattern = "access_token=([^&]+)";
 
@@ -71,6 +79,7 @@ public class LoginController {
             accessToken = matcher.group(1);
         }
 
+        log.info("accessToken {} ", accessToken);
         return accessToken;
     }
 
