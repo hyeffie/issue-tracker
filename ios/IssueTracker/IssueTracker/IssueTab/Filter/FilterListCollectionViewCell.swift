@@ -11,6 +11,24 @@ class FilterListCollectionViewCell: UICollectionViewCell {
    @IBOutlet weak var filterName: UILabel!
    @IBOutlet weak var selectionImageView: UIImageView!
    
+   override func awakeFromNib() {
+      super.awakeFromNib()
+      configureImage()
+   }
+   
+   override func prepareForReuse() {
+      super.prepareForReuse()
+      self.setDeselected()
+   }
+   
+   func configure(name: String, isSelected: Bool = false) {
+      self.filterName.text = name
+      guard isSelected else {
+         return
+      }
+      self.setSelected()
+   }
+   
    func configureFont() {
       filterName.apply(typography: Typography(weight: .regular, size: .large),
                        textColor: .gray900)

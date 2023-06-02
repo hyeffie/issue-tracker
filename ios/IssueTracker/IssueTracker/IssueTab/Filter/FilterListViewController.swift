@@ -14,6 +14,7 @@ class FilterListViewController: UIViewController {
    weak var delegate: (any DataSenderDelegate)?
    var filterListUseCase: FilterListUseCase?
    var filterApplyList = FilterApplyList()
+   var selectedCells = Set<IndexPath>()
    var pastSelectionStatus: IndexPath?
    var pastSelectionMilestone: IndexPath?
    
@@ -127,9 +128,8 @@ extension FilterListViewController: UICollectionViewDataSource {
          return cell
       }
       
-      cell.filterName.text = itemName
       cell.configureFont()
-      cell.configureImage()
+      cell.configure(name: itemName, isSelected: selectedCells.contains(indexPath))
       return cell
    }
 }
@@ -193,6 +193,7 @@ extension FilterListViewController {
       default: break
       }
       cell.setSelected()
+      selectedCells.insert(indexPath)
    }
    
    func collectionView(_ collectionView: UICollectionView,
@@ -202,5 +203,6 @@ extension FilterListViewController {
       }
       
       cell.setDeselected()
+      selectedCells.remove(indexPath)
    }
 }
