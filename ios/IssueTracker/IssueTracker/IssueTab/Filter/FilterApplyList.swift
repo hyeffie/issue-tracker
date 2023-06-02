@@ -29,7 +29,7 @@ class FilterApplyList {
       
       switch section {
       case 0:
-         self.status = id == 3 ? false : true
+         self.status = id == 1 ? false : true
       case 1:
          self.users.insert(id)
       case 2:
@@ -49,7 +49,7 @@ class FilterApplyList {
    func makeQuery() -> RequestParameters {
       var query: RequestParameters = [:]
       let filterList = self
-      let statusString = filterList.status ? "open" : "closed"
+      let statusString = filterList.status ? "open" : "close"
       query.updateValue("\(statusString)", forKey: "status")
       
       var userString = ""
