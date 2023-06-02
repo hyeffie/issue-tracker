@@ -203,4 +203,13 @@ public class IssueService {
             }
         }
     }
+
+    public void changeSpecificIssueStatus(long issueId, boolean isOpen) {
+        if (isOpen) {
+            issueRepository.openIssueById(issueId);
+            return;
+        }
+        issueRepository.closeIssueById(issueId, LocalDateTime.now());
+    }
 }
+

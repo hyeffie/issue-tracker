@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.issuetracker.dto.issue.IssueDetailPageDto;
 import com.issuetracker.dto.issue.IssuePostDto;
 import com.issuetracker.dto.issueList.IssueStatusListDto;
@@ -78,5 +79,10 @@ public class IssueController {
     @PatchMapping("/api/issues")
     public void changeIssueStatus(@RequestBody IssueStatusListDto issueStatusListDto) {
         issueService.changeIssueStatus(issueStatusListDto);
+    }
+
+    @PatchMapping("/api/issues/{issueId}/status")
+    public void changeSpecificIssueStatus(@PathVariable long issueId, @RequestBody Map<String, Boolean> map) {
+        issueService.changeSpecificIssueStatus(issueId, map.get("isOpen"));
     }
 }
