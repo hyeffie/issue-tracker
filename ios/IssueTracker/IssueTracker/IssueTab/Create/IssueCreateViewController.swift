@@ -10,11 +10,11 @@ import UIKit
 class IssueCreateViewController: UIViewController, StoryboardBased {
    // MARK: Static
    
-   static func instantiate(detail: IssueDetailPostDTO? = nil) -> Self {
+   static func instantiate(id: Int? = nil, detail: IssueDetailPostDTO? = nil) -> Self {
       let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
       let viewController = storyboard.instantiateInitialViewController() as! Self
-      
-      let newDTO = IssueDetailPostDTO(userId: 0, title: "", content: "", imgUrl: nil, userList: [], labelList: [], milestoneId: 1)
+      viewController.issueId = id
+      let newDTO = IssueDetailPostDTO(userId: 1, title: "", content: "", imgUrl: nil, userList: [], labelList: [], milestoneId: 1)
       viewController.detail = detail ?? newDTO
       return viewController
    }
@@ -42,6 +42,8 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
    
    var formData: IssueFormData?
    var detail: IssueDetailPostDTO?
+   
+   var issueId: Int? = nil
    
    var saveButton: UIBarButtonItem?
    
@@ -118,6 +120,7 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       setUI()
       setNetworkManager()
       getFormData()
+      setOutlet()
    }
    
    // MARK: Private Methods
@@ -126,8 +129,8 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       setNavigationItem()
       setFont()
       titleTextField.delegate = self
-      titleTextField.inputAccessoryView = UIToolbar.makeDoneButtonToolBar(action: { [weak self] action in self?.doneInput() })
-      contentField.inputAccessoryView = UIToolbar.makeDoneButtonToolBar(action: { [weak self] action in self?.doneInput() })
+      titleTextField.inputAccessoryView = UIToolbar.makeDoneButtonToolBar(action: { [weak self] _ in self?.doneInput() })
+      contentField.inputAccessoryView = UIToolbar.makeDoneButtonToolBar(action: { [weak self] _ in self?.doneInput() })
    }
    
    private func setNavigationItem() {
@@ -155,8 +158,25 @@ class IssueCreateViewController: UIViewController, StoryboardBased {
       contentField.font = UIFont.systemFont(ofSize: 18, weight: .regular)
    }
    
+   private func setOutlet() {
+      guard let detail else { return }
+      titleTextField.text = detail.title
+      contentField.text = detail.content
+      let selectedUserNames = detail.userList.map { user in user.userId }.compactMap { id in
+         formData?.userList.first(where: { user in user.userId == id })?.userName
+      }
+      selectedAssigneeLabel.text = makeDescription(names: selectedUserNames)
+      
+   }
+   
    private func setNetworkManager() {
       networkManager = NetworkManager()
+   }
+   
+   private func makeDescription(names: [String]) -> String {
+      guard var firstName = names.first else { return "" }
+      firstName += names.count > 1 ? "외 \(names.count - 1)개" : ""
+      return firstName
    }
 }
 
@@ -186,10 +206,17 @@ extension IssueCreateViewController {
       let content = contentField.text ?? "문제가 뭐니"
       detail.replaceData(userId: 1, title: title, content: content)
       
-      networkManager?.postNewIssue(detail, completion: {
-         NotificationCenter.default.post(name: IssueList.Notifications.didAddIssue, object: self)
-         DispatchQueue.main.async { self.navigationController?.popViewController(animated: true) }
-      })
+      if let id = issueId {
+         networkManager?.patchIssue(id: id, detail, completion: {
+            NotificationCenter.default.post(name: IssueList.Notifications.didEditIssue, object: self)
+            DispatchQueue.main.async { self.navigationController?.popViewController(animated: true) }
+         })
+      } else {
+         networkManager?.postNewIssue(detail, completion: {
+            NotificationCenter.default.post(name: IssueList.Notifications.didAddIssue, object: self)
+            DispatchQueue.main.async { self.navigationController?.popViewController(animated: true) }
+         })
+      }
    }
 }
 

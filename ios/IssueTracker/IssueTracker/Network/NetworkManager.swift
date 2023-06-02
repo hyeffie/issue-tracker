@@ -307,6 +307,18 @@ extension NetworkManager {
       }
    }
    
+   func patchIssue(id: Int, _ issue: IssueDetailPostDTO, completion: @escaping () -> Void) {
+      let urlString = ServerAPI.issueURL
+      patchData(for: urlString, data: issue) { (result: Result<Data?, Error>) in
+         switch result {
+         case .success:
+            completion()
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+   
    func postNewLabel(_ newLabel: LabelDetailPostDTO, completion: @escaping () -> Void) {
       let urlString = ServerAPI.labelURL
       postData(for: urlString, data: newLabel) { (result: Result<Data?, Error>) in

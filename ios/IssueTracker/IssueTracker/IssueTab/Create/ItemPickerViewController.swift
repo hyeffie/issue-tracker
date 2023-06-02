@@ -64,7 +64,6 @@ final class ItemPickerViewController: UIViewController {
    
    private func makeStateDescription() -> String {
       guard let targetId = selectedItemIds.first else { return "" }
-      
       guard let target = elements.first(where: { element in element.id == targetId }) else { return "" }
       var result = target.name
       result += selectedItemIds.count > 1 ? "외 \(selectedItemIds.count - 1)개" : ""

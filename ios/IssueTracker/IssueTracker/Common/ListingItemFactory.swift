@@ -43,6 +43,22 @@ struct ListingItemFactory {
          }
          return IssueFormData(userList: users, labelList: labels, miletoneList: milestones)
       }
+      
+      static func makeIssueDetailPostDTO(with issueDetailDTO: IssueDetailDTO) -> IssueDetailPostDTO {
+         let userId = issueDetailDTO.userList.first(where: { user in user.userName == issueDetailDTO.issue.userName })?.userId ?? 1
+         let title = issueDetailDTO.issue.title
+         let content = issueDetailDTO.issue.content
+         let imgUrl: String? = nil
+         let userList = issueDetailDTO.attachedAssigneeList.map { assignee in
+            IssueDetailPostDTO.User(userId: assignee.id)
+         }
+         let labelList = issueDetailDTO.attachedLabelList.map { label in
+            IssueDetailPostDTO.Label(labelId: label.labelId)
+         }
+         let milestoneId = issueDetailDTO.attachedMilestone?.milestoneId
+         return IssueDetailPostDTO(userId: userId, title: title, content: content, imgUrl: imgUrl, userList: userList, labelList: labelList, milestoneId: milestoneId)
+      }
+
    }
    
    struct LabelTab {

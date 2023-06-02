@@ -101,7 +101,19 @@ extension IssueListViewController {
             guard let issueId = self?.list.getIssueId(of: indexPath.item) else { return }
             self?.networkManager?.deleteIssue(id: issueId, completion: { self?.list.deleteIssue(id: issueId) })
          })
-         let edit = SwipeAction.edit.makeAction(hasImage: true, withHandler: { _, _, _ in })
+         
+         let edit = SwipeAction.edit.makeAction(hasImage: true, withHandler: { [weak self] _, _, complete in
+            guard let issueId = self?.list.getIssueId(of: indexPath.item) else { return }
+            self?.networkManager?.requestIssueDetail(issueId: issueId, completion: { dto in
+               let detail = ListingItemFactory.IssueTab.makeIssueDetailPostDTO(with: dto)
+               DispatchQueue.main.async { [weak self] in
+                  let viewController = IssueCreateViewController.instantiate(id: issueId, detail: detail)
+                  self?.navigationController?.pushViewController(viewController, animated: true)
+               }
+            })
+            complete(true)
+         })
+         
          let config = UISwipeActionsConfiguration(actions: [delete, edit])
          config.performsFirstActionWithFullSwipe = false
          return config
@@ -237,6 +249,13 @@ extension IssueListViewController {
       
       self.observers.append(NotificationCenter.default.addObserver(
          forName: IssueList.Notifications.didAddIssue,
+         object: nil, queue: .main,
+         using: { [weak self] _ in
+            self?.reset()
+            self?.fetchIssues() }))
+      
+      self.observers.append(NotificationCenter.default.addObserver(
+         forName: IssueList.Notifications.didEditIssue,
          object: nil, queue: .main,
          using: { [weak self] _ in
             self?.reset()
