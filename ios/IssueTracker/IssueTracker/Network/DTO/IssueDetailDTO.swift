@@ -52,7 +52,7 @@ struct IssueDetailDTO: Codable {
    }
    
    let issue: Issue
-   let attachedMilestone: Milestone
+   let attachedMilestone: Milestone?
    let attachedLabelList: [Label]
    let attachedAssigneeList: [Assignee]
    let commentList: [Comment]

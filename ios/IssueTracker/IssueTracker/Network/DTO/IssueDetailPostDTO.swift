@@ -45,7 +45,7 @@ struct IssueDetailPostDTO: Encodable {
       self.content = content
    }
    
-   //TODO: image url
+   // TODO: image url
 }
 
 extension Set where Element: Comparable {

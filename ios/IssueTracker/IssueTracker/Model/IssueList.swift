@@ -74,6 +74,7 @@ extension IssueList {
       static let didEmptyIssue = Notification.Name(rawValue: "didEmptyIssue")
       static let didDeleteIssue = Notification.Name(rawValue: "didDeleteIssue")
       static let didAddIssue = Notification.Name(rawValue: "didAddIssue")
+      static let didEditIssue = Notification.Name(rawValue: "didEditIssue")
    }
    
    enum Keys {
