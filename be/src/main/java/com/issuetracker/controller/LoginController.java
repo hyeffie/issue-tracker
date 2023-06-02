@@ -33,7 +33,10 @@ public class LoginController {
 
     @GetMapping("/api/oauth/login")
     public User githubLogin(@RequestParam String code) throws JsonProcessingException {
+        log.info("code {}", code);
+        System.out.println("code"+code);
         String accessToken = getAccessToken(code);
+
         User user = getAuthLoginId(accessToken);
         if (userRepository.isJoinedUser(user.getLoginId()) > 0) {
             return userRepository.findByLoginId(user.getLoginId());
@@ -51,7 +54,7 @@ public class LoginController {
         params.add("client_secret", "d7ca1f3354707d0dcb23ba4ecdee292d16f4d416");
         params.add("code", code);
         params.add("grant_type", "authorization_code");
-        params.add("redirect_uri", "http://localhost:3000/oauth");
+        // params.add("redirect_uri", "http://localhost:3000/oauth");
         log.info("code {} ", code);
 
 
