@@ -6,8 +6,9 @@
  
 코드스쿼드 그룹 프로젝트, 이슈 트래커입니다. 이슈 트래커는 Github의 이슈 관리 기능을 모티브로 하고 있으며, Github 로그인을 지원하며, 이슈 작성, 댓글 기능으로 프로젝트의 이슈를 관리할 수 있습니다. 또한, 마일스톤, 라벨, 이슈 필터 기능을 이용하여 이슈를 쉽게 관리할 수 있습니다.
 
-[이슈 트래커의 자세한 기능 구경하기](https://github.com/codesquad-members-2023-team2/issue-tracker/wiki/%EA%B8%B0%EB%8A%A5-%EB%8D%B0%EB%AA%A8)
-  
+[이슈 트래커의 기능 데모 보러가기](https://github.com/codesquad-members-2023-team2/issue-tracker/wiki/%EA%B8%B0%EB%8A%A5-%EB%8D%B0%EB%AA%A8)
+
+[이슈 트래커 팀 위키 구경하기](https://github.com/codesquad-members-2023-team2/issue-tracker/wiki)
 
 ## 👪 멤버 소개
 
