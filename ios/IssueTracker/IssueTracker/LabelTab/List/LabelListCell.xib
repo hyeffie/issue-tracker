@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LabelListCell" customModule="IssueTracker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="440" height="141"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="440" height="141"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbN-IH-Nw5">
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="141"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="oxp-pe-v1y">
+                                <rect key="frame" x="24" y="33.333333333333336" width="400" height="74.333333333333314"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nOG-D2-SEY">
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="50"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jcD-h0-Ka9">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="50"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="설명(한 줄만 보여진다, 미입력 시 생략 가능)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gnu-lr-jIv">
+                                        <rect key="frame" x="0.0" y="53.999999999999993" width="400" height="20.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="250" constant="52" id="6YZ-1v-Uod"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="oxp-pe-v1y" secondAttribute="trailing" constant="16" id="TRG-A8-sSN"/>
+                            <constraint firstItem="oxp-pe-v1y" firstAttribute="leading" secondItem="bbN-IH-Nw5" secondAttribute="leading" constant="24" id="VYu-Kj-pbt"/>
+                            <constraint firstItem="oxp-pe-v1y" firstAttribute="centerY" secondItem="bbN-IH-Nw5" secondAttribute="centerY" id="qSu-cy-Gr4"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="bbN-IH-Nw5" secondAttribute="trailing" id="Ax9-Dl-S6T"/>
+                <constraint firstItem="bbN-IH-Nw5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="FRT-xW-87h"/>
+                <constraint firstAttribute="bottom" secondItem="bbN-IH-Nw5" secondAttribute="bottom" id="KTC-cf-CoQ"/>
+                <constraint firstItem="bbN-IH-Nw5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="bSO-kK-b1V"/>
+            </constraints>
+            <size key="customSize" width="440" height="141"/>
+            <connections>
+                <outlet property="container" destination="nOG-D2-SEY" id="OWu-wJ-gBu"/>
+                <outlet property="descriptionLabel" destination="Gnu-lr-jIv" id="WzU-Xf-jqX"/>
+            </connections>
+            <point key="canvasLocation" x="254.96183206106869" y="20.774647887323944"/>
+        </collectionViewCell>
+    </objects>
+</document>
