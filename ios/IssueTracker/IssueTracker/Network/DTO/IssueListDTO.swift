@@ -14,14 +14,14 @@ struct IssueListDTO: Codable {
       let content: String
       let userName: String
       let profileUrl: String?
-      let isOpen: Bool
+      var open: Bool
       let createdAt: String
       let closedAt: String?
       let milestoneName: String?
       let labelList: [Label]
    }
    
-   struct User: Codable {
+   struct User: Codable, Hashable {
       let userId: Int
       let userName: String
       let profileUrl: String?
@@ -37,7 +37,7 @@ struct IssueListDTO: Codable {
    
    struct Milestone: Codable {
       let milestoneId: Int
-      let milestoneName: String
+      let milestoneName: String?
       let description: String?
    }
    

@@ -1,13 +1,13 @@
 //
-//  UILabel+font.swift
+//  UITextField+font.swift
 //  IssueTracker
 //
-//  Created by Effie on 2023/05/11.
+//  Created by Effie on 2023/05/26.
 //
 
 import UIKit
 
-extension UILabel {
+extension UITextField {
    func apply(
       typography: Typography,
       textColor: Color
