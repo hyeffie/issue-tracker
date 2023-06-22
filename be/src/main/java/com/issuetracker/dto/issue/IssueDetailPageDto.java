@@ -1,16 +1,29 @@
 package com.issuetracker.dto.issue;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.util.List;
 
-@Data
+import com.issuetracker.domain.User;
+import com.issuetracker.dto.issueList.FilterLabelDto;
+import com.issuetracker.dto.issueList.FilterMilestoneDto;
+import com.issuetracker.dto.issueList.FilterUserDto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class IssueDetailPageDto {
     private IssueDetailDto issue;
-    private IssueMilestoneDto milestone;
-    private List<IssueLabelDto> labelList;
-    private List<AssigneeDto> assigneeList;
+    private IssueMilestone attachedMilestone;
+    private List<IssueLabelDto> attachedLabelList;
+    private List<User> attachedAssigneeList;
     private List<IssueCommentDto> commentList;
+    private List<FilterUserDto> userList;
+    private List<FilterLabelDto> labelList;
+    private List<FilterMilestoneDto> milestoneList;
+
 }

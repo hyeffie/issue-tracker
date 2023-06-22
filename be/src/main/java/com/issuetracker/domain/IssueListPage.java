@@ -1,15 +1,17 @@
-package com.issuetracker.dto.issueList;
+package com.issuetracker.domain;
 
 import java.time.LocalDateTime;
 
 import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
-@Table("issue")
-public class IssueDao {
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class IssueListPage {
     @Column("issueId")
     private Long id;
     private String title;
@@ -34,6 +36,5 @@ public class IssueDao {
     private String backgroundColor;
     @Column("fontColor")
     private String fontColor;
-
 }
 
