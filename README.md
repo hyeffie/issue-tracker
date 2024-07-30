@@ -1,116 +1,112 @@
+# 이슈 트래커 iOS 앱
+
 <p align="center"><img src="https://github.com/codesquad-members-2023-team2/issue-tracker/assets/112251635/880c5e2d-b561-40a3-b1c9-a17734757ec4" width="300" height="300"/>
 
-<p align="center"><a href="https://github.com/codesquad-members-2023-team2/issue-tracker/wiki"><img src="https://img.shields.io/badge/Issue%20tracker-Wiki-007396?style=flat-square&logo=Wikipedia&logoColor=white"/><a/>
+## **🍄‍🟫 개요**
 
-## 💡 소개
+- Github의 이슈 관리 기능을 모티브로 한 이슈 관리 앱
+- 4주간의 웹 백앤드, 웹 프론트엔드, 모바일 iOS 협업 프로젝트
+- 이슈 및 마일스톤 CRUD 및 이슈 레이블 관리 기능 구현
 
-코드스쿼드 그룹 프로젝트, 이슈 트래커입니다. 이슈 트래커는 Github의 이슈 관리 기능을 모티브로 하고 있으며, Github 로그인을 지원하며, 이슈 작성, 댓글 기능으로 프로젝트의 이슈를 관리할 수 있습니다. 또한, 마일스톤, 라벨, 이슈 필터 기능을 이용하여 이슈를 쉽게 관리할 수 있습니다.
+### iOS 프로젝트
 
-[이슈 트래커의 기능 데모 보러가기](https://github.com/codesquad-members-2023-team2/issue-tracker/wiki/%EA%B8%B0%EB%8A%A5-%EB%8D%B0%EB%AA%A8)
+- [iOS 프로젝트 디렉터리](https://github.com/hyeffie/issue-tracker/tree/hyeffie/main/ios/IssueTracker)
 
-[이슈 트래커 팀 위키 구경하기](https://github.com/codesquad-members-2023-team2/issue-tracker/wiki)
+### 팀 프로젝트 링크
 
-## 👪 멤버 소개
+- [이슈 트래커 팀 프로젝트 레포](https://github.com/codesquad-members-2023-team2/issue-tracker)
+- [이슈 트래커의 기능 데모 보러가기](https://github.com/codesquad-members-2023-team2/issue-tracker/wiki/%EA%B8%B0%EB%8A%A5-%EB%8D%B0%EB%AA%A8)
+- [이슈 트래커 팀 위키 구경하기](https://github.com/codesquad-members-2023-team2/issue-tracker/wiki)
 
-| ![제이든](https://ca.slack-edge.com/T74H5245A-U04G7GJ0P2L-bacfbaf4a8b0-512) | ![릴리](https://ca.slack-edge.com/T74H5245A-U04G792TR7S-523e48733e32-512) | ![루크](https://ca.slack-edge.com/T74H5245A-U04FWAZSZED-3482eadd3837-512) | ![포로](https://ca.slack-edge.com/T74H5245A-U04GE6HKBTJ-08f3100ac358-512) | ![우드](https://ca.slack-edge.com/T74H5245A-U04GHTGGCE4-339eb09b8d0d-512) | ![에피](https://ca.slack-edge.com/T74H5245A-U04FL9VKFDJ-b8cf1a0a5454-512) |
-| :-----------------------------------------------------------: | :------------------------------------------------------------: | :----------------------------------------------------------------: | :-----------------------------------------------------------: | :-----------------------------------------------------------: | :-----------------------------------------------------------: |
-|        [**제이든(FE)**](https://github.com/JaydenLee1116)         |           [**릴리(FE)**](https://github.com/ahnlook)           |         [**루크(BE)**](https://github.com/acceptor-gyu)         |        [**포로(BE)**](https://github.com/Gwonwoo-Nam)         |        [**우드(iOS)**](https://github.com/dpfdlalfm)         |        [**에피(iOS)**](https://github.com/hyeffie)         |
+## **🍄‍🟫 기능 데모**
 
-## 🧾 기술 스택
+| 이슈 목록 | 이슈 필터 적용 | 이슈 검색 |
+| --- | --- | --- |
+| ![01_이슈-목록](https://github.com/user-attachments/assets/c60f0ebd-3489-4515-a1f5-fc540008e714) | ![02_이슈-필터-적용](https://github.com/user-attachments/assets/584aed96-a54a-4b31-8907-7ffc14a963dc) | ![03_이슈-검색](https://github.com/user-attachments/assets/733db82f-4317-4fcb-a704-6f55940ca30d) |
 
-### 공통
+| 이슈 추가 | 이슈 편집 | 이슈 삭제 |
+| --- | --- | --- |
+| ![04_이슈-추가](https://github.com/user-attachments/assets/dfa95587-50a1-4756-aec3-5a547bdd66f6) | ![05_이슈-편집](https://github.com/user-attachments/assets/a4d960a0-4f45-471c-a55c-ce4dd047aa9c) | ![06_이슈-삭제](https://github.com/user-attachments/assets/c87659fb-cf0f-4134-89de-f214ba33a42b) |
 
-![Git](https://img.shields.io/badge/-Git-F05032?style=flat&logo=Git&logoColor=white)
-![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=GitHub&logoColor=white)
+| 레이블 목록 | 레이블 추가, 편집 | 마일스톤 |
+| --- | --- | --- |
+| ![07_레이블-목록](https://github.com/user-attachments/assets/e31a9b4a-a404-4a9e-a87e-cf32f95cf22a) | ![08_레이블-추가-편집](https://github.com/user-attachments/assets/7333e19b-6211-4402-bb37-acb509b0a6fd) | ![09_마일스톤](https://github.com/user-attachments/assets/b0edda2b-505c-4a7b-a1f8-253d2290fd22) |
 
-### Infrastructure & CI/CD
+## **🍄‍🟫 사용 기술**
 
-<img src="https://img.shields.io/badge/AWS%20EC2-FA7343?style=flat&logo=amazonec2&logoColor=white"/> <img src="https://img.shields.io/badge/AWS%20RDS-red?style=flat&logo=amazonrds&logoColor=white"/> <img src="https://img.shields.io/badge/AWS%20S3-569A31?style=flat&logo=amazons3&logoColor=white"/> 
-![nginx](https://img.shields.io/badge/nginx-009639?style=flat&logo=nginx&logoColor=white)
-![Github Actions](https://img.shields.io/badge/Github%20Actions-2088FF?style=flat&logo=GithubActions&logoColor=white)
-![AWS Codedeploy](https://img.shields.io/badge/AWS%20Codedeploy-yellowgreen?style=flat)
+- UIKit (Storyboard + xib)
+- URLSession
+- UICollectionViewDiffableDataSource
+- UICollectionViewCompositionalLayout
 
-### Back-End
+## **🍄‍🟫** 프로젝트 구조
 
-<img src="https://img.shields.io/badge/Java-007396?style=flat&logo=java&logoColor=white"/> <img src="https://img.shields.io/badge/Gradle-02303A?style=flat&logo=Gradle&logoColor=white"/> <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=SpringBoot&logoColor=white"/> <img src="https://img.shields.io/badge/Spring%20Data%20JDBC-03EF62?style=flat"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/> ![Mybatis](https://img.shields.io/badge/Mybatis-blueviolet?style=flat)
-![OAuth 2.0](https://img.shields.io/badge/OAuth-EB5424?style=flat) ![IntelliJ IDEA](https://img.shields.io/badge/-IntelliJ%20IDEA-FF3850?style=flat&logo=IntelliJ%20IDEA&logoColor=white)
-
-
-### Front-End
-
-<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat&logo=TypeScript&logoColor=white"/> <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/-Tailwind-38B2AC?style=flat&logo=Tailwind%20CSS&logoColor=white"/> <img src="https://img.shields.io/badge/-Storybook-FF4785?style=flat&logo=Storybook&logoColor=white"/> 
-![VSC](https://img.shields.io/badge/-Visual%20Studio%20Code-007ACC?style=flat&logo=Visual%20Studio%20Code&logoColor=white) 
-![WebStorm](https://img.shields.io/badge/-WebStorm-00A3E0?style=flat&logo=WebStorm&logoColor=white)
-
-
-### iOS
-
-![Xcode](https://img.shields.io/badge/-Xcode-1575F9?style=flat&logo=Xcode&logoColor=white)
-![Swift](https://img.shields.io/badge/-Swift-FA7343?style=flat&logo=Swift&logoColor=white)
-![UIKit](https://img.shields.io/badge/-UIKit-00599C?style=flat&logo=UIKit&logoColor=white)
-
-## ⚙️ Infrastructure & CI/CD pipeline
-
-![image](https://github.com/codesquad-members-2023-team2/issue-tracker/assets/112251635/1338ee2a-b734-4e68-b511-2e2b66aaece3)
-
-
-## 🤲 협업 전략
-
-### 브랜치 구조
-
-- `release-front` : 프론트 배포 branch
-- `release` : 백엔드 배포 branch
-- `dev` : 개발 branch
-  - `fe` : 프론트엔드 branch
-    - `{issue-no}-feature1`
-    - `{issue-no}-feature2`
-  - `be` : 백엔드 branch
-  - `ios` : iOS branch
-
-### 그라운드룰
-
-#### 1. 스크럼 시간
-
-- 시간: 10:00 - 10:30
-- 주제
-  - 어제 했던 일
-  - 오늘 할 일
-  - 컨디션(10점 만점)
-- 스크럼 마스터 - 제이든
-
-#### 2. 회고
-
-- 시간: (금) 16:30 ~ 18:00
-- 주제
-  - 클래스 별 진행사항
-
-### 커밋 템플릿
+### 폴더 구조
 
 ```
-type (#issue-number): Subject
-
-body
-
-// 예시
-// feat #3: 메인 페이지 토글 기능 추가
-// (한 줄 띄기)
-// - 토글 버튼 클릭 시, 팝업창 on/off
+IssueTracker
+├── IssueTracker
+│ ├── Application # 앱의 엔트리 포인트 및 설정 관련 코드
+│ ├── Base.lproj # 기본 지역화 파일
+│ ├── Extension # 앱에서 사용하는 확장 기능
+│ ├── Model # 데이터 모델 정의
+│ ├── Network # 네트워크 통신 관련 코드
+│ ├── Resource # 리소스 파일 (이미지, 문자열 등)
+│ ├── Scene # 각 화면별 뷰 및 뷰 컨트롤러
+│ ├── Service # 비즈니스 로직 및 서비스 레이어
+│ ├── Supporting Files # 기타 지원 파일 (Info.plist 등)
+│ └── Utility # 유틸리티 및 헬퍼 클래스
+└── IssueTracker.xcodeproj # Xcode 프로젝트 파일
 ```
 
-- `feat` : 새로운 기능 추가
-- `design`: css 등 사용자 UI 디자인 변경
-- `fix` : 버그 수정
-- `docs` : 문서 수정
-- `test` : 테스트 코드 추가
-- `refactor` : 코드 리팩토링
-- `style` : 코드 의미에 영향을 주지 않는 변경사항
-- `chore` : 빌드 부분 혹은 패키지 매니저 수정사항
+### 도메인 설계
 
-### 이슈 템플릿
+- 이슈, 라벨, 마일스톤 등 다양한 도메인 모델을 정의하여 각 기능을 모듈화.
+- 각 모델 객체가 직접 네트워크 요청을 보내고 데이터를 처리하는 방식에서 네트워크 요청을 전담하는 객체를 별도로 두어 모델 객체와 네트워크 레이어를 분리하는 방식으로 리팩토링
 
-- Git-issue 사용
-- 제목 양식
-```
-[FE] 프로젝트 초기 설정
-```
-- 클래스 별 라벨 부착
+### 이벤트 흐름
+
+- UI에서 발생한 이벤트가 모델 객체를 통해 네트워크 레이어로 전달되고, 응답이 도착하면 다시 UI에 반영되는 구조.
+- 비동기 네트워크 요청이 완료될 때까지 UI는 사용자에게 로딩 상태를 표시하며, 응답이 도착하면 UI 업데이트를 트리거하는 방식.
+
+## 🍄‍🟫 주요 문제 해결 경험
+
+### 비동기 네트워크 요청과 응답 처리
+
+- 문제와 원인
+    - 초기 설계에서는 각 모델 객체가 직접 네트워크 요청을 보내는 방식으로 구현, 이로 인해 코드 중복과 응답 처리의 복잡성이 증가.
+- 대안 비교와 도입
+    - 네트워크 요청을 전담하는 `NetworkManager` 클래스를 도입하여 코드 중복을 제거하고, 네트워크 레이어와 모델 객체의 역할을 분리.
+- 평가
+    - 리팩토링 이후 코드의 가독성과 유지보수성이 크게 향상되었으며, 네트워크 요청의 재사용성과 테스트 용이성도 증가.
+
+### Diffable Data Source를 사용한 UITableView 업데이트
+
+- 대안 비교와 도입
+    - 기존의 `UICollectionView` 업데이트 방식은 데이터 변경 시마다 전체 리로드를 하여 성능 저하와 사용자 경험 저하를 초래.
+    - `UICollectionViewDiffableDataSource`를 도입하여 데이터 변경 시 필요한 부분만 업데이트하도록 개선.
+- 평가
+    - `DiffableDataSource` 도입 이후, 테이블 뷰 업데이트 성능이 크게 향상되었고, 데이터 일관성 유지 및 애니메이션 적용이 용이해짐.
+
+## 🍄‍🟫 협업 경험
+
+### 클라이언트 요구사항에 따른 API 설계 협업
+
+이 프로젝트는 iOS와 웹 프론트엔드(React) 클라이언트가 모두 존재하는 복잡한 구조였습니다. 각 클라이언트의 요구사항이 달랐기 때문에, API 설계 단계에서 많은 논의와 협업이 필요했습니다.
+
+- 문제와 원인
+    - API 회의에서 각 클라이언트 팀은 같은 API 에 대해 다른 요구사항을 제시.
+    - iOS 팀은 페이징을 통해 사용자가 긴 목록을 스크롤할 때 성능을 유지하기를 원함.
+    - 웹 팀은 한 번에 모든 데이터를 받아와 효율적인 클라이언트 사이드 렌더링하길 원함.
+    - 동일한 데이터에 대한 서로 다른 요구사항은 백엔드 API 설계 시 혼란을 초래할 수 있었음.
+- 대안 비교와 토론
+    - 하나의 API 엔드포인트에서 모든 데이터를 제공하고 클라이언트에서 필요한 방식으로 처리.
+    - 각 클라이언트의 요구에 맞춘 별도의 엔드포인트를 제공.
+    - 서버에서 클라이언트의 요청 헤더를 기반으로 조건부 응답을 제공.
+- 최종 결정
+    - 우리는 클라이언트의 요청에 따라 다른 응답을 제공하는 조건부 응답 방식 채택
+    - 하나의 API 엔드포인트로 다양한 클라이언트의 요구 충족 가능
+    - iOS는 페이징을 위해 페이지 번호와 페이지 크기를 요청에 포함, 웹 클라이언트는 전체 데이터를 요청
+- 평가와 결과
+    - 서로 다른 요구사항을 가진 클라이언트를 효과적으로 지원할 수 있는 유연한 API를 설계할 수 있었음.
+    - iOS와 웹 프론트엔드 팀, 백엔드 간의 적극적인 소통과 협업을 통해 문제를 해결하고 최적의 해결책 찾음.
