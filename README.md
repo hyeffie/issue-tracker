@@ -1,3 +1,5 @@
+# 이슈 트래커 iOS 앱
+
 <p align="center"><img src="https://github.com/codesquad-members-2023-team2/issue-tracker/assets/112251635/880c5e2d-b561-40a3-b1c9-a17734757ec4" width="300" height="300"/>
 
 ## **🍄‍🟫 개요**
@@ -8,7 +10,7 @@
 
 ### iOS 프로젝트
 
-- https://github.com/hyeffie/issue-tracker/tree/hyeffie/main/ios/IssueTracker
+- [iOS 프로젝트 디렉터리](https://github.com/hyeffie/issue-tracker/tree/hyeffie/main/ios/IssueTracker)
 
 ### 팀 프로젝트 링크
 
